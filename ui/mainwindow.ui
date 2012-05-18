@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>640</width>
+    <height>480</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Постпроцессор</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QHBoxLayout" name="horizontalLayout"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>640</width>
+     <height>20</height>
+    </rect>
+   </property>
+  </widget>
+  <action name="openProjectAction">
+   <property name="text">
+    <string>Открыть проект</string>
+   </property>
+  </action>
+  <action name="testGenerationAction">
+   <property name="text">
+    <string>Сгенерировать тест</string>
+   </property>
+  </action>
+  <action name="closeProjectAction">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Закрыть проект</string>
+   </property>
+  </action>
+  <action name="openLogAction">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Открыть журнал</string>
+   </property>
+  </action>
+  <action name="closeLogAction">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="text">
+    <string>Закрыть журнал</string>
+   </property>
+  </action>
+  <action name="exitAction">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="textVisualizationAction">
+   <property name="text">
+    <string>Текстовая визуализация</string>
+   </property>
+  </action>
+  <action name="action">
+   <property name="text">
+    <string>Выход</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="text">
+    <string>New</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+N</string>
+   </property>
+   <property name="menuRole">
+    <enum>QAction::NoRole</enum>
+   </property>
+   <property name="softKeyRole">
+    <enum>QAction::NoSoftKey</enum>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
