@@ -1,0 +1,7 @@
+*Makefile
+*.o
+*moc_*
+*.so
+*.sh
+*.bat
+ui_*.h
