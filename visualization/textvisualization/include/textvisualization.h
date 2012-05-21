@@ -1,38 +1,20 @@
 /*
- * textvisualization.h
- *
- *  Created on: May 8, 2012
- *      Author: Sergey Popov (snip89@mail.ru)
+ *    Created by Sergey Popov
+ *    snip89@mail.ru
  */
 
-#ifndef TEXTVISUALIZATION_H_
-#define TEXTVISUALIZATION_H_
+#ifndef TEXTVISUALIZATION_H
+#define TEXTVISUALIZATION_H
 
 #include <QWidget>
-#include <QSize>
-#include <QFont>
-#include <QResizeEvent>
-#include <QTextEdit>
-#include <QVariant>
-#include <QScrollBar>
-#include <QByteArray>
-#include <QObject>
-#include <QEvent>
-#include <QDebug>
-#include <QCoreApplication>
 
 #include "ivisualization.h"
-#include "iproject.h"
-#include "ilog.h"
+#include "abstracttextvisualization.h"
+#include "records.h"
 #include "staticrecordsreader.h"
 
-namespace Ui {
-    class TextVisualization;
-}
-
-class TextVisualization : public QWidget, public IVisualization
+class TextVisualization : public IVisualization, protected AbstractTextVisualization
 {
-    Q_OBJECT
 public:
     explicit TextVisualization(QWidget *parent = 0);
 
@@ -41,25 +23,10 @@ public:
     /*virtual*/ void update(IProject *project, ILog *log);
     /*virtual*/ QWidget *getWidget();
 
-    /*virtual*/ void resizeEvent(QResizeEvent *e);
-    /*virtual*/ bool eventFilter(QObject *target, QEvent *event);
-
     virtual ~TextVisualization();
+
 private:
-    ILog *currentLog;
-    IProject *currentProject;
-
-    bool isActive;
-    qint64 topLinePos;
-
-    void initObjectsConnections();
-
-    void updatePage();
-    int linesOnPage();
-
-    Ui::TextVisualization *ui;
-private slots:
-    void scrollBarMoving(int value);
+    /*virtual*/ void updatePage();
 };
 
-#endif /* TEXTVISUALIZATION_H_ */
+#endif // TEXTVISUALIZATION_H

@@ -6,19 +6,11 @@
  */
 
 #include "textvisualization.h"
-#include "ui_textvisualization.h"
+#include "ui_abstracttextvisualization.h"
 
 TextVisualization::TextVisualization(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::TextVisualization)
+    AbstractTextVisualization(parent)
 {
-    ui->setupUi(this);
-
-    initObjectsConnections();
-
-    ui->textEdit->installEventFilter(this);
-
-    isActive = false;
 }
 
 void TextVisualization::activity(bool status)
@@ -46,54 +38,8 @@ QWidget *TextVisualization::getWidget()
     return this;
 }
 
-void TextVisualization::resizeEvent(QResizeEvent *e)
-{
-    QWidget::resizeEvent(e);
-
-    if(isActive)
-    {
-        updatePage();
-    }
-}
-
-bool TextVisualization::eventFilter(QObject *target, QEvent *event)
-{
-    if(event->type() == QEvent::Wheel && target == ui->textEdit)
-        QCoreApplication::sendEvent(ui->verticalScrollBar, event);
-
-    else if(event->type() == QEvent::KeyPress && target == ui->textEdit)
-    {
-        QKeyEvent *keyEvent = (QKeyEvent *)event;
-        if(keyEvent->key() == Qt::Key_Up)
-            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepSub);
-
-        else if(keyEvent->key() == Qt::Key_Down)
-            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepAdd);
-
-        else if(keyEvent->key() == Qt::Key_PageUp)
-            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepSub);
-
-        else if(keyEvent->key() == Qt::Key_PageDown)
-            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepAdd);
-
-        else if(keyEvent->key() == Qt::Key_Home)
-            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderToMinimum);
-
-        else if(keyEvent->key() == Qt::Key_End)
-            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderToMaximum);
-    }
-
-    return true;
-}
-
 TextVisualization::~TextVisualization()
 {
-    delete ui;
-}
-
-void TextVisualization::initObjectsConnections()
-{
-    QObject::connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarMoving(int)));
 }
 
 void TextVisualization::updatePage()
@@ -158,18 +104,4 @@ void TextVisualization::updatePage()
 
     ui->verticalScrollBar->setPageStep(recordsCount);
     ui->verticalScrollBar->setMaximum(currentLog->size() - recordsCount);
-}
-
-int TextVisualization::linesOnPage()
-{
-    int wh = ui->textEdit->height();
-    int fh = this->fontMetrics().height();
-    return wh / fh - 1;
-}
-
-void TextVisualization::scrollBarMoving(int value)
-{
-    qDebug() << value;
-    topLinePos = value;
-    updatePage();
 }
