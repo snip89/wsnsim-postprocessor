@@ -9,8 +9,8 @@
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent) :
-QMainWindow(parent),
-ui(new Ui::MainWindow)
+    QMainWindow(parent),
+    ui(new Ui::MainWindow)
 {
     setSettings(settings);
 
@@ -28,11 +28,11 @@ ui(new Ui::MainWindow)
 
     emptySettings = new EmptySettings();
 
-    generalGuiSettingsWidget = new GeneralGuiSettingsWidget();
-    generalGuiSettingsWidget->showCurrentSettings();
+    generalGuiSettings = new GeneralGuiSettings();
+    generalGuiSettings->showCurrentSettings();
 
-    generalCoreSettingsWidget = new GeneralCoreSettingsWidget();
-    generalCoreSettingsWidget->showCurrentSettings();
+    generalCoreSettings = new GeneralCoreSettings();
+    generalCoreSettings->showCurrentSettings();
 
     filtrationWidget = new FiltrationWidget();
     connect(filtrationWidget, SIGNAL(logFiltered(Log*)), this, SLOT(filteredLog(Log*)));
@@ -41,15 +41,15 @@ ui(new Ui::MainWindow)
     hexVisualization = new HexVisualization();
     textVisualization = new TextVisualization();
 
-    mainSettingsWidget = new MainSettings();
-    connect(mainSettingsWidget, SIGNAL(settingSelected(QString, QString)), this, SLOT(selectedSetting(QString, QString)));
-    connect(mainSettingsWidget, SIGNAL(settingsApplied()), this, SLOT(appliedSettings()));
-    connect(mainSettingsWidget, SIGNAL(settingsCanceled()), this, SLOT(canceledSettings()));
+    mainSettings = new MainSettings();
+    connect(mainSettings, SIGNAL(settingSelected(QString, QString)), this, SLOT(selectedSetting(QString, QString)));
+    connect(mainSettings, SIGNAL(settingsApplied()), this, SLOT(appliedSettings()));
+    connect(mainSettings, SIGNAL(settingsCanceled()), this, SLOT(canceledSettings()));
 
     stackedWidget = new QStackedWidget(this);
     this->setCentralWidget(stackedWidget);
     stackedWidget->addWidget(emptyWidget);
-    stackedWidget->addWidget(mainSettingsWidget);
+    stackedWidget->addWidget(mainSettings);
     stackedWidget->addWidget(hexVisualization->getWidget());
     stackedWidget->addWidget(textVisualization->getWidget());
     stackedWidget->addWidget(filtrationWidget);
@@ -68,12 +68,12 @@ MainWindow::~MainWindow()
 
     delete emptyWidget;
     delete emptySettings;
-    delete generalGuiSettingsWidget;
-    delete generalCoreSettingsWidget;
+    delete generalGuiSettings;
+    delete generalCoreSettings;
     delete filtrationWidget;
     delete hexVisualization;
     delete textVisualization;
-    delete mainSettingsWidget;
+    delete mainSettings;
     delete stackedWidget;
 
     delete ui;
@@ -337,7 +337,7 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case MAINSETTINGS:
-        stackedWidget->setCurrentWidget(mainSettingsWidget);
+        stackedWidget->setCurrentWidget(mainSettings);
         activeWidget = MAINSETTINGS;
         break;
 
@@ -365,10 +365,10 @@ void MainWindow::switchToWidget(WidgetType type)
 void MainWindow::showEmptySettings(QString name)
 {
     emptySettings->setSettingsName(name);
-    if(!mainSettingsWidget->settingsFrameWidget->isAncestorOf(emptySettings))
-        mainSettingsWidget->settingsFrameWidget->addWidget(emptySettings);
+    if(!mainSettings->settingsFrameWidget->isAncestorOf(emptySettings))
+        mainSettings->settingsFrameWidget->addWidget(emptySettings);
 
-    mainSettingsWidget->settingsFrameWidget->setCurrentWidget(emptySettings);
+    mainSettings->settingsFrameWidget->setCurrentWidget(emptySettings);
 }
 
 void MainWindow::openRecentProject()
@@ -553,22 +553,22 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
 
         else if(settingName == "Gui")
         {
-            generalGuiSettingsWidget->setSettingsName(settingName);
+            generalGuiSettings->setSettingsName(settingName);
 
-            if(!mainSettingsWidget->settingsFrameWidget->isAncestorOf(generalGuiSettingsWidget))
-                mainSettingsWidget->settingsFrameWidget->addWidget(generalGuiSettingsWidget);
+            if(!mainSettings->settingsFrameWidget->isAncestorOf(generalGuiSettings))
+                mainSettings->settingsFrameWidget->addWidget(generalGuiSettings);
 
-            mainSettingsWidget->settingsFrameWidget->setCurrentWidget(generalGuiSettingsWidget);
+            mainSettings->settingsFrameWidget->setCurrentWidget(generalGuiSettings);
         }
 
         else if(settingName == "Core")
         {
-            generalCoreSettingsWidget->setSettingsName(settingName);
+            generalCoreSettings->setSettingsName(settingName);
 
-            if(!mainSettingsWidget->settingsFrameWidget->isAncestorOf(generalCoreSettingsWidget))
-                mainSettingsWidget->settingsFrameWidget->addWidget(generalCoreSettingsWidget);
+            if(!mainSettings->settingsFrameWidget->isAncestorOf(generalCoreSettings))
+                mainSettings->settingsFrameWidget->addWidget(generalCoreSettings);
 
-            mainSettingsWidget->settingsFrameWidget->setCurrentWidget(generalCoreSettingsWidget);
+            mainSettings->settingsFrameWidget->setCurrentWidget(generalCoreSettings);
         }
 
         else
@@ -580,16 +580,16 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
 
 void MainWindow::appliedSettings()
 {
-    generalCoreSettingsWidget->applySettings();
-    generalGuiSettingsWidget->applySettings();
+    generalCoreSettings->applySettings();
+    generalGuiSettings->applySettings();
 
     switchToWidget(previousActiveWidget);
 }
 
 void MainWindow::canceledSettings()
 {
-    generalCoreSettingsWidget->showCurrentSettings();
-    generalGuiSettingsWidget->showCurrentSettings();
+    generalCoreSettings->showCurrentSettings();
+    generalGuiSettings->showCurrentSettings();
 
     switchToWidget(previousActiveWidget);
 }

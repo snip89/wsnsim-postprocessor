@@ -1,18 +1,24 @@
+/*
+ *    Created by Sergey Popov
+ *    snip89@mail.ru
+ */
+
 #ifndef MAINSETTINGS_H
 #define MAINSETTINGS_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QSettings>
 #include <QDebug>
 #include <QStringList>
 #include <QTreeWidgetItem>
 #include <QString>
 #include <QList>
-#include <QWidget>
 #include <QStackedWidget>
 #include <QAbstractButton>
 
-#include "ui_mainsettings.h"
+namespace Ui {
+    class MainSettings;
+}
 
 class MainSettings : public QWidget
 {
@@ -25,7 +31,7 @@ public:
     ~MainSettings();
 
 private:
-    Ui::MainSettingsClass ui;
+    Ui::MainSettings *ui;
 
     QList<QWidget*> widgets;
 

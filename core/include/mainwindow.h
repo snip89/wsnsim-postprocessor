@@ -41,8 +41,8 @@
 #include "mainsettings.h"
 #include "ostools.h"
 #include "emptysettings.h"
-#include "generalguisettingswidget.h"
-#include "generalcoresettingswidget.h"
+#include "generalguisettings.h"
+#include "generalcoresettings.h"
 #include "filtrationwidget.h"
 
 #define DEFAULT_RECENT_NUMBER 4
@@ -100,11 +100,11 @@ private:
     WidgetType previousActiveWidget;
     QWidget *emptyWidget;
     EmptySettings *emptySettings;
-    GeneralGuiSettingsWidget *generalGuiSettingsWidget;
-    GeneralCoreSettingsWidget *generalCoreSettingsWidget;
+    GeneralGuiSettings *generalGuiSettings;
+    GeneralCoreSettings *generalCoreSettings;
     FiltrationWidget *filtrationWidget;
     QStackedWidget *stackedWidget;
-    MainSettings *mainSettingsWidget;
+    MainSettings *mainSettings;
     IVisualization *hexVisualization;
     IVisualization *textVisualization;
 

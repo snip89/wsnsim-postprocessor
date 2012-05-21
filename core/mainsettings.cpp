@@ -1,22 +1,25 @@
 #include "mainsettings.h"
+#include "ui_mainsettings.h"
 
-MainSettings::MainSettings(QWidget *parent)
-: QWidget(parent)
+MainSettings::MainSettings(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::MainSettings)
 {
-    ui.setupUi(this);
+    ui->setupUi(this);
 
     settingsFrameWidget = new QStackedWidget(this);
-    ui.settingsFrameLayout->addWidget(settingsFrameWidget);
+    ui->settingsFrameLayout->addWidget(settingsFrameWidget);
 
     initSettingsTree();
 
-    connect(ui.settingsTree, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
-    connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
+    connect(ui->settingsTree, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
+    connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 }
 
 MainSettings::~MainSettings()
 {
     delete settingsFrameWidget;
+    delete ui;
 }
 
 void MainSettings::initSettingsTree()
@@ -35,7 +38,7 @@ void MainSettings::initSettingsTree()
 
                 while(recursiveInitTree(item, group, settings));
 
-                ui.settingsTree->addTopLevelItem(item);
+                ui->settingsTree->addTopLevelItem(item);
             }
         }
     }

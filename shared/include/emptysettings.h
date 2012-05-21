@@ -1,23 +1,31 @@
+/*
+ *    Created by Sergey Popov
+ *    snip89@mail.ru
+ */
+
 #ifndef EMPTYSETTINGS_H
 #define EMPTYSETTINGS_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QString>
-#include "ui_emptysettings.h"
+
+namespace Ui {
+    class EmptySettings;
+}
 
 class EmptySettings : public QWidget
 {
     Q_OBJECT
 
 public:
-    EmptySettings(QWidget *parent = 0);
+    explicit EmptySettings(QWidget *parent = 0);
 
     void setSettingsName(QString name);
 
     ~EmptySettings();
 
 private:
-    Ui::EmptySettingsClass ui;
+    Ui::EmptySettings *ui;
 };
 
 #endif // EMPTYSETTINGS_H
