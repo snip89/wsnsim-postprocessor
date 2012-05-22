@@ -104,6 +104,11 @@ char *Log::read(qint16 count, qint64 &size)
     return memory;
 }
 
+QString Log::fileName()
+{
+    return file->fileName();
+}
+
 Log::~Log()
 {
     if(isLogLoaded)

@@ -10,8 +10,9 @@
 
 #include <QString>
 #include <QFile>
-#include <QDebug>
 #include <QErrorMessage>
+#include <QStringList>
+#include <QDebug>
 
 #include "ilog.h"
 #include "simpleeventinfo.h"
@@ -34,6 +35,8 @@ public:
     /*virtual*/ qint64 pos();
     /*virtual*/ char *read(qint16 count, qint64 &size);
 
+    QString fileName();
+
     virtual ~Log();
 
 private:
@@ -53,6 +56,8 @@ private:
     char *memory;
 
     QErrorMessage errorMessager;
+
+    QStringList filtrationInfo;
 
     qint64 getRecordFilePos(qint64 record);
     void updateFileSize();

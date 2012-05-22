@@ -1,7 +1,12 @@
+/*
+ *    Created by Sergey Popov
+ *    snip89@mail.ru
+ */
+
 #ifndef FILTRATIONWIDGET_H
 #define FILTRATIONWIDGET_H
 
-#include <QtGui/QWidget>
+#include <QWidget>
 #include <QStringList>
 #include <QList>
 #include <QErrorMessage>
@@ -9,14 +14,18 @@
 #include <QMenu>
 #include <QAction>
 #include <QListWidgetItem>
+#include <QAbstractButton>
 
-#include "ui_filtrationwidget.h"
 #include "log.h"
 #include "project.h"
 #include "abstractfilter.h"
 #include "filter.h"
 #include "staticlogfilter.h"
 #include "booleanoperators.h"
+
+namespace Ui {
+    class FiltrationWidget;
+}
 
 class FiltrationWidget : public QWidget
 {
@@ -27,13 +36,14 @@ public:
 
     void setCurrentProject(Project *project);
     void setCurrentLog(Log *log);
+
     void activate();
     void deactivate();
 
     ~FiltrationWidget();
 
 private:
-    Ui::FiltrationWidgetClass ui;
+    Ui::FiltrationWidget *ui;
 
     Project *currentProject;
     Log *currentLog;

@@ -1,17 +1,24 @@
-#include "filtrationwidget.h"
+/*
+ *    Created by Sergey Popov
+ *    snip89@mail.ru
+ */
 
-FiltrationWidget::FiltrationWidget(QWidget *parent)
-: QWidget(parent)
+#include "filtrationwidget.h"
+#include "ui_filtrationwidget.h"
+
+FiltrationWidget::FiltrationWidget(QWidget *parent) :
+    QWidget(parent),
+    ui(new Ui::FiltrationWidget)
 {
-    ui.setupUi(this);
+    ui->setupUi(this);
 
     addBooleanOperators();
 
-    connect(ui.addFilterButton, SIGNAL(clicked()), this, SLOT(addFilter()));
-    connect(ui.buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
+    connect(ui->addFilterButton, SIGNAL(clicked()), this, SLOT(addFilter()));
+    connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 
-    ui.filtrationListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui.filtrationListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
+    ui->filtrationListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->filtrationListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
             this, SLOT(showFiltrationListWidgetContextMenu(const QPoint&)));
 }
 
@@ -30,33 +37,33 @@ void FiltrationWidget::activate()
     QStringList paramsNames = currentProject->paramsNames();
     foreach(QString paramName, paramsNames)
     {
-        ui.filtrationParamComboBox->addItem(paramName);
+        ui->filtrationParamComboBox->addItem(paramName);
     }
 }
 
 void FiltrationWidget::deactivate()
 {
-    ui.filtrationParamComboBox->clear();
+    ui->filtrationParamComboBox->clear();
 }
 
 FiltrationWidget::~FiltrationWidget()
 {
-
+    delete ui;
 }
 
 void FiltrationWidget::addBooleanOperators()
 {
-    ui.filtrationOperatorComboBox->addItem(tr("=="));
-    ui.filtrationOperatorComboBox->addItem(tr("<"));
-    ui.filtrationOperatorComboBox->addItem(tr("<="));
-    ui.filtrationOperatorComboBox->addItem(tr(">"));
-    ui.filtrationOperatorComboBox->addItem(tr(">="));
-    ui.filtrationOperatorComboBox->addItem(tr("!="));
+    ui->filtrationOperatorComboBox->addItem(tr("=="));
+    ui->filtrationOperatorComboBox->addItem(tr("<"));
+    ui->filtrationOperatorComboBox->addItem(tr("<="));
+    ui->filtrationOperatorComboBox->addItem(tr(">"));
+    ui->filtrationOperatorComboBox->addItem(tr(">="));
+    ui->filtrationOperatorComboBox->addItem(tr("!="));
 }
 
 void FiltrationWidget::execute()
 {
-    if(!ui.filtrationListWidget->item(0))
+    if(!ui->filtrationListWidget->item(0))
     {
         emit filtrationCanceled();
         return;
@@ -142,39 +149,39 @@ void FiltrationWidget::execute()
 
 void FiltrationWidget::addFilter()
 {
-    if(ui.filtrationValueComboBox->text() == "")
+    if(ui->filtrationValueComboBox->text() == "")
         errorMessager.showMessage(tr("Value fild is empty"));
 
     else
     {
         BooleanOperators booleanOperator;
 
-        if(ui.filtrationOperatorComboBox->currentText() == "==")
+        if(ui->filtrationOperatorComboBox->currentText() == "==")
             booleanOperator = EQ;
 
-        else if(ui.filtrationOperatorComboBox->currentText() == "<")
+        else if(ui->filtrationOperatorComboBox->currentText() == "<")
             booleanOperator = LT;
 
-        else if(ui.filtrationOperatorComboBox->currentText() == "<=")
+        else if(ui->filtrationOperatorComboBox->currentText() == "<=")
             booleanOperator = LE;
 
-        else if(ui.filtrationOperatorComboBox->currentText() == ">")
+        else if(ui->filtrationOperatorComboBox->currentText() == ">")
             booleanOperator = GT;
 
-        else if(ui.filtrationOperatorComboBox->currentText() == ">=")
+        else if(ui->filtrationOperatorComboBox->currentText() == ">=")
             booleanOperator = GE;
 
-        else if(ui.filtrationOperatorComboBox->currentText() == "!=")
+        else if(ui->filtrationOperatorComboBox->currentText() == "!=")
             booleanOperator = NE;
 
-        filters.append(new Filter(ui.filtrationParamComboBox->currentText(), booleanOperator, ui.filtrationValueComboBox->text()));
+        filters.append(new Filter(ui->filtrationParamComboBox->currentText(), booleanOperator, ui->filtrationValueComboBox->text()));
 
         QString filterInfoString;
-        filterInfoString += ui.filtrationParamComboBox->currentText() + " ";
-        filterInfoString += ui.filtrationOperatorComboBox->currentText() + " ";
-        filterInfoString += ui.filtrationValueComboBox->text();
+        filterInfoString += ui->filtrationParamComboBox->currentText() + " ";
+        filterInfoString += ui->filtrationOperatorComboBox->currentText() + " ";
+        filterInfoString += ui->filtrationValueComboBox->text();
 
-        ui.filtrationListWidget->addItem(filterInfoString);
+        ui->filtrationListWidget->addItem(filterInfoString);
     }
 }
 
@@ -192,12 +199,12 @@ void FiltrationWidget::buttonClicked(QAbstractButton *button)
 
 void FiltrationWidget::showFiltrationListWidgetContextMenu(const QPoint& pos)
 {
-    QPoint globalPos = ui.filtrationListWidget->mapToGlobal(pos);
+    QPoint globalPos = ui->filtrationListWidget->mapToGlobal(pos);
 
     QMenu contextMenu;
     contextMenu.addAction(tr("delete"));
 
-    QListWidgetItem *item = ui.filtrationListWidget->itemAt(pos);
+    QListWidgetItem *item = ui->filtrationListWidget->itemAt(pos);
 
     if(item)
     {
@@ -205,7 +212,7 @@ void FiltrationWidget::showFiltrationListWidgetContextMenu(const QPoint& pos)
         if(selectedItem)
         {
             //            ui.filtrationListWidget->removeItemWidget(item);
-            filters.removeAt(ui.filtrationListWidget->row(item));
+            filters.removeAt(ui->filtrationListWidget->row(item));
             delete item;
         }
     }
