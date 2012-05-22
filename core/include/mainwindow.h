@@ -181,7 +181,7 @@ private slots:
     void appliedSettings();
     void canceledSettings();
 
-    void filteredLog(Log *newLog);
+    void filteredLog(Log *newLog, int id);
     void canceledFiltration();
 
     void exit();

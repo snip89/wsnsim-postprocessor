@@ -35,7 +35,7 @@ MainWindow::MainWindow(QWidget *parent) :
     generalCoreSettings->showCurrentSettings();
 
     filtrationWidget = new FiltrationWidget();
-    connect(filtrationWidget, SIGNAL(logFiltered(Log*)), this, SLOT(filteredLog(Log*)));
+    connect(filtrationWidget, SIGNAL(logFiltered(Log*, int)), this, SLOT(filteredLog(Log*, int)));
     connect(filtrationWidget, SIGNAL(filtrationCanceled()), this, SLOT(canceledFiltration()));
 
     hexVisualization = new HexVisualization();
@@ -625,6 +625,8 @@ void MainWindow::openLog(QString name)
 
     logs = new QList<LogInfo>();
 
+    filtrationWidget->setLogsInfos(logs);
+
     LogInfo logInfo;
 
     logInfo.id = currentLogId;
@@ -681,7 +683,7 @@ void MainWindow::showFiltration()
 {
     filtrationWidget->setCurrentProject(project);
 //    filtrationWidget->setCurrentLog(logs->at(logs->size() - 1));
-    filtrationWidget->setCurrentLog(logs->at(currentLogId).log);
+    filtrationWidget->setCurrentLog(currentLogId);
     filtrationWidget->activate();
     switchToWidget(FILTRATION);
 }
@@ -738,19 +740,12 @@ void MainWindow::canceledSettings()
     switchToWidget(previousActiveWidget);
 }
 
-void MainWindow::filteredLog(Log *newLog)
+void MainWindow::filteredLog(Log *newLog, int id)
 {
 //    logs->at(logs->size() - 1)->toggleActivity(false);
 
 //    logs->append(newLog);
-    currentLogId++;
-
-    LogInfo newLogInfo;
-    newLogInfo.id = currentLogId;
-    newLogInfo.log = newLog;
-    newLogInfo.fileName = newLog->fileName();
-
-    logs->append(newLogInfo);
+    currentLogId = id;
 
 //    logs->at(logs->size() - 1)->toggleActivity(true);
 

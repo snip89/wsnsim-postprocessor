@@ -20,16 +20,23 @@ FiltrationWidget::FiltrationWidget(QWidget *parent) :
     ui->filtrationListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->filtrationListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
             this, SLOT(showFiltrationListWidgetContextMenu(const QPoint&)));
-}
 
-void FiltrationWidget::setCurrentLog(Log *log)
-{
-    currentLog = log;
+    logNameCounter = 0;
 }
 
 void FiltrationWidget::setCurrentProject(Project *project)
 {
     currentProject = project;
+}
+
+void FiltrationWidget::setCurrentLog(int id)
+{
+    currentLogId = id;
+}
+
+void FiltrationWidget::setLogsInfos(QList<LogInfo> *logsInfos)
+{
+    logs = logsInfos;
 }
 
 void FiltrationWidget::activate()
@@ -69,9 +76,11 @@ void FiltrationWidget::execute()
         return;
     }
 
+    Log *currentLog = logs->at(currentLogId).log;
+
     int infoSize = 0;
-    Log *tempLog = new Log("temp", currentLog->blockSize, currentLog->memorySize, currentProject->info(infoSize), true);
-    Log *newLog = new Log("temp", currentLog->blockSize, currentLog->memorySize, currentProject->info(infoSize), true);
+    Log *tempLog = new Log(QString::number(logNameCounter) + ".templog", currentLog->blockSize, currentLog->memorySize, currentProject->info(infoSize), true);
+    Log *newLog = new Log(QString::number(logNameCounter) + ".templog", currentLog->blockSize, currentLog->memorySize, currentProject->info(infoSize), true);
 
     for(int i = 0; i < filters.size(); i ++)
     {
@@ -127,7 +136,7 @@ void FiltrationWidget::execute()
 //                }
 //            }
 
-            Log *tempLog2 = new Log("temp", currentLog->blockSize, currentLog->memorySize, currentProject->info(infoSize), true);
+            Log *tempLog2 = new Log(QString::number(logNameCounter) + ".templog", currentLog->blockSize, currentLog->memorySize, currentProject->info(infoSize), true);
 
             if(!StaticLogFilter::useFilter(tempLog, tempLog2, filters[i]))
             {
@@ -142,9 +151,19 @@ void FiltrationWidget::execute()
         }
     }
 
+    logNameCounter ++;
+    currentLogId ++;
+
     newLog = tempLog;
 
-    emit logFiltered(newLog);
+    LogInfo newLogInfo;
+    newLogInfo.id = currentLogId;
+    newLogInfo.log = newLog;
+    newLogInfo.fileName = newLog->fileName();
+
+    logs->append(newLogInfo);
+
+    emit logFiltered(newLog, currentLogId);
 }
 
 void FiltrationWidget::addFilter()

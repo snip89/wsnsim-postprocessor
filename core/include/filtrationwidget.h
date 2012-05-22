@@ -22,6 +22,7 @@
 #include "filter.h"
 #include "staticlogfilter.h"
 #include "booleanoperators.h"
+#include "loginfo.h"
 
 namespace Ui {
     class FiltrationWidget;
@@ -35,7 +36,8 @@ public:
     FiltrationWidget(QWidget *parent = 0);
 
     void setCurrentProject(Project *project);
-    void setCurrentLog(Log *log);
+    void setCurrentLog(int id);
+    void setLogsInfos(QList<LogInfo> *logsInfos);
 
     void activate();
     void deactivate();
@@ -46,7 +48,10 @@ private:
     Ui::FiltrationWidget *ui;
 
     Project *currentProject;
-    Log *currentLog;
+    int currentLogId;
+    QList<LogInfo> *logs;
+
+    int logNameCounter;
 
     QErrorMessage errorMessager;
 
@@ -56,7 +61,7 @@ private:
     void execute();
 
 signals:
-    void logFiltered(Log *newLog);
+    void logFiltered(Log *newLog, int id);
     void filtrationCanceled();
 
 private slots:
