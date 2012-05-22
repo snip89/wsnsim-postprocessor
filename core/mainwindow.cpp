@@ -343,14 +343,16 @@ void MainWindow::switchToWidget(WidgetType type)
 
     case HEXVISUALIZATION:
         stackedWidget->setCurrentWidget(hexVisualization->getWidget());
-        hexVisualization->update(project, logs->at(logs->size() - 1));
+//        hexVisualization->update(project, logs->at(logs->size() - 1));
+        hexVisualization->update(project, logs->at(currentLogId));
         hexVisualization->activity(true);
         activeWidget = HEXVISUALIZATION;
         break;
 
     case TEXTVISUALIZATION:
         stackedWidget->setCurrentWidget(textVisualization->getWidget());
-        textVisualization->update(project, logs->at(logs->size() - 1));
+//        textVisualization->update(project, logs->at(logs->size() - 1));
+        textVisualization->update(project, logs->at(currentLogId));
         textVisualization->activity(true);
         activeWidget = TEXTVISUALIZATION;
         break;
@@ -497,16 +499,37 @@ void MainWindow::openLog(QString name)
     int memoryUsagePercent = settings.value("General/Core/Memory_usage").toInt();
     qint64 memoryUsage = OSTools::getTotalSystemMemory() * memoryUsagePercent / 100;
 
-    logs = new QList<Log*>();
-    logs->append(new Log(name, blockSize, memoryUsage, info, false));
-    if(!logs->at(logs->size() - 1)->load(true, false))
+//    logs = new QList<Log*>();
+
+    currentLogId = 0;
+
+    logs = new QList<LogInfo>();
+
+    LogInfo logInfo;
+
+    logInfo.id = currentLogId;
+    logInfo.log = new Log(name, blockSize, memoryUsage, info, false);
+    logInfo.fileName = logInfo.log->fileName();
+
+    logs->append(logInfo);
+
+    if(!logs->at(currentLogId)->load(true, false))
     {
-        errorMessager.showMessage(errorString);
         closeLog();
         return;
     }
 
-    logs->at(logs->size() - 1)->toggleActivity(true);
+    // logs->append(new Log(name, blockSize, memoryUsage, info, false));
+    // if(!logs->at(logs->size() - 1)->load(true, false))
+    // {
+    //     errorMessager.showMessage(errorString);
+    //     closeLog();
+    //     return;
+    // }
+
+    logs->at(currentLogId)->toggleActivity(true);
+
+//    logs->at(logs->size() - 1)->toggleActivity(true);
 
     isLogOpened = true;
 
@@ -537,7 +560,8 @@ void MainWindow::showHexVisualization()
 void MainWindow::showFiltration()
 {
     filtrationWidget->setCurrentProject(project);
-    filtrationWidget->setCurrentLog(logs->at(logs->size() - 1));
+//    filtrationWidget->setCurrentLog(logs->at(logs->size() - 1));
+    filtrationWidget->setCurrentLog(logs->at(currentLogId));
     filtrationWidget->activate();
     switchToWidget(FILTRATION);
 }

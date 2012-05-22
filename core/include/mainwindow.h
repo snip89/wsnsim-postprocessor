@@ -92,6 +92,8 @@ private:
 
     QErrorMessage errorMessager;
 
+    int currentLogId;
+
     bool isProjectOpened;
     bool isLogOpened;
 
@@ -109,7 +111,11 @@ private:
     IVisualization *textVisualization;
 
     Project *project;
-    QList<Log*> *logs;
+
+    // TODO: remove after implemention new logs list
+//    QList<Log*> *logs;
+
+    QList<LogInfo> *logs;
 
     SimpleEventInfo *info;
 
