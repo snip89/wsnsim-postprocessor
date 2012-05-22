@@ -124,6 +124,7 @@ void MainWindow::createActions()
     connect(actionClose, SIGNAL(triggered()), this, SLOT(closeProject()));
 
     actionPrint = new QAction(tr("&Print..."), this);
+    actionPrint->setShortcut(QKeySequence::Print);
     actionPrint->setEnabled(false);
 
     actionLogSelect = new QAction(tr("&Select log..."), this);
@@ -137,17 +138,80 @@ void MainWindow::createActions()
     actionSettings = new QAction(tr("&Settings..."), this);
     connect(actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
 
-    actionHexVisualization = new QAction(tr("&Hex Visualization"), this);
+    actionHexVisualization = new QAction(tr("&Hex"), this);
     actionHexVisualization->setEnabled(false);
     connect(actionHexVisualization, SIGNAL(triggered()), this, SLOT(showHexVisualization()));
 
-    actionTextVisualization = new QAction(tr("&Text Visualization"), this);
+    actionTextVisualization = new QAction(tr("&Text"), this);
     actionTextVisualization->setEnabled(false);
     connect(actionTextVisualization, SIGNAL(triggered()), this, SLOT(showTextVisualization()));
 
-    actionFiltration = new QAction(tr("&Filtration..."), this);
+    actionRevertZoom = new QAction(tr("&Revert zoom"), this);
+    actionRevertZoom->setEnabled(false);
+
+    actionZoomOut = new QAction(tr("&Zoom out"), this);
+    actionZoomOut->setShortcut(QKeySequence::ZoomOut);
+    actionZoomOut->setEnabled(false);
+
+    actionZoomIn = new QAction(tr("&Zoom in"), this);
+    actionZoomIn->setShortcut(QKeySequence::ZoomIn);
+    actionZoomIn->setEnabled(false);
+
+    actionUndo = new QAction(tr("&Undo"), this);
+    actionUndo->setShortcut(QKeySequence::Undo);
+    actionUndo->setEnabled(false);
+
+    actionRedo = new QAction(tr("&Redo"), this);
+    actionRedo->setShortcut(QKeySequence::Redo);
+    actionRedo->setEnabled(false);
+
+    actionCut = new QAction(tr("&Cut"), this);
+    actionCut->setShortcut(QKeySequence::Cut);
+    actionCut->setEnabled(false);
+
+    actionCopy = new QAction(tr("&Copy"), this);
+    actionCopy->setShortcut(QKeySequence::Copy);
+    actionCopy->setEnabled(false);
+
+    actionPaste = new QAction(tr("&Paste"), this);
+    actionPaste->setShortcut(QKeySequence::Paste);
+    actionPaste->setEnabled(false);
+
+    actionSelectAll = new QAction(tr("&Select all"), this);
+    actionSelectAll->setShortcut(QKeySequence::SelectAll);
+    actionSelectAll->setEnabled(false);
+
+    actionFind = new QAction(tr("&Find"), this);
+    actionFind->setShortcut(QKeySequence::Find);
+    actionFind->setEnabled(false);
+
+    actionFindNext = new QAction(tr("&Find next"), this);
+    actionFindNext->setShortcut(QKeySequence::FindNext);
+    actionFindNext->setEnabled(false);
+
+    actionFindPrevious = new QAction(tr("&Find previous"), this);
+    actionFindPrevious->setShortcut(QKeySequence::FindPrevious);
+    actionFindPrevious->setEnabled(false);
+
+    actionGoToLine = new QAction(tr("&Go to line"), this);
+    actionGoToLine->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_L));
+    actionGoToLine->setEnabled(false);
+
+    actionFiltration = new QAction(tr("&Filters..."), this);
     actionFiltration->setEnabled(false);
     connect(actionFiltration, SIGNAL(triggered()), this, SLOT(showFiltration()));
+
+    actionFullScreen = new QAction(tr("&Full screen"), this);
+    actionFullScreen->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F11));
+
+    actionHelp = new QAction(tr("&Help"), this);
+
+    actionContextHelp = new QAction(tr("&Context help"), this);
+    actionContextHelp->setShortcut(QKeySequence::HelpContents);
+
+    actionAbout = new QAction(tr("&About..."), this);
+
+    actionStartUpdater = new QAction(tr("&Start updater"), this);
 }
 
 void MainWindow::createMenus()
@@ -164,22 +228,58 @@ void MainWindow::createMenus()
     menuFile->addAction(actionExit);
 
     menuEdit = new QMenu(tr("&Edit"), this);
+    menuEdit->addAction(actionUndo);
+    menuEdit->addAction(actionRedo);
+    menuEdit->addSeparator();
+    menuEdit->addAction(actionCut);
+    menuEdit->addAction(actionCopy);
+    menuEdit->addAction(actionPaste);
+    menuEdit->addSeparator();
+    menuEdit->addAction(actionSelectAll);
+    menuEdit->addSeparator();
     menuEdit->addAction(actionFiltration);
+    menuEdit->addSeparator();
+
+    menuFind = new QMenu(tr("&Find"), this);
+    menuFind->addAction(actionFind);
+    menuFind->addSeparator();
+    menuFind->addAction(actionFindNext);
+    menuFind->addAction(actionFindPrevious);
+
+    menuEdit->addMenu(menuFind);
+    menuEdit->addAction(actionGoToLine);
 
     menuView = new QMenu(tr("&View"), this);
     menuView->addAction(actionHexVisualization);
     menuView->addAction(actionTextVisualization);
+    menuView->addSeparator();
 
-    // TODO: rename to "Options" and menuOptions
+    menuZoom = new QMenu(tr("&Zoom"), this);
+    menuZoom->addAction(actionRevertZoom);
+    menuZoom->addAction(actionZoomOut);
+    menuZoom->addAction(actionZoomIn);
+
+    menuView->addMenu(menuZoom);
+
     menuTools = new QMenu(tr("&Tools"), this);
     menuTools->addAction(actionSettings);
 
+    menuWindow = new QMenu(tr("&Window"), this);
+    menuWindow->addAction(actionFullScreen);
+
     menuHelp = new QMenu(tr("&Help"), this);
+    menuHelp->addAction(actionHelp);
+    menuHelp->addAction(actionContextHelp);
+    menuHelp->addSeparator();
+    menuHelp->addAction(actionAbout);
+    menuHelp->addSeparator();
+    menuHelp->addAction(actionStartUpdater);
 
     ui->menuBar->addMenu(menuFile);
     ui->menuBar->addMenu(menuEdit);
     ui->menuBar->addMenu(menuView);
     ui->menuBar->addMenu(menuTools);
+    ui->menuBar->addMenu(menuWindow);
     ui->menuBar->addMenu(menuHelp);
 }
 
@@ -197,14 +297,34 @@ void MainWindow::deleteActions()
     delete actionHexVisualization;
     delete actionTextVisualization;
     delete actionFiltration;
+    delete actionFullScreen;
+    delete actionRevertZoom;
+    delete actionZoomOut;
+    delete actionZoomIn;
+    delete actionUndo;
+    delete actionRedo;
+    delete actionCut;
+    delete actionCopy;
+    delete actionPaste;
+    delete actionFind;
+    delete actionFindNext;
+    delete actionFindPrevious;
+    delete actionGoToLine;
+    delete actionHelp;
+    delete actionContextHelp;
+    delete actionAbout;
+    delete actionStartUpdater;
 }
 
 void MainWindow::deleteMenus()
 {
     delete menuFile;
     delete menuEdit;
+    delete menuFind;
     delete menuView;
+    delete menuZoom;
     delete menuTools;
+    delete menuWindow;
     delete menuHelp;
 }
 
@@ -255,7 +375,7 @@ void MainWindow::closeLog()
     {
         for(int i = 0; i < logs->size(); i ++)
         {
-            delete logs->at(i);
+            delete logs->at(i).log;
         }
         delete logs;
 
@@ -344,7 +464,7 @@ void MainWindow::switchToWidget(WidgetType type)
     case HEXVISUALIZATION:
         stackedWidget->setCurrentWidget(hexVisualization->getWidget());
 //        hexVisualization->update(project, logs->at(logs->size() - 1));
-        hexVisualization->update(project, logs->at(currentLogId));
+        hexVisualization->update(project, logs->at(currentLogId).log);
         hexVisualization->activity(true);
         activeWidget = HEXVISUALIZATION;
         break;
@@ -352,7 +472,7 @@ void MainWindow::switchToWidget(WidgetType type)
     case TEXTVISUALIZATION:
         stackedWidget->setCurrentWidget(textVisualization->getWidget());
 //        textVisualization->update(project, logs->at(logs->size() - 1));
-        textVisualization->update(project, logs->at(currentLogId));
+        textVisualization->update(project, logs->at(currentLogId).log);
         textVisualization->activity(true);
         activeWidget = TEXTVISUALIZATION;
         break;
@@ -513,7 +633,7 @@ void MainWindow::openLog(QString name)
 
     logs->append(logInfo);
 
-    if(!logs->at(currentLogId)->load(true, false))
+    if(!logs->at(currentLogId).log->load(true, false))
     {
         closeLog();
         return;
@@ -527,7 +647,7 @@ void MainWindow::openLog(QString name)
     //     return;
     // }
 
-    logs->at(currentLogId)->toggleActivity(true);
+    logs->at(currentLogId).log->toggleActivity(true);
 
 //    logs->at(logs->size() - 1)->toggleActivity(true);
 
@@ -561,7 +681,7 @@ void MainWindow::showFiltration()
 {
     filtrationWidget->setCurrentProject(project);
 //    filtrationWidget->setCurrentLog(logs->at(logs->size() - 1));
-    filtrationWidget->setCurrentLog(logs->at(currentLogId));
+    filtrationWidget->setCurrentLog(logs->at(currentLogId).log);
     filtrationWidget->activate();
     switchToWidget(FILTRATION);
 }
@@ -622,7 +742,15 @@ void MainWindow::filteredLog(Log *newLog)
 {
 //    logs->at(logs->size() - 1)->toggleActivity(false);
 
-    logs->append(newLog);
+//    logs->append(newLog);
+    currentLogId++;
+
+    LogInfo newLogInfo;
+    newLogInfo.id = currentLogId;
+    newLogInfo.log = newLog;
+    newLogInfo.fileName = newLog->fileName();
+
+    logs->append(newLogInfo);
 
 //    logs->at(logs->size() - 1)->toggleActivity(true);
 

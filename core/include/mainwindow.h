@@ -44,6 +44,7 @@
 #include "generalguisettings.h"
 #include "generalcoresettings.h"
 #include "filtrationwidget.h"
+#include "loginfo.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -79,13 +80,37 @@ private:
     QAction *actionSettings;
     QAction *actionHexVisualization;
     QAction *actionTextVisualization;
+    QAction *actionRevertZoom;
+    QAction *actionZoomOut;
+    QAction *actionZoomIn;
+    QAction *actionUndo;
+    QAction *actionRedo;
+    QAction *actionCut;
+    QAction *actionCopy;
+    QAction *actionPaste;
+    QAction *actionSelectAll;
+    QAction *actionFind;
+    QAction *actionFindNext;
+    QAction *actionFindPrevious;
+    QAction *actionGoToLine;
+
+    // FIXME: rename this later
     QAction *actionFiltration;
+
+    QAction *actionFullScreen;
+    QAction *actionHelp;
+    QAction *actionContextHelp;
+    QAction *actionAbout;
+    QAction *actionStartUpdater;
 
     // menus
     QMenu *menuFile;
     QMenu *menuEdit;
+    QMenu *menuFind;
     QMenu *menuView;
+    QMenu *menuZoom;
     QMenu *menuTools;
+    QMenu *menuWindow;
     QMenu *menuHelp;
 
     QSettings settings;
