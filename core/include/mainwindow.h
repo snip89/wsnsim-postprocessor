@@ -26,6 +26,7 @@
 #include <QKeySequence>
 #include <QErrorMessage>
 #include <QList>
+#include <QStyle>
 #include <QDebug>
 
 #include "project.h"

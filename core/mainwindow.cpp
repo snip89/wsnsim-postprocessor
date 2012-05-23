@@ -118,6 +118,7 @@ void MainWindow::createActions()
 {
     actionOpen = new QAction(tr("&Open..."), this);
     actionOpen->setShortcut(QKeySequence::Open);
+    actionOpen->setIcon(QApplication::style()->standardIcon(QStyle::SP_DirIcon));
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(openProject()));
 
     actionClose = new QAction(tr("&Close"), this);
