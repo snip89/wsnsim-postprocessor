@@ -176,11 +176,13 @@ void FiltrationWidget::execute()
     newLogInfo.log = newLog;
     newLogInfo.fileName = newLog->fileName();
 
+    QString toolTip;
+
+    newLogInfo.filtersInfo = filtersExpressions();
+
     logs->append(newLogInfo);
 
-    QString toolTip;
-    QStringList expressions = filtersExpressions();
-    foreach(QString exp, expressions)
+    foreach(QString exp, newLogInfo.filtersInfo)
     {
         toolTip += exp + "\n";
     }

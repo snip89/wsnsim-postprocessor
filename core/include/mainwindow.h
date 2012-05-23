@@ -75,7 +75,6 @@ private:
     QAction *actionOpen;
     QAction *actionClose;
     QActionGroup *actionsRecent;
-    QAction *actionLogSelect;
     QAction *actionPrint;
     QAction *actionExit;
     QAction *actionSettings;
@@ -101,6 +100,8 @@ private:
 
     // menus
     QMenu *menuFile;
+    QMenu *menuRecentProjects;
+    QMenu *menuCurrentLog;
     QMenu *menuEdit;
     QMenu *menuFind;
     QMenu *menuView;
@@ -152,6 +153,8 @@ private:
 
     void insertActionsRecent();
     void removeActionsRecent();
+
+    void updateActionsCurrentLogMenu();
 
     void closeLog();
 

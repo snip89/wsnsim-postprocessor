@@ -118,7 +118,6 @@ void MainWindow::createActions()
 {
     actionOpen = new QAction(tr("&Open..."), this);
     actionOpen->setShortcut(QKeySequence::Open);
-    actionOpen->setIcon(QApplication::style()->standardIcon(QStyle::SP_DirIcon));
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(openProject()));
 
     actionClose = new QAction(tr("&Close"), this);
@@ -130,9 +129,9 @@ void MainWindow::createActions()
     actionPrint->setShortcut(QKeySequence::Print);
     actionPrint->setEnabled(false);
 
-    actionLogSelect = new QAction(tr("&Select log..."), this);
-    actionLogSelect->setEnabled(false);
-    connect(actionLogSelect, SIGNAL(triggered()), this, SLOT(openLog()));
+    // actionLogSelect = new QAction(tr("&Select log..."), this);
+    // actionLogSelect->setEnabled(false);
+    // connect(actionLogSelect, SIGNAL(triggered()), this, SLOT(openLog()));
 
     actionExit = new QAction(tr("&Exit"), this);
     actionExit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
@@ -205,9 +204,18 @@ void MainWindow::createMenus()
     menuFile->addSeparator();
     menuFile->addAction(actionClose);
     menuFile->addSeparator();
-    menuFile->addAction(actionPrint);
+
+    menuRecentProjects = new QMenu(tr("&Recent projects..."), this);
+
+    menuFile->addMenu(menuRecentProjects);
     menuFile->addSeparator();
-    menuFile->addAction(actionLogSelect);
+
+    menuCurrentLog = new QMenu(tr("&Current log"), this);
+    menuCurrentLog->setEnabled(false);
+
+    menuFile->addMenu(menuCurrentLog);
+    menuFile->addSeparator();
+    menuFile->addAction(actionPrint);
     menuFile->addSeparator();
     menuFile->addAction(actionExit);
 
@@ -259,7 +267,7 @@ void MainWindow::deleteActions()
 
     removeActionsRecent();
 
-    delete actionLogSelect;
+    // delete actionLogSelect;
     delete actionPrint;
     delete actionClose;
     delete actionExit;
@@ -284,6 +292,8 @@ void MainWindow::deleteActions()
 void MainWindow::deleteMenus()
 {
     delete menuFile;
+    delete menuRecentProjects;
+    delete menuCurrentLog;
     delete menuEdit;
     delete menuFind;
     delete menuView;
@@ -307,22 +317,46 @@ void MainWindow::insertActionsRecent()
         }
     }
 
-    menuFile->insertActions(actionLogSelect, actionsRecent->actions());
-    if(actionsRecent->actions().size() != 0)
-        menuFile->insertSeparator(actionLogSelect);
+    // menuFile->insertActions(menuCurrentLog, actionsRecent->actions());
+    // if(actionsRecent->actions().size() != 0)
+    //    menuFile->insertSeparator(actionLogSelect);
+
+    menuRecentProjects->addActions(actionsRecent->actions());
 }
 
 void MainWindow::removeActionsRecent()
 {
-    if(!actionsRecent->actions().size() == 0)
-        menuFile->removeAction(menuFile->actions()[menuFile->actions().size() - 5]);
-
     foreach(QAction *action, actionsRecent->actions())
     {
-        menuFile->removeAction(action);
+        menuRecentProjects->removeAction(action);
         delete action;
     }
     delete actionsRecent;
+}
+
+void MainWindow::updateActionsCurrentLogMenu()
+{
+    foreach(QAction *action, menuCurrentLog->actions())
+    {
+        menuCurrentLog->removeAction(action);
+        delete action;
+    }
+
+    for(int i = 0; i < logs->size(); i ++)
+    {
+        QAction *action = new QAction(logs->at(i).fileName, this);
+
+        QString toolTip;
+        foreach(QString exp, logs->at(i).filtersInfo)
+        {
+            toolTip += exp + "\n";
+        }
+        toolTip.chop(1);
+
+        action->setToolTip(toolTip);
+
+        menuCurrentLog->addAction(action);
+    }
 }
 
 void MainWindow::closeLog()
@@ -344,6 +378,8 @@ void MainWindow::closeLog()
 
         isLogOpened = false;
     }
+
+    updateActionsCurrentLogMenu();
 }
 
 void MainWindow::insertToRecent(QString fileName)
@@ -530,7 +566,8 @@ void MainWindow::openProject(QString name)
             openLog(project->logName(selectedLogId));
     }
 
-    actionLogSelect->setEnabled(true);
+    // actionLogSelect->setEnabled(true);
+    menuCurrentLog->setEnabled(true);
     actionClose->setEnabled(true);
 
     isProjectOpened = true;
@@ -550,7 +587,8 @@ void MainWindow::closeProject()
 
         isProjectOpened = false;
 
-        actionLogSelect->setEnabled(false);
+        // actionLogSelect->setEnabled(false);
+        menuCurrentLog->setEnabled(false);
     }
 }
 
@@ -605,6 +643,8 @@ void MainWindow::openLog(QString name)
     }
 
     filtrationWidget->setMainLog(currentLogId);
+
+    updateActionsCurrentLogMenu();
 
     // logs->append(new Log(name, blockSize, memoryUsage, info, false));
     // if(!logs->at(logs->size() - 1)->load(true, false))
@@ -711,6 +751,7 @@ void MainWindow::filteredLog(int id)
 
 //    logs->append(newLog);
     currentLogId = id;
+    updateActionsCurrentLogMenu();
 
 //    logs->at(logs->size() - 1)->toggleActivity(true);
 
