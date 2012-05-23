@@ -185,6 +185,8 @@ private slots:
 
     void toggleFullScreen();
 
+    void switchCurrentLog();
+
     void exit();
 };
 

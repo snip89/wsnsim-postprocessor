@@ -766,6 +766,11 @@ void MainWindow::toggleFullScreen()
     }
 }
 
+void MainWindow::switchCurrentLog()
+{
+
+}
+
 void MainWindow::exit()
 {
     QApplication::exit(0);
