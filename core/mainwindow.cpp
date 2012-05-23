@@ -24,6 +24,8 @@ MainWindow::MainWindow(QWidget *parent) :
     isProjectOpened = false;
     isLogOpened = false;
 
+    fullScreen = false;
+
     emptyWidget = new QWidget();
 
     emptySettings = new EmptySettings();
@@ -35,7 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     generalCoreSettings->showCurrentSettings();
 
     filtrationWidget = new FiltrationWidget();
-    connect(filtrationWidget, SIGNAL(logFiltered(Log*, int)), this, SLOT(filteredLog(Log*, int)));
+    connect(filtrationWidget, SIGNAL(logFiltered(int)), this, SLOT(filteredLog(int)));
     connect(filtrationWidget, SIGNAL(filtrationCanceled()), this, SLOT(canceledFiltration()));
 
     hexVisualization = new HexVisualization();
@@ -149,26 +151,6 @@ void MainWindow::createActions()
     actionRevertZoom = new QAction(tr("&Revert zoom"), this);
     actionRevertZoom->setEnabled(false);
 
-    actionZoomOut = new QAction(tr("&Zoom out"), this);
-    actionZoomOut->setShortcut(QKeySequence::ZoomOut);
-    actionZoomOut->setEnabled(false);
-
-    actionZoomIn = new QAction(tr("&Zoom in"), this);
-    actionZoomIn->setShortcut(QKeySequence::ZoomIn);
-    actionZoomIn->setEnabled(false);
-
-    actionUndo = new QAction(tr("&Undo"), this);
-    actionUndo->setShortcut(QKeySequence::Undo);
-    actionUndo->setEnabled(false);
-
-    actionRedo = new QAction(tr("&Redo"), this);
-    actionRedo->setShortcut(QKeySequence::Redo);
-    actionRedo->setEnabled(false);
-
-    actionCut = new QAction(tr("&Cut"), this);
-    actionCut->setShortcut(QKeySequence::Cut);
-    actionCut->setEnabled(false);
-
     actionCopy = new QAction(tr("&Copy"), this);
     actionCopy->setShortcut(QKeySequence::Copy);
     actionCopy->setEnabled(false);
@@ -197,12 +179,13 @@ void MainWindow::createActions()
     actionGoToLine->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_L));
     actionGoToLine->setEnabled(false);
 
-    actionFiltration = new QAction(tr("&Filters..."), this);
+    actionFiltration = new QAction(tr("&Filter..."), this);
     actionFiltration->setEnabled(false);
     connect(actionFiltration, SIGNAL(triggered()), this, SLOT(showFiltration()));
 
     actionFullScreen = new QAction(tr("&Full screen"), this);
     actionFullScreen->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F11));
+    connect(actionFullScreen, SIGNAL(triggered()), this, SLOT(toggleFullScreen()));
 
     actionHelp = new QAction(tr("&Help"), this);
 
@@ -228,10 +211,6 @@ void MainWindow::createMenus()
     menuFile->addAction(actionExit);
 
     menuEdit = new QMenu(tr("&Edit"), this);
-    menuEdit->addAction(actionUndo);
-    menuEdit->addAction(actionRedo);
-    menuEdit->addSeparator();
-    menuEdit->addAction(actionCut);
     menuEdit->addAction(actionCopy);
     menuEdit->addAction(actionPaste);
     menuEdit->addSeparator();
@@ -253,19 +232,10 @@ void MainWindow::createMenus()
     menuView->addAction(actionHexVisualization);
     menuView->addAction(actionTextVisualization);
     menuView->addSeparator();
-
-    menuZoom = new QMenu(tr("&Zoom"), this);
-    menuZoom->addAction(actionRevertZoom);
-    menuZoom->addAction(actionZoomOut);
-    menuZoom->addAction(actionZoomIn);
-
-    menuView->addMenu(menuZoom);
+    menuView->addAction(actionFullScreen);
 
     menuTools = new QMenu(tr("&Tools"), this);
     menuTools->addAction(actionSettings);
-
-    menuWindow = new QMenu(tr("&Window"), this);
-    menuWindow->addAction(actionFullScreen);
 
     menuHelp = new QMenu(tr("&Help"), this);
     menuHelp->addAction(actionHelp);
@@ -279,7 +249,6 @@ void MainWindow::createMenus()
     ui->menuBar->addMenu(menuEdit);
     ui->menuBar->addMenu(menuView);
     ui->menuBar->addMenu(menuTools);
-    ui->menuBar->addMenu(menuWindow);
     ui->menuBar->addMenu(menuHelp);
 }
 
@@ -299,11 +268,6 @@ void MainWindow::deleteActions()
     delete actionFiltration;
     delete actionFullScreen;
     delete actionRevertZoom;
-    delete actionZoomOut;
-    delete actionZoomIn;
-    delete actionUndo;
-    delete actionRedo;
-    delete actionCut;
     delete actionCopy;
     delete actionPaste;
     delete actionFind;
@@ -322,9 +286,7 @@ void MainWindow::deleteMenus()
     delete menuEdit;
     delete menuFind;
     delete menuView;
-    delete menuZoom;
     delete menuTools;
-    delete menuWindow;
     delete menuHelp;
 }
 
@@ -641,6 +603,8 @@ void MainWindow::openLog(QString name)
         return;
     }
 
+    filtrationWidget->setMainLog(currentLogId);
+
     // logs->append(new Log(name, blockSize, memoryUsage, info, false));
     // if(!logs->at(logs->size() - 1)->load(true, false))
     // {
@@ -740,7 +704,7 @@ void MainWindow::canceledSettings()
     switchToWidget(previousActiveWidget);
 }
 
-void MainWindow::filteredLog(Log *newLog, int id)
+void MainWindow::filteredLog(int id)
 {
 //    logs->at(logs->size() - 1)->toggleActivity(false);
 
@@ -755,6 +719,20 @@ void MainWindow::filteredLog(Log *newLog, int id)
 void MainWindow::canceledFiltration()
 {
     switchToWidget(previousActiveWidget);
+}
+
+void MainWindow::toggleFullScreen()
+{
+    if(!fullScreen)
+    {
+        fullScreen = true;
+        this->showFullScreen();
+    }
+    else
+    {
+        fullScreen = false;
+        this->showNormal();
+    }
 }
 
 void MainWindow::exit()

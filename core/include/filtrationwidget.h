@@ -8,12 +8,14 @@
 
 #include <QWidget>
 #include <QStringList>
+#include <QString>
 #include <QList>
 #include <QErrorMessage>
 #include <QPoint>
 #include <QMenu>
 #include <QAction>
 #include <QListWidgetItem>
+#include <QListWidget>
 #include <QAbstractButton>
 
 #include "log.h"
@@ -37,6 +39,7 @@ public:
 
     void setCurrentProject(Project *project);
     void setCurrentLog(int id);
+    void setMainLog(int id);
     void setLogsInfos(QList<LogInfo> *logsInfos);
 
     void activate();
@@ -51,6 +54,8 @@ private:
     int currentLogId;
     QList<LogInfo> *logs;
 
+    int mainLogId;
+
     int logNameCounter;
 
     QErrorMessage errorMessager;
@@ -60,14 +65,17 @@ private:
     void addBooleanOperators();
     void execute();
 
+    QStringList filtersExpressions();
+
 signals:
-    void logFiltered(Log *newLog, int id);
+    void logFiltered(int id);
     void filtrationCanceled();
 
 private slots:
     void addFilter();
     void buttonClicked(QAbstractButton *button);
     void showFiltrationListWidgetContextMenu(const QPoint& pos);
+    void showLogsListWidgetContextMenu(const QPoint& pos);
 };
 
 #endif // FILTRATIONWIDGET_H

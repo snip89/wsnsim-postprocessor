@@ -81,11 +81,6 @@ private:
     QAction *actionHexVisualization;
     QAction *actionTextVisualization;
     QAction *actionRevertZoom;
-    QAction *actionZoomOut;
-    QAction *actionZoomIn;
-    QAction *actionUndo;
-    QAction *actionRedo;
-    QAction *actionCut;
     QAction *actionCopy;
     QAction *actionPaste;
     QAction *actionSelectAll;
@@ -108,9 +103,7 @@ private:
     QMenu *menuEdit;
     QMenu *menuFind;
     QMenu *menuView;
-    QMenu *menuZoom;
     QMenu *menuTools;
-    QMenu *menuWindow;
     QMenu *menuHelp;
 
     QSettings settings;
@@ -143,6 +136,8 @@ private:
     QList<LogInfo> *logs;
 
     SimpleEventInfo *info;
+
+    bool fullScreen;
 
     Ui::MainWindow *ui;
 
@@ -181,8 +176,10 @@ private slots:
     void appliedSettings();
     void canceledSettings();
 
-    void filteredLog(Log *newLog, int id);
+    void filteredLog(int id);
     void canceledFiltration();
+
+    void toggleFullScreen();
 
     void exit();
 };

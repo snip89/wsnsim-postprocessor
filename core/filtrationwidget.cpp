@@ -21,6 +21,10 @@ FiltrationWidget::FiltrationWidget(QWidget *parent) :
     connect(ui->filtrationListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
             this, SLOT(showFiltrationListWidgetContextMenu(const QPoint&)));
 
+    ui->logsListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+    connect(ui->logsListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
+            this, SLOT(showLogsListWidgetContextMenu(const QPoint&)));
+
     logNameCounter = 0;
 }
 
@@ -32,6 +36,15 @@ void FiltrationWidget::setCurrentProject(Project *project)
 void FiltrationWidget::setCurrentLog(int id)
 {
     currentLogId = id;
+
+    ui->currentLogLineEdit->setText(logs->at(currentLogId).fileName);
+}
+
+void FiltrationWidget::setMainLog(int id)
+{
+    mainLogId = id;
+
+    ui->logsListWidget->addItem(logs->at(mainLogId).fileName);
 }
 
 void FiltrationWidget::setLogsInfos(QList<LogInfo> *logsInfos)
@@ -72,7 +85,8 @@ void FiltrationWidget::execute()
 {
     if(!ui->filtrationListWidget->item(0))
     {
-        emit filtrationCanceled();
+//        emit filtrationCanceled();
+        emit logFiltered(currentLogId);
         return;
     }
 
@@ -152,7 +166,8 @@ void FiltrationWidget::execute()
     }
 
     logNameCounter ++;
-    currentLogId ++;
+//    currentLogId ++;
+    currentLogId = logs->size();
 
     newLog = tempLog;
 
@@ -163,7 +178,31 @@ void FiltrationWidget::execute()
 
     logs->append(newLogInfo);
 
-    emit logFiltered(newLog, currentLogId);
+    QString toolTip;
+    QStringList expressions = filtersExpressions();
+    foreach(QString exp, expressions)
+    {
+        toolTip += exp + "\n";
+    }
+    toolTip.chop(1);
+
+    QListWidgetItem *item = new QListWidgetItem(newLogInfo.fileName);
+    item->setToolTip(toolTip);
+    ui->logsListWidget->addItem(item);
+
+    emit logFiltered(currentLogId);
+}
+
+QStringList FiltrationWidget::filtersExpressions()
+{
+    QStringList result;
+
+    for(int i = 0; i < ui->filtrationListWidget->count(); i ++)
+    {
+        result.append(ui->filtrationListWidget->item(i)->text());
+    }
+
+    return result;
 }
 
 void FiltrationWidget::addFilter()
@@ -230,9 +269,55 @@ void FiltrationWidget::showFiltrationListWidgetContextMenu(const QPoint& pos)
         QAction* selectedItem = contextMenu.exec(globalPos);
         if(selectedItem)
         {
-            //            ui.filtrationListWidget->removeItemWidget(item);
             filters.removeAt(ui->filtrationListWidget->row(item));
             delete item;
+        }
+    }
+}
+
+void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
+{
+    QPoint globalPos = ui->logsListWidget->mapToGlobal(pos);
+
+    QMenu contextMenu;
+    contextMenu.addAction(tr("set current"));
+    contextMenu.addAction(tr("delete"));
+
+    QListWidgetItem *item = ui->logsListWidget->itemAt(pos);
+
+    if(item)
+    {
+        QAction* selectedItem = contextMenu.exec(globalPos);
+        if(selectedItem->text() == "set current")
+        {
+            QString fileName = item->text();
+
+            for(int i = 0; i < logs->size(); i ++)
+            {
+                if(logs->at(i).fileName == fileName)
+                {
+                    logs->at(currentLogId).log->toggleActivity(false);
+
+                    setCurrentLog(logs->at(i).id);
+
+                    logs->at(currentLogId).log->toggleActivity(true);
+                }
+            }
+
+            // foreach(LogInfo logInfo, logs)
+            // {
+            //     if(logInfo.fileName == fileName)
+            //     {
+            //         setCurrentLog(logInfo.id);
+            //     }
+            // }
+
+//            filters.removeAt(ui->filtrationListWidget->row(item));
+//            delete item;
+        }
+        else if(selectedItem->text() == "delete")
+        {
+            // TODO: cehck log id and delete item
         }
     }
 }
