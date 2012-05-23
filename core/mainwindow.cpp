@@ -344,18 +344,7 @@ void MainWindow::updateActionsCurrentLogMenu()
 
     for(int i = 0; i < logs->size(); i ++)
     {
-        QAction *action = new QAction(logs->at(i).fileName, this);
-
-        QString toolTip;
-        foreach(QString exp, logs->at(i).filtersInfo)
-        {
-            toolTip += exp + "\n";
-        }
-        toolTip.chop(1);
-
-        action->setToolTip(toolTip);
-
-        menuCurrentLog->addAction(action);
+        menuCurrentLog->addAction(new QAction(logs->at(i).fileName, this));
     }
 }
 
