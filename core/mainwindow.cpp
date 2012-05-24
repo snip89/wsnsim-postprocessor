@@ -363,14 +363,19 @@ void MainWindow::closeLog()
     {
         for(int i = 0; i < logs->size(); i ++)
         {
-            delete logs->at(i).log;
+            Log *log = logs->at(i).log;
+            logs->removeAt(i);
+            delete log;
         }
-        delete logs;
-
-        isLogOpened = false;
     }
 
     updateActionsCurrentLogMenu();
+    filtrationWidget->clearLogs();
+
+    qDebug() << logs->size();
+
+    delete logs;
+    isLogOpened = false;
 }
 
 void MainWindow::insertToRecent(QString fileName)

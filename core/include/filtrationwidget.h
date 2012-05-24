@@ -44,6 +44,7 @@ public:
 
     void activate();
     void deactivate();
+    void clearLogs();
 
     ~FiltrationWidget();
 
