@@ -138,6 +138,37 @@ QStringList Project::paramsNames()
     return result;
 }
 
+LogDataType Project::paramType(QString paramName)
+{
+    LogDataType result = UNKNOWN_TYPE;
+
+    foreach(EventParams params, projectParams.events.systemEvents)
+    {
+        foreach(EventArgument argument, params.arguments)
+        {
+            if(argument["name"] == paramName)
+            {
+                result = toLogDataType(argument["type"]);
+                return result;
+            }
+        }
+    }
+
+    foreach(EventParams params, projectParams.events.userEvents)
+    {
+        foreach(EventArgument argument, params.arguments)
+        {
+            if(argument["name"] == paramName)
+            {
+                result = toLogDataType(argument["type"]);
+                return result;
+            }
+        }
+    }
+
+    return result;
+}
+
 void Project::loadEventsInfo()
 {
     eventsInfoSize = projectParams.events.systemEvents.size();

@@ -36,6 +36,7 @@ public:
     QString logName(int id);
     QString projectName();
     QStringList paramsNames();
+    LogDataType paramType(QString paramName);
     virtual ~Project();
 private:
     QString projectFileName;
