@@ -65,6 +65,9 @@ void FiltrationWidget::deactivate()
 {
     ui->filtrationParamComboBox->clear();
     ui->filtrationListWidget->clear();
+
+    filters.clear();
+
     ui->filtrationValueComboBox->clear();
 }
 
