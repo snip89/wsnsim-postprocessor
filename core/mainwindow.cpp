@@ -344,7 +344,9 @@ void MainWindow::updateActionsCurrentLogMenu()
 
     for(int i = 0; i < logs->size(); i ++)
     {
-        menuCurrentLog->addAction(new QAction(logs->at(i).fileName, this));
+        QAction *action = new QAction(logs->at(i).fileName, this);
+        menuCurrentLog->addAction(action);
+        connect(action, SIGNAL(triggered()), this, SLOT(switchCurrentLog()));
     }
 }
 
@@ -768,7 +770,20 @@ void MainWindow::toggleFullScreen()
 
 void MainWindow::switchCurrentLog()
 {
+    QAction *sender = (QAction*)QObject::sender();
+    for(int i = 0; i < logs->size(); i ++)
+    {
+        if(logs->at(i).fileName == sender->text())
+        {
+            logs->at(currentLogId).log->toggleActivity(false);
 
+            currentLogId = logs->at(i).id;
+
+            logs->at(currentLogId).log->toggleActivity(true);
+
+            switchToWidget(activeWidget);
+        }
+    }
 }
 
 void MainWindow::exit()
