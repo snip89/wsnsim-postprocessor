@@ -120,6 +120,10 @@ void MainWindow::createActions()
     actionOpen->setShortcut(QKeySequence::Open);
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(openProject()));
 
+    actionOpenLog = new QAction(tr("&Open log..."), this);
+    actionOpenLog->setEnabled(false);
+    connect(actionOpenLog, SIGNAL(triggered()), this, SLOT(openLog()));
+
     actionClose = new QAction(tr("&Close"), this);
     actionClose->setShortcut(QKeySequence::Close);
     actionClose->setEnabled(false);
@@ -201,6 +205,12 @@ void MainWindow::createMenus()
 {
     menuFile = new QMenu(tr("&File"), this);
     menuFile->addAction(actionOpen);
+    menuFile->addAction(actionOpenLog);
+
+    menuCurrentLog = new QMenu(tr("&Current log"), this);
+    menuCurrentLog->setEnabled(false);
+
+    menuFile->addMenu(menuCurrentLog);
     menuFile->addSeparator();
     menuFile->addAction(actionClose);
     menuFile->addSeparator();
@@ -208,12 +218,6 @@ void MainWindow::createMenus()
     menuRecentProjects = new QMenu(tr("&Recent projects..."), this);
 
     menuFile->addMenu(menuRecentProjects);
-    menuFile->addSeparator();
-
-    menuCurrentLog = new QMenu(tr("&Current log"), this);
-    menuCurrentLog->setEnabled(false);
-
-    menuFile->addMenu(menuCurrentLog);
     menuFile->addSeparator();
     menuFile->addAction(actionPrint);
     menuFile->addSeparator();
@@ -562,6 +566,8 @@ void MainWindow::openProject(QString name)
             openLog(project->logName(selectedLogId));
     }
 
+    actionOpenLog->setEnabled(true);
+
     // actionLogSelect->setEnabled(true);
     menuCurrentLog->setEnabled(true);
     actionClose->setEnabled(true);
@@ -583,7 +589,7 @@ void MainWindow::closeProject()
 
         isProjectOpened = false;
 
-        // actionLogSelect->setEnabled(false);
+        actionOpenLog->setEnabled(false);
         menuCurrentLog->setEnabled(false);
     }
 }

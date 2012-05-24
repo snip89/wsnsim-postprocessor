@@ -73,6 +73,7 @@ public:
 private:
     // actions
     QAction *actionOpen;
+    QAction *actionOpenLog;
     QAction *actionClose;
     QActionGroup *actionsRecent;
     QAction *actionPrint;
