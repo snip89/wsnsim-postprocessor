@@ -371,15 +371,13 @@ void MainWindow::closeLog()
             logs->removeAt(i);
             delete log;
         }
+
+        updateActionsCurrentLogMenu();
+        filtrationWidget->clearLogs();
+
+        delete logs;
+        isLogOpened = false;
     }
-
-    updateActionsCurrentLogMenu();
-    filtrationWidget->clearLogs();
-
-    qDebug() << logs->size();
-
-    delete logs;
-    isLogOpened = false;
 }
 
 void MainWindow::insertToRecent(QString fileName)
@@ -477,6 +475,8 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case FILTRATION:
+        filtrationWidget->setCurrentLog(currentLogId);
+        filtrationWidget->activate();
         stackedWidget->setCurrentWidget(filtrationWidget);
         activeWidget = FILTRATION;
         break;
@@ -569,7 +569,6 @@ void MainWindow::openProject(QString name)
     actionOpenLog->setEnabled(true);
 
     // actionLogSelect->setEnabled(true);
-    menuCurrentLog->setEnabled(true);
     actionClose->setEnabled(true);
 
     isProjectOpened = true;
@@ -662,6 +661,8 @@ void MainWindow::openLog(QString name)
 
     isLogOpened = true;
 
+    menuCurrentLog->setEnabled(true);
+
     // TODO: enable all visualization actions here
     actionHexVisualization->setEnabled(true);
     actionTextVisualization->setEnabled(true);
@@ -690,8 +691,8 @@ void MainWindow::showFiltration()
 {
     filtrationWidget->setCurrentProject(project);
 //    filtrationWidget->setCurrentLog(logs->at(logs->size() - 1));
-    filtrationWidget->setCurrentLog(currentLogId);
-    filtrationWidget->activate();
+//    filtrationWidget->setCurrentLog(currentLogId);
+//    filtrationWidget->activate();
     switchToWidget(FILTRATION);
 }
 
@@ -792,7 +793,18 @@ void MainWindow::switchCurrentLog()
 
             logs->at(currentLogId).log->toggleActivity(true);
 
-            switchToWidget(activeWidget);
+            WidgetType tempWidgetType = activeWidget;
+
+            if(tempWidgetType == HEXVISUALIZATION || tempWidgetType == TEXTVISUALIZATION)
+                switchToWidget(tempWidgetType);
+            
+            else if(tempWidgetType == FILTRATION)
+            {
+                filtrationWidget->setCurrentLog(currentLogId);
+            }
+
+            else
+                switchToWidget(HEXVISUALIZATION);
         }
     }
 }
