@@ -300,36 +300,40 @@ void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
     if(item)
     {
         QAction* selectedItem = contextMenu.exec(globalPos);
-        if(selectedItem->text() == "set current")
+        if(selectedItem)
         {
-            QString fileName = item->text();
-
-            for(int i = 0; i < logs->size(); i ++)
+            
+            if(selectedItem->text() == "set current")
             {
-                if(logs->at(i).fileName == fileName)
+                QString fileName = item->text();
+
+                for(int i = 0; i < logs->size(); i ++)
                 {
-                    logs->at(currentLogId).log->toggleActivity(false);
+                    if(logs->at(i).fileName == fileName)
+                    {
+                        logs->at(currentLogId).log->toggleActivity(false);
 
-                    setCurrentLog(logs->at(i).id);
+                        setCurrentLog(logs->at(i).id);
 
-                    logs->at(currentLogId).log->toggleActivity(true);
+                        logs->at(currentLogId).log->toggleActivity(true);
+                    }
                 }
-            }
 
-            // foreach(LogInfo logInfo, logs)
-            // {
-            //     if(logInfo.fileName == fileName)
-            //     {
-            //         setCurrentLog(logInfo.id);
-            //     }
-            // }
+                // foreach(LogInfo logInfo, logs)
+                // {
+                //     if(logInfo.fileName == fileName)
+                //     {
+                //         setCurrentLog(logInfo.id);
+                //     }
+                // }
 
 //            filters.removeAt(ui->filtrationListWidget->row(item));
 //            delete item;
-        }
-        else if(selectedItem->text() == "delete")
-        {
-            // TODO: cehck log id and delete item
+            }
+            else if(selectedItem->text() == "delete")
+            {
+                // TODO: cehck log id and delete item
+            }
         }
     }
 }
