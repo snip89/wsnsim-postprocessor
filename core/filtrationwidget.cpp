@@ -332,7 +332,34 @@ void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
             }
             else if(selectedItem->text() == "delete")
             {
-                // TODO: cehck log id and delete item
+                QString fileName = item->text();
+
+                for(int i = 0; i < logs->size(); i ++)
+                {
+                    if(logs->at(i).fileName == fileName)
+                    {
+                        if(i == mainLogId)
+                            return;
+                        else
+                        {
+                            qDebug() << "normal";
+
+                            logs->at(currentLogId).log->toggleActivity(false);
+
+                            Log *log = logs->at(currentLogId).log;
+
+                            logs->removeAt(currentLogId);
+
+                            delete log;
+
+                            delete item;
+
+                            setCurrentLog(mainLogId);
+
+                            logs->at(currentLogId).log->toggleActivity(true);
+                        }
+                    }
+                }
             }
         }
     }
