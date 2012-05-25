@@ -100,11 +100,7 @@ void LogIndex::generateFromMemory(char *memory, qint64 memorySize, qint64 &logSi
         quint64 vTime = 0;
 
         // попытка пропустить запись
-        if(!StaticRecordsReader::skipRecord(memory, memorySize, pos, skippedSize, vTime, eventsInfo))
-        {
-            errorMessager.showMessage(QObject::tr("Unexpected end of record"));
-            return;
-        }
+        StaticRecordsReader::skipRecord(memory, memorySize, pos, skippedSize, vTime, eventsInfo);
 
         // увеличить размер формируемого блока
 //        currentBlockSize += skippedSize;
@@ -131,10 +127,7 @@ void LogIndex::generateFromMemory(char *memory, qint64 memorySize, qint64 &logSi
 
         // попытка пропустить запись
         if(!StaticRecordsReader::skipRecord(memory, memorySize, pos, skippedSize, vTime, eventsInfo))
-        {
-            errorMessager.showMessage(QObject::tr("Unexpected end of record"));
             return;
-        }
 
         // увеличить размер формируемого блока
 //        currentBlockSize += skippedSize;
