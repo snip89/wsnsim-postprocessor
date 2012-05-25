@@ -12,8 +12,6 @@ FiltrationWidget::FiltrationWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    addBooleanOperators();
-
     connect(ui->addFilterButton, SIGNAL(clicked()), this, SLOT(addFilter()));
     connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 
@@ -24,6 +22,8 @@ FiltrationWidget::FiltrationWidget(QWidget *parent) :
     ui->logsListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(ui->logsListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
             this, SLOT(showLogsListWidgetContextMenu(const QPoint&)));
+
+    connect(ui->filtrationParamComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(paramSelected(int)));
 
     logNameCounter = 0;
 }
@@ -59,6 +59,8 @@ void FiltrationWidget::activate()
     {
         ui->filtrationParamComboBox->addItem(paramName);
     }
+
+    updateBooleanOperators();
 }
 
 void FiltrationWidget::deactivate()
@@ -81,14 +83,50 @@ FiltrationWidget::~FiltrationWidget()
     delete ui;
 }
 
-void FiltrationWidget::addBooleanOperators()
+void FiltrationWidget::updateBooleanOperators()
 {
-    ui->filtrationOperatorComboBox->addItem(tr("=="));
-    ui->filtrationOperatorComboBox->addItem(tr("<"));
-    ui->filtrationOperatorComboBox->addItem(tr("<="));
-    ui->filtrationOperatorComboBox->addItem(tr(">"));
-    ui->filtrationOperatorComboBox->addItem(tr(">="));
-    ui->filtrationOperatorComboBox->addItem(tr("!="));
+    ui->filtrationOperatorComboBox->clear();
+
+    QString currentParamName = ui->filtrationParamComboBox->currentText();
+
+    switch(currentProject->paramType(currentParamName))
+    {
+    case UINT8_TYPE:
+        setIntegerBooleanOperators();
+        break;
+
+    case UINT16_TYPE:
+        setIntegerBooleanOperators();
+        break;
+
+    case UINT32_TYPE:
+        setIntegerBooleanOperators();
+        break;
+
+    case UINT64_TYPE:
+        setIntegerBooleanOperators();
+        break;
+
+    case INT32_TYPE:
+        setIntegerBooleanOperators();
+        break;
+
+    case BOOL_TYPE:
+        setEqNeBooleanOperators();
+        break;
+
+    case DOUBLE_TYPE:
+        setFloatBooleanOperators();
+        break;
+
+    case BYTE_ARRAY_TYPE:
+        setEqNeBooleanOperators();
+        break;
+
+    case STRING_TYPE:
+        setEqNeBooleanOperators();
+        break;
+    }
 }
 
 void FiltrationWidget::execute()
@@ -215,6 +253,28 @@ QStringList FiltrationWidget::filtersExpressions()
     }
 
     return result;
+}
+
+void FiltrationWidget::setIntegerBooleanOperators()
+{
+    ui->filtrationOperatorComboBox->addItem(tr("=="));
+    ui->filtrationOperatorComboBox->addItem(tr("<"));
+    ui->filtrationOperatorComboBox->addItem(tr("<="));
+    ui->filtrationOperatorComboBox->addItem(tr(">"));
+    ui->filtrationOperatorComboBox->addItem(tr(">="));
+    ui->filtrationOperatorComboBox->addItem(tr("!="));
+}
+
+void FiltrationWidget::setFloatBooleanOperators()
+{
+    ui->filtrationOperatorComboBox->addItem(tr("<"));
+    ui->filtrationOperatorComboBox->addItem(tr(">"));
+}
+
+void FiltrationWidget::setEqNeBooleanOperators()
+{
+    ui->filtrationOperatorComboBox->addItem(tr("=="));
+    ui->filtrationOperatorComboBox->addItem(tr("!="));
 }
 
 void FiltrationWidget::addFilter()
@@ -363,4 +423,11 @@ void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
             }
         }
     }
+}
+
+void FiltrationWidget::paramSelected(int index)
+{
+    int indexValue = index;
+
+    updateBooleanOperators();
 }

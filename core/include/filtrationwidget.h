@@ -63,10 +63,14 @@ private:
 
     QList<AbstractFilter*> filters;
 
-    void addBooleanOperators();
+    void updateBooleanOperators();
     void execute();
 
     QStringList filtersExpressions();
+
+    void setIntegerBooleanOperators();
+    void setFloatBooleanOperators();
+    void setEqNeBooleanOperators();
 
 signals:
     void logFiltered(int id);
@@ -77,6 +81,7 @@ private slots:
     void buttonClicked(QAbstractButton *button);
     void showFiltrationListWidgetContextMenu(const QPoint& pos);
     void showLogsListWidgetContextMenu(const QPoint& pos);
+    void paramSelected(int index);
 };
 
 #endif // FILTRATIONWIDGET_H

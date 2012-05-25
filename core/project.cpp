@@ -142,6 +142,12 @@ LogDataType Project::paramType(QString paramName)
 {
     LogDataType result = UNKNOWN_TYPE;
 
+    if(paramName == "vTime")
+        return UINT64_TYPE;
+
+    if(paramName == "eventID")
+        return UINT8_TYPE;
+
     foreach(EventParams params, projectParams.events.systemEvents)
     {
         foreach(EventArgument argument, params.arguments)
