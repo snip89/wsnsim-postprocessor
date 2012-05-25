@@ -165,9 +165,12 @@ private:
 
     void showEmptySettings(QString name);
 
+public slots:
+    void openProject(QString name = QString::null);
+
 private slots:
     void openRecentProject();
-    void openProject(QString name = QString::null);
+
     void closeProject();
 
     void openLog(QString name = QString::null);
