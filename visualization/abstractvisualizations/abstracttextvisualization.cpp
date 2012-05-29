@@ -9,9 +9,9 @@ AbstractTextVisualization::AbstractTextVisualization(QWidget *parent) :
 
     connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarMoving(int)));
 
-    ui->textEdit->installEventFilter(this);
-
     viewer = new Viewer();
+
+    viewer->installEventFilter(this);
 
     ui->gridLayout->addWidget(viewer, 0, 0);
 
@@ -37,10 +37,26 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
     {
         QKeyEvent *keyEvent = (QKeyEvent *)event;
         if(keyEvent->key() == Qt::Key_Up)
-            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepSub);
+        {
+            viewer->moveCursor(QTextCursor::StartOfLine);
+
+            if(viewer->textCursor().atStart())
+                ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepSub);
+
+            else
+                viewer->moveCursor(QTextCursor::Up);
+        }
 
         else if(keyEvent->key() == Qt::Key_Down)
-            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepAdd);
+        {
+            viewer->moveCursor(QTextCursor::EndOfLine);
+
+            if(viewer->textCursor().atEnd())
+                ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepAdd);
+
+            else
+                viewer->moveCursor(QTextCursor::Down);
+        }
 
         else if(keyEvent->key() == Qt::Key_PageUp)
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepSub);

@@ -11,6 +11,7 @@
 #include <QColor>
 #include <QObject>
 #include <QKeyEvent>
+#include <QTextCursor>
 #include <QDebug>
 
 class Viewer : public QTextEdit
@@ -25,9 +26,6 @@ public:
 
 private slots:
     void highlightCurrentLine();
-
-protected:
-//    /* virtual */ void keyPressEvent(QKeyEvent *e);
 
 private:
     QColor lineColor;

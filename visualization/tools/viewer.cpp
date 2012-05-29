@@ -36,7 +36,3 @@ void Viewer::highlightCurrentLine()
 
     this->setExtraSelections(extraSelections);
 }
-
-/*void keyPressEvent(QKeyEvent *e)
-{
-}*/
