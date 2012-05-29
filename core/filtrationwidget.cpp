@@ -91,6 +91,9 @@ void FiltrationWidget::updateBooleanOperators()
 
     switch(currentProject->paramType(currentParamName))
     {
+    case UNKNOWN_TYPE:
+        break;
+
     case UINT8_TYPE:
         setIntegerBooleanOperators();
         break;
@@ -428,6 +431,8 @@ void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
 void FiltrationWidget::paramSelected(int index)
 {
     int indexValue = index;
+
+    qDebug() << "selected param: " << indexValue;
 
     updateBooleanOperators();
 }

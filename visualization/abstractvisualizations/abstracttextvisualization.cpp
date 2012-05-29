@@ -11,6 +11,10 @@ AbstractTextVisualization::AbstractTextVisualization(QWidget *parent) :
 
     ui->textEdit->installEventFilter(this);
 
+    viewer = new Viewer();
+
+    ui->gridLayout->addWidget(viewer, 0, 0);
+
     isActive = false;
 }
 
@@ -26,10 +30,10 @@ void AbstractTextVisualization::resizeEvent(QResizeEvent *e)
 
 bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
 {
-    if(event->type() == QEvent::Wheel && target == ui->textEdit)
+    if(event->type() == QEvent::Wheel && target == viewer)
         QCoreApplication::sendEvent(ui->verticalScrollBar, event);
 
-    else if(event->type() == QEvent::KeyPress && target == ui->textEdit)
+    else if(event->type() == QEvent::KeyPress && target == viewer)
     {
         QKeyEvent *keyEvent = (QKeyEvent *)event;
         if(keyEvent->key() == Qt::Key_Up)
@@ -61,7 +65,7 @@ AbstractTextVisualization::~AbstractTextVisualization()
 
 int AbstractTextVisualization::linesOnPage()
 {
-    int wh = ui->textEdit->height();
+    int wh = viewer->height();
     int fh = this->fontMetrics().height();
     return wh / fh - 1;
 }

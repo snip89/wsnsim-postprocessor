@@ -20,7 +20,7 @@ void TextVisualization::activity(bool status)
     if(!isActive)
     {
         ui->verticalScrollBar->setValue(0);
-        ui->textEdit->clear();
+        viewer->clear();
     }
 }
 
@@ -45,7 +45,7 @@ TextVisualization::~TextVisualization()
 void TextVisualization::updatePage()
 {
     currentLog->seek(topLinePos);
-    ui->textEdit->clear();
+    viewer->clear();
     int recordsCount = linesOnPage();
 
     while(topLinePos > 0 && recordsCount > currentLog->size() - topLinePos)
@@ -99,7 +99,7 @@ void TextVisualization::updatePage()
                 resultLine += *info[record.eventID].argsInfo[j].name + ": " + record.other[j].toString() + "; ";
         }
 
-        ui->textEdit->append(resultLine);
+        viewer->append(resultLine);
     }
 
     ui->verticalScrollBar->setPageStep(recordsCount);

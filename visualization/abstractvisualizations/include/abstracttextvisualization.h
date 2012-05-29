@@ -11,10 +11,14 @@
 #include <QEvent>
 #include <QResizeEvent>
 #include <QWheelEvent>
+#include <QLayout>
+#include <QGridLayout>
 #include <QDebug>
 
 #include "ilog.h"
 #include "iproject.h"
+
+#include "viewer.h"
 
 namespace Ui {
     class AbstractTextVisualization;
@@ -41,6 +45,8 @@ protected:
     virtual void updatePage() = 0;
 
     int linesOnPage();
+
+    Viewer *viewer;
 
     Ui::AbstractTextVisualization *ui;
 
