@@ -72,21 +72,25 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
 
         else if(keyEvent->key() == Qt::Key_PageUp)
         {
+            direction = Up;
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepSub);
         }
 
         else if(keyEvent->key() == Qt::Key_PageDown)
         {
+            direction = Down;
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepAdd);
         }
 
         else if(keyEvent->key() == Qt::Key_Home)
         {
+            direction = Up;
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderToMinimum);
         }
 
         else if(keyEvent->key() == Qt::Key_End)
         {
+            direction = Down;
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderToMaximum);
         }
     }
