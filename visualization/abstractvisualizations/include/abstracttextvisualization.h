@@ -20,6 +20,12 @@
 
 #include "viewer.h"
 
+enum Direction
+{
+    Up,
+    Down
+};
+
 namespace Ui {
     class AbstractTextVisualization;
 }
@@ -36,6 +42,8 @@ public:
     virtual ~AbstractTextVisualization();
 
 protected:
+    Direction direction;
+
     ILog *currentLog;
     IProject *currentProject;
 

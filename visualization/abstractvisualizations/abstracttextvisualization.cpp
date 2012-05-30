@@ -16,6 +16,8 @@ AbstractTextVisualization::AbstractTextVisualization(QWidget *parent) :
     ui->gridLayout->addWidget(viewer, 0, 0);
 
     isActive = false;
+
+    direction = Up;
 }
 
 void AbstractTextVisualization::resizeEvent(QResizeEvent *e)
@@ -41,10 +43,15 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
             viewer->moveCursor(QTextCursor::StartOfLine);
 
             if(viewer->textCursor().atStart())
+            {
+                direction = Up;
                 ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepSub);
+            }
 
             else
+            {
                 viewer->moveCursor(QTextCursor::Up);
+            }
         }
 
         else if(keyEvent->key() == Qt::Key_Down)
@@ -52,23 +59,36 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
             viewer->moveCursor(QTextCursor::EndOfLine);
 
             if(viewer->textCursor().atEnd())
+            {
+                direction = Down;
                 ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepAdd);
+            }
 
             else
+            {
                 viewer->moveCursor(QTextCursor::Down);
+            }
         }
 
         else if(keyEvent->key() == Qt::Key_PageUp)
+        {
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepSub);
+        }
 
         else if(keyEvent->key() == Qt::Key_PageDown)
+        {
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepAdd);
+        }
 
         else if(keyEvent->key() == Qt::Key_Home)
+        {
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderToMinimum);
+        }
 
         else if(keyEvent->key() == Qt::Key_End)
+        {
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderToMaximum);
+        }
     }
 
     return true;

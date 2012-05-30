@@ -104,4 +104,9 @@ void TextVisualization::updatePage()
 
     ui->verticalScrollBar->setPageStep(recordsCount);
     ui->verticalScrollBar->setMaximum(currentLog->size() - recordsCount);
+
+    if(direction == Up)
+        viewer->moveCursor(QTextCursor::Start);
+    else if(direction == Down)
+        viewer->moveCursor(QTextCursor::End);
 }
