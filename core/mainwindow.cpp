@@ -146,11 +146,13 @@ void MainWindow::createActions()
 
     actionHexVisualization = new QAction(tr("&Hex"), this);
     actionHexVisualization->setEnabled(false);
-    connect(actionHexVisualization, SIGNAL(triggered()), this, SLOT(showHexVisualization()));
+    actionHexVisualization->setCheckable(true);
+    connect(actionHexVisualization, SIGNAL(toggled(bool)), this, SLOT(showHexVisualization(bool)));
 
     actionTextVisualization = new QAction(tr("&Text"), this);
     actionTextVisualization->setEnabled(false);
-    connect(actionTextVisualization, SIGNAL(triggered()), this, SLOT(showTextVisualization()));
+    actionTextVisualization->setCheckable(true);
+    connect(actionTextVisualization, SIGNAL(toggled(bool)), this, SLOT(showTextVisualization(bool)));
 
     actionRevertZoom = new QAction(tr("&Revert zoom"), this);
     actionRevertZoom->setEnabled(false);
@@ -669,7 +671,9 @@ void MainWindow::openLog(QString name)
 
     actionFiltration->setEnabled(true);
 
-    showHexVisualization();
+//    showHexVisualization(true);
+
+    actionHexVisualization->toggle();
 }
 
 void MainWindow::showSettings()
@@ -677,14 +681,31 @@ void MainWindow::showSettings()
     switchToWidget(MAINSETTINGS);
 }
 
-void MainWindow::showTextVisualization()
+void MainWindow::showTextVisualization(bool checked)
 {
-    switchToWidget(TEXTVISUALIZATION);
+    if(checked)
+    {
+        if(actionHexVisualization->isChecked())
+            actionHexVisualization->setChecked(false);
+    
+        switchToWidget(TEXTVISUALIZATION);
+    }
+
+    if(!checked && activeWidget == TEXTVISUALIZATION)
+        switchToWidget(EMPTY);
 }
 
-void MainWindow::showHexVisualization()
+void MainWindow::showHexVisualization(bool checked)
 {
-    switchToWidget(HEXVISUALIZATION);
+    if(checked)
+    {
+        if(actionTextVisualization->isChecked())
+            actionTextVisualization->setChecked(false);
+        switchToWidget(HEXVISUALIZATION);
+    }
+
+    if(!checked && activeWidget == HEXVISUALIZATION)
+        switchToWidget(EMPTY);
 }
 
 void MainWindow::showFiltration()
@@ -737,7 +758,14 @@ void MainWindow::appliedSettings()
     generalCoreSettings->applySettings();
     generalGuiSettings->applySettings();
 
-    switchToWidget(previousActiveWidget);
+    if(previousActiveWidget == HEXVISUALIZATION && !actionHexVisualization->isChecked())
+        switchToWidget(EMPTY);
+
+    else if(previousActiveWidget == TEXTVISUALIZATION && !actionTextVisualization->isChecked())
+        switchToWidget(EMPTY);
+
+    else
+        switchToWidget(previousActiveWidget);
 }
 
 void MainWindow::canceledSettings()
@@ -745,7 +773,14 @@ void MainWindow::canceledSettings()
     generalCoreSettings->showCurrentSettings();
     generalGuiSettings->showCurrentSettings();
 
-    switchToWidget(previousActiveWidget);
+    if(previousActiveWidget == HEXVISUALIZATION && !actionHexVisualization->isChecked())
+        switchToWidget(EMPTY);
+
+    else if(previousActiveWidget == TEXTVISUALIZATION && !actionTextVisualization->isChecked())
+        switchToWidget(EMPTY);
+
+    else
+        switchToWidget(previousActiveWidget);
 }
 
 void MainWindow::filteredLog(int id)

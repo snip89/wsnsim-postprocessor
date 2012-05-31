@@ -176,8 +176,8 @@ private slots:
     void openLog(QString name = QString::null);
 
     void showSettings();
-    void showTextVisualization();
-    void showHexVisualization();
+    void showTextVisualization(bool checked);
+    void showHexVisualization(bool checked);
     void showFiltration();
 
     void selectedSetting(QString topLevelName, QString settingName);
