@@ -13,6 +13,9 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
+  <property name="layoutDirection">
+   <enum>Qt::RightToLeft</enum>
+  </property>
   <layout class="QGridLayout" name="gridLayout">
    <property name="margin">
     <number>0</number>
@@ -22,6 +25,9 @@
    </property>
    <item row="0" column="0">
     <widget class="QScrollBar" name="verticalScrollBar">
+     <property name="layoutDirection">
+      <enum>Qt::LeftToRight</enum>
+     </property>
      <property name="orientation">
       <enum>Qt::Vertical</enum>
      </property>
