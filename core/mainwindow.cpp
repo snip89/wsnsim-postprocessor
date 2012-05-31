@@ -112,6 +112,12 @@ void MainWindow::setSettings(QSettings &someSettings)
 
         someSettings.setValue("General/Gui/Recent", emptyRecent);
     }
+
+    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors_and_Fonts/Cursor_line_color"))
+        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors_and_Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+
+    if(!someSettings.contains("Hex visualization/Appearance/Colors_and_Fonts/Cursor_line_color"))
+        someSettings.setValue("Hex visualization/Appearance/Colors_and_Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 }
 
 void MainWindow::createActions()
@@ -754,13 +760,33 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
 
     else if(topLevelName == "Hex visualization")
     {
-        IVisualizationSettings *visualizationSettings = hexVisualization->visualizationSettings(settingName);
-
-        if(!visualizationSettings)
+        if(settingName == "Hex visualization")
             showEmptySettings(settingName);
 
         else
         {
+
+            IVisualizationSettings *visualizationSettings = hexVisualization->visualizationSettings(settingName);
+
+            if(!visualizationSettings)
+                showEmptySettings(settingName);
+
+            else
+            {
+                QWidget *widget = visualizationSettings->getWidget();
+
+                if(!mainSettings->settingsFrameWidget->isAncestorOf(widget))
+                    mainSettings->settingsFrameWidget->addWidget(widget);
+                
+                mainSettings->settingsFrameWidget->setCurrentWidget(widget);
+
+            // generalGuiSettings->setSettingsName(settingName);
+
+            // if(!mainSettings->settingsFrameWidget->isAncestorOf(generalGuiSettings))
+            //     mainSettings->settingsFrameWidget->addWidget(generalGuiSettings);
+
+            // mainSettings->settingsFrameWidget->setCurrentWidget(generalGuiSettings);
+            }
         }
     }
 }

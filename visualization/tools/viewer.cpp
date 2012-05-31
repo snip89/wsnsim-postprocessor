@@ -9,7 +9,7 @@ Viewer::Viewer(QWidget *parent)
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     QSettings settings;
-    lineColor = settings.value("Hex visualization/Appearance/Cursor_line_color").value<QColor>();
+    lineColor = settings.value("Hex visualization/Appearance/Colors_and_Fonts/Cursor_line_color").value<QColor>();
 
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 }

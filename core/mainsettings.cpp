@@ -26,6 +26,8 @@ void MainSettings::initSettingsTree()
 {
     QSettings settings;
 
+    qDebug() << settings.allKeys();
+
     QStringList topLevelGroups = settings.childGroups();
 
     if(topLevelGroups.size() != 0)
@@ -61,8 +63,12 @@ bool MainSettings::recursiveInitTree(QTreeWidgetItem *parentItem, QString group,
         }
     }
     else
+    {
+        qDebug() << "1" << settings.group();
         return false;
+    }
 
+    qDebug() << "2" << settings.group();
     return true;
 }
 

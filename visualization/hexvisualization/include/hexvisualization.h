@@ -35,8 +35,6 @@ public:
 private:
     HexAppearanceColorsAndFontsSettings *colorsAndFontsSettings;
 
-    void setSettings(QSettings &someSettings);
-
     QSettings settings;
 
     /*virtual*/ void updatePage();
