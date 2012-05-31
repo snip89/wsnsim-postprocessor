@@ -751,6 +751,18 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
             showEmptySettings(settingName);
         }
     }
+
+    else if(topLevelName == "Hex visualization")
+    {
+        IVisualizationSettings *visualizationSettings = hexVisualization->visualizationSettings(settingName);
+
+        if(!visualizationSettings)
+            showEmptySettings(settingName);
+
+        else
+        {
+        }
+    }
 }
 
 void MainWindow::appliedSettings()

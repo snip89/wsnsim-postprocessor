@@ -6,11 +6,15 @@
 #ifndef IVISUALIZATIONSETTINGS_H
 #define IVISUALIZATIONSETTINGS_H
 
+#include <QWidget>
+#include <QObject>
+
 class IVisualizationSettings
 {
 public:
     virtual void showCurrentSettings() = 0;
     virtual void applySettings() = 0;
+    virtual QWidget *getWidget() = 0;
     virtual ~IVisualizationSettings() { }
 };
 

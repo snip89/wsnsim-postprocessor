@@ -7,6 +7,18 @@ HexAppearanceColorsAndFontsSettings::HexAppearanceColorsAndFontsSettings(QWidget
     ui->setupUi(this);
 }
 
+void HexAppearanceColorsAndFontsSettings::showCurrentSettings()
+{
+}
+
+void HexAppearanceColorsAndFontsSettings::applySettings()
+{
+}
+
+QWidget *HexAppearanceColorsAndFontsSettings::getWidget()
+{
+}
+
 HexAppearanceColorsAndFontsSettings::~HexAppearanceColorsAndFontsSettings()
 {
     delete ui;

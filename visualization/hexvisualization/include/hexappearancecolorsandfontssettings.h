@@ -9,17 +9,23 @@
 #include <QWidget>
 
 #include "ui_hexappearancecolorsandfontssettings.h"
+#include "ivisualizationsettings.h"
 
 namespace Ui {
     class HexAppearanceColorsAndFontsSettings;
 }
 
-class HexAppearanceColorsAndFontsSettings : public QWidget
+class HexAppearanceColorsAndFontsSettings : public QWidget, public IVisualizationSettings
 {
     Q_OBJECT
 
 public:
     explicit HexAppearanceColorsAndFontsSettings(QWidget *parent = 0);
+
+    /*virtual*/ void showCurrentSettings();
+    /*virtual*/ void applySettings();
+    /*virtual*/ QWidget *getWidget();
+
     virtual ~HexAppearanceColorsAndFontsSettings();
 
 private:
