@@ -13,6 +13,7 @@
 #include <QWheelEvent>
 #include <QLayout>
 #include <QGridLayout>
+#include <QSettings>
 #include <QDebug>
 
 #include "ilog.h"
@@ -55,6 +56,8 @@ protected:
     int linesOnPage();
 
     Viewer *viewer;
+
+    QSettings settings;
 
     Ui::AbstractTextVisualization *ui;
 

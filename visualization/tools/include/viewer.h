@@ -12,6 +12,8 @@
 #include <QObject>
 #include <QKeyEvent>
 #include <QTextCursor>
+#include <QSettings>
+#include <QVariant>
 #include <QDebug>
 
 class Viewer : public QTextEdit
@@ -19,8 +21,6 @@ class Viewer : public QTextEdit
     Q_OBJECT
 public:
     explicit Viewer(QWidget *parent = 0);
-
-    void setLineColor(QColor color);
 
     virtual ~Viewer();
 

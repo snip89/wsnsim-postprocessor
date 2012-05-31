@@ -17,6 +17,7 @@ void HexAppearanceColorsAndFontsSettings::applySettings()
 
 QWidget *HexAppearanceColorsAndFontsSettings::getWidget()
 {
+    return this;
 }
 
 HexAppearanceColorsAndFontsSettings::~HexAppearanceColorsAndFontsSettings()

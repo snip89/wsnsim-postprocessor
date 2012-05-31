@@ -81,36 +81,36 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::setSettings(QSettings &settings)
+void MainWindow::setSettings(QSettings &someSettings)
 {
-    if(!settings.contains("Defaults/General/Gui/Recent_number"))
-        settings.setValue("Defaults/General/Gui/Recent_number", DEFAULT_RECENT_NUMBER);
+    if(!someSettings.contains("Defaults/General/Gui/Recent_number"))
+        someSettings.setValue("Defaults/General/Gui/Recent_number", DEFAULT_RECENT_NUMBER);
 
-    if(!settings.contains("General/Gui/Recent_number"))
-        settings.setValue("General/Gui/Recent_number", DEFAULT_RECENT_NUMBER);
+    if(!someSettings.contains("General/Gui/Recent_number"))
+        someSettings.setValue("General/Gui/Recent_number", DEFAULT_RECENT_NUMBER);
 
-    if(!settings.contains("Defaults/General/Gui/File_dialog_path"))
-        settings.setValue("Defaults/General/Gui/File_dialog_path", QDir::homePath());
+    if(!someSettings.contains("Defaults/General/Gui/File_dialog_path"))
+        someSettings.setValue("Defaults/General/Gui/File_dialog_path", QDir::homePath());
 
-    if(!settings.contains("General/Gui/File_dialog_path"))
-        settings.setValue("General/Gui/File_dialog_path", QDir::homePath());
+    if(!someSettings.contains("General/Gui/File_dialog_path"))
+        someSettings.setValue("General/Gui/File_dialog_path", QDir::homePath());
 
-    if(!settings.contains("Defaults/General/Gui/Recent"))
+    if(!someSettings.contains("Defaults/General/Gui/Recent"))
     {
         QStringList emptyRecent;
         for(int i = 0; i < DEFAULT_RECENT_NUMBER; i ++)
             emptyRecent.append(" ");
 
-        settings.setValue("Defaults/General/Gui/Recent", emptyRecent);
+        someSettings.setValue("Defaults/General/Gui/Recent", emptyRecent);
     }
 
-    if(!settings.contains("General/Gui/Recent"))
+    if(!someSettings.contains("General/Gui/Recent"))
     {
         QStringList emptyRecent;
         for(int i = 0; i < DEFAULT_RECENT_NUMBER; i ++)
             emptyRecent.append(" ");
 
-        settings.setValue("General/Gui/Recent", emptyRecent);
+        someSettings.setValue("General/Gui/Recent", emptyRecent);
     }
 }
 

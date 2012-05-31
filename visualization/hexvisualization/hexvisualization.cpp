@@ -9,6 +9,18 @@
 HexVisualization::HexVisualization(QWidget *parent) :
     AbstractTextVisualization(parent)
 {
+    colorsAndFontsSettings = new HexAppearanceColorsAndFontsSettings();
+
+//    setSettings(settings);
+}
+
+void HexVisualization::setSettings(QSettings &someSettings)
+{
+    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Cursor_line_color"))
+        someSettings.setValue("Defaults/Hex visualization/Appearance/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+
+    if(!someSettings.contains("Hex visualization/Appearance/Cursor_line_color"))
+        someSettings.setValue("Hex visualization/Appearance/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 }
 
 IVisualizationSettings *HexVisualization::visualizationSettings(QString name)
@@ -42,6 +54,7 @@ QWidget *HexVisualization::getWidget()
 
 HexVisualization::~HexVisualization()
 {
+    delete colorsAndFontsSettings;
 }
 
 void HexVisualization::updatePage()

@@ -144,7 +144,7 @@ private:
 
     Ui::MainWindow *ui;
 
-    void setSettings(QSettings &settings);
+    void setSettings(QSettings &someSettings);
 
     void createActions();
     void createMenus();

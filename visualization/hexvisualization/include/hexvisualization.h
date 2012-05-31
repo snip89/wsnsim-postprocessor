@@ -8,12 +8,14 @@
 
 #include <QWidget>
 #include <QString>
+#include <QSettings>
 
 #include "ivisualization.h"
 #include "ivisualizationsettings.h"
 #include "abstracttextvisualization.h"
 #include "records.h"
 #include "staticrecordsreader.h"
+#include "hexappearancecolorsandfontssettings.h"
 
 class HexVisualization : public IVisualization, protected AbstractTextVisualization
 {
@@ -31,6 +33,12 @@ public:
     virtual ~HexVisualization();
 
 private:
+    HexAppearanceColorsAndFontsSettings *colorsAndFontsSettings;
+
+    void setSettings(QSettings &someSettings);
+
+    QSettings settings;
+
     /*virtual*/ void updatePage();
 };
 
