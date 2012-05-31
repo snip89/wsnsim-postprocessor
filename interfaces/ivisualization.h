@@ -9,13 +9,17 @@
 #define IVISUALIZATION_H_
 
 #include <QtGui/QWidget>
+#include <QString>
 
 #include "ilog.h"
 #include "iproject.h"
+#include "ivisualizationsettings.h"
 
 class IVisualization
 {
 public:
+    virtual IVisualizationSettings *visualizationSettings(QString name) = 0;
+
     virtual void activity(bool status) = 0;
     virtual void update(IProject *project, ILog *log) = 0;
     virtual QWidget *getWidget() = 0;

@@ -11,6 +11,10 @@ HexVisualization::HexVisualization(QWidget *parent) :
 {
 }
 
+IVisualizationSettings *HexVisualization::visualizationSettings(QString name)
+{
+}
+
 void HexVisualization::activity(bool status)
 {
     isActive = status;

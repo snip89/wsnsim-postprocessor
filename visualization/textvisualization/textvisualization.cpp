@@ -13,6 +13,10 @@ TextVisualization::TextVisualization(QWidget *parent) :
 {
 }
 
+IVisualizationSettings *TextVisualization::visualizationSettings(QString name)
+{
+}
+
 void TextVisualization::activity(bool status)
 {
     isActive = status;
