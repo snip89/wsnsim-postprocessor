@@ -143,6 +143,8 @@ void FiltrationWidget::execute()
 
     Log *currentLog = logs->at(currentLogId).log;
 
+    QStringList currentFiltersInfo = logs->at(currentLogId).filtersInfo;
+
     int infoSize = 0;
     Log *tempLog = new Log(QString::number(logNameCounter) + ".templog", currentLog->blockSize, currentLog->memorySize, currentProject->info(infoSize), true);
     Log *newLog = new Log(QString::number(logNameCounter) + ".templog", currentLog->blockSize, currentLog->memorySize, currentProject->info(infoSize), true);
@@ -229,7 +231,12 @@ void FiltrationWidget::execute()
 
     QString toolTip;
 
-    newLogInfo.filtersInfo = filtersExpressions();
+    newLogInfo.filtersInfo = currentFiltersInfo;
+
+    foreach(QString filterInfo, filtersExpressions())
+    {
+        newLogInfo.filtersInfo.append(filterInfo);
+    }
 
     logs->append(newLogInfo);
 
