@@ -376,7 +376,8 @@ void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
                     {
                         logs->at(currentLogId).log->toggleActivity(false);
 
-                        setCurrentLog(logs->at(i).id);
+//                        setCurrentLog(logs->at(i).id);
+                        setCurrentLog(i);
 
                         logs->at(currentLogId).log->toggleActivity(true);
                     }
