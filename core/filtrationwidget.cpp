@@ -405,21 +405,38 @@ void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
                             return;
                         else
                         {
-                            qDebug() << "normal";
+                            if(i == currentLogId)
+                            {
+                                logs->at(currentLogId).log->toggleActivity(false);
 
-                            logs->at(currentLogId).log->toggleActivity(false);
+                                Log *log = logs->at(currentLogId).log;
 
-                            Log *log = logs->at(currentLogId).log;
+                                logs->removeAt(currentLogId);
 
-                            logs->removeAt(currentLogId);
+                                delete log;
 
-                            delete log;
+                                delete item;
 
-                            delete item;
+                                setCurrentLog(mainLogId);
 
-                            setCurrentLog(mainLogId);
+                                logs->at(currentLogId).log->toggleActivity(true);
+                            }
+                            else
+                            {
+                                Log *log = logs->at(i).log;
 
-                            logs->at(currentLogId).log->toggleActivity(true);
+                                logs->removeAt(i);
+
+                                delete log;
+
+                                delete item;
+
+                                if(i < currentLogId)
+                                {
+                                    currentLogId --;
+                                    setCurrentLog(currentLogId);
+                                }
+                            }
                         }
                     }
                 }
