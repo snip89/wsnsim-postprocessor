@@ -862,7 +862,7 @@ void MainWindow::switchCurrentLog()
         {
             logs->at(currentLogId).log->toggleActivity(false);
 
-            currentLogId = logs->at(i).id;
+            currentLogId = i;
 
             logs->at(currentLogId).log->toggleActivity(true);
 
