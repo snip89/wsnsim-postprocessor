@@ -31,11 +31,15 @@ public:
     ~MainSettings();
 
 private:
+    QSettings settings;
+
     Ui::MainSettings *ui;
 
     QList<QWidget*> widgets;
 
     void initSettingsTree();
+
+    void addChildSettings(QSettings &settings, QTreeWidgetItem *parent, QString group);
 
     bool recursiveInitTree(QTreeWidgetItem *parentItem, QString group, QSettings &settings);
 

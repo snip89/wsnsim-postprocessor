@@ -10,7 +10,9 @@ MainSettings::MainSettings(QWidget *parent) :
     settingsFrameWidget = new QStackedWidget(this);
     ui->settingsFrameLayout->addWidget(settingsFrameWidget);
 
-    initSettingsTree();
+//    initSettingsTree();
+
+    addChildSettings(settings, 0, "");
 
     connect(ui->settingsTree, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
     connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
@@ -46,6 +48,35 @@ void MainSettings::initSettingsTree()
     }
 }
 
+void MainSettings::addChildSettings(QSettings &settings, QTreeWidgetItem *parent, QString group)
+{
+    QTreeWidgetItem *item;
+
+    settings.beginGroup(group);
+
+    foreach(QString group, settings.childGroups())
+    {
+        if(group != "Defaults")
+        {
+            
+            if(parent)
+            {
+                item = new QTreeWidgetItem(parent);
+            }
+            else
+            {
+                item = new QTreeWidgetItem(ui->settingsTree);
+            }
+
+            item->setText(0, group);
+            addChildSettings(settings, item, group);
+
+        }
+    }
+
+    settings.endGroup();
+}
+
 bool MainSettings::recursiveInitTree(QTreeWidgetItem *parentItem, QString group, QSettings &settings)
 {
     settings.beginGroup(group);
@@ -65,6 +96,7 @@ bool MainSettings::recursiveInitTree(QTreeWidgetItem *parentItem, QString group,
     else
     {
         qDebug() << "1" << settings.group();
+        settings.endGroup();
         return false;
     }
 

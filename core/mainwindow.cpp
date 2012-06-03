@@ -113,11 +113,11 @@ void MainWindow::setSettings(QSettings &someSettings)
         someSettings.setValue("General/Gui/Recent", emptyRecent);
     }
 
-    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors_and_Fonts/Cursor_line_color"))
-        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors_and_Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 
-    if(!someSettings.contains("Hex visualization/Appearance/Colors_and_Fonts/Cursor_line_color"))
-        someSettings.setValue("Hex visualization/Appearance/Colors_and_Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 }
 
 void MainWindow::createActions()

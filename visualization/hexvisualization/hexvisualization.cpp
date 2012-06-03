@@ -14,7 +14,7 @@ HexVisualization::HexVisualization(QWidget *parent) :
 
 IVisualizationSettings *HexVisualization::visualizationSettings(QString name)
 {
-    if(name == "Colors_and_Fonts")
+    if(name == "Colors and Fonts")
     {
         return (IVisualizationSettings*)colorsAndFontsSettings;
     }
