@@ -7,6 +7,11 @@ HexAppearanceColorsAndFontsSettings::HexAppearanceColorsAndFontsSettings(QWidget
     ui->setupUi(this);
 }
 
+void HexAppearanceColorsAndFontsSettings::setSettingsName(QString name)
+{
+    ui->settingsNameLabel->setText(name);
+}
+
 void HexAppearanceColorsAndFontsSettings::showCurrentSettings()
 {
 }

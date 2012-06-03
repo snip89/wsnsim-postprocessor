@@ -22,6 +22,7 @@ class HexAppearanceColorsAndFontsSettings : public QWidget, public IVisualizatio
 public:
     explicit HexAppearanceColorsAndFontsSettings(QWidget *parent = 0);
 
+    /*virtual*/ void setSettingsName(QString name);
     /*virtual*/ void showCurrentSettings();
     /*virtual*/ void applySettings();
     /*virtual*/ QWidget *getWidget();

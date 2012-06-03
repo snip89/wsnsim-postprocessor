@@ -775,6 +775,8 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
             {
                 QWidget *widget = visualizationSettings->getWidget();
 
+                visualizationSettings->setSettingsName(settingName);
+
                 if(!mainSettings->settingsFrameWidget->isAncestorOf(widget))
                     mainSettings->settingsFrameWidget->addWidget(widget);
                 

@@ -12,6 +12,7 @@
 class IVisualizationSettings
 {
 public:
+    virtual void setSettingsName(QString name) = 0;
     virtual void showCurrentSettings() = 0;
     virtual void applySettings() = 0;
     virtual QWidget *getWidget() = 0;
