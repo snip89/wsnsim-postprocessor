@@ -37,11 +37,7 @@ private:
 
     QList<QWidget*> widgets;
 
-    void initSettingsTree();
-
     void addChildSettings(QSettings &settings, QTreeWidgetItem *parent, QString group);
-
-    bool recursiveInitTree(QTreeWidgetItem *parentItem, QString group, QSettings &settings);
 
 signals:
     void settingSelected(QString topLevelName, QString settingName);
