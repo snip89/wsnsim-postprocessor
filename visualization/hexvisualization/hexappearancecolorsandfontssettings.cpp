@@ -1,10 +1,8 @@
 #include "hexappearancecolorsandfontssettings.h"
 
 HexAppearanceColorsAndFontsSettings::HexAppearanceColorsAndFontsSettings(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::HexAppearanceColorsAndFontsSettings)
+    AbstractTextAppearanceColorsAndFontsSettings(parent)
 {
-    ui->setupUi(this);
 }
 
 void HexAppearanceColorsAndFontsSettings::setSettingsName(QString name)
@@ -27,5 +25,4 @@ QWidget *HexAppearanceColorsAndFontsSettings::getWidget()
 
 HexAppearanceColorsAndFontsSettings::~HexAppearanceColorsAndFontsSettings()
 {
-    delete ui;
 }

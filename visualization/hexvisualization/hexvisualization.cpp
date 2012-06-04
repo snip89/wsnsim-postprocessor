@@ -18,6 +18,8 @@ IVisualizationSettings *HexVisualization::visualizationSettings(QString name)
     {
         return (IVisualizationSettings*)colorsAndFontsSettings;
     }
+
+    else return NULL;
 }
 
 void HexVisualization::activity(bool status)

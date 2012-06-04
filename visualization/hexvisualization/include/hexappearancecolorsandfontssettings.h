@@ -8,19 +8,18 @@
 
 #include <QWidget>
 
-#include "ui_hexappearancecolorsandfontssettings.h"
+#include "ui_abstracttextappearancecolorsandfontssettings.h"
+#include "abstracttextappearancecolorsandfontssettings.h"
 #include "ivisualizationsettings.h"
 
-namespace Ui {
-    class HexAppearanceColorsAndFontsSettings;
-}
-
-class HexAppearanceColorsAndFontsSettings : public QWidget, public IVisualizationSettings
+class HexAppearanceColorsAndFontsSettings : public AbstractTextAppearanceColorsAndFontsSettings, public IVisualizationSettings
 {
     Q_OBJECT
 
 public:
     explicit HexAppearanceColorsAndFontsSettings(QWidget *parent = 0);
+
+    // interface methods
 
     /*virtual*/ void setSettingsName(QString name);
     /*virtual*/ void showCurrentSettings();
@@ -28,9 +27,6 @@ public:
     /*virtual*/ QWidget *getWidget();
 
     virtual ~HexAppearanceColorsAndFontsSettings();
-
-private:
-    Ui::HexAppearanceColorsAndFontsSettings *ui;
 };
 
 #endif // HEXAPPEARANCECOLORSANDFONTSSETTINGS_H
