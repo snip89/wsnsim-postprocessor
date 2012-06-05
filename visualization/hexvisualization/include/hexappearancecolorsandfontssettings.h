@@ -10,6 +10,8 @@
 #include <QSettings>
 #include <QAbstractButton>
 #include <QFont>
+#include <QFontDialog>
+#include <QDebug>
 
 #include "ui_abstracttextappearancecolorsandfontssettings.h"
 #include "abstracttextappearancecolorsandfontssettings.h"
@@ -34,10 +36,13 @@ public:
 private:
     QSettings settings;
 
+    void updatePreviewText();
+
     void showDefaultSettings();
 
 private slots:
     void buttonClicked(QAbstractButton *button);
+    void buttonChangeFontClicked();
 };
 
 #endif // HEXAPPEARANCECOLORSANDFONTSSETTINGS_H

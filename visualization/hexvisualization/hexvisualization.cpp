@@ -38,6 +38,8 @@ void HexVisualization::activity(bool status)
 
 void HexVisualization::update(IProject *project, ILog *log)
 {
+    viewer->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+
     currentProject = project;
     currentLog = log;
 
