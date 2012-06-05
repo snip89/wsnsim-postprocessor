@@ -26,6 +26,7 @@ class LogSelectDialog : public QDialog
 public:
     explicit LogSelectDialog(QWidget *parent, Project *logicProject);
     static int selectedLogId(QWidget *parent = 0, Project *logicProject = 0);
+    int logId();
     virtual ~LogSelectDialog();
 private:
     Project *project;

@@ -130,6 +130,12 @@ void MainWindow::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Hidden/Gui/File_dialog_size"))
         someSettings.setValue("Hidden/Gui/File_dialog_size", QSize(320, 240));
+
+    if(!someSettings.contains("Hidden/Gui/Log_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Log_dialog_pos", QPoint(0, 0));
+
+    if(!someSettings.contains("Hidden/Gui/Log_dialog_size"))
+        someSettings.setValue("Hidden/Gui/Log_dialog_size", QSize(320, 240));
 }
 
 void MainWindow::createActions()
@@ -605,7 +611,20 @@ void MainWindow::openProject(QString name)
 
     else
     {
-        int selectedLogId = LogSelectDialog::selectedLogId(this, project);
+        int selectedLogId = -1;
+
+        LogSelectDialog *logSelectDialog = new LogSelectDialog(this, project);
+        logSelectDialog->move(settings.value("Hidden/Gui/Log_dialog_pos").value<QPoint>());
+        logSelectDialog->resize(settings.value("Hidden/Gui/Log_dialog_size").value<QSize>());
+
+        if(logSelectDialog->exec())
+            selectedLogId = logSelectDialog->logId();
+
+        settings.setValue("Hidden/Gui/Log_dialog_pos", logSelectDialog->pos());
+        settings.setValue("Hidden/Gui/Log_dialog_size", logSelectDialog->size());
+
+        delete logSelectDialog;
+
         if(selectedLogId != -1)
             openLog(project->logName(selectedLogId));
     }
@@ -641,7 +660,20 @@ void MainWindow::openLog(QString name)
 {
     if(name == QString::null)
     {
-        int selectedLogId = LogSelectDialog::selectedLogId(this, project);
+        int selectedLogId = -1;
+
+        LogSelectDialog *logSelectDialog = new LogSelectDialog(this, project);
+        logSelectDialog->move(settings.value("Hidden/Gui/Log_dialog_pos").value<QPoint>());
+        logSelectDialog->resize(settings.value("Hidden/Gui/Log_dialog_size").value<QSize>());
+
+        if(logSelectDialog->exec())
+            selectedLogId = logSelectDialog->logId();
+
+        settings.setValue("Hidden/Gui/Log_dialog_pos", logSelectDialog->pos());
+        settings.setValue("Hidden/Gui/Log_dialog_size", logSelectDialog->size());
+
+        delete logSelectDialog;
+
         if(selectedLogId != -1)
         {
             if(isLogOpened)

@@ -21,24 +21,24 @@ LogSelectDialog::LogSelectDialog(QWidget *parent, Project *logicProject) :
 
 int LogSelectDialog::selectedLogId(QWidget *parent, Project *logicProject)
 {
-    // создать объект самого себя
     LogSelectDialog *dlg = new LogSelectDialog(parent, logicProject);
     dlg->setModal(true);
 
     int result = -1;
 
-    // в случае подтверждения выбора элемента в диалоге
     if(dlg->exec() == QDialog::Accepted)
     {
-        // получить id выбранного журнала
         result = dlg->ui->logSelectTableWidget->selectedItems()[0]->text().toInt();
     }
 
-    // удалить самого себя
     delete dlg;
 
-    // и вернуть id журнала
     return result;
+}
+
+int LogSelectDialog::logId()
+{
+    return ui->logSelectTableWidget->selectedItems()[0]->text().toInt();
 }
 
 LogSelectDialog::~LogSelectDialog()
