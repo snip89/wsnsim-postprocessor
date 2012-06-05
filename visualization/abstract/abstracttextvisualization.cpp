@@ -1,7 +1,7 @@
 #include "abstracttextvisualization.h"
 #include "ui_abstracttextvisualization.h"
 
-AbstractTextVisualization::AbstractTextVisualization(QWidget *parent) :
+AbstractTextVisualization::AbstractTextVisualization(QString group, QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AbstractTextVisualization)
 {
@@ -9,7 +9,7 @@ AbstractTextVisualization::AbstractTextVisualization(QWidget *parent) :
 
     connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarMoving(int)));
 
-    viewer = new Viewer();
+    viewer = new Viewer(group);
 
     viewer->installEventFilter(this);
 

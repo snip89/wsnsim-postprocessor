@@ -8,12 +8,14 @@
 
 #include <QWidget>
 #include <QString>
+#include <QSettings>
 
 #include "ivisualization.h"
 #include "ivisualizationsettings.h"
 #include "abstracttextvisualization.h"
 #include "records.h"
 #include "staticrecordsreader.h"
+#include "textappearancecolorsandfontssettings.h"
 
 class TextVisualization : public IVisualization, protected AbstractTextVisualization
 {
@@ -31,6 +33,10 @@ public:
     virtual ~TextVisualization();
 
 private:
+    TextAppearanceColorsAndFontsSettings *colorsAndFontsSettings;
+
+    QSettings settings;
+
     /*virtual*/ void updatePage();
 };
 

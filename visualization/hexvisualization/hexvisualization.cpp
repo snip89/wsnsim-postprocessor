@@ -7,7 +7,7 @@
 #include "ui_abstracttextvisualization.h"
 
 HexVisualization::HexVisualization(QWidget *parent) :
-    AbstractTextVisualization(parent)
+    AbstractTextVisualization("Hex visualization", parent)
 {
     colorsAndFontsSettings = new HexAppearanceColorsAndFontsSettings();
 }
@@ -19,7 +19,7 @@ IVisualizationSettings *HexVisualization::visualizationSettings(QString name)
         return (IVisualizationSettings*)colorsAndFontsSettings;
     }
 
-    else return NULL;
+    return NULL;
 }
 
 void HexVisualization::activity(bool status)

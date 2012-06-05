@@ -14,6 +14,7 @@
 #include <QLayout>
 #include <QGridLayout>
 #include <QSettings>
+#include <QString>
 #include <QDebug>
 
 #include "ilog.h"
@@ -35,7 +36,7 @@ class AbstractTextVisualization : public QWidget
 {
     Q_OBJECT
 public:
-    explicit AbstractTextVisualization(QWidget *parent = 0);
+    explicit AbstractTextVisualization(QString group, QWidget *parent = 0);
 
     /*virtual*/ void resizeEvent(QResizeEvent *e);
     /*virtual*/ bool eventFilter(QObject *target, QEvent *event);

@@ -14,13 +14,14 @@
 #include <QTextCursor>
 #include <QSettings>
 #include <QVariant>
+#include <QString>
 #include <QDebug>
 
 class Viewer : public QTextEdit
 {
     Q_OBJECT
 public:
-    explicit Viewer(QWidget *parent = 0);
+    explicit Viewer(QString group, QWidget *parent = 0);
 
     virtual ~Viewer();
 

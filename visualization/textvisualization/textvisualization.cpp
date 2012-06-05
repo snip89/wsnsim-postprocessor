@@ -9,12 +9,19 @@
 #include "ui_abstracttextvisualization.h"
 
 TextVisualization::TextVisualization(QWidget *parent) :
-    AbstractTextVisualization(parent)
+    AbstractTextVisualization("Text visualization", parent)
 {
+    colorsAndFontsSettings = new TextAppearanceColorsAndFontsSettings();
 }
 
 IVisualizationSettings *TextVisualization::visualizationSettings(QString name)
 {
+    if(name == "Colors and Fonts")
+    {
+        return (IVisualizationSettings*)colorsAndFontsSettings;
+    }
+
+    return NULL;
 }
 
 void TextVisualization::activity(bool status)
@@ -44,6 +51,7 @@ QWidget *TextVisualization::getWidget()
 
 TextVisualization::~TextVisualization()
 {
+    delete colorsAndFontsSettings;
 }
 
 void TextVisualization::updatePage()

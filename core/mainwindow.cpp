@@ -118,6 +118,12 @@ void MainWindow::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
         someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+
+    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+
+    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 }
 
 void MainWindow::createActions()
@@ -765,7 +771,6 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
 
         else
         {
-
             IVisualizationSettings *visualizationSettings = hexVisualization->visualizationSettings(settingName);
 
             if(!visualizationSettings)
@@ -781,13 +786,32 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
                     mainSettings->settingsFrameWidget->addWidget(widget);
                 
                 mainSettings->settingsFrameWidget->setCurrentWidget(widget);
+            }
+        }
+    }
 
-            // generalGuiSettings->setSettingsName(settingName);
+    else if(topLevelName == "Text visualization")
+    {
+        if(settingName == "Text visualization")
+            showEmptySettings(settingName);
 
-            // if(!mainSettings->settingsFrameWidget->isAncestorOf(generalGuiSettings))
-            //     mainSettings->settingsFrameWidget->addWidget(generalGuiSettings);
+        else
+        {
+            IVisualizationSettings *visualizationSettings = textVisualization->visualizationSettings(settingName);
 
-            // mainSettings->settingsFrameWidget->setCurrentWidget(generalGuiSettings);
+            if(!visualizationSettings)
+                showEmptySettings(settingName);
+
+            else
+            {
+                QWidget *widget = visualizationSettings->getWidget();
+
+                visualizationSettings->setSettingsName(settingName);
+
+                if(!mainSettings->settingsFrameWidget->isAncestorOf(widget))
+                    mainSettings->settingsFrameWidget->addWidget(widget);
+                
+                mainSettings->settingsFrameWidget->setCurrentWidget(widget);
             }
         }
     }

@@ -1,6 +1,6 @@
 #include "viewer.h"
 
-Viewer::Viewer(QWidget *parent)
+Viewer::Viewer(QString group, QWidget *parent)
     : QTextEdit(parent)
 {
     this->setReadOnly(true);
@@ -9,7 +9,7 @@ Viewer::Viewer(QWidget *parent)
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     QSettings settings;
-    lineColor = settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>();
+    lineColor = settings.value(group + "/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>();
 
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 }
