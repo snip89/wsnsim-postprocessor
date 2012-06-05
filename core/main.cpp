@@ -41,8 +41,8 @@ void setSettings(QSettings &settings)
     if(!settings.contains("Hidden/Gui/Main_window_size"))
         settings.setValue("Hidden/Gui/Main_window_size", QSize(640, 480));
 
-    if(!settings.contains("Hidden/Gui/Main_window_full_screened"))
-        settings.setValue("Hidden/Gui/Main_window_full_screened", true);
+    if(!settings.contains("Hidden/Gui/Main_window_is_full_screen"))
+        settings.setValue("Hidden/Gui/Main_window_is_full_screen", false);
 
 //    qint64 memSize = OSTools::getTotalSystemMemory();
 //
@@ -69,6 +69,7 @@ int main(int argc, char **argv) {
 
     w.move(settings.value("Hidden/Gui/Main_window_pos").value<QPoint>());
     w.resize(settings.value("Hidden/Gui/Main_window_size").value<QSize>());
+    w.setFullScreen(settings.value("Hidden/Gui/Main_window_is_full_screen").value<bool>());
 
     w.show();
     if (argc == 2)
@@ -77,7 +78,13 @@ int main(int argc, char **argv) {
     int result = a.exec();
 
     settings.setValue("Hidden/Gui/Main_window_pos", w.pos());
-    settings.setValue("Hidden/Gui/Main_window_size", w.size());
+
+    bool isMainWindowFullScreen = w.isFullScreen();
+
+    if(!isMainWindowFullScreen)
+        settings.setValue("Hidden/Gui/Main_window_size", w.size());
+
+    settings.setValue("Hidden/Gui/Main_window_is_full_screen", isMainWindowFullScreen);
 
     // TODO: here can be saved windows size, pos
 

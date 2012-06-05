@@ -68,6 +68,10 @@ class MainWindow : public QMainWindow
 
 public:
     explicit MainWindow(QWidget *parent = 0);
+
+    bool isFullScreen();
+    void setFullScreen(bool checked);
+
     virtual ~MainWindow();
 
 private:
@@ -162,9 +166,6 @@ private:
     void insertToRecent(QString fileName);
 
     void switchToWidget(WidgetType type);
-
-    bool isFullScreen();
-    void setFullScreen(bool checked);
 
     void showEmptySettings(QString name);
 
