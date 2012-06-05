@@ -33,7 +33,7 @@ void MainSettings::addChildSettings(QSettings &settings, QTreeWidgetItem *parent
 
     foreach(QString group, settings.childGroups())
     {
-        if(group != "Defaults")
+        if(group != "Defaults" && group != "Hidden")
         {
             
             if(parent)

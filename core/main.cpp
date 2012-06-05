@@ -9,6 +9,7 @@
 #include <QTextCodec>
 #include <QCoreApplication>
 #include <QSettings>
+#include <QPoint>
 
 #include "mainwindow.h"
 #include "ostools.h"
@@ -33,6 +34,9 @@ void setSettings(QSettings &settings)
     if(!settings.contains("General/Core/Block_size"))
         settings.setValue("General/Core/Block_size", 100);
 
+    if(!settings.contains("Hidden/Gui/Main_window_pos"))
+        settings.setValue("Hidden/Gui/Main_window_pos", QPoint(0, 0));
+
 //    qint64 memSize = OSTools::getTotalSystemMemory();
 //
 //    if(memSize != -1)
@@ -55,11 +59,16 @@ int main(int argc, char **argv) {
     setSettings(settings);
 
     MainWindow w;
+
+    w.move(settings.value("Hidden/Gui/Main_window_pos").value<QPoint>());
+
     w.show();
     if (argc == 2)
         w.openProject(argv[1]);
 
     int result = a.exec();
+
+    settings.setValue("Hidden/Gui/Main_window_pos", w.pos());
 
     // TODO: here can be saved windows size, pos
 
