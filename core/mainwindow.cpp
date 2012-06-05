@@ -541,11 +541,13 @@ void MainWindow::openProject(QString name)
 
         QFileDialog *fileDialog = new QFileDialog(this, tr("Open project file"), dirPath, tr("XML project files (*xml)"));
         fileDialog->move(settings.value("Hidden/Gui/File_dialog_pos").value<QPoint>());
+        fileDialog->resize(settings.value("Hidden/Gui/File_dialog_size").value<QSize>());
         
         if(fileDialog->exec())
             name = fileDialog->selectedFiles().at(0);
 
         settings.setValue("Hidden/Gui/File_dialog_pos", fileDialog->pos());
+        settings.setValue("Hidden/Gui/File_dialog_size", fileDialog->size());
 
         delete fileDialog;
 
