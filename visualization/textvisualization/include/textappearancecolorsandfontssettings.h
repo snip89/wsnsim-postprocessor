@@ -7,6 +7,11 @@
 #define TEXTAPPEARANCECOLORSANDFONTSSETTINGS_H
 
 #include <QWidget>
+#include <QSettings>
+#include <QAbstractButton>
+#include <QFont>
+#include <QFontDialog>
+#include <QDebug>
 
 #include "ui_abstracttextappearancecolorsandfontssettings.h"
 #include "abstracttextappearancecolorsandfontssettings.h"
@@ -27,6 +32,17 @@ public:
     /*virtual*/ QWidget *getWidget();
 
     virtual ~TextAppearanceColorsAndFontsSettings();
+
+private:
+    QSettings settings;
+
+    void updatePreviewText();
+
+    void showDefaultSettings();
+
+private slots:
+    void buttonClicked(QAbstractButton *button);
+    void buttonChangeFontClicked();
 };
 
 #endif // TEXTAPPEARANCECOLORSANDFONTSSETTINGS_H
