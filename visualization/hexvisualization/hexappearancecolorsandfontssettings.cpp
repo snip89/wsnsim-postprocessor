@@ -58,12 +58,13 @@ void HexAppearanceColorsAndFontsSettings::buttonClicked(QAbstractButton *button)
 
 void HexAppearanceColorsAndFontsSettings::buttonChangeFontClicked()
 {
-    QFont resultFont = settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>();
+    QFont resultFont = ui->previewTextEdit->currentFont();
 
     QFontDialog *fontDialog = new QFontDialog(this);
+//    fontDialog->setCurrentFont(resultFont);
 
     bool ok;
-    resultFont = fontDialog->getFont(&ok);
+    resultFont = fontDialog->getFont(&ok, resultFont);
 
     if(ok)
     {
