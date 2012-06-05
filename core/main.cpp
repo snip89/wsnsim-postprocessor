@@ -59,6 +59,9 @@ int main(int argc, char **argv) {
     if (argc == 2)
         w.openProject(argv[1]);
 
+    int result = a.exec();
 
-    return a.exec();
+    // TODO: here can be saved windows size, pos
+
+    return result;
 }
