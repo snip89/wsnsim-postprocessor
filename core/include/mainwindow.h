@@ -27,6 +27,8 @@
 #include <QErrorMessage>
 #include <QList>
 #include <QStyle>
+#include <QPoint>
+#include <QSize>
 #include <QDebug>
 
 #include "project.h"

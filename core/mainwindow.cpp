@@ -124,6 +124,12 @@ void MainWindow::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
         someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+
+    if(!someSettings.contains("Hidden/Gui/File_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/File_dialog_pos", QPoint(0, 0));
+
+    if(!someSettings.contains("Hidden/Gui/File_dialog_size"))
+        someSettings.setValue("Hidden/Gui/File_dialog_size", QSize(320, 240));
 }
 
 void MainWindow::createActions()
@@ -533,7 +539,18 @@ void MainWindow::openProject(QString name)
     {
         QString dirPath = settings.value("General/Gui/File_dialog_path").toString();
 
-        name = QFileDialog::getOpenFileName(this, tr("Open project file"), dirPath, tr("XML project files (*xml)"));
+        QFileDialog *fileDialog = new QFileDialog(this, tr("Open project file"), dirPath, tr("XML project files (*xml)"));
+        fileDialog->move(settings.value("Hidden/Gui/File_dialog_pos").value<QPoint>());
+        
+        if(fileDialog->exec())
+            name = fileDialog->selectedFiles().at(0);
+
+        settings.setValue("Hidden/Gui/File_dialog_pos", fileDialog->pos());
+
+        delete fileDialog;
+
+//        name = fileDialog.getOpenFileName(this, tr("Open project file"), dirPath, tr("XML project files (*xml)"));
+//        name = QFileDialog::getOpenFileName(this, tr("Open project file"), dirPath, tr("XML project files (*xml)"));
 
         if(name == "")
             return;
