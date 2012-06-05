@@ -12,6 +12,7 @@ void HexAppearanceColorsAndFontsSettings::setSettingsName(QString name)
 
 void HexAppearanceColorsAndFontsSettings::showCurrentSettings()
 {
+    ui->fontComboBox->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
 }
 
 void HexAppearanceColorsAndFontsSettings::applySettings()
@@ -25,4 +26,19 @@ QWidget *HexAppearanceColorsAndFontsSettings::getWidget()
 
 HexAppearanceColorsAndFontsSettings::~HexAppearanceColorsAndFontsSettings()
 {
+}
+
+void HexAppearanceColorsAndFontsSettings::showDefaultSettings()
+{
+}
+
+void HexAppearanceColorsAndFontsSettings::buttonClicked(QAbstractButton *button)
+{
+    if(button->text() == "Apply")
+    {
+        applySettings();
+    }
+
+    else if(button->text() == "Restore Defaults")
+        showDefaultSettings();
 }

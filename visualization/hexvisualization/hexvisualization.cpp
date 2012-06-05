@@ -9,7 +9,10 @@
 HexVisualization::HexVisualization(QWidget *parent) :
     AbstractTextVisualization("Hex visualization", parent)
 {
+    setSettings(settings);
+
     colorsAndFontsSettings = new HexAppearanceColorsAndFontsSettings();
+    colorsAndFontsSettings->showCurrentSettings();
 }
 
 IVisualizationSettings *HexVisualization::visualizationSettings(QString name)
@@ -50,6 +53,15 @@ QWidget *HexVisualization::getWidget()
 HexVisualization::~HexVisualization()
 {
     delete colorsAndFontsSettings;
+}
+
+void HexVisualization::setSettings(QSettings &someSettings)
+{
+    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Font"))
+        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Font", QFont());
+
+    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Font"))
+        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Font", QFont());
 }
 
 void HexVisualization::updatePage()

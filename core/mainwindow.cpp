@@ -884,6 +884,11 @@ void MainWindow::appliedSettings()
     generalCoreSettings->applySettings();
     generalGuiSettings->applySettings();
 
+    IVisualizationSettings *hexVisualizationSettings = hexVisualization->visualizationSettings("Colors and Fonts");
+
+    if(hexVisualizationSettings)
+        hexVisualizationSettings->applySettings();
+
     if(previousActiveWidget == HEXVISUALIZATION && !actionHexVisualization->isChecked())
         switchToWidget(EMPTY);
 
@@ -898,6 +903,11 @@ void MainWindow::canceledSettings()
 {
     generalCoreSettings->showCurrentSettings();
     generalGuiSettings->showCurrentSettings();
+
+    IVisualizationSettings *hexVisualizationSettings = hexVisualization->visualizationSettings("Colors and Fonts");
+
+    if(hexVisualizationSettings)
+        hexVisualizationSettings->showCurrentSettings();
 
     if(previousActiveWidget == HEXVISUALIZATION && !actionHexVisualization->isChecked())
         switchToWidget(EMPTY);

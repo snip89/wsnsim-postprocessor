@@ -7,6 +7,9 @@
 #define HEXAPPEARANCECOLORSANDFONTSSETTINGS_H
 
 #include <QWidget>
+#include <QSettings>
+#include <QAbstractButton>
+#include <QFont>
 
 #include "ui_abstracttextappearancecolorsandfontssettings.h"
 #include "abstracttextappearancecolorsandfontssettings.h"
@@ -27,6 +30,14 @@ public:
     /*virtual*/ QWidget *getWidget();
 
     virtual ~HexAppearanceColorsAndFontsSettings();
+
+private:
+    QSettings settings;
+
+    void showDefaultSettings();
+
+private slots:
+    void buttonClicked(QAbstractButton *button);
 };
 
 #endif // HEXAPPEARANCECOLORSANDFONTSSETTINGS_H

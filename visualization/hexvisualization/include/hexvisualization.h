@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <QString>
 #include <QSettings>
+#include <QFont>
 
 #include "ivisualization.h"
 #include "ivisualizationsettings.h"
@@ -36,6 +37,8 @@ private:
     HexAppearanceColorsAndFontsSettings *colorsAndFontsSettings;
 
     QSettings settings;
+
+    void setSettings(QSettings &someSettings);
 
     /*virtual*/ void updatePage();
 };
