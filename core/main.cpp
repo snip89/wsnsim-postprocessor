@@ -10,6 +10,7 @@
 #include <QCoreApplication>
 #include <QSettings>
 #include <QPoint>
+#include <QSize>
 
 #include "mainwindow.h"
 #include "ostools.h"
@@ -37,6 +38,12 @@ void setSettings(QSettings &settings)
     if(!settings.contains("Hidden/Gui/Main_window_pos"))
         settings.setValue("Hidden/Gui/Main_window_pos", QPoint(0, 0));
 
+    if(!settings.contains("Hidden/Gui/Main_window_size"))
+        settings.setValue("Hidden/Gui/Main_window_size", QSize(640, 480));
+
+    if(!settings.contains("Hidden/Gui/Main_window_full_screened"))
+        settings.setValue("Hidden/Gui/Main_window_full_screened", true);
+
 //    qint64 memSize = OSTools::getTotalSystemMemory();
 //
 //    if(memSize != -1)
@@ -61,6 +68,7 @@ int main(int argc, char **argv) {
     MainWindow w;
 
     w.move(settings.value("Hidden/Gui/Main_window_pos").value<QPoint>());
+    w.resize(settings.value("Hidden/Gui/Main_window_size").value<QSize>());
 
     w.show();
     if (argc == 2)
@@ -69,6 +77,7 @@ int main(int argc, char **argv) {
     int result = a.exec();
 
     settings.setValue("Hidden/Gui/Main_window_pos", w.pos());
+    settings.setValue("Hidden/Gui/Main_window_size", w.size());
 
     // TODO: here can be saved windows size, pos
 

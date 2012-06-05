@@ -203,7 +203,8 @@ void MainWindow::createActions()
 
     actionFullScreen = new QAction(tr("&Full screen"), this);
     actionFullScreen->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F11));
-    connect(actionFullScreen, SIGNAL(triggered()), this, SLOT(toggleFullScreen()));
+    actionFullScreen->setCheckable(true);
+    connect(actionFullScreen, SIGNAL(toggled(bool)), this, SLOT(toggleFullScreen(bool)));
 
     actionHelp = new QAction(tr("&Help"), this);
 
@@ -495,6 +496,16 @@ void MainWindow::switchToWidget(WidgetType type)
         activeWidget = FILTRATION;
         break;
     }
+}
+
+bool MainWindow::isFullScreen()
+{
+    return actionFullScreen->isChecked();
+}
+
+void MainWindow::setFullScreen(bool checked)
+{
+    actionFullScreen->setChecked(checked);
 }
 
 void MainWindow::showEmptySettings(QString name)
@@ -865,16 +876,14 @@ void MainWindow::canceledFiltration()
     switchToWidget(previousActiveWidget);
 }
 
-void MainWindow::toggleFullScreen()
+void MainWindow::toggleFullScreen(bool checked)
 {
-    if(!fullScreen)
+    if(checked)
     {
-        fullScreen = true;
         this->showFullScreen();
     }
     else
     {
-        fullScreen = false;
         this->showNormal();
     }
 }

@@ -163,6 +163,9 @@ private:
 
     void switchToWidget(WidgetType type);
 
+    bool isFullScreen();
+    void setFullScreen(bool checked);
+
     void showEmptySettings(QString name);
 
 public slots:
@@ -187,7 +190,7 @@ private slots:
     void filteredLog(int id);
     void canceledFiltration();
 
-    void toggleFullScreen();
+    void toggleFullScreen(bool checked);
 
     void switchCurrentLog();
 
