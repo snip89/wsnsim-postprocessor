@@ -106,8 +106,12 @@ AbstractTextVisualization::~AbstractTextVisualization()
 int AbstractTextVisualization::linesOnPage()
 {
     int wh = viewer->height();
-    int fh = this->fontMetrics().height();
-    return wh / fh - 1;
+
+    QFontMetrics m(viewer->currentFont());
+
+    int fh = m.height();
+
+    return wh / fh;
 }
 
 void AbstractTextVisualization::scrollBarMoving(int value)
