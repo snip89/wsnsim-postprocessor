@@ -11,7 +11,10 @@
 TextVisualization::TextVisualization(QWidget *parent) :
     AbstractTextVisualization("Text visualization", parent)
 {
+    setSettings(settings);
+
     colorsAndFontsSettings = new TextAppearanceColorsAndFontsSettings();
+    colorsAndFontsSettings->showCurrentSettings();
 }
 
 IVisualizationSettings *TextVisualization::visualizationSettings(QString name)
@@ -37,6 +40,8 @@ void TextVisualization::activity(bool status)
 
 void TextVisualization::update(IProject *project, ILog *log)
 {
+    viewer->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+
     currentProject = project;
     currentLog = log;
 
@@ -52,6 +57,15 @@ QWidget *TextVisualization::getWidget()
 TextVisualization::~TextVisualization()
 {
     delete colorsAndFontsSettings;
+}
+
+void TextVisualization::setSettings(QSettings &someSettings)
+{
+    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Font"))
+        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Font", QFont());
+
+    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Font"))
+        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Font", QFont());
 }
 
 void TextVisualization::updatePage()
