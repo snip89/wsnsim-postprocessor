@@ -11,6 +11,7 @@
 #include <QAbstractButton>
 #include <QFont>
 #include <QFontDialog>
+#include <QListWidgetItem>
 #include <QDebug>
 
 #include "ui_abstracttextappearancecolorsandfontssettings.h"
@@ -36,7 +37,14 @@ public:
 private:
     QSettings settings;
 
+    QListWidgetItem *itemMainText;
+    QListWidgetItem *itemCurrentLine;
+
+    void createListWidgetItems();
+    void deleteListWidgetItems();
+
     void updatePreviewText();
+    void updateColorsList();
 
     void showDefaultSettings();
 

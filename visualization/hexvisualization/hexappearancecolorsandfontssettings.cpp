@@ -3,6 +3,8 @@
 HexAppearanceColorsAndFontsSettings::HexAppearanceColorsAndFontsSettings(QWidget *parent) :
     AbstractTextAppearanceColorsAndFontsSettings(parent)
 {
+    createListWidgetItems();
+
     connect(ui->changeFontButton, SIGNAL(clicked()), this, SLOT(buttonChangeFontClicked()));
 
 	connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
@@ -17,6 +19,8 @@ void HexAppearanceColorsAndFontsSettings::showCurrentSettings()
 {
     ui->previewTextEdit->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
     updatePreviewText();
+
+    updateColorsList();
 }
 
 void HexAppearanceColorsAndFontsSettings::applySettings()
@@ -31,12 +35,37 @@ QWidget *HexAppearanceColorsAndFontsSettings::getWidget()
 
 HexAppearanceColorsAndFontsSettings::~HexAppearanceColorsAndFontsSettings()
 {
+    deleteListWidgetItems();
+}
+
+void HexAppearanceColorsAndFontsSettings::createListWidgetItems()
+{
+    itemMainText = new QListWidgetItem("main text");
+    itemMainText->setTextAlignment(Qt::AlignHCenter);
+
+    itemCurrentLine = new QListWidgetItem("current line");
+    itemCurrentLine->setTextAlignment(Qt::AlignHCenter);
+
+    ui->colorsListWidget->addItem(itemMainText);
+    ui->colorsListWidget->addItem(itemCurrentLine);
+
+    ui->colorsListWidget->setCurrentItem(itemMainText);
+}
+
+void HexAppearanceColorsAndFontsSettings::deleteListWidgetItems()
+{
+    delete itemMainText;
+    delete itemCurrentLine;
 }
 
 void HexAppearanceColorsAndFontsSettings::updatePreviewText()
 {
     ui->previewTextEdit->clear();
     ui->previewTextEdit->setText("This is font preview text");
+}
+
+void HexAppearanceColorsAndFontsSettings::updateColorsList()
+{
 }
 
 void HexAppearanceColorsAndFontsSettings::showDefaultSettings()
