@@ -384,7 +384,10 @@ void MainWindow::updateActionsCurrentLogMenu()
 void MainWindow::closeLog()
 {
     actionHexVisualization->setEnabled(false);
+    actionHexVisualization->setChecked(false);
+
     actionTextVisualization->setEnabled(false);
+    actionTextVisualization->setChecked(false);
 
     actionFiltration->setEnabled(false);
 
@@ -538,9 +541,6 @@ void MainWindow::openRecentProject()
 
 void MainWindow::openProject(QString name)
 {
-    if(isProjectOpened)
-        closeProject();
-
     if(name == QString::null)
     {
         QString dirPath = settings.value("General/Gui/File_dialog_path").toString();
@@ -569,6 +569,9 @@ void MainWindow::openProject(QString name)
         dirPath = dir.filePath(name);
         dirPath.chop(finfo.fileName().size());
         settings.setValue("General/Gui/File_dialog_path", dirPath);
+
+        if(isProjectOpened)
+            closeProject();
     }
     else
     {
@@ -579,6 +582,9 @@ void MainWindow::openProject(QString name)
             errorMessager.showMessage("Project not found");
             return;
         }
+
+        if(isProjectOpened)
+            closeProject();
     }
 
     QString errorString;
