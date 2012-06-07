@@ -716,6 +716,7 @@ void MainWindow::openLog(QString name)
     logInfo.id = currentLogId;
     logInfo.log = new Log(name, blockSize, memoryUsage, info, false);
     logInfo.fileName = logInfo.log->fileName();
+    logInfo.filtersInfo.append("NO FILTERS");
 
     logs->append(logInfo);
 

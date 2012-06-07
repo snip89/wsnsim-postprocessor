@@ -44,7 +44,10 @@ void FiltrationWidget::setMainLog(int id)
 {
     mainLogId = id;
 
-    ui->logsListWidget->addItem(logs->at(mainLogId).fileName);
+    QListWidgetItem *item = new QListWidgetItem(logs->at(mainLogId).fileName);
+    item->setToolTip(logs->at(mainLogId).filtersInfo.at(0));
+
+    ui->logsListWidget->addItem(item);
 }
 
 void FiltrationWidget::setLogsInfos(QList<LogInfo> *logsInfos)
