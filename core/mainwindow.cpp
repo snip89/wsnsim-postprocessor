@@ -901,14 +901,14 @@ void MainWindow::appliedSettings()
     if(textVisualizationSettings)
         textVisualizationSettings->applySettings();
 
-    if(previousActiveWidget == HEXVISUALIZATION && !actionHexVisualization->isChecked())
-        switchToWidget(EMPTY);
+    if(actionHexVisualization->isChecked())
+        switchToWidget(HEXVISUALIZATION);
 
-    else if(previousActiveWidget == TEXTVISUALIZATION && !actionTextVisualization->isChecked())
-        switchToWidget(EMPTY);
+    else if(actionTextVisualization->isChecked())
+        switchToWidget(TEXTVISUALIZATION);
 
     else
-        switchToWidget(previousActiveWidget);
+        switchToWidget(EMPTY);
 }
 
 void MainWindow::canceledSettings()
@@ -926,14 +926,14 @@ void MainWindow::canceledSettings()
     if(textVisualizationSettings)
         textVisualizationSettings->showCurrentSettings();
 
-    if(previousActiveWidget == HEXVISUALIZATION && !actionHexVisualization->isChecked())
-        switchToWidget(EMPTY);
+    if(actionHexVisualization->isChecked())
+        switchToWidget(HEXVISUALIZATION);
 
-    else if(previousActiveWidget == TEXTVISUALIZATION && !actionTextVisualization->isChecked())
-        switchToWidget(EMPTY);
+    else if(actionTextVisualization->isChecked())
+        switchToWidget(TEXTVISUALIZATION);
 
     else
-        switchToWidget(previousActiveWidget);
+        switchToWidget(EMPTY);
 }
 
 void MainWindow::filteredLog(int id)
@@ -946,12 +946,26 @@ void MainWindow::filteredLog(int id)
 
 //    logs->at(logs->size() - 1)->toggleActivity(true);
 
-    switchToWidget(previousActiveWidget);
+    if(actionHexVisualization->isChecked())
+        switchToWidget(HEXVISUALIZATION);
+
+    else if(actionTextVisualization->isChecked())
+        switchToWidget(TEXTVISUALIZATION);
+
+    else
+        switchToWidget(EMPTY);
 }
 
 void MainWindow::canceledFiltration()
 {
-    switchToWidget(previousActiveWidget);
+    if(actionHexVisualization->isChecked())
+        switchToWidget(HEXVISUALIZATION);
+
+    else if(actionTextVisualization->isChecked())
+        switchToWidget(TEXTVISUALIZATION);
+
+    else
+        switchToWidget(EMPTY);
 }
 
 void MainWindow::toggleFullScreen(bool checked)
