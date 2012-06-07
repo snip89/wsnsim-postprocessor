@@ -13,7 +13,8 @@ AbstractTextVisualization::AbstractTextVisualization(QString group, QWidget *par
 
     viewer->installEventFilter(this);
 
-    ui->gridLayout->addWidget(viewer, 0, 1);
+    ui->vAreaGridLayout->addWidget(viewer);
+//    ui->gridLayout->addWidget(viewer, 0, 1);
 
     isActive = false;
 
