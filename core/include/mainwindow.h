@@ -48,6 +48,7 @@
 #include "generalcoresettings.h"
 #include "filtrationwidget.h"
 #include "loginfo.h"
+#include "gotolinedialog.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -136,6 +137,7 @@ private:
     MainSettings *mainSettings;
     IVisualization *hexVisualization;
     IVisualization *textVisualization;
+    GoToLineDialog *goToLineDialog;
 
     Project *project;
 
@@ -185,6 +187,7 @@ private slots:
     void showTextVisualization(bool checked);
     void showHexVisualization(bool checked);
     void showFiltration();
+    void showGoToLineDialog();
 
     void selectedSetting(QString topLevelName, QString settingName);
     void appliedSettings();

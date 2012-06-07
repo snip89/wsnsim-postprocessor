@@ -26,6 +26,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fullScreen = false;
 
+    goToLineDialog = new GoToLineDialog();
+
     emptyWidget = new QWidget();
 
     emptySettings = new EmptySettings();
@@ -796,6 +798,11 @@ void MainWindow::showFiltration()
 //    filtrationWidget->setCurrentLog(currentLogId);
 //    filtrationWidget->activate();
     switchToWidget(FILTRATION);
+}
+
+void MainWindow::showGoToLineDialog()
+{
+    
 }
 
 void MainWindow::selectedSetting(QString topLevelName, QString settingName)
