@@ -7,6 +7,11 @@ GoToLineDialog::GoToLineDialog(QWidget *parent) :
     ui->setupUi(this);
 }
 
+qint64 GoToLineDialog::lineNumber()
+{
+    return ui->lineEdit->text().toInt();
+}
+
 GoToLineDialog::~GoToLineDialog()
 {
     delete ui;

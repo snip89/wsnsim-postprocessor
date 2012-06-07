@@ -7,6 +7,7 @@
 #define GOTOLINEDIALOG_H
 
 #include <QDialog>
+#include <QString>
 
 #include "ui_gotolinedialog.h"
 
@@ -20,6 +21,9 @@ class GoToLineDialog : public QDialog
 
 public:
     explicit GoToLineDialog(QWidget *parent = 0);
+
+    qint64 lineNumber();
+
     virtual ~GoToLineDialog();
 
 private:

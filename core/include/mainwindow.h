@@ -137,7 +137,6 @@ private:
     MainSettings *mainSettings;
     IVisualization *hexVisualization;
     IVisualization *textVisualization;
-    GoToLineDialog *goToLineDialog;
 
     Project *project;
 

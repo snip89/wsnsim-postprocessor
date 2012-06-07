@@ -52,6 +52,13 @@ QWidget *HexVisualization::getWidget()
     return this;
 }
 
+void HexVisualization::fromLine(qint64 line)
+{
+//    topLinePos = line;
+//    updatePage();
+    ui->verticalScrollBar->setValue(line);
+}
+
 HexVisualization::~HexVisualization()
 {
     delete colorsAndFontsSettings;

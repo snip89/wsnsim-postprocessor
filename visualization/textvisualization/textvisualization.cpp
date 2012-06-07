@@ -54,6 +54,13 @@ QWidget *TextVisualization::getWidget()
     return this;
 }
 
+void TextVisualization::fromLine(qint64 line)
+{
+//    topLinePos = line;
+//    updatePage();
+    ui->verticalScrollBar->setValue(line);
+}
+
 TextVisualization::~TextVisualization()
 {
     delete colorsAndFontsSettings;

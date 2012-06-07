@@ -26,8 +26,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     fullScreen = false;
 
-    goToLineDialog = new GoToLineDialog();
-
     emptyWidget = new QWidget();
 
     emptySettings = new EmptySettings();
@@ -138,6 +136,12 @@ void MainWindow::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Hidden/Gui/Log_dialog_size"))
         someSettings.setValue("Hidden/Gui/Log_dialog_size", QSize(320, 240));
+
+    if(!someSettings.contains("Hidden/Gui/Line_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Line_dialog_pos", QPoint(0, 0));
+
+    if(!someSettings.contains("Hidden/Gui/Line_dialog_size"))
+        someSettings.setValue("Hidden/Gui/Line_dialog_size", QSize(184, 84));
 }
 
 void MainWindow::createActions()
@@ -209,6 +213,7 @@ void MainWindow::createActions()
 
     actionGoToLine = new QAction(tr("&Go to line"), this);
     actionGoToLine->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_L));
+    connect(actionGoToLine, SIGNAL(triggered()), this, SLOT(showGoToLineDialog()));
     actionGoToLine->setEnabled(false);
 
     actionFiltration = new QAction(tr("&Filter..."), this);
@@ -463,11 +468,13 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case HEXVISUALIZATION:
+        actionGoToLine->setEnabled(false);
         hexVisualization->activity(false);
         previousActiveWidget = HEXVISUALIZATION;
         break;
 
     case TEXTVISUALIZATION:
+        actionGoToLine->setEnabled(false);
         textVisualization->activity(false);
         previousActiveWidget = TEXTVISUALIZATION;
         break;
@@ -491,6 +498,7 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case HEXVISUALIZATION:
+        actionGoToLine->setEnabled(true);
         stackedWidget->setCurrentWidget(hexVisualization->getWidget());
 //        hexVisualization->update(project, logs->at(logs->size() - 1));
         hexVisualization->update(project, logs->at(currentLogId).log);
@@ -499,6 +507,7 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case TEXTVISUALIZATION:
+        actionGoToLine->setEnabled(true);
         stackedWidget->setCurrentWidget(textVisualization->getWidget());
 //        textVisualization->update(project, logs->at(logs->size() - 1));
         textVisualization->update(project, logs->at(currentLogId).log);
@@ -802,7 +811,22 @@ void MainWindow::showFiltration()
 
 void MainWindow::showGoToLineDialog()
 {
-    
+    GoToLineDialog *goToLineDialog = new GoToLineDialog();
+    goToLineDialog->move(settings.value("Hidden/Gui/Line_dialog_pos").value<QPoint>());
+    goToLineDialog->resize(settings.value("Hidden/Gui/Line_dialog_size").value<QSize>());
+
+    if(goToLineDialog->exec())
+    {
+        if(activeWidget == HEXVISUALIZATION)
+            hexVisualization->fromLine(goToLineDialog->lineNumber());
+        else if(activeWidget == TEXTVISUALIZATION)
+            textVisualization->fromLine(goToLineDialog->lineNumber());
+    }
+
+    settings.setValue("Hidden/Gui/Line_dialog_pos", goToLineDialog->pos());
+    settings.setValue("Hidden/Gui/Line_dialog_size", goToLineDialog->size());
+
+    delete goToLineDialog;
 }
 
 void MainWindow::selectedSetting(QString topLevelName, QString settingName)

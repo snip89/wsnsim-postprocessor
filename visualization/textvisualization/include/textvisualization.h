@@ -30,6 +30,7 @@ public:
     /*virtual*/ void activity(bool status);
     /*virtual*/ void update(IProject *project, ILog *log);
     /*virtual*/ QWidget *getWidget();
+    /*virtual*/ void fromLine(qint64 line);
 
     virtual ~TextVisualization();
 
