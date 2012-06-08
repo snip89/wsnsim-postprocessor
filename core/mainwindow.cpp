@@ -846,9 +846,17 @@ void MainWindow::showGoToLineDialog()
     if(goToLineDialog->exec())
     {
         if(activeWidget == HEXVISUALIZATION)
-            hexVisualization->fromLine(goToLineDialog->lineNumber());
+        {
+            qint64 number = goToLineDialog->lineNumber();
+            if(number < logs->at(currentLogId).log->size() || number >= 0)
+                hexVisualization->fromLine(goToLineDialog->lineNumber());
+        }
         else if(activeWidget == TEXTVISUALIZATION)
-            textVisualization->fromLine(goToLineDialog->lineNumber());
+        {   
+            qint64 number = goToLineDialog->lineNumber();
+            if(number < logs->at(currentLogId).log->size() || number >= 0)
+                textVisualization->fromLine(goToLineDialog->lineNumber());
+        }
     }
 
     settings.setValue("Hidden/Gui/Line_dialog_pos", goToLineDialog->pos());

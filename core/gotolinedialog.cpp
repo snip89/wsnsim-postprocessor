@@ -5,6 +5,7 @@ GoToLineDialog::GoToLineDialog(QWidget *parent) :
     ui(new Ui::GoToLineDialog)
 {
     ui->setupUi(this);
+    ui->lineEdit->setValidator(new QIntValidator(this));
 }
 
 qint64 GoToLineDialog::lineNumber()

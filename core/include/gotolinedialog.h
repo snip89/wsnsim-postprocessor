@@ -8,6 +8,7 @@
 
 #include <QDialog>
 #include <QString>
+#include <QValidator>
 
 #include "ui_gotolinedialog.h"
 
