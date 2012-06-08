@@ -29,6 +29,7 @@
 #include <QStyle>
 #include <QPoint>
 #include <QSize>
+#include <QLabel>
 #include <QDebug>
 
 #include "project.h"
@@ -116,6 +117,8 @@ private:
     QMenu *menuTools;
     QMenu *menuHelp;
 
+    QLabel *labelTotalSize;
+
     QSettings settings;
 
     QErrorMessage errorMessager;
@@ -155,9 +158,11 @@ private:
 
     void createActions();
     void createMenus();
+    void createStatusWidgets();
 
     void deleteActions();
     void deleteMenus();
+    void deleteStatusWidgets();
 
     void insertActionsRecent();
     void removeActionsRecent();

@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     createActions();
     createMenus();
+    createStatusWidgets();
 
     insertActionsRecent();
 
@@ -67,6 +68,7 @@ MainWindow::~MainWindow()
 
     deleteActions();
     deleteMenus();
+    deleteStatusWidgets();
 
     delete emptyWidget;
     delete emptySettings;
@@ -299,6 +301,13 @@ void MainWindow::createMenus()
     ui->menuBar->addMenu(menuHelp);
 }
 
+void MainWindow::createStatusWidgets()
+{
+    labelTotalSize = new QLabel(this);
+    labelTotalSize->setVisible(false);
+    ui->statusbar->addWidget(labelTotalSize);
+}
+
 void MainWindow::deleteActions()
 {
     delete actionOpen;
@@ -337,6 +346,11 @@ void MainWindow::deleteMenus()
     delete menuView;
     delete menuTools;
     delete menuHelp;
+}
+
+void MainWindow::deleteStatusWidgets()
+{
+    delete labelTotalSize;
 }
 
 void MainWindow::insertActionsRecent()
@@ -468,12 +482,14 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case HEXVISUALIZATION:
+        labelTotalSize->setVisible(false);
         actionGoToLine->setEnabled(false);
         hexVisualization->activity(false);
         previousActiveWidget = HEXVISUALIZATION;
         break;
 
     case TEXTVISUALIZATION:
+        labelTotalSize->setVisible(false);
         actionGoToLine->setEnabled(false);
         textVisualization->activity(false);
         previousActiveWidget = TEXTVISUALIZATION;
@@ -484,6 +500,8 @@ void MainWindow::switchToWidget(WidgetType type)
         previousActiveWidget = FILTRATION;
         break;
     }
+
+    QString statusString;
 
     switch(type)
     {
@@ -498,6 +516,11 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case HEXVISUALIZATION:
+        statusString += "Total size: ";
+        statusString += QString::number(logs->at(currentLogId).log->size());
+        statusString += " records";
+        labelTotalSize->setText(statusString);
+        labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
         stackedWidget->setCurrentWidget(hexVisualization->getWidget());
 //        hexVisualization->update(project, logs->at(logs->size() - 1));
@@ -507,6 +530,11 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case TEXTVISUALIZATION:
+        statusString += "Total size: ";
+        statusString += QString::number(logs->at(currentLogId).log->size());
+        statusString += " records";
+        labelTotalSize->setText(statusString);
+        labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
         stackedWidget->setCurrentWidget(textVisualization->getWidget());
 //        textVisualization->update(project, logs->at(logs->size() - 1));
