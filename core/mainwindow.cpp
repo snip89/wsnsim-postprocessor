@@ -397,8 +397,14 @@ void MainWindow::updateActionsCurrentLogMenu()
     for(int i = 0; i < logs->size(); i ++)
     {
         QAction *action = new QAction(logs->at(i).fileName, this);
-        menuCurrentLog->addAction(action);
         connect(action, SIGNAL(triggered()), this, SLOT(switchCurrentLog()));
+        action->setCheckable(true);
+        menuCurrentLog->addAction(action);
+
+        if(i == currentLogId)
+        {
+            action->setChecked(true);
+        }
     }
 }
 
@@ -1050,6 +1056,9 @@ void MainWindow::toggleFullScreen(bool checked)
 void MainWindow::switchCurrentLog()
 {
     QAction *sender = (QAction*)QObject::sender();
+
+    qDebug() << sender;
+
     for(int i = 0; i < logs->size(); i ++)
     {
         if(logs->at(i).fileName == sender->text())
@@ -1074,6 +1083,13 @@ void MainWindow::switchCurrentLog()
                 switchToWidget(HEXVISUALIZATION);
         }
     }
+
+    foreach(QAction *action, menuCurrentLog->actions())
+    {
+        action->setChecked(false);
+    }
+
+    sender->setChecked(true);
 }
 
 void MainWindow::exit()
