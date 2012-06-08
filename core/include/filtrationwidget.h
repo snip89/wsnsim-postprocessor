@@ -82,6 +82,7 @@ private slots:
     void showFiltrationListWidgetContextMenu(const QPoint& pos);
     void showLogsListWidgetContextMenu(const QPoint& pos);
     void paramSelected(int index);
+    void selectedListItem(QListWidgetItem *item);
 };
 
 #endif // FILTRATIONWIDGET_H

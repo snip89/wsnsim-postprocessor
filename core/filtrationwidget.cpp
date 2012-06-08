@@ -25,6 +25,8 @@ FiltrationWidget::FiltrationWidget(QWidget *parent) :
 
     connect(ui->filtrationParamComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(paramSelected(int)));
 
+    connect(ui->logsListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(selectedListItem(QListWidgetItem*)));
+
     logNameCounter = 0;
 }
 
@@ -463,4 +465,22 @@ void FiltrationWidget::paramSelected(int index)
     qDebug() << "selected param: " << indexValue;
 
     updateBooleanOperators();
+}
+
+void FiltrationWidget::selectedListItem(QListWidgetItem *item)
+{
+    QString fileName = item->text();
+
+    for(int i = 0; i < logs->size(); i ++)
+    {
+        if(logs->at(i).fileName == fileName)
+        {
+            logs->at(currentLogId).log->toggleActivity(false);
+
+//                        setCurrentLog(logs->at(i).id);
+            setCurrentLog(i);
+
+            logs->at(currentLogId).log->toggleActivity(true);
+        }
+    }
 }
