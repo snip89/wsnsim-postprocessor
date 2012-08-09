@@ -141,5 +141,9 @@ void TextVisualization::updatePage()
     if(direction == Up)
         viewer->moveCursor(QTextCursor::Start);
     else if(direction == Down)
+    {
         viewer->moveCursor(QTextCursor::End);
+        viewer->moveCursor(QTextCursor::StartOfLine);
+    }
+    
 }

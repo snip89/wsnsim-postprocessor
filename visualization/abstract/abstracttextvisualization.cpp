@@ -61,12 +61,14 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
 
             if(viewer->textCursor().atEnd())
             {
+                viewer->moveCursor(QTextCursor::StartOfLine);
                 direction = Down;
                 ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepAdd);
             }
 
             else
             {
+                viewer->moveCursor(QTextCursor::StartOfLine);
                 viewer->moveCursor(QTextCursor::Down);
             }
         }
