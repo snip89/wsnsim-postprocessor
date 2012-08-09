@@ -7,6 +7,8 @@ AbstractTextVisualization::AbstractTextVisualization(QString group, QWidget *par
 {
     ui->setupUi(this);
 
+    ui->horizontalScrollBar->setVisible(false);
+
     connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarMoving(int)));
 
     viewer = new Viewer(group);

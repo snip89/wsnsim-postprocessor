@@ -6,7 +6,7 @@ Viewer::Viewer(QString group, QWidget *parent)
     this->setReadOnly(true);
     this->setLineWrapMode(QTextEdit::NoWrap);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
-    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 
     QSettings settings;
     lineColor = settings.value(group + "/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>();
