@@ -38,6 +38,7 @@ MainWindow::MainWindow(QWidget *parent) :
     generalCoreSettings->showCurrentSettings();
 
     filtrationWidget = new FiltrationWidget();
+
     connect(filtrationWidget, SIGNAL(logFiltered(int)), this, SLOT(filteredLog(int)));
     connect(filtrationWidget, SIGNAL(filtrationCanceled()), this, SLOT(canceledFiltration()));
 
@@ -52,10 +53,10 @@ MainWindow::MainWindow(QWidget *parent) :
     stackedWidget = new QStackedWidget(this);
     this->setCentralWidget(stackedWidget);
     stackedWidget->addWidget(emptyWidget);
-    stackedWidget->addWidget(mainSettings);
+//    stackedWidget->addWidget(mainSettings);
     stackedWidget->addWidget(hexVisualization->getWidget());
     stackedWidget->addWidget(textVisualization->getWidget());
-    stackedWidget->addWidget(filtrationWidget);
+//    stackedWidget->addWidget(filtrationWidget);
 
     stackedWidget->setCurrentWidget(emptyWidget);
     activeWidget = EMPTY;
@@ -517,7 +518,7 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case MAINSETTINGS:
-        stackedWidget->setCurrentWidget(mainSettings);
+//        stackedWidget->setCurrentWidget(mainSettings);
         activeWidget = MAINSETTINGS;
         break;
 
@@ -552,7 +553,7 @@ void MainWindow::switchToWidget(WidgetType type)
     case FILTRATION:
         filtrationWidget->setCurrentLog(currentLogId);
         filtrationWidget->activate();
-        stackedWidget->setCurrentWidget(filtrationWidget);
+//        stackedWidget->setCurrentWidget(filtrationWidget);
         activeWidget = FILTRATION;
         break;
     }
@@ -804,7 +805,10 @@ void MainWindow::openLog(QString name)
 
 void MainWindow::showSettings()
 {
-    switchToWidget(MAINSETTINGS);
+//    switchToWidget(MAINSETTINGS);
+    mainSettings->setWindowFlags(Qt::Dialog);
+    mainSettings->setWindowModality(Qt::ApplicationModal);
+    mainSettings->show();
 }
 
 void MainWindow::showTextVisualization(bool checked)
@@ -840,7 +844,11 @@ void MainWindow::showFiltration()
 //    filtrationWidget->setCurrentLog(logs->at(logs->size() - 1));
 //    filtrationWidget->setCurrentLog(currentLogId);
 //    filtrationWidget->activate();
-    switchToWidget(FILTRATION);
+//    switchToWidget(FILTRATION);
+//    filtrationWidget->show();
+    filtrationWidget->setWindowFlags(Qt::Dialog);
+    filtrationWidget->setWindowModality(Qt::ApplicationModal);
+    filtrationWidget->show();
 }
 
 void MainWindow::showGoToLineDialog()
@@ -999,14 +1007,16 @@ void MainWindow::canceledSettings()
     if(textVisualizationSettings)
         textVisualizationSettings->showCurrentSettings();
 
-    if(actionHexVisualization->isChecked())
+/*    if(actionHexVisualization->isChecked())
         switchToWidget(HEXVISUALIZATION);
 
     else if(actionTextVisualization->isChecked())
         switchToWidget(TEXTVISUALIZATION);
 
     else
-        switchToWidget(EMPTY);
+    switchToWidget(EMPTY);*/
+
+    mainSettings->close();
 }
 
 void MainWindow::filteredLog(int id)
@@ -1031,14 +1041,15 @@ void MainWindow::filteredLog(int id)
 
 void MainWindow::canceledFiltration()
 {
-    if(actionHexVisualization->isChecked())
-        switchToWidget(HEXVISUALIZATION);
+    filtrationWidget->close();
+//    if(actionHexVisualization->isChecked())
+//        switchToWidget(HEXVISUALIZATION);
 
-    else if(actionTextVisualization->isChecked())
-        switchToWidget(TEXTVISUALIZATION);
+//    else if(actionTextVisualization->isChecked())
+//        switchToWidget(TEXTVISUALIZATION);
 
-    else
-        switchToWidget(EMPTY);
+//    else
+//        switchToWidget(EMPTY);
 }
 
 void MainWindow::toggleFullScreen(bool checked)
