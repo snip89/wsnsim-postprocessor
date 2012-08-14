@@ -145,6 +145,12 @@ void MainWindow::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Hidden/Gui/Line_dialog_size"))
         someSettings.setValue("Hidden/Gui/Line_dialog_size", QSize(184, 84));
+
+    if(!someSettings.contains("Hidden/Gui/Filter_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Filter_dialog_pos", QPoint(0, 0));
+
+    if(!someSettings.contains("Hidden/Gui/Settings_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Settings_dialog_pos", QPoint(0, 0));
 }
 
 void MainWindow::createActions()
@@ -842,12 +848,13 @@ void MainWindow::showFiltration()
 {
     filtrationWidget->setCurrentProject(project);
 //    filtrationWidget->setCurrentLog(logs->at(logs->size() - 1));
-//    filtrationWidget->setCurrentLog(currentLogId);
-//    filtrationWidget->activate();
+    filtrationWidget->setCurrentLog(currentLogId);
+    filtrationWidget->activate();
 //    switchToWidget(FILTRATION);
 //    filtrationWidget->show();
     filtrationWidget->setWindowFlags(Qt::Dialog);
     filtrationWidget->setWindowModality(Qt::ApplicationModal);
+    filtrationWidget->move(settings.value("Hidden/Gui/Filtration_dialog_pos").value<QPoint>());
     filtrationWidget->show();
 }
 
@@ -1016,6 +1023,8 @@ void MainWindow::canceledSettings()
     else
     switchToWidget(EMPTY);*/
 
+    settings.setValue("Hidden/Gui/Settings_dialog_pos", mainSettings->pos());
+
     mainSettings->close();
 }
 
@@ -1041,6 +1050,8 @@ void MainWindow::filteredLog(int id)
 
 void MainWindow::canceledFiltration()
 {
+    settings.setValue("Hidden/Gui/Filtration_dialog_pos", filtrationWidget->pos());
+
     filtrationWidget->close();
 //    if(actionHexVisualization->isChecked())
 //        switchToWidget(HEXVISUALIZATION);

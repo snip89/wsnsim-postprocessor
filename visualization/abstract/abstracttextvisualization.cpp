@@ -7,7 +7,7 @@ AbstractTextVisualization::AbstractTextVisualization(QString group, QWidget *par
 {
     ui->setupUi(this);
 
-    ui->horizontalScrollBar->setVisible(false);
+//    ui->horizontalScrollBar->setVisible(false);
 
     connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarMoving(int)));
 
@@ -110,13 +110,13 @@ AbstractTextVisualization::~AbstractTextVisualization()
 
 int AbstractTextVisualization::linesOnPage()
 {
-    int wh = viewer->height();
+    int wh = viewer->height() - ui->verticalScrollBar->width();
 
     QFontMetrics m(viewer->currentFont());
 
     int fh = m.height();
 
-    return wh / fh;
+    return (wh / fh);
 }
 
 void AbstractTextVisualization::scrollBarMoving(int value)
