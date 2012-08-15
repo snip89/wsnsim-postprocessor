@@ -849,6 +849,10 @@ void MainWindow::showSettings()
 //    switchToWidget(MAINSETTINGS);
     mainSettings->setWindowFlags(Qt::Dialog);
     mainSettings->setWindowModality(Qt::ApplicationModal);
+
+//    mainSettings->setPos(Hidden/Gui/Settings_dialog_pos
+    mainSettings->move(settings.value("Hidden/Gui/Settings_dialog_pos").value<QPoint>());
+
     mainSettings->show();
 }
 
@@ -991,6 +995,7 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
         {
             IVisualizationSettings *visualizationSettings = textVisualization->visualizationSettings(settingName);
 
+
             if(!visualizationSettings)
                 showEmptySettings(settingName);
 
@@ -1061,6 +1066,11 @@ void MainWindow::canceledSettings()
     settings.setValue("Hidden/Gui/Settings_dialog_pos", mainSettings->pos());
 
     mainSettings->close();
+
+    if(activeWidget == TEXTVISUALIZATION)
+        updateVisualization(TEXTVISUALIZATION);
+    else if(activeWidget == HEXVISUALIZATION)
+        updateVisualization(HEXVISUALIZATION);
 }
 
 void MainWindow::filteredLog(int id)
