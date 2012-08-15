@@ -565,6 +565,41 @@ void MainWindow::switchToWidget(WidgetType type)
     }
 }
 
+void MainWindow::updateVisualization(WidgetType type)
+{
+    QString statusString;
+
+    switch(type)
+    {
+    case TEXTVISUALIZATION:
+        statusString += "Total size: ";
+        statusString += QString::number(logs->at(currentLogId).log->size());
+        statusString += " records";
+        labelTotalSize->setText(statusString);
+        labelTotalSize->setVisible(true);
+        actionGoToLine->setEnabled(true);
+        stackedWidget->setCurrentWidget(textVisualization->getWidget());
+        textVisualization->update(project, logs->at(currentLogId).log);
+        break;
+    case HEXVISUALIZATION:
+        statusString += "Total size: ";
+        statusString += QString::number(logs->at(currentLogId).log->size());
+        statusString += " records";
+        labelTotalSize->setText(statusString);
+        labelTotalSize->setVisible(true);
+        actionGoToLine->setEnabled(true);
+        stackedWidget->setCurrentWidget(hexVisualization->getWidget());
+        hexVisualization->update(project, logs->at(currentLogId).log);
+        break;
+    case EMPTY:
+        break;
+    case MAINSETTINGS:
+        break;
+    case FILTRATION:
+        break;
+    }
+}
+
 bool MainWindow::isFullScreen()
 {
     return actionFullScreen->isChecked();
@@ -1036,16 +1071,23 @@ void MainWindow::filteredLog(int id)
     currentLogId = id;
     updateActionsCurrentLogMenu();
 
+    filtrationWidget->close();
+
+    if(activeWidget == TEXTVISUALIZATION)
+        updateVisualization(TEXTVISUALIZATION);
+    else if(activeWidget == HEXVISUALIZATION)
+        updateVisualization(HEXVISUALIZATION);
+
 //    logs->at(logs->size() - 1)->toggleActivity(true);
 
-    if(actionHexVisualization->isChecked())
+/*    if(actionHexVisualization->isChecked())
         switchToWidget(HEXVISUALIZATION);
 
     else if(actionTextVisualization->isChecked())
         switchToWidget(TEXTVISUALIZATION);
 
     else
-        switchToWidget(EMPTY);
+    switchToWidget(EMPTY);*/
 }
 
 void MainWindow::canceledFiltration()

@@ -12,6 +12,8 @@ FiltrationWidget::FiltrationWidget(QWidget *parent) :
 {
     ui->setupUi(this);
 
+    errorMessager.setModal(true);
+
     connect(ui->addFilterButton, SIGNAL(clicked()), this, SLOT(addFilter()));
     connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 
@@ -295,7 +297,7 @@ void FiltrationWidget::setEqNeBooleanOperators()
 void FiltrationWidget::addFilter()
 {
     if(ui->filtrationValueComboBox->text() == "")
-        errorMessager.showMessage(tr("Value fild is empty"));
+        errorMessager.showMessage(tr("Value field is empty"));
 
     else
     {

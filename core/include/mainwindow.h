@@ -181,6 +181,8 @@ public slots:
     void openProject(QString name = QString::null);
 
 private slots:
+    void updateVisualization(WidgetType type);
+
     void openRecentProject();
 
     void closeProject();
