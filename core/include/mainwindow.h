@@ -105,7 +105,6 @@ private:
     QAction *actionHelp;
     QAction *actionContextHelp;
     QAction *actionAbout;
-    QAction *actionStartUpdater;
 
     // menus
     QMenu *menuFile;

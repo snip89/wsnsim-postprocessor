@@ -125,6 +125,12 @@ void MainWindow::setSettings(QSettings &someSettings)
     if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
         someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 
+    if(!someSettings.contains("Defaults/General/Gui/Default_visualization"))
+        someSettings.setValue("Defaults/General/Gui/Default_visualization", "hex");
+
+    if(!someSettings.contains("General/Gui/Default_visualization"))
+        someSettings.setValue("General/Gui/Default_visualization", "hex");
+
     if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
         someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 
@@ -240,8 +246,6 @@ void MainWindow::createActions()
     actionContextHelp->setShortcut(QKeySequence::HelpContents);
 
     actionAbout = new QAction(tr("&About..."), this);
-
-    actionStartUpdater = new QAction(tr("&Start updater"), this);
 }
 
 void MainWindow::createMenus()
@@ -253,7 +257,6 @@ void MainWindow::createMenus()
     menuCurrentLog = new QMenu(tr("&Current log"), this);
     menuCurrentLog->setEnabled(false);
 
-    menuFile->addMenu(menuCurrentLog);
     menuFile->addSeparator();
     menuFile->addAction(actionClose);
     menuFile->addSeparator();
@@ -288,6 +291,8 @@ void MainWindow::createMenus()
     menuView->addAction(actionHexVisualization);
     menuView->addAction(actionTextVisualization);
     menuView->addSeparator();
+    menuView->addMenu(menuCurrentLog);
+    menuView->addSeparator();
     menuView->addAction(actionFullScreen);
 
     menuTools = new QMenu(tr("&Tools"), this);
@@ -298,8 +303,6 @@ void MainWindow::createMenus()
     menuHelp->addAction(actionContextHelp);
     menuHelp->addSeparator();
     menuHelp->addAction(actionAbout);
-    menuHelp->addSeparator();
-    menuHelp->addAction(actionStartUpdater);
 
     ui->menuBar->addMenu(menuFile);
     ui->menuBar->addMenu(menuEdit);
@@ -340,7 +343,6 @@ void MainWindow::deleteActions()
     delete actionHelp;
     delete actionContextHelp;
     delete actionAbout;
-    delete actionStartUpdater;
 }
 
 void MainWindow::deleteMenus()
@@ -734,6 +736,11 @@ void MainWindow::closeProject()
 {
     if(isProjectOpened)
     {
+        if(activeWidget == HEXVISUALIZATION)
+            settings.setValue("General/Gui/Default_visualization", "hex");
+        else if(activeWidget == TEXTVISUALIZATION)
+            settings.setValue("General/Gui/Default_visualization", "text");
+
         actionClose->setEnabled(false);
 
         switchToWidget(EMPTY);
@@ -840,8 +847,11 @@ void MainWindow::openLog(QString name)
     actionFiltration->setEnabled(true);
 
 //    showHexVisualization(true);
-
-    actionHexVisualization->toggle();
+    
+    if(settings.value("General/Gui/Default_visualization").value<QString>() == "hex")
+        actionHexVisualization->toggle();
+    else if(settings.value("General/Gui/Default_visualization").value<QString>() == "text")
+        actionTextVisualization->toggle();
 }
 
 void MainWindow::showSettings()
