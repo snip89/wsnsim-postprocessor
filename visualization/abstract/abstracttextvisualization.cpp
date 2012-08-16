@@ -27,6 +27,8 @@ AbstractTextVisualization::AbstractTextVisualization(QString group, QWidget *par
 
     connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), viewer->horizontalScrollBar(), SLOT(setValue(int)));
 
+//    connect(viewer->horizontalScrollBar(), SIGNAL(rangeChanged(int, int)), ui->horizontalScrollBar, SLOT(hscrollBarRangeChanging(int, int)));
+
 //    viewer->addScrollBarWidget(ui->horizontalScrollBar, Qt::AlignBottom);
 }
 
@@ -132,3 +134,10 @@ void AbstractTextVisualization::scrollBarMoving(int value)
     topLinePos = value;
     updatePage();
 }
+
+/*void AbstractTextVisualization::hscrollBarRangeChanging(int min, int max)
+{
+    qDebug() << "hscroll range: " << min << " " << max;
+    ui->horizontalScrollBar->setMinimum(min);
+    ui->horizontalScrollBar->setMaximum(max);
+}*/

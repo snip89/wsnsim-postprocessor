@@ -64,6 +64,7 @@ protected:
 
 private slots:
     void scrollBarMoving(int value);
+//    void hscrollBarRangeChanging(int min, int max);
 };
 
 #endif // ABSTRACTTEXTVISUALIZATION_H

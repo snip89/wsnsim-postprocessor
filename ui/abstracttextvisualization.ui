@@ -38,6 +38,12 @@
    </item>
    <item row="1" column="0">
     <widget class="QScrollBar" name="horizontalScrollBar">
+     <property name="maximum">
+      <number>0</number>
+     </property>
+     <property name="singleStep">
+      <number>1</number>
+     </property>
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
      </property>

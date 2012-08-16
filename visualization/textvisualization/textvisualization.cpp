@@ -145,5 +145,7 @@ void TextVisualization::updatePage()
         viewer->moveCursor(QTextCursor::End);
         viewer->moveCursor(QTextCursor::StartOfLine);
     }
-    
+
+    ui->horizontalScrollBar->setMinimum(viewer->horizontalScrollBar()->minimum());
+    ui->horizontalScrollBar->setMaximum(viewer->horizontalScrollBar()->maximum());
 }
