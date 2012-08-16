@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>826</width>
-    <height>493</height>
+    <width>375</width>
+    <height>240</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -53,9 +53,6 @@
      <property name="editTriggers">
       <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
      </property>
-     <attribute name="headerVisible">
-      <bool>false</bool>
-     </attribute>
      <attribute name="headerVisible">
       <bool>false</bool>
      </attribute>

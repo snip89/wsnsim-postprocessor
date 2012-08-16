@@ -21,6 +21,13 @@ AbstractTextVisualization::AbstractTextVisualization(QString group, QWidget *par
     isActive = false;
 
     direction = Up;
+
+//    viewer->setHorizontalScrollBar(ui->horizontalScrollBar);
+//    viewer->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+
+    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), viewer->horizontalScrollBar(), SLOT(setValue(int)));
+
+//    viewer->addScrollBarWidget(ui->horizontalScrollBar, Qt::AlignBottom);
 }
 
 void AbstractTextVisualization::resizeEvent(QResizeEvent *e)
@@ -110,13 +117,13 @@ AbstractTextVisualization::~AbstractTextVisualization()
 
 int AbstractTextVisualization::linesOnPage()
 {
-    int wh = viewer->height() - ui->verticalScrollBar->width();
+    int wh = viewer->height(); // - ui->verticalScrollBar->width();
 
     QFontMetrics m(viewer->currentFont());
 
     int fh = m.height();
 
-    return (wh / fh);
+    return (wh / fh) - 1;
 }
 
 void AbstractTextVisualization::scrollBarMoving(int value)
