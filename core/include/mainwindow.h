@@ -122,6 +122,10 @@ private:
 
     QErrorMessage errorMessager;
 
+    QString prName;
+    QString delimT1;
+    QString delimT2;
+
     int currentLogId;
 
     bool isProjectOpened;
@@ -175,6 +179,8 @@ private:
     void switchToWidget(WidgetType type);
 
     void showEmptySettings(QString name);
+
+    void setTitle(QString project, QString log);
 
 public slots:
     void openProject(QString name = QString::null);

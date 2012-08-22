@@ -124,8 +124,9 @@ int AbstractTextVisualization::linesOnPage()
     QFontMetrics m(viewer->currentFont());
 
     int fh = m.height();
+//    int fh = m.lineWidth();
 
-    return (wh / fh) - 1;
+    return wh / fh;
 }
 
 void AbstractTextVisualization::scrollBarMoving(int value)

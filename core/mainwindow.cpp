@@ -12,9 +12,15 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    prName = tr("Обработчик журналов симулятора");
+    delimT1 = tr(" : ");
+    delimT2 = tr(" -> ");
+
     setSettings(settings);
 
     ui->setupUi(this);
+
+    setWindowTitle(prName);
 
     createActions();
     createMenus();
@@ -621,6 +627,15 @@ void MainWindow::showEmptySettings(QString name)
     mainSettings->settingsFrameWidget->setCurrentWidget(emptySettings);
 }
 
+void MainWindow::setTitle(QString project, QString log)
+{
+    if(project != QString::null)
+        setWindowTitle(prName + delimT1 + project);
+
+    if(project != QString::null && log != QString::null)
+        setWindowTitle(prName + delimT1 + project + delimT2 + log);
+}
+
 void MainWindow::openRecentProject()
 {
     QAction *action = qobject_cast<QAction *>(sender());
@@ -688,6 +703,8 @@ void MainWindow::openProject(QString name)
         return;
     }
 
+    setTitle(project->projectName(), QString::null);
+
     removeActionsRecent();
     insertToRecent(name);
     insertActionsRecent();
@@ -753,6 +770,8 @@ void MainWindow::closeProject()
 
         actionOpenLog->setEnabled(false);
         menuCurrentLog->setEnabled(false);
+
+        setWindowTitle(prName);
     }
 }
 
@@ -833,6 +852,8 @@ void MainWindow::openLog(QString name)
     // }
 
     logs->at(currentLogId).log->toggleActivity(true);
+
+    setTitle(project->projectName(), logs->at(currentLogId).fileName);
 
 //    logs->at(logs->size() - 1)->toggleActivity(true);
 
@@ -1039,14 +1060,16 @@ void MainWindow::appliedSettings()
     if(textVisualizationSettings)
         textVisualizationSettings->applySettings();
 
-    if(actionHexVisualization->isChecked())
+    mainSettings->close();
+
+/*    if(actionHexVisualization->isChecked())
         switchToWidget(HEXVISUALIZATION);
 
     else if(actionTextVisualization->isChecked())
         switchToWidget(TEXTVISUALIZATION);
 
     else
-        switchToWidget(EMPTY);
+    switchToWidget(EMPTY);*/
 }
 
 void MainWindow::canceledSettings()
@@ -1097,6 +1120,10 @@ void MainWindow::filteredLog(int id)
         updateVisualization(TEXTVISUALIZATION);
     else if(activeWidget == HEXVISUALIZATION)
         updateVisualization(HEXVISUALIZATION);
+
+//    qDebug() << logs->at(currentLogId).fileName;
+
+    setTitle(project->projectName(), logs->at(currentLogId).fileName);
 
 //    logs->at(logs->size() - 1)->toggleActivity(true);
 
@@ -1174,6 +1201,8 @@ void MainWindow::switchCurrentLog()
     }
 
     sender->setChecked(true);
+
+    setTitle(project->projectName(), logs->at(currentLogId).fileName);
 }
 
 void MainWindow::exit()

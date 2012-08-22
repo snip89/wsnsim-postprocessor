@@ -28,6 +28,8 @@ public:
 private slots:
     void highlightCurrentLine();
 
+    void wheelEvent(QWheelEvent *e);
+
 private:
     QColor lineColor;
 };
