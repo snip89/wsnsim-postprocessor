@@ -12,6 +12,7 @@
 #include <QPoint>
 #include <QSize>
 #include <QTranslator>
+#include <QObject>
 
 #include "mainwindow.h"
 #include "ostools.h"
@@ -30,37 +31,37 @@ void setApplicationInfo()
 
 void setSettings(QSettings &settings)
 {
-    if(!settings.contains("Defaults/General/Core/Block_size"))
-        settings.setValue("Defaults/General/Core/Block_size", 100);
+    if(!settings.contains(QObject::tr("Defaults/General/Core/Block_size")))
+        settings.setValue(QObject::tr("Defaults/General/Core/Block_size"), 100);
 
-    if(!settings.contains("General/Core/Block_size"))
-        settings.setValue("General/Core/Block_size", 100);
+    if(!settings.contains(QObject::tr("General/Core/Block_size")))
+        settings.setValue(QObject::tr("General/Core/Block_size"), 100);
 
-    if(!settings.contains("Hidden/Gui/Main_window_pos"))
-        settings.setValue("Hidden/Gui/Main_window_pos", QPoint(0, 0));
+    if(!settings.contains(QObject::tr("Hidden/Gui/Main_window_pos")))
+        settings.setValue(QObject::tr("Hidden/Gui/Main_window_pos"), QPoint(0, 0));
 
-    if(!settings.contains("Hidden/Gui/Main_window_size"))
-        settings.setValue("Hidden/Gui/Main_window_size", QSize(640, 480));
+    if(!settings.contains(QObject::tr("Hidden/Gui/Main_window_size")))
+        settings.setValue(QObject::tr("Hidden/Gui/Main_window_size"), QSize(640, 480));
 
-    if(!settings.contains("Hidden/Gui/Main_window_is_full_screen"))
-        settings.setValue("Hidden/Gui/Main_window_is_full_screen", false);
+    if(!settings.contains(QObject::tr("Hidden/Gui/Main_window_is_full_screen")))
+        settings.setValue(QObject::tr("Hidden/Gui/Main_window_is_full_screen"), false);
 
 //    qint64 memSize = OSTools::getTotalSystemMemory();
 //
 //    if(memSize != -1)
 //        memSize = memSize * 10 / 100;
 
-    if(!settings.contains("Defaults/General/Core/Memory_usage"))
-        settings.setValue("Defaults/General/Core/Memory_usage", 10);
+    if(!settings.contains(QObject::tr("Defaults/General/Core/Memory_usage")))
+        settings.setValue(QObject::tr("Defaults/General/Core/Memory_usage"), 10);
 
-    if(!settings.contains("Defaults/Localization/GUILanguage"))
-        settings.setValue("Defaults/Localization/GUILanguage", "Ru");
+    if(!settings.contains(QObject::tr("Defaults/Localization/GUILanguage")))
+        settings.setValue(QObject::tr("Defaults/Localization/GUILanguage"), QObject::tr("Ru"));
 
-    if(!settings.contains("General/Core/Memory_usage"))
-        settings.setValue("General/Core/Memory_usage", 10);
+    if(!settings.contains(QObject::tr("General/Core/Memory_usage")))
+        settings.setValue(QObject::tr("General/Core/Memory_usage"), 10);
 
-    if(!settings.contains("Localization/GUILanguage"))
-        settings.setValue("Localization/GUILanguage", "Ru");
+    if(!settings.contains(QObject::tr("Localization/GUILanguage")))
+        settings.setValue(QObject::tr("Localization/GUILanguage"), QObject::tr("Ru"));
 }
 
 int main(int argc, char **argv) {
@@ -68,9 +69,8 @@ int main(int argc, char **argv) {
 
     QTranslator translator;
 
-    qDebug() << translator.load("qt_ru");
-
-    a.installTranslator(&translator);
+//    qDebug() << translator.load("qt_ru");
+//    a.installTranslator(&translator);
 
     setUpCodec();
     setApplicationInfo();
@@ -80,9 +80,9 @@ int main(int argc, char **argv) {
 
     MainWindow w;
 
-    w.move(settings.value("Hidden/Gui/Main_window_pos").value<QPoint>());
-    w.resize(settings.value("Hidden/Gui/Main_window_size").value<QSize>());
-    w.setFullScreen(settings.value("Hidden/Gui/Main_window_is_full_screen").value<bool>());
+    w.move(settings.value(QObject::tr("Hidden/Gui/Main_window_pos")).value<QPoint>());
+    w.resize(settings.value(QObject::tr("Hidden/Gui/Main_window_size")).value<QSize>());
+    w.setFullScreen(settings.value(QObject::tr("Hidden/Gui/Main_window_is_full_screen")).value<bool>());
 
     w.show();
     if (argc == 2)
@@ -90,16 +90,18 @@ int main(int argc, char **argv) {
 
     int result = a.exec();
 
-    settings.setValue("Hidden/Gui/Main_window_pos", w.pos());
+    settings.setValue(QObject::tr("Hidden/Gui/Main_window_pos"), w.pos());
 
     bool isMainWindowFullScreen = w.isFullScreen();
 
     if(!isMainWindowFullScreen)
-        settings.setValue("Hidden/Gui/Main_window_size", w.size());
+        settings.setValue(QObject::tr("Hidden/Gui/Main_window_size"), w.size());
 
-    settings.setValue("Hidden/Gui/Main_window_is_full_screen", isMainWindowFullScreen);
+    settings.setValue(QObject::tr("Hidden/Gui/Main_window_is_full_screen"), isMainWindowFullScreen);
 
     // TODO: here can be saved windows size, pos
+
+    settings.clear();
 
     return result;
 }
