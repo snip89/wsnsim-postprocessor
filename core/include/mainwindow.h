@@ -89,7 +89,6 @@ private:
     QAction *actionSettings;
     QAction *actionHexVisualization;
     QAction *actionTextVisualization;
-    QAction *actionRevertZoom;
     QAction *actionCopy;
     QAction *actionPaste;
     QAction *actionSelectAll;
@@ -115,6 +114,7 @@ private:
     QMenu *menuView;
     QMenu *menuTools;
     QMenu *menuHelp;
+    QMenu *menuViewFiltration;
 
     QLabel *labelTotalSize;
 

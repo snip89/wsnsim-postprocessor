@@ -167,20 +167,20 @@ void MainWindow::setSettings(QSettings &someSettings)
 
 void MainWindow::createActions()
 {
-    actionOpen = new QAction(tr("&Open..."), this);
+    actionOpen = new QAction(tr("&Открыть проект..."), this);
     actionOpen->setShortcut(QKeySequence::Open);
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(openProject()));
 
-    actionOpenLog = new QAction(tr("&Open log..."), this);
+    actionOpenLog = new QAction(tr("&Открыть журнал..."), this);
     actionOpenLog->setEnabled(false);
     connect(actionOpenLog, SIGNAL(triggered()), this, SLOT(openLog()));
 
-    actionClose = new QAction(tr("&Close"), this);
+    actionClose = new QAction(tr("&Закрыть проект"), this);
     actionClose->setShortcut(QKeySequence::Close);
     actionClose->setEnabled(false);
     connect(actionClose, SIGNAL(triggered()), this, SLOT(closeProject()));
 
-    actionPrint = new QAction(tr("&Print..."), this);
+    actionPrint = new QAction(tr("&Печать..."), this);
     actionPrint->setShortcut(QKeySequence::Print);
     actionPrint->setEnabled(false);
 
@@ -188,86 +188,87 @@ void MainWindow::createActions()
     // actionLogSelect->setEnabled(false);
     // connect(actionLogSelect, SIGNAL(triggered()), this, SLOT(openLog()));
 
-    actionExit = new QAction(tr("&Exit"), this);
+    actionExit = new QAction(tr("&Выход"), this);
     actionExit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     connect(actionExit, SIGNAL(triggered()), this, SLOT(exit()));
 
-    actionSettings = new QAction(tr("&Settings..."), this);
+    actionSettings = new QAction(tr("&Настройки..."), this);
     connect(actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
 
-    actionHexVisualization = new QAction(tr("&Hex"), this);
+    actionHexVisualization = new QAction(tr("&Шестнадцатиричное представление"), this);
     actionHexVisualization->setEnabled(false);
     actionHexVisualization->setCheckable(true);
     connect(actionHexVisualization, SIGNAL(toggled(bool)), this, SLOT(showHexVisualization(bool)));
 
-    actionTextVisualization = new QAction(tr("&Text"), this);
+    actionTextVisualization = new QAction(tr("&Текстовое представление"), this);
     actionTextVisualization->setEnabled(false);
     actionTextVisualization->setCheckable(true);
     connect(actionTextVisualization, SIGNAL(toggled(bool)), this, SLOT(showTextVisualization(bool)));
 
-    actionRevertZoom = new QAction(tr("&Revert zoom"), this);
-    actionRevertZoom->setEnabled(false);
-
-    actionCopy = new QAction(tr("&Copy"), this);
+    actionCopy = new QAction(tr("&Копировать"), this);
     actionCopy->setShortcut(QKeySequence::Copy);
     actionCopy->setEnabled(false);
 
-    actionPaste = new QAction(tr("&Paste"), this);
+    actionPaste = new QAction(tr("&Вставить"), this);
     actionPaste->setShortcut(QKeySequence::Paste);
     actionPaste->setEnabled(false);
 
-    actionSelectAll = new QAction(tr("&Select all"), this);
+    actionSelectAll = new QAction(tr("&Выделить все"), this);
     actionSelectAll->setShortcut(QKeySequence::SelectAll);
     actionSelectAll->setEnabled(false);
 
-    actionFind = new QAction(tr("&Find"), this);
+    actionFind = new QAction(tr("&Найти"), this);
     actionFind->setShortcut(QKeySequence::Find);
     actionFind->setEnabled(false);
 
-    actionFindNext = new QAction(tr("&Find next"), this);
+    actionFindNext = new QAction(tr("&Найти следующее"), this);
     actionFindNext->setShortcut(QKeySequence::FindNext);
     actionFindNext->setEnabled(false);
 
-    actionFindPrevious = new QAction(tr("&Find previous"), this);
+    actionFindPrevious = new QAction(tr("&Найти предыдущее"), this);
     actionFindPrevious->setShortcut(QKeySequence::FindPrevious);
     actionFindPrevious->setEnabled(false);
 
-    actionGoToLine = new QAction(tr("&Go to line"), this);
+    actionGoToLine = new QAction(tr("&Перейти к строке"), this);
     actionGoToLine->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_L));
     connect(actionGoToLine, SIGNAL(triggered()), this, SLOT(showGoToLineDialog()));
     actionGoToLine->setEnabled(false);
 
-    actionFiltration = new QAction(tr("&Filter..."), this);
+    actionFiltration = new QAction(tr("&Отфильтровать журнал..."), this);
     actionFiltration->setEnabled(false);
     connect(actionFiltration, SIGNAL(triggered()), this, SLOT(showFiltration()));
 
-    actionFullScreen = new QAction(tr("&Full screen"), this);
+    actionFullScreen = new QAction(tr("&На весь экран"), this);
     actionFullScreen->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F11));
     actionFullScreen->setCheckable(true);
     connect(actionFullScreen, SIGNAL(toggled(bool)), this, SLOT(toggleFullScreen(bool)));
 
-    actionHelp = new QAction(tr("&Help"), this);
+    actionHelp = new QAction(tr("&Справка"), this);
 
-    actionContextHelp = new QAction(tr("&Context help"), this);
+    actionContextHelp = new QAction(tr("&Контекстная справка"), this);
     actionContextHelp->setShortcut(QKeySequence::HelpContents);
 
-    actionAbout = new QAction(tr("&About..."), this);
+    actionAbout = new QAction(tr("&О программе..."), this);
 }
 
 void MainWindow::createMenus()
 {
-    menuFile = new QMenu(tr("&File"), this);
+    menuFile = new QMenu(tr("&Файл"), this);
     menuFile->addAction(actionOpen);
     menuFile->addAction(actionOpenLog);
 
-    menuCurrentLog = new QMenu(tr("&Current log"), this);
+    menuViewFiltration = new QMenu(tr("&Фильтрация журнала"), this);
+
+    menuCurrentLog = new QMenu(tr("&Полученные журналы"), this);
     menuCurrentLog->setEnabled(false);
+
+    menuViewFiltration->addMenu(menuCurrentLog);
 
     menuFile->addSeparator();
     menuFile->addAction(actionClose);
     menuFile->addSeparator();
 
-    menuRecentProjects = new QMenu(tr("&Recent projects..."), this);
+    menuRecentProjects = new QMenu(tr("&Последние проекты..."), this);
 
     menuFile->addMenu(menuRecentProjects);
     menuFile->addSeparator();
@@ -275,7 +276,7 @@ void MainWindow::createMenus()
     menuFile->addSeparator();
     menuFile->addAction(actionExit);
 
-    menuEdit = new QMenu(tr("&Edit"), this);
+    menuEdit = new QMenu(tr("&Правка"), this);
     menuEdit->addAction(actionCopy);
     menuEdit->addAction(actionPaste);
     menuEdit->addSeparator();
@@ -284,7 +285,7 @@ void MainWindow::createMenus()
     menuEdit->addAction(actionFiltration);
     menuEdit->addSeparator();
 
-    menuFind = new QMenu(tr("&Find"), this);
+    menuFind = new QMenu(tr("&Поиск"), this);
     menuFind->addAction(actionFind);
     menuFind->addSeparator();
     menuFind->addAction(actionFindNext);
@@ -293,18 +294,18 @@ void MainWindow::createMenus()
     menuEdit->addMenu(menuFind);
     menuEdit->addAction(actionGoToLine);
 
-    menuView = new QMenu(tr("&View"), this);
+    menuView = new QMenu(tr("&Просмотр"), this);
     menuView->addAction(actionHexVisualization);
     menuView->addAction(actionTextVisualization);
     menuView->addSeparator();
-    menuView->addMenu(menuCurrentLog);
+    menuView->addMenu(menuViewFiltration);
     menuView->addSeparator();
     menuView->addAction(actionFullScreen);
 
-    menuTools = new QMenu(tr("&Tools"), this);
+    menuTools = new QMenu(tr("&Сервис"), this);
     menuTools->addAction(actionSettings);
 
-    menuHelp = new QMenu(tr("&Help"), this);
+    menuHelp = new QMenu(tr("&Помощь"), this);
     menuHelp->addAction(actionHelp);
     menuHelp->addAction(actionContextHelp);
     menuHelp->addSeparator();
@@ -339,7 +340,6 @@ void MainWindow::deleteActions()
     delete actionTextVisualization;
     delete actionFiltration;
     delete actionFullScreen;
-    delete actionRevertZoom;
     delete actionCopy;
     delete actionPaste;
     delete actionFind;
@@ -361,6 +361,7 @@ void MainWindow::deleteMenus()
     delete menuView;
     delete menuTools;
     delete menuHelp;
+    delete menuViewFiltration;
 }
 
 void MainWindow::deleteStatusWidgets()
@@ -537,9 +538,9 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case HEXVISUALIZATION:
-        statusString += "Total size: ";
+        statusString += tr("Размер журнала: ");
         statusString += QString::number(logs->at(currentLogId).log->size());
-        statusString += " records";
+        statusString += tr(" записей");
         labelTotalSize->setText(statusString);
         labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
@@ -551,9 +552,9 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case TEXTVISUALIZATION:
-        statusString += "Total size: ";
+        statusString += tr("Размер журнала: ");
         statusString += QString::number(logs->at(currentLogId).log->size());
-        statusString += " records";
+        statusString += tr(" записей");
         labelTotalSize->setText(statusString);
         labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
@@ -580,9 +581,9 @@ void MainWindow::updateVisualization(WidgetType type)
     switch(type)
     {
     case TEXTVISUALIZATION:
-        statusString += "Total size: ";
+        statusString += tr("Размер журнала: ");
         statusString += QString::number(logs->at(currentLogId).log->size());
-        statusString += " records";
+        statusString += tr(" записей");
         labelTotalSize->setText(statusString);
         labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
@@ -590,9 +591,9 @@ void MainWindow::updateVisualization(WidgetType type)
         textVisualization->update(project, logs->at(currentLogId).log);
         break;
     case HEXVISUALIZATION:
-        statusString += "Total size: ";
+        statusString += tr("Размер журнала: ");
         statusString += QString::number(logs->at(currentLogId).log->size());
-        statusString += " records";
+        statusString += tr(" записей");
         labelTotalSize->setText(statusString);
         labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
@@ -683,7 +684,7 @@ void MainWindow::openProject(QString name)
 
         if(!pFile.exists())
         {
-            errorMessager.showMessage("Project not found");
+            errorMessager.showMessage(tr("Файл проекта не найден"));
             return;
         }
 
@@ -713,7 +714,7 @@ void MainWindow::openProject(QString name)
 
     if(count == 0)
     {
-        errorMessager.showMessage("Project is empty");
+        errorMessager.showMessage(tr("Проект пуст"));
         delete project;
         return;
     }
@@ -829,7 +830,7 @@ void MainWindow::openLog(QString name)
     logInfo.id = currentLogId;
     logInfo.log = new Log(name, blockSize, memoryUsage, info, false);
     logInfo.fileName = logInfo.log->fileName();
-    logInfo.filtersInfo.append("NO FILTERS");
+    logInfo.filtersInfo.append(tr("Нет фильтров"));
 
     logs->append(logInfo);
 
@@ -962,12 +963,12 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
     {
         if(settingName == "General")
         {
-            showEmptySettings(settingName);
+            showEmptySettings(tr("Основные"));
         }
 
         else if(settingName == "Gui")
         {
-            generalGuiSettings->setSettingsName(settingName);
+            generalGuiSettings->setSettingsName(tr("Пользовательский интерфейс"));
 
             if(!mainSettings->settingsFrameWidget->isAncestorOf(generalGuiSettings))
                 mainSettings->settingsFrameWidget->addWidget(generalGuiSettings);
@@ -977,7 +978,7 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
 
         else if(settingName == "Core")
         {
-            generalCoreSettings->setSettingsName(settingName);
+            generalCoreSettings->setSettingsName(tr("Ядро"));
 
             if(!mainSettings->settingsFrameWidget->isAncestorOf(generalCoreSettings))
                 mainSettings->settingsFrameWidget->addWidget(generalCoreSettings);
@@ -994,7 +995,7 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
     else if(topLevelName == "Hex visualization")
     {
         if(settingName == "Hex visualization")
-            showEmptySettings(settingName);
+            showEmptySettings(tr("Шестнадцатиричное представление"));
 
         else
         {
@@ -1020,7 +1021,7 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
     else if(topLevelName == "Text visualization")
     {
         if(settingName == "Text visualization")
-            showEmptySettings(settingName);
+            showEmptySettings(tr("Текстовое представление"));
 
         else
         {

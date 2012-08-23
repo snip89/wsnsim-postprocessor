@@ -21,13 +21,13 @@ FiltrationWidget::FiltrationWidget(QWidget *parent) :
     connect(ui->filtrationListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
             this, SLOT(showFiltrationListWidgetContextMenu(const QPoint&)));
 
-    ui->logsListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->logsListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
-            this, SLOT(showLogsListWidgetContextMenu(const QPoint&)));
+//    ui->logsListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
+//    connect(ui->logsListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
+//            this, SLOT(showLogsListWidgetContextMenu(const QPoint&)));
 
     connect(ui->filtrationParamComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(paramSelected(int)));
 
-    connect(ui->logsListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(selectedListItem(QListWidgetItem*)));
+//    connect(ui->logsListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(selectedListItem(QListWidgetItem*)));
 
     logNameCounter = 0;
 }
@@ -41,7 +41,7 @@ void FiltrationWidget::setCurrentLog(int id)
 {
     currentLogId = id;
 
-    ui->currentLogLineEdit->setText(logs->at(currentLogId).fileName);
+//    ui->currentLogLineEdit->setText(logs->at(currentLogId).fileName);
 }
 
 void FiltrationWidget::setMainLog(int id)
@@ -51,7 +51,7 @@ void FiltrationWidget::setMainLog(int id)
     QListWidgetItem *item = new QListWidgetItem(logs->at(mainLogId).fileName);
     item->setToolTip(logs->at(mainLogId).filtersInfo.at(0));
 
-    ui->logsListWidget->addItem(item);
+//    ui->logsListWidget->addItem(item);
 }
 
 void FiltrationWidget::setLogsInfos(QList<LogInfo> *logsInfos)
@@ -82,7 +82,7 @@ void FiltrationWidget::deactivate()
 
 void FiltrationWidget::clearLogs()
 {
-    ui->logsListWidget->clear();
+//    ui->logsListWidget->clear();
 }
 
 FiltrationWidget::~FiltrationWidget()
@@ -255,7 +255,7 @@ void FiltrationWidget::execute()
 
     QListWidgetItem *item = new QListWidgetItem(newLogInfo.fileName);
     item->setToolTip(toolTip);
-    ui->logsListWidget->addItem(item);
+//    ui->logsListWidget->addItem(item);
 
     emit logFiltered(currentLogId);
 }
@@ -364,9 +364,9 @@ void FiltrationWidget::showFiltrationListWidgetContextMenu(const QPoint& pos)
     }
 }
 
-void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
-{
-    QPoint globalPos = ui->logsListWidget->mapToGlobal(pos);
+//void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
+//{
+/*    QPoint globalPos = ui->logsListWidget->mapToGlobal(pos);
 
     QMenu contextMenu;
     contextMenu.addAction(tr("set current"));
@@ -457,8 +457,8 @@ void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
                 }
             }
         }
-    }
-}
+        }*/
+//}
 
 void FiltrationWidget::paramSelected(int index)
 {
