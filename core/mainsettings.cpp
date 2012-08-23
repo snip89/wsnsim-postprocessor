@@ -33,7 +33,7 @@ void MainSettings::addChildSettings(QSettings &settings, QTreeWidgetItem *parent
 
     foreach(QString group, settings.childGroups())
     {
-        if(group != "Defaults" && group != "Hidden")
+        if(group != tr("Defaults") && group != tr("Hidden"))
         {
             
             if(parent)
@@ -82,9 +82,9 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
 
 void MainSettings::buttonClicked(QAbstractButton *button)
 {
-    if(button->text() == "OK")
+    if(button->text() == tr("OK"))
         emit settingsApplied();
 
-    else if(button->text() == "Cancel")
+    else if(button->text() == tr("Cancel"))
         emit settingsCanceled();
 }
