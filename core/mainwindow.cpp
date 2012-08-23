@@ -95,77 +95,77 @@ MainWindow::~MainWindow()
 
 void MainWindow::setSettings(QSettings &someSettings)
 {
-    if(!someSettings.contains("Defaults/General/Gui/Recent_number"))
-        someSettings.setValue("Defaults/General/Gui/Recent_number", DEFAULT_RECENT_NUMBER);
+    if(!someSettings.contains(tr("Defaults/General/Gui/Recent_number")))
+        someSettings.setValue(tr("Defaults/General/Gui/Recent_number"), DEFAULT_RECENT_NUMBER);
 
-    if(!someSettings.contains("General/Gui/Recent_number"))
-        someSettings.setValue("General/Gui/Recent_number", DEFAULT_RECENT_NUMBER);
+    if(!someSettings.contains(tr("General/Gui/Recent_number")))
+        someSettings.setValue(tr("General/Gui/Recent_number"), DEFAULT_RECENT_NUMBER);
 
-    if(!someSettings.contains("Defaults/General/Gui/File_dialog_path"))
-        someSettings.setValue("Defaults/General/Gui/File_dialog_path", QDir::homePath());
+    if(!someSettings.contains(tr("Defaults/General/Gui/File_dialog_path")))
+        someSettings.setValue(tr("Defaults/General/Gui/File_dialog_path"), QDir::homePath());
 
-    if(!someSettings.contains("General/Gui/File_dialog_path"))
-        someSettings.setValue("General/Gui/File_dialog_path", QDir::homePath());
+    if(!someSettings.contains(tr("General/Gui/File_dialog_path")))
+        someSettings.setValue(tr("General/Gui/File_dialog_path"), QDir::homePath());
 
-    if(!someSettings.contains("Defaults/General/Gui/Recent"))
+    if(!someSettings.contains(tr("Defaults/General/Gui/Recent")))
     {
         QStringList emptyRecent;
         for(int i = 0; i < DEFAULT_RECENT_NUMBER; i ++)
             emptyRecent.append(" ");
 
-        someSettings.setValue("Defaults/General/Gui/Recent", emptyRecent);
+        someSettings.setValue(tr("Defaults/General/Gui/Recent"), emptyRecent);
     }
 
-    if(!someSettings.contains("General/Gui/Recent"))
+    if(!someSettings.contains(tr("General/Gui/Recent")))
     {
         QStringList emptyRecent;
         for(int i = 0; i < DEFAULT_RECENT_NUMBER; i ++)
             emptyRecent.append(" ");
 
-        someSettings.setValue("General/Gui/Recent", emptyRecent);
+        someSettings.setValue(tr("General/Gui/Recent"), emptyRecent);
     }
 
-    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
-        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+    if(!someSettings.contains(tr("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color")))
+        someSettings.setValue(tr("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"), QColor(Qt::yellow).lighter(160));
 
-    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
-        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+    if(!someSettings.contains(tr("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color")))
+        someSettings.setValue(tr("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"), QColor(Qt::yellow).lighter(160));
 
-    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
-        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+    if(!someSettings.contains(tr("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color")))
+        someSettings.setValue(tr("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color"), QColor(Qt::yellow).lighter(160));
 
-    if(!someSettings.contains("Defaults/General/Gui/Default_visualization"))
-        someSettings.setValue("Defaults/General/Gui/Default_visualization", "hex");
+    if(!someSettings.contains(tr("Defaults/General/Gui/Default_visualization")))
+        someSettings.setValue(tr("Defaults/General/Gui/Default_visualization"), tr("hex"));
 
-    if(!someSettings.contains("General/Gui/Default_visualization"))
-        someSettings.setValue("General/Gui/Default_visualization", "hex");
+    if(!someSettings.contains(tr("General/Gui/Default_visualization")))
+        someSettings.setValue(tr("General/Gui/Default_visualization"), tr("hex"));
 
-    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
-        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+    if(!someSettings.contains(tr("Text visualization/Appearance/Colors and Fonts/Cursor_line_color")))
+        someSettings.setValue(tr("Text visualization/Appearance/Colors and Fonts/Cursor_line_color"), QColor(Qt::yellow).lighter(160));
 
-    if(!someSettings.contains("Hidden/Gui/File_dialog_pos"))
-        someSettings.setValue("Hidden/Gui/File_dialog_pos", QPoint(0, 0));
+    if(!someSettings.contains(tr("Hidden/Gui/File_dialog_pos")))
+        someSettings.setValue(tr("Hidden/Gui/File_dialog_pos"), QPoint(0, 0));
 
-    if(!someSettings.contains("Hidden/Gui/File_dialog_size"))
-        someSettings.setValue("Hidden/Gui/File_dialog_size", QSize(320, 240));
+    if(!someSettings.contains(tr("Hidden/Gui/File_dialog_size")))
+        someSettings.setValue(tr("Hidden/Gui/File_dialog_size"), QSize(320, 240));
 
-    if(!someSettings.contains("Hidden/Gui/Log_dialog_pos"))
-        someSettings.setValue("Hidden/Gui/Log_dialog_pos", QPoint(0, 0));
+    if(!someSettings.contains(tr("Hidden/Gui/Log_dialog_pos")))
+        someSettings.setValue(tr("Hidden/Gui/Log_dialog_pos"), QPoint(0, 0));
 
-    if(!someSettings.contains("Hidden/Gui/Log_dialog_size"))
-        someSettings.setValue("Hidden/Gui/Log_dialog_size", QSize(320, 240));
+    if(!someSettings.contains(tr("Hidden/Gui/Log_dialog_size")))
+        someSettings.setValue(tr("Hidden/Gui/Log_dialog_size"), QSize(320, 240));
 
-    if(!someSettings.contains("Hidden/Gui/Line_dialog_pos"))
-        someSettings.setValue("Hidden/Gui/Line_dialog_pos", QPoint(0, 0));
+    if(!someSettings.contains(tr("Hidden/Gui/Line_dialog_pos")))
+        someSettings.setValue(tr("Hidden/Gui/Line_dialog_pos"), QPoint(0, 0));
 
-    if(!someSettings.contains("Hidden/Gui/Line_dialog_size"))
-        someSettings.setValue("Hidden/Gui/Line_dialog_size", QSize(184, 84));
+    if(!someSettings.contains(tr("Hidden/Gui/Line_dialog_size")))
+        someSettings.setValue(tr("Hidden/Gui/Line_dialog_size"), QSize(184, 84));
 
-    if(!someSettings.contains("Hidden/Gui/Filter_dialog_pos"))
-        someSettings.setValue("Hidden/Gui/Filter_dialog_pos", QPoint(0, 0));
+    if(!someSettings.contains(tr("Hidden/Gui/Filter_dialog_pos")))
+        someSettings.setValue(tr("Hidden/Gui/Filter_dialog_pos"), QPoint(0, 0));
 
-    if(!someSettings.contains("Hidden/Gui/Settings_dialog_pos"))
-        someSettings.setValue("Hidden/Gui/Settings_dialog_pos", QPoint(0, 0));
+    if(!someSettings.contains(tr("Hidden/Gui/Settings_dialog_pos")))
+        someSettings.setValue(tr("Hidden/Gui/Settings_dialog_pos"), QPoint(0, 0));
 }
 
 void MainWindow::createActions()

@@ -101,7 +101,7 @@ int main(int argc, char **argv) {
 
     // TODO: here can be saved windows size, pos
 
-    settings.clear();
+//    settings.clear();
 
     return result;
 }
