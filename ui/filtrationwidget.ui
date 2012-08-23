@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Отфильтровать журнал</string>
+   <string>Filter log</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_17">
    <property name="margin">
@@ -41,7 +41,7 @@
      <item row="0" column="0">
       <widget class="QGroupBox" name="filtrationGroupBox">
        <property name="title">
-        <string>Фильтрация</string>
+        <string>Filtration</string>
        </property>
        <layout class="QGridLayout" name="gridLayout_8">
         <property name="horizontalSpacing">
@@ -86,7 +86,7 @@
                </sizepolicy>
               </property>
               <property name="text">
-               <string>Условие:</string>
+               <string>Expression:</string>
               </property>
              </widget>
             </item>

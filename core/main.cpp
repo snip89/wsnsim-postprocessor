@@ -11,6 +11,7 @@
 #include <QSettings>
 #include <QPoint>
 #include <QSize>
+#include <QTranslator>
 
 #include "mainwindow.h"
 #include "ostools.h"
@@ -58,6 +59,12 @@ void setSettings(QSettings &settings)
 
 int main(int argc, char **argv) {
     QApplication a(argc, argv);
+
+    QTranslator translator;
+
+    qDebug() << translator.load("qt_ru");
+
+    a.installTranslator(&translator);
 
     setUpCodec();
     setApplicationInfo();
