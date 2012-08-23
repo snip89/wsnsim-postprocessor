@@ -22,6 +22,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setWindowTitle(prName);
 
+
     createActions();
     createMenus();
     createStatusWidgets();
@@ -36,6 +37,8 @@ MainWindow::MainWindow(QWidget *parent) :
     emptyWidget = new QWidget();
 
     emptySettings = new EmptySettings();
+
+    localizationSettings = new LocalizationSettings();
 
     generalGuiSettings = new GeneralGuiSettings();
     generalGuiSettings->showCurrentSettings();

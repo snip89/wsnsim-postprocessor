@@ -53,8 +53,14 @@ void setSettings(QSettings &settings)
     if(!settings.contains("Defaults/General/Core/Memory_usage"))
         settings.setValue("Defaults/General/Core/Memory_usage", 10);
 
+    if(!settings.contains("Defaults/Localization/GUILanguage"))
+        settings.setValue("Defaults/Localization/GUILanguage", "Ru");
+
     if(!settings.contains("General/Core/Memory_usage"))
         settings.setValue("General/Core/Memory_usage", 10);
+
+    if(!settings.contains("Localization/GUILanguage"))
+        settings.setValue("Localization/GUILanguage", "Ru");
 }
 
 int main(int argc, char **argv) {

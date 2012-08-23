@@ -50,6 +50,7 @@
 #include "filtrationwidget.h"
 #include "loginfo.h"
 #include "gotolinedialog.h"
+#include "localizationsettings.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -136,6 +137,7 @@ private:
     WidgetType previousActiveWidget;
     QWidget *emptyWidget;
     EmptySettings *emptySettings;
+    LocalizationSettings *localizationSettings;
     GeneralGuiSettings *generalGuiSettings;
     GeneralCoreSettings *generalCoreSettings;
     FiltrationWidget *filtrationWidget;
