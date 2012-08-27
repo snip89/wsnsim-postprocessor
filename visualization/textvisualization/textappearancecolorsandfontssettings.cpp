@@ -15,13 +15,13 @@ void TextAppearanceColorsAndFontsSettings::setSettingsName(QString name)
 
 void TextAppearanceColorsAndFontsSettings::showCurrentSettings()
 {
-    ui->previewTextEdit->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    ui->previewTextEdit->setCurrentFont(settings.value(tr("Text visualization/Appearance/Colors and Fonts/Font")).value<QFont>());
     updatePreviewText();
 }
 
 void TextAppearanceColorsAndFontsSettings::applySettings()
 {
-    settings.setValue("Text visualization/Appearance/Colors and Fonts/Font", ui->previewTextEdit->currentFont());
+    settings.setValue(tr("Text visualization/Appearance/Colors and Fonts/Font"), ui->previewTextEdit->currentFont());
 }
 
 QWidget *TextAppearanceColorsAndFontsSettings::getWidget()
@@ -36,29 +36,29 @@ TextAppearanceColorsAndFontsSettings::~TextAppearanceColorsAndFontsSettings()
 void TextAppearanceColorsAndFontsSettings::updatePreviewText()
 {
     ui->previewTextEdit->clear();
-    ui->previewTextEdit->setText("This is font preview text");
+    ui->previewTextEdit->setText(tr("This is font preview text"));
 }
 
 void TextAppearanceColorsAndFontsSettings::showDefaultSettings()
 {
-    ui->previewTextEdit->setCurrentFont(settings.value("Defaults/Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    ui->previewTextEdit->setCurrentFont(settings.value(tr("Defaults/Text visualization/Appearance/Colors and Fonts/Font")).value<QFont>());
     updatePreviewText();
 }
 
 void TextAppearanceColorsAndFontsSettings::buttonClicked(QAbstractButton *button)
 {
-    if(button->text() == "Apply")
+    if(button->text() == tr("Apply"))
     {
         applySettings();
     }
 
-    else if(button->text() == "Restore Defaults")
+    else if(button->text() == tr("Restore Defaults"))
         showDefaultSettings();
 }
 
 void TextAppearanceColorsAndFontsSettings::buttonChangeFontClicked()
 {
-    QFont resultFont = settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>();
+    QFont resultFont = settings.value(tr("Text visualization/Appearance/Colors and Fonts/Font")).value<QFont>();
 
     QFontDialog *fontDialog = new QFontDialog(this);
 

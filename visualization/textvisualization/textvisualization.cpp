@@ -9,7 +9,7 @@
 #include "ui_abstracttextvisualization.h"
 
 TextVisualization::TextVisualization(QWidget *parent) :
-    AbstractTextVisualization("Text visualization", parent)
+    AbstractTextVisualization(tr("Text visualization"), parent)
 {
     setSettings(settings);
 
@@ -19,7 +19,7 @@ TextVisualization::TextVisualization(QWidget *parent) :
 
 IVisualizationSettings *TextVisualization::visualizationSettings(QString name)
 {
-    if(name == "Colors and Fonts")
+    if(name == tr("Colors and Fonts"))
     {
         return (IVisualizationSettings*)colorsAndFontsSettings;
     }
@@ -40,7 +40,7 @@ void TextVisualization::activity(bool status)
 
 void TextVisualization::update(IProject *project, ILog *log)
 {
-    viewer->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    viewer->setCurrentFont(settings.value(tr("Text visualization/Appearance/Colors and Fonts/Font")).value<QFont>());
 
     currentProject = project;
     currentLog = log;
@@ -68,11 +68,11 @@ TextVisualization::~TextVisualization()
 
 void TextVisualization::setSettings(QSettings &someSettings)
 {
-    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Font"))
-        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Font", QFont());
+    if(!someSettings.contains(tr("Defaults/Text visualization/Appearance/Colors and Fonts/Font")))
+        someSettings.setValue(tr("Defaults/Text visualization/Appearance/Colors and Fonts/Font"), QFont());
 
-    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Font"))
-        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Font", QFont());
+    if(!someSettings.contains(tr("Text visualization/Appearance/Colors and Fonts/Font")))
+        someSettings.setValue(tr("Text visualization/Appearance/Colors and Fonts/Font"), QFont());
 }
 
 void TextVisualization::updatePage()

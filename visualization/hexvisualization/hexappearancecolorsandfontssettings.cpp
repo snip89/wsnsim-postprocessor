@@ -17,7 +17,7 @@ void HexAppearanceColorsAndFontsSettings::setSettingsName(QString name)
 
 void HexAppearanceColorsAndFontsSettings::showCurrentSettings()
 {
-    ui->previewTextEdit->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    ui->previewTextEdit->setCurrentFont(settings.value(tr("Hex visualization/Appearance/Colors and Fonts/Font")).value<QFont>());
     updatePreviewText();
 
     updateColorsList();
@@ -25,7 +25,7 @@ void HexAppearanceColorsAndFontsSettings::showCurrentSettings()
 
 void HexAppearanceColorsAndFontsSettings::applySettings()
 {
-    settings.setValue("Hex visualization/Appearance/Colors and Fonts/Font", ui->previewTextEdit->currentFont());
+    settings.setValue(tr("Hex visualization/Appearance/Colors and Fonts/Font"), ui->previewTextEdit->currentFont());
 }
 
 QWidget *HexAppearanceColorsAndFontsSettings::getWidget()

@@ -334,11 +334,11 @@ void FiltrationWidget::addFilter()
 
 void FiltrationWidget::buttonClicked(QAbstractButton *button)
 {
-    if(button->text() == "OK")
+    if(button->text() == tr("OK"))
     {
         execute();
     }
-    else if(button->text() == "Cancel")
+    else if(button->text() == tr("Cancel"))
     {
         emit filtrationCanceled();
     }

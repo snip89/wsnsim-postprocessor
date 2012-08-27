@@ -18,7 +18,7 @@ MainSettings::MainSettings(QWidget *parent) :
     connect(ui->settingsTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
     connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 }
-
+\
 MainSettings::~MainSettings()
 {
     delete settingsFrameWidget;
@@ -33,7 +33,7 @@ void MainSettings::addChildSettings(QSettings &settings, QTreeWidgetItem *parent
 
     foreach(QString group, settings.childGroups())
     {
-        if(group != tr("Defaults") && group != tr("Hidden"))
+        if(group != tr("Defaults") && group != tr("Hidden") && group != "SYSTEM")
         {
             
             if(parent)

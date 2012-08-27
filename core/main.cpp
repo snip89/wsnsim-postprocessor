@@ -13,6 +13,8 @@
 #include <QSize>
 #include <QTranslator>
 #include <QObject>
+#include <QFile>
+#include <QTextStream>
 
 #include "mainwindow.h"
 #include "ostools.h"
@@ -54,28 +56,38 @@ void setSettings(QSettings &settings)
     if(!settings.contains(QObject::tr("Defaults/General/Core/Memory_usage")))
         settings.setValue(QObject::tr("Defaults/General/Core/Memory_usage"), 10);
 
-    if(!settings.contains(QObject::tr("Defaults/Localization/GUILanguage")))
-        settings.setValue(QObject::tr("Defaults/Localization/GUILanguage"), QObject::tr("Ru"));
-
     if(!settings.contains(QObject::tr("General/Core/Memory_usage")))
         settings.setValue(QObject::tr("General/Core/Memory_usage"), 10);
 
-    if(!settings.contains(QObject::tr("Localization/GUILanguage")))
-        settings.setValue(QObject::tr("Localization/GUILanguage"), QObject::tr("Ru"));
+    if(!settings.contains(QObject::tr("Localization/Language/unused")))
+        settings.setValue(QObject::tr("Localization/Language/unused"), "");
 }
 
 int main(int argc, char **argv) {
     QApplication a(argc, argv);
 
-    QTranslator translator;
-
-//    qDebug() << translator.load("qt_ru");
-//    a.installTranslator(&translator);
-
     setUpCodec();
     setApplicationInfo();
 
     QSettings settings;
+
+    if(!settings.contains("SYSTEM/Localization/Language"))
+        settings.setValue("SYSTEM/Localization/Language", "En");
+
+    QString language = settings.value("SYSTEM/Localization/Language").value<QString>();
+
+    QTranslator translator1;
+    QTranslator translator2;
+
+    if(language == "Ru")
+    {   
+        qDebug() << translator1.load("qt_ru");
+        qDebug() << translator2.load("translation");
+
+        a.installTranslator(&translator1);
+        a.installTranslator(&translator2);
+    }
+
     setSettings(settings);
 
     MainWindow w;
