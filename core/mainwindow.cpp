@@ -996,6 +996,29 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
         }
     }
 
+    else if(topLevelName == tr("Localization"))
+    {
+        if(settingName == tr("Localization"))
+        {
+            showEmptySettings(settingName);
+        }
+
+        else if(settingName == tr("Language"))
+        {
+            localizationSettings->setSettingsName(settingName);
+
+            if(!mainSettings->settingsFrameWidget->isAncestorOf(localizationSettings))
+                mainSettings->settingsFrameWidget->addWidget(localizationSettings);
+
+            mainSettings->settingsFrameWidget->setCurrentWidget(localizationSettings);
+        }
+
+        else
+        {
+            showEmptySettings(settingName);
+        }
+    }
+
     else if(topLevelName == tr("Hex visualization"))
     {
         if(settingName == tr("Hex visualization"))
