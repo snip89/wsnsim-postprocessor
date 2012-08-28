@@ -39,6 +39,7 @@ MainWindow::MainWindow(QWidget *parent) :
     emptySettings = new EmptySettings();
 
     localizationSettings = new LocalizationSettings();
+    localizationSettings->showCurrentSettings();
 
     generalGuiSettings = new GeneralGuiSettings();
     generalGuiSettings->showCurrentSettings();
@@ -1077,6 +1078,7 @@ void MainWindow::appliedSettings()
 {
     generalCoreSettings->applySettings();
     generalGuiSettings->applySettings();
+    localizationSettings->applySettings();
 
     IVisualizationSettings *hexVisualizationSettings = hexVisualization->visualizationSettings(tr("Colors and Fonts"));
 
@@ -1104,6 +1106,7 @@ void MainWindow::canceledSettings()
 {
     generalCoreSettings->showCurrentSettings();
     generalGuiSettings->showCurrentSettings();
+    localizationSettings->showCurrentSettings();
 
     IVisualizationSettings *hexVisualizationSettings = hexVisualization->visualizationSettings(tr("Colors and Fonts"));
 

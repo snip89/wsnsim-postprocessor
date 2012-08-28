@@ -11,6 +11,7 @@
 #include <QSettings>
 #include <QAbstractButton>
 #include <QMessageBox>
+#include <QSessionManager>
 
 #include "ui_localizationsettings.h"
 

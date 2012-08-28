@@ -61,6 +61,9 @@ void setSettings(QSettings &settings)
 
     if(!settings.contains(QObject::tr("Localization/Language/unused")))
         settings.setValue(QObject::tr("Localization/Language/unused"), "");
+
+    if(!settings.contains("SYSTEM/Localization/Clear_settings"))
+        settings.setValue("SYSTEM/Localization/Clear_settings", false);
 }
 
 int main(int argc, char **argv) {
@@ -75,6 +78,15 @@ int main(int argc, char **argv) {
         settings.setValue("SYSTEM/Localization/Language", "En");
 
     QString language = settings.value("SYSTEM/Localization/Language").value<QString>();
+
+    if(settings.contains("SYSTEM/Localization/Clear_settings"))
+    {
+        if(settings.value("SYSTEM/Localization/Clear_settings").value<bool>())
+        {
+            settings.clear();
+            settings.setValue("SYSTEM/Localization/Language", language);
+        }
+    }
 
     QTranslator translator1;
     QTranslator translator2;

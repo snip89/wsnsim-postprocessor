@@ -81,6 +81,16 @@
            <height>0</height>
           </size>
          </property>
+         <item>
+          <property name="text">
+           <string>En</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Ru</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item row="0" column="2">
