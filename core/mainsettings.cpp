@@ -12,6 +12,19 @@ MainSettings::MainSettings(QWidget *parent) :
 
     createItems();
 
+    emptySettings = new EmptySettings();
+
+    localizationSettings = new LocalizationSettings();
+    localizationSettings->showCurrentSettings();
+
+    generalGuiSettings = new GeneralGuiSettings();
+    generalGuiSettings->showCurrentSettings();
+
+    generalCoreSettings = new GeneralCoreSettings();
+    generalCoreSettings->showCurrentSettings();
+
+    initConnections();
+
 //    initSettingsTree();
 
     // addChildSettings(settings, 0, "");
@@ -27,34 +40,72 @@ MainSettings::~MainSettings()
 
     delete settingsFrameWidget;
     delete ui;
+
+    delete emptySettings;
+    delete localizationSettings;
+    delete generalCoreSettings;
+    delete generalGuiSettings;
 }
 
 void MainSettings::createItems()
 {
     generalItem = new QTreeWidgetItem(ui->settingsTree);
-    generalItem->setText(0, "General");
-
     generalCoreItem = new QTreeWidgetItem(generalItem);
     generalGuiItem = new QTreeWidgetItem(generalItem);
+
+    generalItem->setText(0, tr("General"));
+    generalCoreItem->setText(0, tr("Core"));
+    generalGuiItem->setText(0, tr("Gui"));
 
     hexVisualizationItem = new QTreeWidgetItem(ui->settingsTree);
     hexVisualizationColorsAndFontsItem = new QTreeWidgetItem(hexVisualizationItem);
 
+    hexVisualizationItem->setText(0, tr("Hex visualization"));
+    hexVisualizationColorsAndFontsItem->setText(0, tr("Colors and Fonts"));
+
     textVisualizationItem = new QTreeWidgetItem(ui->settingsTree);
     textVisualizationColorsAndFontsItem = new QTreeWidgetItem(textVisualizationItem);
+
+    textVisualizationItem->setText(0, tr("Text visualization"));
+    textVisualizationColorsAndFontsItem->setText(0, tr("Colors and Fonts"));
+
+    localizationItem = new QTreeWidgetItem(ui->settingsTree);
+    languageItem = new QTreeWidgetItem(localizationItem);
+
+    localizationItem->setText(0, tr("Localization"));
+    languageItem->setText(0, tr("Language"));
+}
+
+void MainSettings::initConnections()
+{
+    connect(ui->settingsTree, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
+    connect(ui->settingsTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
 }
 
 void MainSettings::deleteItems()
 {
-    delete generalItem;
     delete generalCoreItem;
     delete generalGuiItem;
 
-    delete hexVisualizationItem;
-    delete hexVisualizationColorsAndFontsItem;
+    delete generalItem;
 
-    delete textVisualizationItem;
+    delete hexVisualizationColorsAndFontsItem;
+    delete hexVisualizationItem;
+
     delete textVisualizationColorsAndFontsItem;
+    delete textVisualizationItem;
+
+    delete languageItem;
+    delete localizationItem;
+}
+
+void MainSettings::showEmptySettings(QString name)
+{
+    emptySettings->setSettingsName(name);
+    if(!settingsFrameWidget->isAncestorOf(emptySettings))
+        settingsFrameWidget->addWidget(emptySettings);
+
+    settingsFrameWidget->setCurrentWidget(emptySettings);
 }
 
 /*void MainSettings::addChildSettings(QSettings &settings, QTreeWidgetItem *parent, QString group)
@@ -84,40 +135,60 @@ void MainSettings::deleteItems()
     }
 
     settings.endGroup();
-}
+}*/
 
 void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
 {
-    QSettings settings;
-    QStringList groups = settings.childGroups();
-
-    QTreeWidgetItem *currentItem = item;
-    QTreeWidgetItem *parentItem;
-
-    QString itemText = item->text(column);
-
-    if(groups.contains(itemText))
+    if(item == generalItem)
     {
-        emit settingSelected(itemText, itemText);
-        return;
     }
 
-    while(!groups.contains(itemText))
+    else if(item == generalCoreItem)
     {
-        parentItem = currentItem->parent();
-        itemText = parentItem->text(column);
-        currentItem = parentItem;
+
     }
 
-    emit settingSelected(parentItem->text(column), item->text(column));
+    else if(item == generalGuiItem)
+    {
+
+    }
+
+    else if(item == hexVisualizationItem)
+    {
+
+    }
+
+    else if(item == hexVisualizationColorsAndFontsItem)
+    {
+
+    }
+
+    else if(item == textVisualizationItem)
+    {
+
+    }
+
+    else if(item == textVisualizationColorsAndFontsItem)
+    {
+
+    }
+
+    else if(item == localizationItem)
+    {
+
+    }
+
+    else if(item == languageItem)
+    {
+
+    }
 }
 
-void MainSettings::buttonClicked(QAbstractButton *button)
+/*void MainSettings::buttonClicked(QAbstractButton *button)
 {
     if(button->text() == tr("OK"))
         emit settingsApplied();
 
     else if(button->text() == tr("Cancel"))
         emit settingsCanceled();
-}
-*/
+}*/

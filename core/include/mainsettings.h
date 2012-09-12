@@ -19,6 +19,7 @@
 #include "emptysettings.h"
 #include "generalcoresettings.h"
 #include "generalguisettings.h"
+#include "localizationsettings.h"
 
 namespace Ui {
     class MainSettings;
@@ -37,6 +38,7 @@ public:
 private:
     QSettings settings;
 
+    // tree widgets
     QTreeWidgetItem *generalItem;
     QTreeWidgetItem *generalCoreItem;
     QTreeWidgetItem *generalGuiItem;
@@ -44,11 +46,24 @@ private:
     QTreeWidgetItem *textVisualizationItem;
     QTreeWidgetItem *hexVisualizationColorsAndFontsItem;
     QTreeWidgetItem *textVisualizationColorsAndFontsItem;
+    QTreeWidgetItem *localizationItem;
+    QTreeWidgetItem *languageItem;
+
+    //settings widgets
+    EmptySettings *emptySettings;
+    LocalizationSettings *localizationSettings;
+    GeneralGuiSettings *generalGuiSettings;
+    GeneralCoreSettings *generalCoreSettings;
 
     Ui::MainSettings *ui;
 
     void createItems();
+
+    void initConnections();
+
     void deleteItems();
+
+    void showEmptySettings(QString name);
 
     // QList<QWidget*> widgets;
 
@@ -60,7 +75,7 @@ signals:
     // void settingsCanceled();
 
 private slots:
-    // void activatedItem(QTreeWidgetItem *item, int column);
+    void activatedItem(QTreeWidgetItem *item, int column);
     // void buttonClicked(QAbstractButton *button);
 };
 
