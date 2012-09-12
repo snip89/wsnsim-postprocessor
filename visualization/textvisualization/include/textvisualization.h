@@ -12,11 +12,11 @@
 #include <QFont>
 
 #include "ivisualization.h"
-#include "ivisualizationsettings.h"
+// #include "ivisualizationsettings.h"
 #include "abstracttextvisualization.h"
 #include "records.h"
 #include "staticrecordsreader.h"
-#include "textappearancecolorsandfontssettings.h"
+// #include "textappearancecolorsandfontssettings.h"
 
 class TextVisualization : public IVisualization, protected AbstractTextVisualization
 {
@@ -25,7 +25,7 @@ public:
 
     // interface methods
 
-    /*virtual*/ IVisualizationSettings *visualizationSettings(QString name);
+    // /*virtual*/ IVisualizationSettings *visualizationSettings(QString name);
 
     /*virtual*/ void activity(bool status);
     /*virtual*/ void update(IProject *project, ILog *log);
@@ -35,7 +35,7 @@ public:
     virtual ~TextVisualization();
 
 private:
-    TextAppearanceColorsAndFontsSettings *colorsAndFontsSettings;
+    // TextAppearanceColorsAndFontsSettings *colorsAndFontsSettings;
 
     QSettings settings;
 

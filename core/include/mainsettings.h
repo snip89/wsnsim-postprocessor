@@ -20,6 +20,8 @@
 #include "generalcoresettings.h"
 #include "generalguisettings.h"
 #include "localizationsettings.h"
+#include "hexappearancecolorsandfontssettings.h"
+#include "textappearancecolorsandfontssettings.h"
 
 namespace Ui {
     class MainSettings;
@@ -54,6 +56,8 @@ private:
     LocalizationSettings *localizationSettings;
     GeneralGuiSettings *generalGuiSettings;
     GeneralCoreSettings *generalCoreSettings;
+    HexAppearanceColorsAndFontsSettings *hexColorsAndFontsSettings;
+    TextAppearanceColorsAndFontsSettings *textColorsAndFontsSettings;
 
     Ui::MainSettings *ui;
 

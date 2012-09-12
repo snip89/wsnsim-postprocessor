@@ -23,6 +23,12 @@ MainSettings::MainSettings(QWidget *parent) :
     generalCoreSettings = new GeneralCoreSettings();
     generalCoreSettings->showCurrentSettings();
 
+    hexColorsAndFontsSettings = new HexAppearanceColorsAndFontsSettings();
+    hexColorsAndFontsSettings->showCurrentSettings();
+
+    textColorsAndFontsSettings = new TextAppearanceColorsAndFontsSettings();
+    textColorsAndFontsSettings->showCurrentSettings();
+
     initConnections();
 
 //    initSettingsTree();
@@ -38,13 +44,15 @@ MainSettings::~MainSettings()
 {
     deleteItems();
 
-    delete settingsFrameWidget;
-    delete ui;
-
     delete emptySettings;
     delete localizationSettings;
     delete generalCoreSettings;
     delete generalGuiSettings;
+    delete hexColorsAndFontsSettings;
+    delete textColorsAndFontsSettings;
+
+    delete settingsFrameWidget;
+    delete ui;
 }
 
 void MainSettings::createItems()
@@ -141,41 +149,62 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
 {
     if(item == generalItem)
     {
+        showEmptySettings(tr("General"));
     }
 
     else if(item == generalCoreItem)
     {
+        generalCoreSettings->setSettingsName(tr("Core"));
 
+        if(!settingsFrameWidget->isAncestorOf(generalCoreSettings))
+            settingsFrameWidget->addWidget(generalCoreSettings);
+
+        settingsFrameWidget->setCurrentWidget(generalCoreSettings);
     }
 
     else if(item == generalGuiItem)
     {
+        generalGuiSettings->setSettingsName(tr("Gui"));
 
+        if(!settingsFrameWidget->isAncestorOf(generalGuiSettings))
+            settingsFrameWidget->addWidget(generalGuiSettings);
+
+        settingsFrameWidget->setCurrentWidget(generalGuiSettings);
     }
 
     else if(item == hexVisualizationItem)
     {
-
+        showEmptySettings(tr("Hex visualization"));
     }
 
     else if(item == hexVisualizationColorsAndFontsItem)
     {
+        hexColorsAndFontsSettings->setSettingsName(tr("Colors and Fonts"));
 
+        if(!settingsFrameWidget->isAncestorOf(hexColorsAndFontsSettings))
+            settingsFrameWidget->addWidget(hexColorsAndFontsSettings);
+
+        settingsFrameWidget->setCurrentWidget(hexColorsAndFontsSettings);
     }
 
     else if(item == textVisualizationItem)
     {
-
+        showEmptySettings(tr("Text visualization"));
     }
 
     else if(item == textVisualizationColorsAndFontsItem)
     {
+        textColorsAndFontsSettings->setSettingsName(tr("Colors and Fonts"));
 
+        if(!settingsFrameWidget->isAncestorOf(textColorsAndFontsSettings))
+            settingsFrameWidget->addWidget(textColorsAndFontsSettings);
+
+        settingsFrameWidget->setCurrentWidget(textColorsAndFontsSettings);
     }
 
     else if(item == localizationItem)
     {
-
+        showEmptySettings(tr("Localization"));
     }
 
     else if(item == languageItem)

@@ -13,11 +13,11 @@ TextVisualization::TextVisualization(QWidget *parent) :
 {
     setSettings(settings);
 
-    colorsAndFontsSettings = new TextAppearanceColorsAndFontsSettings();
-    colorsAndFontsSettings->showCurrentSettings();
+    // colorsAndFontsSettings = new TextAppearanceColorsAndFontsSettings();
+    // colorsAndFontsSettings->showCurrentSettings();
 }
 
-IVisualizationSettings *TextVisualization::visualizationSettings(QString name)
+/*IVisualizationSettings *TextVisualization::visualizationSettings(QString name)
 {
     if(name == tr("Colors and Fonts"))
     {
@@ -25,7 +25,7 @@ IVisualizationSettings *TextVisualization::visualizationSettings(QString name)
     }
 
     return NULL;
-}
+}*/
 
 void TextVisualization::activity(bool status)
 {
@@ -63,7 +63,7 @@ void TextVisualization::fromLine(qint64 line)
 
 TextVisualization::~TextVisualization()
 {
-    delete colorsAndFontsSettings;
+    // delete colorsAndFontsSettings;
 }
 
 void TextVisualization::setSettings(QSettings &someSettings)

@@ -15,9 +15,9 @@
 
 #include "ui_abstracttextappearancecolorsandfontssettings.h"
 #include "abstracttextappearancecolorsandfontssettings.h"
-#include "ivisualizationsettings.h"
+// #include "ivisualizationsettings.h"
 
-class TextAppearanceColorsAndFontsSettings : public AbstractTextAppearanceColorsAndFontsSettings, public IVisualizationSettings
+class TextAppearanceColorsAndFontsSettings : public AbstractTextAppearanceColorsAndFontsSettings
 {
     Q_OBJECT
 

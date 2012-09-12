@@ -11,11 +11,11 @@ HexVisualization::HexVisualization(QWidget *parent) :
 {
     setSettings(settings);
 
-    colorsAndFontsSettings = new HexAppearanceColorsAndFontsSettings();
-    colorsAndFontsSettings->showCurrentSettings();
+    // colorsAndFontsSettings = new HexAppearanceColorsAndFontsSettings();
+    // colorsAndFontsSettings->showCurrentSettings();
 }
 
-IVisualizationSettings *HexVisualization::visualizationSettings(QString name)
+/*IVisualizationSettings *HexVisualization::visualizationSettings(QString name)
 {
     if(name == tr("Colors and Fonts"))
     {
@@ -23,7 +23,7 @@ IVisualizationSettings *HexVisualization::visualizationSettings(QString name)
     }
 
     return NULL;
-}
+}*/
 
 void HexVisualization::activity(bool status)
 {
@@ -61,7 +61,7 @@ void HexVisualization::fromLine(qint64 line)
 
 HexVisualization::~HexVisualization()
 {
-    delete colorsAndFontsSettings;
+    // delete colorsAndFontsSettings;
 }
 
 void HexVisualization::setSettings(QSettings &someSettings)
