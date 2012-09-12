@@ -15,6 +15,7 @@
 #include <QList>
 #include <QStackedWidget>
 #include <QAbstractButton>
+#include <QDialog>
 
 #include "emptysettings.h"
 #include "generalcoresettings.h"
@@ -27,7 +28,7 @@ namespace Ui {
     class MainSettings;
 }
 
-class MainSettings : public QWidget
+class MainSettings : public QDialog
 {
     Q_OBJECT
 
@@ -80,7 +81,10 @@ signals:
 
 private slots:
     void activatedItem(QTreeWidgetItem *item, int column);
-    // void buttonClicked(QAbstractButton *button);
+    void buttonClicked(QAbstractButton *button);
+
+    void dialogIsAccepted();
+    void dialogIsRejected();
 };
 
 #endif // MAINSETTINGS_H

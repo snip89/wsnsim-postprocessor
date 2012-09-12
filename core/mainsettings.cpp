@@ -2,7 +2,7 @@
 #include "ui_mainsettings.h"
 
 MainSettings::MainSettings(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::MainSettings)
 {
     ui->setupUi(this);
@@ -88,6 +88,11 @@ void MainSettings::initConnections()
 {
     connect(ui->settingsTree, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
     connect(ui->settingsTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
+
+    connect(this, SIGNAL(accepted()), this, SLOT(dialogIsAccepted()));
+    connect(this, SIGNAL(rejected()), this, SLOT(dialogIsRejected()));
+
+    connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 }
 
 void MainSettings::deleteItems()
@@ -209,15 +214,46 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
 
     else if(item == languageItem)
     {
+        localizationSettings->setSettingsName(tr("Language"));
 
+        if(!settingsFrameWidget->isAncestorOf(localizationSettings))
+            settingsFrameWidget->addWidget(localizationSettings);
+
+        settingsFrameWidget->setCurrentWidget(localizationSettings);
     }
 }
 
-/*void MainSettings::buttonClicked(QAbstractButton *button)
+void MainSettings::dialogIsAccepted()
 {
-    if(button->text() == tr("OK"))
-        emit settingsApplied();
+    localizationSettings->applySettings();
+    generalGuiSettings->applySettings();
+    generalCoreSettings->applySettings();
+    hexColorsAndFontsSettings->applySettings();
+    textColorsAndFontsSettings->applySettings();
 
-    else if(button->text() == tr("Cancel"))
-        emit settingsCanceled();
-}*/
+    settings.setValue(tr("Hidden/Gui/Settings_dialog_pos"), pos());
+}
+
+void MainSettings::dialogIsRejected()
+{
+    localizationSettings->showCurrentSettings();
+    generalGuiSettings->showCurrentSettings();
+    generalCoreSettings->showCurrentSettings();
+    hexColorsAndFontsSettings->showCurrentSettings();
+    textColorsAndFontsSettings->showCurrentSettings();
+
+    settings.setValue(tr("Hidden/Gui/Settings_dialog_pos"), pos());
+}
+
+void MainSettings::buttonClicked(QAbstractButton *button)
+{
+    if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole)
+    {
+        done(QDialog::Accepted);
+    }
+
+    else if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::RejectRole)
+    {
+        done(QDialog::Rejected);
+    }
+}
