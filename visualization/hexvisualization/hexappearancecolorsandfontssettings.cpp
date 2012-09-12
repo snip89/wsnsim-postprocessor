@@ -76,13 +76,15 @@ void HexAppearanceColorsAndFontsSettings::showDefaultSettings()
 
 void HexAppearanceColorsAndFontsSettings::buttonClicked(QAbstractButton *button)
 {
-    if(button->text() == tr("Apply"))
+    if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::ApplyRole)
     {
         applySettings();
     }
 
-    else if(button->text() == tr("Restore Defaults"))
+    else if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::ResetRole)
+    {
         showDefaultSettings();
+    }
 }
 
 void HexAppearanceColorsAndFontsSettings::buttonChangeFontClicked()
