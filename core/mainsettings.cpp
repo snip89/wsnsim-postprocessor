@@ -10,22 +10,54 @@ MainSettings::MainSettings(QWidget *parent) :
     settingsFrameWidget = new QStackedWidget(this);
     ui->settingsFrameLayout->addWidget(settingsFrameWidget);
 
+    createItems();
+
 //    initSettingsTree();
 
-    addChildSettings(settings, 0, "");
+    // addChildSettings(settings, 0, "");
 
-    connect(ui->settingsTree, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
-    connect(ui->settingsTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
-    connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
+    // connect(ui->settingsTree, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
+    // connect(ui->settingsTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
+    // connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 }
-\
+
 MainSettings::~MainSettings()
 {
+    deleteItems();
+
     delete settingsFrameWidget;
     delete ui;
 }
 
-void MainSettings::addChildSettings(QSettings &settings, QTreeWidgetItem *parent, QString group)
+void MainSettings::createItems()
+{
+    generalItem = new QTreeWidgetItem(ui->settingsTree);
+    generalItem->setText(0, "General");
+
+    generalCoreItem = new QTreeWidgetItem(generalItem);
+    generalGuiItem = new QTreeWidgetItem(generalItem);
+
+    hexVisualizationItem = new QTreeWidgetItem(ui->settingsTree);
+    hexVisualizationColorsAndFontsItem = new QTreeWidgetItem(hexVisualizationItem);
+
+    textVisualizationItem = new QTreeWidgetItem(ui->settingsTree);
+    textVisualizationColorsAndFontsItem = new QTreeWidgetItem(textVisualizationItem);
+}
+
+void MainSettings::deleteItems()
+{
+    delete generalItem;
+    delete generalCoreItem;
+    delete generalGuiItem;
+
+    delete hexVisualizationItem;
+    delete hexVisualizationColorsAndFontsItem;
+
+    delete textVisualizationItem;
+    delete textVisualizationColorsAndFontsItem;
+}
+
+/*void MainSettings::addChildSettings(QSettings &settings, QTreeWidgetItem *parent, QString group)
 {
     QTreeWidgetItem *item;
 
@@ -88,3 +120,4 @@ void MainSettings::buttonClicked(QAbstractButton *button)
     else if(button->text() == tr("Cancel"))
         emit settingsCanceled();
 }
+*/

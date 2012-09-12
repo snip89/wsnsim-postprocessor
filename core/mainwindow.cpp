@@ -36,16 +36,16 @@ MainWindow::MainWindow(QWidget *parent) :
 
     emptyWidget = new QWidget();
 
-    emptySettings = new EmptySettings();
+    // emptySettings = new EmptySettings();
 
-    localizationSettings = new LocalizationSettings();
-    localizationSettings->showCurrentSettings();
+    // localizationSettings = new LocalizationSettings();
+    // localizationSettings->showCurrentSettings();
 
-    generalGuiSettings = new GeneralGuiSettings();
-    generalGuiSettings->showCurrentSettings();
+    // generalGuiSettings = new GeneralGuiSettings();
+    // generalGuiSettings->showCurrentSettings();
 
-    generalCoreSettings = new GeneralCoreSettings();
-    generalCoreSettings->showCurrentSettings();
+    // generalCoreSettings = new GeneralCoreSettings();
+    // generalCoreSettings->showCurrentSettings();
 
     filtrationWidget = new FiltrationWidget();
 
@@ -56,9 +56,9 @@ MainWindow::MainWindow(QWidget *parent) :
     textVisualization = new TextVisualization();
 
     mainSettings = new MainSettings();
-    connect(mainSettings, SIGNAL(settingSelected(QString, QString)), this, SLOT(selectedSetting(QString, QString)));
-    connect(mainSettings, SIGNAL(settingsApplied()), this, SLOT(appliedSettings()));
-    connect(mainSettings, SIGNAL(settingsCanceled()), this, SLOT(canceledSettings()));
+    // connect(mainSettings, SIGNAL(settingSelected(QString, QString)), this, SLOT(selectedSetting(QString, QString)));
+    // connect(mainSettings, SIGNAL(settingsApplied()), this, SLOT(appliedSettings()));
+    // connect(mainSettings, SIGNAL(settingsCanceled()), this, SLOT(canceledSettings()));
 
     stackedWidget = new QStackedWidget(this);
     this->setCentralWidget(stackedWidget);
@@ -82,9 +82,9 @@ MainWindow::~MainWindow()
     deleteStatusWidgets();
 
     delete emptyWidget;
-    delete emptySettings;
-    delete generalGuiSettings;
-    delete generalCoreSettings;
+    // delete emptySettings;
+    // delete generalGuiSettings;
+    // delete generalCoreSettings;
     delete filtrationWidget;
     delete hexVisualization;
     delete textVisualization;
@@ -624,14 +624,14 @@ void MainWindow::setFullScreen(bool checked)
     actionFullScreen->setChecked(checked);
 }
 
-void MainWindow::showEmptySettings(QString name)
+/*void MainWindow::showEmptySettings(QString name)
 {
     emptySettings->setSettingsName(name);
     if(!mainSettings->settingsFrameWidget->isAncestorOf(emptySettings))
         mainSettings->settingsFrameWidget->addWidget(emptySettings);
 
     mainSettings->settingsFrameWidget->setCurrentWidget(emptySettings);
-}
+}*/
 
 void MainWindow::setTitle(QString project, QString log)
 {
@@ -962,7 +962,7 @@ void MainWindow::showGoToLineDialog()
     delete goToLineDialog;
 }
 
-void MainWindow::selectedSetting(QString topLevelName, QString settingName)
+/*void MainWindow::selectedSetting(QString topLevelName, QString settingName)
 {
     if(topLevelName == tr("General"))
     {
@@ -1072,9 +1072,9 @@ void MainWindow::selectedSetting(QString topLevelName, QString settingName)
             }
         }
     }
-}
+}*/
 
-void MainWindow::appliedSettings()
+/*void MainWindow::appliedSettings()
 {
     generalCoreSettings->applySettings();
     generalGuiSettings->applySettings();
@@ -1091,18 +1091,9 @@ void MainWindow::appliedSettings()
         textVisualizationSettings->applySettings();
 
     mainSettings->close();
+}*/
 
-/*    if(actionHexVisualization->isChecked())
-        switchToWidget(HEXVISUALIZATION);
-
-    else if(actionTextVisualization->isChecked())
-        switchToWidget(TEXTVISUALIZATION);
-
-    else
-    switchToWidget(EMPTY);*/
-}
-
-void MainWindow::canceledSettings()
+/*void MainWindow::canceledSettings()
 {
     generalCoreSettings->showCurrentSettings();
     generalGuiSettings->showCurrentSettings();
@@ -1118,15 +1109,6 @@ void MainWindow::canceledSettings()
     if(textVisualizationSettings)
         textVisualizationSettings->showCurrentSettings();
 
-/*    if(actionHexVisualization->isChecked())
-        switchToWidget(HEXVISUALIZATION);
-
-    else if(actionTextVisualization->isChecked())
-        switchToWidget(TEXTVISUALIZATION);
-
-    else
-    switchToWidget(EMPTY);*/
-
     settings.setValue(tr("Hidden/Gui/Settings_dialog_pos"), mainSettings->pos());
 
     mainSettings->close();
@@ -1135,7 +1117,7 @@ void MainWindow::canceledSettings()
         updateVisualization(TEXTVISUALIZATION);
     else if(activeWidget == HEXVISUALIZATION)
         updateVisualization(HEXVISUALIZATION);
-}
+}*/
 
 void MainWindow::filteredLog(int id)
 {

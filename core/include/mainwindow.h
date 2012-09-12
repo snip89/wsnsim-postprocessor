@@ -44,13 +44,13 @@
 #include "booleanoperators.h"
 #include "mainsettings.h"
 #include "ostools.h"
-#include "emptysettings.h"
-#include "generalguisettings.h"
-#include "generalcoresettings.h"
+// #include "emptysettings.h"
+// #include "generalguisettings.h"
+// #include "generalcoresettings.h"
 #include "filtrationwidget.h"
 #include "loginfo.h"
 #include "gotolinedialog.h"
-#include "localizationsettings.h"
+// #include "localizationsettings.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -136,10 +136,10 @@ private:
     WidgetType activeWidget;
     WidgetType previousActiveWidget;
     QWidget *emptyWidget;
-    EmptySettings *emptySettings;
-    LocalizationSettings *localizationSettings;
-    GeneralGuiSettings *generalGuiSettings;
-    GeneralCoreSettings *generalCoreSettings;
+    // EmptySettings *emptySettings;
+    // LocalizationSettings *localizationSettings;
+    // GeneralGuiSettings *generalGuiSettings;
+    // GeneralCoreSettings *generalCoreSettings;
     FiltrationWidget *filtrationWidget;
     QStackedWidget *stackedWidget;
     MainSettings *mainSettings;
@@ -180,7 +180,7 @@ private:
 
     void switchToWidget(WidgetType type);
 
-    void showEmptySettings(QString name);
+    // void showEmptySettings(QString name);
 
     void setTitle(QString project, QString log);
 
@@ -202,9 +202,9 @@ private slots:
     void showFiltration();
     void showGoToLineDialog();
 
-    void selectedSetting(QString topLevelName, QString settingName);
-    void appliedSettings();
-    void canceledSettings();
+    // void selectedSetting(QString topLevelName, QString settingName);
+    // void appliedSettings();
+    // void canceledSettings();
 
     void filteredLog(int id);
     void canceledFiltration();

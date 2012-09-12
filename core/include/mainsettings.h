@@ -16,6 +16,10 @@
 #include <QStackedWidget>
 #include <QAbstractButton>
 
+#include "emptysettings.h"
+#include "generalcoresettings.h"
+#include "generalguisettings.h"
+
 namespace Ui {
     class MainSettings;
 }
@@ -33,20 +37,31 @@ public:
 private:
     QSettings settings;
 
+    QTreeWidgetItem *generalItem;
+    QTreeWidgetItem *generalCoreItem;
+    QTreeWidgetItem *generalGuiItem;
+    QTreeWidgetItem *hexVisualizationItem;
+    QTreeWidgetItem *textVisualizationItem;
+    QTreeWidgetItem *hexVisualizationColorsAndFontsItem;
+    QTreeWidgetItem *textVisualizationColorsAndFontsItem;
+
     Ui::MainSettings *ui;
 
-    QList<QWidget*> widgets;
+    void createItems();
+    void deleteItems();
 
-    void addChildSettings(QSettings &settings, QTreeWidgetItem *parent, QString group);
+    // QList<QWidget*> widgets;
+
+    // void addChildSettings(QSettings &settings, QTreeWidgetItem *parent, QString group);
 
 signals:
-    void settingSelected(QString topLevelName, QString settingName);
-    void settingsApplied();
-    void settingsCanceled();
+    // void settingSelected(QString topLevelName, QString settingName);
+    // void settingsApplied();
+    // void settingsCanceled();
 
 private slots:
-    void activatedItem(QTreeWidgetItem *item, int column);
-    void buttonClicked(QAbstractButton *button);
+    // void activatedItem(QTreeWidgetItem *item, int column);
+    // void buttonClicked(QAbstractButton *button);
 };
 
 #endif // MAINSETTINGS_H
