@@ -58,6 +58,12 @@ void setSettings(QSettings &settings)
 
     if(!settings.contains(QObject::tr("General/Core/Memory_usage")))
         settings.setValue(QObject::tr("General/Core/Memory_usage"), 10);
+
+    if(!settings.contains(QObject::tr("Localization/Language")))
+        settings.setValue(QObject::tr("Localization/Language"), QObject::tr("En"));
+
+    if(!settings.contains(QObject::tr("Defaults/Localization/Language")))
+        settings.setValue(QObject::tr("Defaults/Localization/Language"), QObject::tr("En"));
 }
 
 int main(int argc, char **argv) {
@@ -68,33 +74,21 @@ int main(int argc, char **argv) {
 
     QSettings settings;
 
-    /*if(!settings.contains("SYSTEM/Localization/Language"))
-        settings.setValue("SYSTEM/Localization/Language", "En");
+    setSettings(settings);
 
-    QString language = settings.value("SYSTEM/Localization/Language").value<QString>();
+    QString language = settings.value("Localization/Language").value<QString>();
 
-    if(settings.contains("SYSTEM/Localization/Clear_settings"))
-    {
-        if(settings.value("SYSTEM/Localization/Clear_settings").value<bool>())
-        {
-            settings.clear();
-            settings.setValue("SYSTEM/Localization/Language", language);
-        }
-    }
-
-    QTranslator translator1;
-    QTranslator translator2;
+    QTranslator translator_qt;
+    QTranslator translator_postprocessor;
 
     if(language == "Ru")
-    {   
-        qDebug() << translator1.load("qt_ru");
-        qDebug() << translator2.load("translation");
+    {
+        translator_qt.load("qt_ru");
+        translator_postprocessor.load("translation");
 
-        a.installTranslator(&translator1);
-        a.installTranslator(&translator2);
-    }*/
-
-    setSettings(settings);
+        a.installTranslator(&translator_qt);
+        a.installTranslator(&translator_postprocessor);
+    }
 
     MainWindow w;
 

@@ -17,10 +17,10 @@ void LocalizationSettings::setSettingsName(QString name)
 
 void LocalizationSettings::showCurrentSettings()
 {
-    if(settings.value("SYSTEM/Localization/Language").value<QString>() == "En")
+    if(settings.value(tr("Localization/Language")).value<QString>() == tr("En"))
         ui->GUILanguageComboBox->setCurrentIndex(0);
 
-    else if(settings.value("SYSTEM/Localization/Language").value<QString>() == "Ru")
+    else if(settings.value(tr("Localization/Language")).value<QString>() == tr("Ru"))
         ui->GUILanguageComboBox->setCurrentIndex(1);
 }
 
@@ -28,25 +28,12 @@ void LocalizationSettings::applySettings()
 {
     if(ui->GUILanguageComboBox->currentIndex() == 0)
     {
-        if(settings.value("SYSTEM/Localization/Language").value<QString>() != "En")
-        {
-//            settings.clear();
-            settings.setValue("SYSTEM/Localization/Language", "En");
-            settings.setValue("SYSTEM/Localization/Clear_settings", true);
-
-/*            QWidget *wg = this->parentWidget()->parentWidget();
-              wg->close();*/
-        }
+        settings.setValue(tr("Localization/Language"), tr("En"));
     }
 
     else if(ui->GUILanguageComboBox->currentIndex() == 1)
     {
-        if(settings.value("SYSTEM/Localization/Language").value<QString>() != "Ru")
-        {
-//            settings.clear();
-            settings.setValue("SYSTEM/Localization/Language", "Ru");
-            settings.setValue("SYSTEM/Localization/Clear_settings", true);
-        }
+        settings.setValue(tr("Localization/Language"), tr("Ru"));
     }
 }
 
@@ -57,12 +44,12 @@ LocalizationSettings::~LocalizationSettings()
 
 void LocalizationSettings::showDefaultSettings()
 {
-    if(settings.value("SYSTEM/Localization/Language").value<QString>() == "En")
+    if(settings.value("Defaults/Localization/Language").value<QString>() == "En")
     {
         ui->GUILanguageComboBox->setCurrentIndex(0);
     }
 
-    else if(settings.value("SYSTEM/Localization/Language").value<QString>() == "Ru")
+    else if(settings.value("Defaults/Localization/Language").value<QString>() == "Ru")
     {
         ui->GUILanguageComboBox->setCurrentIndex(1);
     }
