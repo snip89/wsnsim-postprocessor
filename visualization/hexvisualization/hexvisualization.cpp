@@ -7,7 +7,7 @@
 #include "ui_abstracttextvisualization.h"
 
 HexVisualization::HexVisualization(QWidget *parent) :
-    AbstractTextVisualization(tr("Hex visualization"), parent)
+    AbstractTextVisualization("Hex visualization", parent)
 {
     setSettings(settings);
 
@@ -38,7 +38,7 @@ void HexVisualization::activity(bool status)
 
 void HexVisualization::update(IProject *project, ILog *log)
 {
-    viewer->setCurrentFont(settings.value(tr("Hex visualization/Appearance/Colors and Fonts/Font")).value<QFont>());
+    viewer->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
 
     currentProject = project;
     currentLog = log;
@@ -66,11 +66,11 @@ HexVisualization::~HexVisualization()
 
 void HexVisualization::setSettings(QSettings &someSettings)
 {
-    if(!someSettings.contains(tr("Defaults/Hex visualization/Appearance/Colors and Fonts/Font")))
-        someSettings.setValue(tr("Defaults/Hex visualization/Appearance/Colors and Fonts/Font"), QFont());
+    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Font"))
+        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Font", QFont());
 
-    if(!someSettings.contains(tr("Hex visualization/Appearance/Colors and Fonts/Font")))
-        someSettings.setValue(tr("Hex visualization/Appearance/Colors and Fonts/Font"), QFont());
+    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Font"))
+        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Font", QFont());
 }
 
 void HexVisualization::updatePage()

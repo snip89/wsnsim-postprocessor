@@ -73,7 +73,7 @@
        <item row="0" column="0">
         <widget class="QLabel" name="recentNumberLabel">
          <property name="text">
-          <string>Recent logs number:</string>
+          <string>Recent projects number:</string>
          </property>
         </widget>
        </item>

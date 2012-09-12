@@ -17,14 +17,14 @@ void GeneralCoreSettings::setSettingsName(QString name)
 
 void GeneralCoreSettings::showCurrentSettings()
 {
-    ui->memoryUsageSpinBox->setValue(settings.value(tr("General/Core/Memory_usage")).toInt());
-    ui->blockSizeSpinBox->setValue(settings.value(tr("General/Core/Block_size")).toInt());
+    ui->memoryUsageSpinBox->setValue(settings.value("General/Core/Memory_usage").toInt());
+    ui->blockSizeSpinBox->setValue(settings.value("General/Core/Block_size").toInt());
 }
 
 void GeneralCoreSettings::applySettings()
 {
-    settings.setValue(tr("General/Core/Memory_usage"), ui->memoryUsageSpinBox->text());
-    settings.setValue(tr("General/Core/Block_size"), ui->blockSizeSpinBox->text());
+    settings.setValue("General/Core/Memory_usage", ui->memoryUsageSpinBox->text());
+    settings.setValue("General/Core/Block_size", ui->blockSizeSpinBox->text());
 }
 
 GeneralCoreSettings::~GeneralCoreSettings()
@@ -34,8 +34,8 @@ GeneralCoreSettings::~GeneralCoreSettings()
 
 void GeneralCoreSettings::showDefaultSettings()
 {
-    ui->memoryUsageSpinBox->setValue(settings.value(tr("Defaults/General/Core/Memory_usage")).toInt());
-    ui->blockSizeSpinBox->setValue(settings.value(tr("Defaults/General/Core/Block_size")).toInt());
+    ui->memoryUsageSpinBox->setValue(settings.value("Defaults/General/Core/Memory_usage").toInt());
+    ui->blockSizeSpinBox->setValue(settings.value("Defaults/General/Core/Block_size").toInt());
 }
 
 void GeneralCoreSettings::buttonClicked(QAbstractButton *button)

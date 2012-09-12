@@ -17,23 +17,31 @@ void LocalizationSettings::setSettingsName(QString name)
 
 void LocalizationSettings::showCurrentSettings()
 {
-    if(settings.value(tr("Localization/Language")).value<QString>() == tr("En"))
-        ui->GUILanguageComboBox->setCurrentIndex(0);
+    qDebug() << "current";
 
-    else if(settings.value(tr("Localization/Language")).value<QString>() == tr("Ru"))
+    if(settings.value("Localization/Language").value<QString>() == "En")
+    {
+        qDebug() << "En";
+        ui->GUILanguageComboBox->setCurrentIndex(0);
+    }
+
+    else if(settings.value("Localization/Language").value<QString>() == "Ru")
+    {
+        qDebug() << "Ru";
         ui->GUILanguageComboBox->setCurrentIndex(1);
+    }
 }
 
 void LocalizationSettings::applySettings()
 {
     if(ui->GUILanguageComboBox->currentIndex() == 0)
     {
-        settings.setValue(tr("Localization/Language"), tr("En"));
+        settings.setValue("Localization/Language", "En");
     }
 
     else if(ui->GUILanguageComboBox->currentIndex() == 1)
     {
-        settings.setValue(tr("Localization/Language"), tr("Ru"));
+        settings.setValue("Localization/Language", "Ru");
     }
 }
 

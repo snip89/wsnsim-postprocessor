@@ -17,12 +17,12 @@ void GeneralGuiSettings::setSettingsName(QString name)
 
 void GeneralGuiSettings::showCurrentSettings()
 {
-    ui->recentNumberSpinBox->setValue(settings.value(tr("General/Gui/Recent_number")).toInt());
+    ui->recentNumberSpinBox->setValue(settings.value("General/Gui/Recent_number").toInt());
 }
 
 void GeneralGuiSettings::applySettings()
 {
-    settings.setValue(tr("General/Gui/Recent_number"), ui->recentNumberSpinBox->text());
+    settings.setValue("General/Gui/Recent_number", ui->recentNumberSpinBox->text());
 }
 
 GeneralGuiSettings::~GeneralGuiSettings()
@@ -31,7 +31,7 @@ GeneralGuiSettings::~GeneralGuiSettings()
 
 void GeneralGuiSettings::showDefaultSettings()
 {
-    ui->recentNumberSpinBox->setValue(settings.value(tr("Defaults/General/Gui/Recent_number")).toInt());
+    ui->recentNumberSpinBox->setValue(settings.value("Defaults/General/Gui/Recent_number").toInt());
 }
 
 void GeneralGuiSettings::buttonClicked(QAbstractButton *button)

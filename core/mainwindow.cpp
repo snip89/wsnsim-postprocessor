@@ -36,17 +36,6 @@ MainWindow::MainWindow(QWidget *parent) :
 
     emptyWidget = new QWidget();
 
-    // emptySettings = new EmptySettings();
-
-    // localizationSettings = new LocalizationSettings();
-    // localizationSettings->showCurrentSettings();
-
-    // generalGuiSettings = new GeneralGuiSettings();
-    // generalGuiSettings->showCurrentSettings();
-
-    // generalCoreSettings = new GeneralCoreSettings();
-    // generalCoreSettings->showCurrentSettings();
-
     filtrationWidget = new FiltrationWidget();
 
     connect(filtrationWidget, SIGNAL(logFiltered(int)), this, SLOT(filteredLog(int)));
@@ -56,17 +45,13 @@ MainWindow::MainWindow(QWidget *parent) :
     textVisualization = new TextVisualization();
 
     mainSettings = new MainSettings();
-    // connect(mainSettings, SIGNAL(settingSelected(QString, QString)), this, SLOT(selectedSetting(QString, QString)));
-    // connect(mainSettings, SIGNAL(settingsApplied()), this, SLOT(appliedSettings()));
-    // connect(mainSettings, SIGNAL(settingsCanceled()), this, SLOT(canceledSettings()));
 
     stackedWidget = new QStackedWidget(this);
     this->setCentralWidget(stackedWidget);
     stackedWidget->addWidget(emptyWidget);
-//    stackedWidget->addWidget(mainSettings);
+
     stackedWidget->addWidget(hexVisualization->getWidget());
     stackedWidget->addWidget(textVisualization->getWidget());
-//    stackedWidget->addWidget(filtrationWidget);
 
     stackedWidget->setCurrentWidget(emptyWidget);
     activeWidget = EMPTY;
@@ -82,9 +67,6 @@ MainWindow::~MainWindow()
     deleteStatusWidgets();
 
     delete emptyWidget;
-    // delete emptySettings;
-    // delete generalGuiSettings;
-    // delete generalCoreSettings;
     delete filtrationWidget;
     delete hexVisualization;
     delete textVisualization;
@@ -96,77 +78,77 @@ MainWindow::~MainWindow()
 
 void MainWindow::setSettings(QSettings &someSettings)
 {
-    if(!someSettings.contains(tr("Defaults/General/Gui/Recent_number")))
-        someSettings.setValue(tr("Defaults/General/Gui/Recent_number"), DEFAULT_RECENT_NUMBER);
+    if(!someSettings.contains("Defaults/General/Gui/Recent_number"))
+        someSettings.setValue("Defaults/General/Gui/Recent_number", DEFAULT_RECENT_NUMBER);
 
-    if(!someSettings.contains(tr("General/Gui/Recent_number")))
-        someSettings.setValue(tr("General/Gui/Recent_number"), DEFAULT_RECENT_NUMBER);
+    if(!someSettings.contains("General/Gui/Recent_number"))
+        someSettings.setValue("General/Gui/Recent_number", DEFAULT_RECENT_NUMBER);
 
-    if(!someSettings.contains(tr("Defaults/General/Gui/File_dialog_path")))
-        someSettings.setValue(tr("Defaults/General/Gui/File_dialog_path"), QDir::homePath());
+    if(!someSettings.contains("Defaults/General/Gui/File_dialog_path"))
+        someSettings.setValue("Defaults/General/Gui/File_dialog_path", QDir::homePath());
 
-    if(!someSettings.contains(tr("General/Gui/File_dialog_path")))
-        someSettings.setValue(tr("General/Gui/File_dialog_path"), QDir::homePath());
+    if(!someSettings.contains("General/Gui/File_dialog_path"))
+        someSettings.setValue("General/Gui/File_dialog_path", QDir::homePath());
 
-    if(!someSettings.contains(tr("Defaults/General/Gui/Recent")))
+    if(!someSettings.contains("Defaults/General/Gui/Recent"))
     {
         QStringList emptyRecent;
         for(int i = 0; i < DEFAULT_RECENT_NUMBER; i ++)
             emptyRecent.append(" ");
 
-        someSettings.setValue(tr("Defaults/General/Gui/Recent"), emptyRecent);
+        someSettings.setValue("Defaults/General/Gui/Recent", emptyRecent);
     }
 
-    if(!someSettings.contains(tr("General/Gui/Recent")))
+    if(!someSettings.contains("General/Gui/Recent"))
     {
         QStringList emptyRecent;
         for(int i = 0; i < DEFAULT_RECENT_NUMBER; i ++)
             emptyRecent.append(" ");
 
-        someSettings.setValue(tr("General/Gui/Recent"), emptyRecent);
+        someSettings.setValue("General/Gui/Recent", emptyRecent);
     }
 
-    if(!someSettings.contains(tr("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color")))
-        someSettings.setValue(tr("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"), QColor(Qt::yellow).lighter(160));
+    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 
-    if(!someSettings.contains(tr("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color")))
-        someSettings.setValue(tr("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"), QColor(Qt::yellow).lighter(160));
+    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 
-    if(!someSettings.contains(tr("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color")))
-        someSettings.setValue(tr("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color"), QColor(Qt::yellow).lighter(160));
+    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 
-    if(!someSettings.contains(tr("Defaults/General/Gui/Default_visualization")))
-        someSettings.setValue(tr("Defaults/General/Gui/Default_visualization"), tr("hex"));
+    if(!someSettings.contains("Defaults/General/Gui/Default_visualization"))
+        someSettings.setValue("Defaults/General/Gui/Default_visualization", "hex");
 
-    if(!someSettings.contains(tr("General/Gui/Default_visualization")))
-        someSettings.setValue(tr("General/Gui/Default_visualization"), tr("hex"));
+    if(!someSettings.contains("General/Gui/Default_visualization"))
+        someSettings.setValue("General/Gui/Default_visualization", "hex");
 
-    if(!someSettings.contains(tr("Text visualization/Appearance/Colors and Fonts/Cursor_line_color")))
-        someSettings.setValue(tr("Text visualization/Appearance/Colors and Fonts/Cursor_line_color"), QColor(Qt::yellow).lighter(160));
+    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
 
-    if(!someSettings.contains(tr("Hidden/Gui/File_dialog_pos")))
-        someSettings.setValue(tr("Hidden/Gui/File_dialog_pos"), QPoint(0, 0));
+    if(!someSettings.contains("Hidden/Gui/File_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/File_dialog_pos", QPoint(0, 0));
 
-    if(!someSettings.contains(tr("Hidden/Gui/File_dialog_size")))
-        someSettings.setValue(tr("Hidden/Gui/File_dialog_size"), QSize(320, 240));
+    if(!someSettings.contains("Hidden/Gui/File_dialog_size"))
+        someSettings.setValue("Hidden/Gui/File_dialog_size", QSize(320, 240));
 
-    if(!someSettings.contains(tr("Hidden/Gui/Log_dialog_pos")))
-        someSettings.setValue(tr("Hidden/Gui/Log_dialog_pos"), QPoint(0, 0));
+    if(!someSettings.contains("Hidden/Gui/Log_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Log_dialog_pos", QPoint(0, 0));
 
-    if(!someSettings.contains(tr("Hidden/Gui/Log_dialog_size")))
-        someSettings.setValue(tr("Hidden/Gui/Log_dialog_size"), QSize(320, 240));
+    if(!someSettings.contains("Hidden/Gui/Log_dialog_size"))
+        someSettings.setValue("Hidden/Gui/Log_dialog_size", QSize(320, 240));
 
-    if(!someSettings.contains(tr("Hidden/Gui/Line_dialog_pos")))
-        someSettings.setValue(tr("Hidden/Gui/Line_dialog_pos"), QPoint(0, 0));
+    if(!someSettings.contains("Hidden/Gui/Line_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Line_dialog_pos", QPoint(0, 0));
 
-    if(!someSettings.contains(tr("Hidden/Gui/Line_dialog_size")))
-        someSettings.setValue(tr("Hidden/Gui/Line_dialog_size"), QSize(184, 84));
+    if(!someSettings.contains("Hidden/Gui/Line_dialog_size"))
+        someSettings.setValue("Hidden/Gui/Line_dialog_size", QSize(184, 84));
 
-    if(!someSettings.contains(tr("Hidden/Gui/Filter_dialog_pos")))
-        someSettings.setValue(tr("Hidden/Gui/Filter_dialog_pos"), QPoint(0, 0));
+    if(!someSettings.contains("Hidden/Gui/Filter_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Filter_dialog_pos", QPoint(0, 0));
 
-    if(!someSettings.contains(tr("Hidden/Gui/Settings_dialog_pos")))
-        someSettings.setValue(tr("Hidden/Gui/Settings_dialog_pos"), QPoint(0, 0));
+    if(!someSettings.contains("Hidden/Gui/Settings_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Settings_dialog_pos", QPoint(0, 0));
 }
 
 void MainWindow::createActions()
@@ -187,10 +169,6 @@ void MainWindow::createActions()
     actionPrint = new QAction(tr("&Print..."), this);
     actionPrint->setShortcut(QKeySequence::Print);
     actionPrint->setEnabled(false);
-
-    // actionLogSelect = new QAction(tr("&Select log..."), this);
-    // actionLogSelect->setEnabled(false);
-    // connect(actionLogSelect, SIGNAL(triggered()), this, SLOT(openLog()));
 
     actionExit = new QAction(tr("&Exit"), this);
     actionExit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
@@ -257,7 +235,6 @@ void MainWindow::createActions()
 
 void MainWindow::createMenus()
 {
-//    menuFile = new QMenu(tr("&Файл"), this);
     menuFile = new QMenu(tr("&File"), this);
     menuFile->addAction(actionOpen);
     menuFile->addAction(actionOpenLog);
@@ -336,7 +313,6 @@ void MainWindow::deleteActions()
 
     removeActionsRecent();
 
-    // delete actionLogSelect;
     delete actionPrint;
     delete actionClose;
     delete actionExit;
@@ -377,13 +353,13 @@ void MainWindow::deleteStatusWidgets()
 void MainWindow::insertActionsRecent()
 {
     actionsRecent = new QActionGroup(this);
-    QStringList recentFilesNames = settings.value(tr("General/Gui/Recent")).toStringList();
+    QStringList recentFilesNames = settings.value("General/Gui/Recent").toStringList();
     for(int i = 0; i < recentFilesNames.size(); i ++)
     {
         if(recentFilesNames[i] != " ")
         {
             QString recentFileName = QFileInfo(recentFilesNames[i]).fileName();
-            QAction *action = new QAction(tr(("&" + QString::number(i + 1) + " " + recentFileName).toAscii().data()), this);
+            QAction *action = new QAction(("&" + QString::number(i + 1) + " " + recentFileName.toAscii().data()), this);
             action->setData(recentFilesNames[i]);
             actionsRecent->addAction(action);
             connect(actionsRecent->actions()[i], SIGNAL(triggered()), this, SLOT(openRecentProject()));
@@ -460,11 +436,11 @@ void MainWindow::closeLog()
 
 void MainWindow::insertToRecent(QString fileName)
 {
-    int recentNumber = settings.value(tr("General/Gui/Recent_number")).toInt();
+    int recentNumber = settings.value("General/Gui/Recent_number").toInt();
 
     bool repeated = false;
     bool inserted = false;
-    QStringList recentNames = settings.value(tr("General/Gui/Recent")).toStringList();
+    QStringList recentNames = settings.value("General/Gui/Recent").toStringList();
     for(int i = 0; i < recentNumber; i ++)
     {
         if(recentNames[i] == " ")
@@ -493,7 +469,7 @@ void MainWindow::insertToRecent(QString fileName)
         }
     }
 
-    settings.setValue(tr("General/Gui/Recent"), recentNames);
+    settings.setValue("General/Gui/Recent", recentNames);
 }
 
 void MainWindow::switchToWidget(WidgetType type)
@@ -624,15 +600,6 @@ void MainWindow::setFullScreen(bool checked)
     actionFullScreen->setChecked(checked);
 }
 
-/*void MainWindow::showEmptySettings(QString name)
-{
-    emptySettings->setSettingsName(name);
-    if(!mainSettings->settingsFrameWidget->isAncestorOf(emptySettings))
-        mainSettings->settingsFrameWidget->addWidget(emptySettings);
-
-    mainSettings->settingsFrameWidget->setCurrentWidget(emptySettings);
-}*/
-
 void MainWindow::setTitle(QString project, QString log)
 {
     if(project != QString::null)
@@ -653,22 +620,19 @@ void MainWindow::openProject(QString name)
 {
     if(name == QString::null)
     {
-        QString dirPath = settings.value(tr("General/Gui/File_dialog_path")).toString();
+        QString dirPath = settings.value("General/Gui/File_dialog_path").toString();
 
         QFileDialog *fileDialog = new QFileDialog(this, tr("Open project file"), dirPath, tr("XML project files (*xml)"));
-        fileDialog->move(settings.value(tr("Hidden/Gui/File_dialog_pos")).value<QPoint>());
-        fileDialog->resize(settings.value(tr("Hidden/Gui/File_dialog_size")).value<QSize>());
+        fileDialog->move(settings.value("Hidden/Gui/File_dialog_pos").value<QPoint>());
+        fileDialog->resize(settings.value("Hidden/Gui/File_dialog_size").value<QSize>());
         
         if(fileDialog->exec())
             name = fileDialog->selectedFiles().at(0);
 
-        settings.setValue(tr("Hidden/Gui/File_dialog_pos"), fileDialog->pos());
-        settings.setValue(tr("Hidden/Gui/File_dialog_size"), fileDialog->size());
+        settings.setValue("Hidden/Gui/File_dialog_pos", fileDialog->pos());
+        settings.setValue("Hidden/Gui/File_dialog_size", fileDialog->size());
 
         delete fileDialog;
-
-//        name = fileDialog.getOpenFileName(this, tr("Open project file"), dirPath, tr("XML project files (*xml)"));
-//        name = QFileDialog::getOpenFileName(this, tr("Open project file"), dirPath, tr("XML project files (*xml)"));
 
         if(name == "")
             return;
@@ -678,7 +642,7 @@ void MainWindow::openProject(QString name)
 
         dirPath = dir.filePath(name);
         dirPath.chop(finfo.fileName().size());
-        settings.setValue(tr("General/Gui/File_dialog_path"), dirPath);
+        settings.setValue("General/Gui/File_dialog_path", dirPath);
 
         if(isProjectOpened)
             closeProject();
@@ -732,14 +696,14 @@ void MainWindow::openProject(QString name)
         int selectedLogId = -1;
 
         LogSelectDialog *logSelectDialog = new LogSelectDialog(this, project);
-        logSelectDialog->move(settings.value(tr("Hidden/Gui/Log_dialog_pos")).value<QPoint>());
-        logSelectDialog->resize(settings.value(tr("Hidden/Gui/Log_dialog_size")).value<QSize>());
+        logSelectDialog->move(settings.value("Hidden/Gui/Log_dialog_pos").value<QPoint>());
+        logSelectDialog->resize(settings.value("Hidden/Gui/Log_dialog_size").value<QSize>());
 
         if(logSelectDialog->exec())
             selectedLogId = logSelectDialog->logId();
 
-        settings.setValue(tr("Hidden/Gui/Log_dialog_pos"), logSelectDialog->pos());
-        settings.setValue(tr("Hidden/Gui/Log_dialog_size"), logSelectDialog->size());
+        settings.setValue("Hidden/Gui/Log_dialog_pos", logSelectDialog->pos());
+        settings.setValue("Hidden/Gui/Log_dialog_size", logSelectDialog->size());
 
         delete logSelectDialog;
 
@@ -760,9 +724,9 @@ void MainWindow::closeProject()
     if(isProjectOpened)
     {
         if(activeWidget == HEXVISUALIZATION)
-            settings.setValue(tr("General/Gui/Default_visualization"), tr("hex"));
+            settings.setValue("General/Gui/Default_visualization", "hex");
         else if(activeWidget == TEXTVISUALIZATION)
-            settings.setValue(tr("General/Gui/Default_visualization"), tr("text"));
+            settings.setValue("General/Gui/Default_visualization", "text");
 
         actionClose->setEnabled(false);
 
@@ -788,14 +752,14 @@ void MainWindow::openLog(QString name)
         int selectedLogId = -1;
 
         LogSelectDialog *logSelectDialog = new LogSelectDialog(this, project);
-        logSelectDialog->move(settings.value(tr("Hidden/Gui/Log_dialog_pos")).value<QPoint>());
-        logSelectDialog->resize(settings.value(tr("Hidden/Gui/Log_dialog_size")).value<QSize>());
+        logSelectDialog->move(settings.value("Hidden/Gui/Log_dialog_pos").value<QPoint>());
+        logSelectDialog->resize(settings.value("Hidden/Gui/Log_dialog_size").value<QSize>());
 
         if(logSelectDialog->exec())
             selectedLogId = logSelectDialog->logId();
 
-        settings.setValue(tr("Hidden/Gui/Log_dialog_pos"), logSelectDialog->pos());
-        settings.setValue(tr("Hidden/Gui/Log_dialog_size"), logSelectDialog->size());
+        settings.setValue("Hidden/Gui/Log_dialog_pos", logSelectDialog->pos());
+        settings.setValue("Hidden/Gui/Log_dialog_size", logSelectDialog->size());
 
         delete logSelectDialog;
 
@@ -817,12 +781,10 @@ void MainWindow::openLog(QString name)
     int eventsInfoSize = 0;
     info = project->info(eventsInfoSize);
 
-    qint64 blockSize = settings.value(tr("General/Core/Block_size")).toLongLong();
+    qint64 blockSize = settings.value("General/Core/Block_size").toLongLong();
 
-    int memoryUsagePercent = settings.value(tr("General/Core/Memory_usage")).toInt();
+    int memoryUsagePercent = settings.value("General/Core/Memory_usage").toInt();
     qint64 memoryUsage = OSTools::getTotalSystemMemory() * memoryUsagePercent / 100;
-
-//    logs = new QList<Log*>();
 
     currentLogId = 0;
 
@@ -849,19 +811,9 @@ void MainWindow::openLog(QString name)
 
     updateActionsCurrentLogMenu();
 
-    // logs->append(new Log(name, blockSize, memoryUsage, info, false));
-    // if(!logs->at(logs->size() - 1)->load(true, false))
-    // {
-    //     errorMessager.showMessage(errorString);
-    //     closeLog();
-    //     return;
-    // }
-
     logs->at(currentLogId).log->toggleActivity(true);
 
     setTitle(project->projectName(), logs->at(currentLogId).fileName);
-
-//    logs->at(logs->size() - 1)->toggleActivity(true);
 
     isLogOpened = true;
 
@@ -872,12 +824,10 @@ void MainWindow::openLog(QString name)
     actionTextVisualization->setEnabled(true);
 
     actionFiltration->setEnabled(true);
-
-//    showHexVisualization(true);
     
-    if(settings.value(tr("General/Gui/Default_visualization")).value<QString>() == tr("hex"))
+    if(settings.value("General/Gui/Default_visualization").value<QString>() == "hex")
         actionHexVisualization->toggle();
-    else if(settings.value(tr("General/Gui/Default_visualization")).value<QString>() == tr("text"))
+    else if(settings.value("General/Gui/Default_visualization").value<QString>() == "text")
         actionTextVisualization->toggle();
 }
 
@@ -888,7 +838,7 @@ void MainWindow::showSettings()
     mainSettings->setWindowModality(Qt::ApplicationModal);
 
 //    mainSettings->setPos(Hidden/Gui/Settings_dialog_pos
-    mainSettings->move(settings.value(tr("Hidden/Gui/Settings_dialog_pos")).value<QPoint>());
+    mainSettings->move(settings.value("Hidden/Gui/Settings_dialog_pos").value<QPoint>());
 
     mainSettings->show();
 }
@@ -930,15 +880,15 @@ void MainWindow::showFiltration()
 //    filtrationWidget->show();
     filtrationWidget->setWindowFlags(Qt::Dialog);
     filtrationWidget->setWindowModality(Qt::ApplicationModal);
-    filtrationWidget->move(settings.value(tr("Hidden/Gui/Filtration_dialog_pos")).value<QPoint>());
+    filtrationWidget->move(settings.value("Hidden/Gui/Filtration_dialog_pos").value<QPoint>());
     filtrationWidget->show();
 }
 
 void MainWindow::showGoToLineDialog()
 {
     GoToLineDialog *goToLineDialog = new GoToLineDialog();
-    goToLineDialog->move(settings.value(tr("Hidden/Gui/Line_dialog_pos")).value<QPoint>());
-    goToLineDialog->resize(settings.value(tr("Hidden/Gui/Line_dialog_size")).value<QSize>());
+    goToLineDialog->move(settings.value("Hidden/Gui/Line_dialog_pos").value<QPoint>());
+    goToLineDialog->resize(settings.value("Hidden/Gui/Line_dialog_size").value<QSize>());
 
     if(goToLineDialog->exec())
     {
@@ -956,174 +906,14 @@ void MainWindow::showGoToLineDialog()
         }
     }
 
-    settings.setValue(tr("Hidden/Gui/Line_dialog_pos"), goToLineDialog->pos());
-    settings.setValue(tr("Hidden/Gui/Line_dialog_size"), goToLineDialog->size());
+    settings.setValue("Hidden/Gui/Line_dialog_pos", goToLineDialog->pos());
+    settings.setValue("Hidden/Gui/Line_dialog_size", goToLineDialog->size());
 
     delete goToLineDialog;
 }
 
-/*void MainWindow::selectedSetting(QString topLevelName, QString settingName)
-{
-    if(topLevelName == tr("General"))
-    {
-        if(settingName == tr("General"))
-        {
-            showEmptySettings(settingName);
-        }
-
-        else if(settingName == tr("Gui"))
-        {
-            generalGuiSettings->setSettingsName(settingName);
-
-            if(!mainSettings->settingsFrameWidget->isAncestorOf(generalGuiSettings))
-                mainSettings->settingsFrameWidget->addWidget(generalGuiSettings);
-
-            mainSettings->settingsFrameWidget->setCurrentWidget(generalGuiSettings);
-        }
-
-        else if(settingName == tr("Core"))
-        {
-            generalCoreSettings->setSettingsName(settingName);
-
-            if(!mainSettings->settingsFrameWidget->isAncestorOf(generalCoreSettings))
-                mainSettings->settingsFrameWidget->addWidget(generalCoreSettings);
-
-            mainSettings->settingsFrameWidget->setCurrentWidget(generalCoreSettings);
-        }
-
-        else
-        {
-            showEmptySettings(settingName);
-        }
-    }
-
-    else if(topLevelName == tr("Localization"))
-    {
-        if(settingName == tr("Localization"))
-        {
-            showEmptySettings(settingName);
-        }
-
-        else if(settingName == tr("Language"))
-        {
-            localizationSettings->setSettingsName(settingName);
-
-            if(!mainSettings->settingsFrameWidget->isAncestorOf(localizationSettings))
-                mainSettings->settingsFrameWidget->addWidget(localizationSettings);
-
-            mainSettings->settingsFrameWidget->setCurrentWidget(localizationSettings);
-        }
-
-        else
-        {
-            showEmptySettings(settingName);
-        }
-    }
-
-    else if(topLevelName == tr("Hex visualization"))
-    {
-        if(settingName == tr("Hex visualization"))
-            showEmptySettings(tr("Hex visualization"));
-
-        else
-        {
-            IVisualizationSettings *visualizationSettings = hexVisualization->visualizationSettings(settingName);
-
-            if(!visualizationSettings)
-                showEmptySettings(settingName);
-
-            else
-            {
-                QWidget *widget = visualizationSettings->getWidget();
-
-                visualizationSettings->setSettingsName(settingName);
-
-                if(!mainSettings->settingsFrameWidget->isAncestorOf(widget))
-                    mainSettings->settingsFrameWidget->addWidget(widget);
-                
-                mainSettings->settingsFrameWidget->setCurrentWidget(widget);
-            }
-        }
-    }
-
-    else if(topLevelName == "Text visualization")
-    {
-        if(settingName == "Text visualization")
-            showEmptySettings(tr("Text visualization"));
-
-        else
-        {
-            IVisualizationSettings *visualizationSettings = textVisualization->visualizationSettings(settingName);
-
-
-            if(!visualizationSettings)
-                showEmptySettings(settingName);
-
-            else
-            {
-                QWidget *widget = visualizationSettings->getWidget();
-
-                visualizationSettings->setSettingsName(settingName);
-
-                if(!mainSettings->settingsFrameWidget->isAncestorOf(widget))
-                    mainSettings->settingsFrameWidget->addWidget(widget);
-                
-                mainSettings->settingsFrameWidget->setCurrentWidget(widget);
-            }
-        }
-    }
-}*/
-
-/*void MainWindow::appliedSettings()
-{
-    generalCoreSettings->applySettings();
-    generalGuiSettings->applySettings();
-    localizationSettings->applySettings();
-
-    IVisualizationSettings *hexVisualizationSettings = hexVisualization->visualizationSettings(tr("Colors and Fonts"));
-
-    if(hexVisualizationSettings)
-        hexVisualizationSettings->applySettings();
-
-    IVisualizationSettings *textVisualizationSettings = textVisualization->visualizationSettings(tr("Colors and Fonts"));
-
-    if(textVisualizationSettings)
-        textVisualizationSettings->applySettings();
-
-    mainSettings->close();
-}*/
-
-/*void MainWindow::canceledSettings()
-{
-    generalCoreSettings->showCurrentSettings();
-    generalGuiSettings->showCurrentSettings();
-    localizationSettings->showCurrentSettings();
-
-    IVisualizationSettings *hexVisualizationSettings = hexVisualization->visualizationSettings(tr("Colors and Fonts"));
-
-    if(hexVisualizationSettings)
-        hexVisualizationSettings->showCurrentSettings();
-
-    IVisualizationSettings *textVisualizationSettings = textVisualization->visualizationSettings(tr("Colors and Fonts"));
-
-    if(textVisualizationSettings)
-        textVisualizationSettings->showCurrentSettings();
-
-    settings.setValue(tr("Hidden/Gui/Settings_dialog_pos"), mainSettings->pos());
-
-    mainSettings->close();
-
-    if(activeWidget == TEXTVISUALIZATION)
-        updateVisualization(TEXTVISUALIZATION);
-    else if(activeWidget == HEXVISUALIZATION)
-        updateVisualization(HEXVISUALIZATION);
-}*/
-
 void MainWindow::filteredLog(int id)
 {
-//    logs->at(logs->size() - 1)->toggleActivity(false);
-
-//    logs->append(newLog);
     currentLogId = id;
     updateActionsCurrentLogMenu();
 
@@ -1134,35 +924,14 @@ void MainWindow::filteredLog(int id)
     else if(activeWidget == HEXVISUALIZATION)
         updateVisualization(HEXVISUALIZATION);
 
-//    qDebug() << logs->at(currentLogId).fileName;
-
     setTitle(project->projectName(), logs->at(currentLogId).fileName);
-
-//    logs->at(logs->size() - 1)->toggleActivity(true);
-
-/*    if(actionHexVisualization->isChecked())
-        switchToWidget(HEXVISUALIZATION);
-
-    else if(actionTextVisualization->isChecked())
-        switchToWidget(TEXTVISUALIZATION);
-
-    else
-    switchToWidget(EMPTY);*/
 }
 
 void MainWindow::canceledFiltration()
 {
-    settings.setValue(tr("Hidden/Gui/Filtration_dialog_pos"), filtrationWidget->pos());
+    settings.setValue("Hidden/Gui/Filtration_dialog_pos", filtrationWidget->pos());
 
     filtrationWidget->close();
-//    if(actionHexVisualization->isChecked())
-//        switchToWidget(HEXVISUALIZATION);
-
-//    else if(actionTextVisualization->isChecked())
-//        switchToWidget(TEXTVISUALIZATION);
-
-//    else
-//        switchToWidget(EMPTY);
 }
 
 void MainWindow::toggleFullScreen(bool checked)

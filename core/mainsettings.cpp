@@ -231,7 +231,7 @@ void MainSettings::dialogIsAccepted()
     hexColorsAndFontsSettings->applySettings();
     textColorsAndFontsSettings->applySettings();
 
-    settings.setValue(tr("Hidden/Gui/Settings_dialog_pos"), pos());
+    settings.setValue("Hidden/Gui/Settings_dialog_pos", pos());
 }
 
 void MainSettings::dialogIsRejected()
@@ -242,7 +242,7 @@ void MainSettings::dialogIsRejected()
     hexColorsAndFontsSettings->showCurrentSettings();
     textColorsAndFontsSettings->showCurrentSettings();
 
-    settings.setValue(tr("Hidden/Gui/Settings_dialog_pos"), pos());
+    settings.setValue("Hidden/Gui/Settings_dialog_pos", pos());
 }
 
 void MainSettings::buttonClicked(QAbstractButton *button)

@@ -32,14 +32,14 @@ bool Log::load(bool generateIndex, bool createNew)
     {
         if(!file->exists())
         {
-            errorMessager.showMessage(QObject::tr("Log file not found"));
+            errorMessager.showMessage("Log file not found");
             return false;
         }
     }
 
     if(!file->open(QFile::ReadWrite))
     {
-        errorMessager.showMessage(QObject::tr("Can't open log file"));
+        errorMessager.showMessage("Can't open log file");
         return false;
     }
 
