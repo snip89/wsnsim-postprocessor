@@ -17,17 +17,13 @@ void LocalizationSettings::setSettingsName(QString name)
 
 void LocalizationSettings::showCurrentSettings()
 {
-    qDebug() << "current";
-
     if(settings.value("Localization/Language").value<QString>() == "En")
     {
-        qDebug() << "En";
         ui->GUILanguageComboBox->setCurrentIndex(0);
     }
 
     else if(settings.value("Localization/Language").value<QString>() == "Ru")
     {
-        qDebug() << "Ru";
         ui->GUILanguageComboBox->setCurrentIndex(1);
     }
 }

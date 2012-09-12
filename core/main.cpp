@@ -60,10 +60,10 @@ void setSettings(QSettings &settings)
         settings.setValue("General/Core/Memory_usage", 10);
 
     if(!settings.contains("Localization/Language"))
-        settings.setValue("Localization/Language", QObject::tr("En"));
+        settings.setValue("Localization/Language", "En");
 
     if(!settings.contains("Defaults/Localization/Language"))
-        settings.setValue("Defaults/Localization/Language", QObject::tr("En"));
+        settings.setValue("Defaults/Localization/Language", "En");
 }
 
 int main(int argc, char **argv) {

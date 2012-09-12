@@ -10,7 +10,7 @@ Viewer::Viewer(QString group, QWidget *parent)
 //    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
     QSettings settings;
-    lineColor = settings.value(group + tr("/Appearance/Colors and Fonts/Cursor_line_color")).value<QColor>();
+    lineColor = settings.value(group + "/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>();
 
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 }
