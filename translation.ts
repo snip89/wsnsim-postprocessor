@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0" language="ru_RU" sourcelanguage="en_GB">
+<TS version="2.0">
 <context>
     <name>AbstractTextAppearanceColorsAndFontsSettings</name>
     <message>
@@ -148,17 +148,17 @@
     <message>
         <location filename="ui/generalcoresettings.ui" line="90"/>
         <source>Memory usage (percents):</source>
-        <translation type="unfinished">Расход памяти (в процентах):</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="ui/generalcoresettings.ui" line="191"/>
         <source>Block size (records):</source>
-        <translation type="unfinished">Размер блока (в записях):</translation>
+        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="ui/generalcoresettings.ui" line="295"/>
         <source>This settings will be applied after log reloading!</source>
-        <translation type="unfinished">Настройки вступят в силу только после перезагрузки журнала!</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -171,7 +171,7 @@
     <message>
         <location filename="ui/generalguisettings.ui" line="76"/>
         <source>Recent projects number:</source>
-        <translation type="unfinished">Количество последних проектов:</translation>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
@@ -345,57 +345,6 @@
     <message>
         <location filename="ui/mainwindow.ui" line="14"/>
         <source>Postprocessor</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="ui/mainwindow.ui" line="32"/>
-        <source>Открыть проект</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="ui/mainwindow.ui" line="37"/>
-        <source>Сгенерировать тест</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="ui/mainwindow.ui" line="45"/>
-        <source>Закрыть проект</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="ui/mainwindow.ui" line="53"/>
-        <source>Открыть журнал</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="ui/mainwindow.ui" line="61"/>
-        <source>Закрыть журнал</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="ui/mainwindow.ui" line="66"/>
-        <location filename="ui/mainwindow.ui" line="76"/>
-        <source>Выход</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message utf8="true">
-        <location filename="ui/mainwindow.ui" line="71"/>
-        <source>Текстовая визуализация</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ui/mainwindow.ui" line="81"/>
-        <source>New</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ui/mainwindow.ui" line="84"/>
-        <source>Ctrl+N</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ui/mainwindow.ui" line="95"/>
-        <source>Open</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -602,12 +551,6 @@
         <location filename="core/log.cpp" line="170"/>
         <location filename="core/staticlogfilter.cpp" line="54"/>
         <source>Unexpected end of record</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/main.cpp" line="63"/>
-        <location filename="core/main.cpp" line="66"/>
-        <source>En</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
