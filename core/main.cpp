@@ -83,8 +83,8 @@ int main(int argc, char **argv) {
 
     if(language == "Ru")
     {
-        translator_qt.load("qt_ru");
-        translator_postprocessor.load("translation");
+        translator_qt.load("localization/qt_ru");
+        translator_postprocessor.load("localization/translation");
 
         a.installTranslator(&translator_qt);
         a.installTranslator(&translator_postprocessor);
