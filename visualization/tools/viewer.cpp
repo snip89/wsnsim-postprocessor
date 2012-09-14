@@ -33,8 +33,3 @@ void Viewer::highlightCurrentLine()
 
     this->setExtraSelections(extraSelections);
 }
-
-void Viewer::wheelEvent(QWheelEvent *e)
-{
-//    emit 
-}
