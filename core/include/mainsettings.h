@@ -79,6 +79,8 @@ signals:
     // void settingsApplied();
     // void settingsCanceled();
 
+    void settingsApplied();
+
 private slots:
     void activatedItem(QTreeWidgetItem *item, int column);
     void buttonClicked(QAbstractButton *button);

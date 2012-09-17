@@ -30,14 +30,6 @@ MainSettings::MainSettings(QWidget *parent) :
     textColorsAndFontsSettings->showCurrentSettings();
 
     initConnections();
-
-//    initSettingsTree();
-
-    // addChildSettings(settings, 0, "");
-
-    // connect(ui->settingsTree, SIGNAL(itemActivated(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
-    // connect(ui->settingsTree, SIGNAL(itemClicked(QTreeWidgetItem*, int)), this, SLOT(activatedItem(QTreeWidgetItem*, int)));
-    // connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 }
 
 MainSettings::~MainSettings()
@@ -121,35 +113,6 @@ void MainSettings::showEmptySettings(QString name)
     settingsFrameWidget->setCurrentWidget(emptySettings);
 }
 
-/*void MainSettings::addChildSettings(QSettings &settings, QTreeWidgetItem *parent, QString group)
-{
-    QTreeWidgetItem *item;
-
-    settings.beginGroup(group);
-
-    foreach(QString group, settings.childGroups())
-    {
-        if(group != tr("Defaults") && group != tr("Hidden") && group != "SYSTEM")
-        {
-            
-            if(parent)
-            {
-                item = new QTreeWidgetItem(parent);
-            }
-            else
-            {
-                item = new QTreeWidgetItem(ui->settingsTree);
-            }
-
-            item->setText(0, group);
-            addChildSettings(settings, item, group);
-
-        }
-    }
-
-    settings.endGroup();
-}*/
-
 void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
 {
     if(item == generalItem)
@@ -231,6 +194,8 @@ void MainSettings::dialogIsAccepted()
     hexColorsAndFontsSettings->applySettings();
     textColorsAndFontsSettings->applySettings();
 
+    emit settingsApplied();
+
     settings.setValue("Hidden/Gui/Settings_dialog_pos", pos());
 }
 
@@ -257,3 +222,7 @@ void MainSettings::buttonClicked(QAbstractButton *button)
         done(QDialog::Rejected);
     }
 }
+
+/*void MainSettings::settingsApplied()
+{
+}*/

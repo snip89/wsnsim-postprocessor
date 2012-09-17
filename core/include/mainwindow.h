@@ -203,7 +203,7 @@ private slots:
     void showGoToLineDialog();
 
     // void selectedSetting(QString topLevelName, QString settingName);
-    // void appliedSettings();
+    void appliedSettings();
     // void canceledSettings();
 
     void filteredLog(int id);

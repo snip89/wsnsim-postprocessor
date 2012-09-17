@@ -127,14 +127,14 @@ int AbstractTextVisualization::linesOnPage()
 
     int lines = wh / fh;
 
-    qDebug() << "---------";
+    /*qDebug() << "---------";
     qDebug() << wh;
     qDebug() << viewer->viewport()->height();
     qDebug() << fh;
     qDebug() << viewer->minimumHeight();
     qDebug() << lines;
     qDebug() << lines * fh;
-    qDebug() << "---------";
+    qDebug() << "---------";*/
 
     return lines;
 }

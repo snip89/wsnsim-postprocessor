@@ -46,6 +46,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     mainSettings = new MainSettings();
 
+    connect(mainSettings, SIGNAL(settingsApplied()), this, SLOT(appliedSettings()));
+
     stackedWidget = new QStackedWidget(this);
     this->setCentralWidget(stackedWidget);
     stackedWidget->addWidget(emptyWidget);
@@ -990,4 +992,13 @@ void MainWindow::switchCurrentLog()
 void MainWindow::exit()
 {
     QApplication::exit(0);
+}
+
+void MainWindow::appliedSettings()
+{
+    if(activeWidget == HEXVISUALIZATION)
+        updateVisualization(HEXVISUALIZATION);
+
+    else if(activeWidget == TEXTVISUALIZATION)
+        updateVisualization(TEXTVISUALIZATION);
 }
