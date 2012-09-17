@@ -119,14 +119,24 @@ AbstractTextVisualization::~AbstractTextVisualization()
 
 int AbstractTextVisualization::linesOnPage()
 {
-    int wh = viewer->height(); // - ui->verticalScrollBar->width();
+    QFontMetricsF m(viewer->currentFont());
 
-    QFontMetrics m(viewer->currentFont());
+    int wh = viewer->viewport()->height() - VIEWER_PADDING_KOEFF;
 
-    int fh = m.height();
-//    int fh = m.lineWidth();
+    int fh = m.lineSpacing();
 
-    return wh / fh;
+    int lines = wh / fh;
+
+    qDebug() << "---------";
+    qDebug() << wh;
+    qDebug() << viewer->viewport()->height();
+    qDebug() << fh;
+    qDebug() << viewer->minimumHeight();
+    qDebug() << lines;
+    qDebug() << lines * fh;
+    qDebug() << "---------";
+
+    return lines;
 }
 
 void AbstractTextVisualization::scrollBarMoving(int value)

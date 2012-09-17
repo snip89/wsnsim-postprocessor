@@ -16,6 +16,8 @@
 #include <QSettings>
 #include <QString>
 #include <QDebug>
+#include <QFontMetricsF>
+#include <QSizeF>
 
 #include "ilog.h"
 #include "iproject.h"

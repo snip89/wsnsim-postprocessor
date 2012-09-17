@@ -17,6 +17,8 @@
 #include <QString>
 #include <QDebug>
 
+#define VIEWER_PADDING_KOEFF 10
+
 class Viewer : public QTextEdit
 {
     Q_OBJECT
