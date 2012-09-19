@@ -36,7 +36,13 @@ public:
 private:
     QSettings settings;
 
+    QListWidgetItem *itemMainText;
+    QListWidgetItem *itemCurrentLine;
+
     void updatePreviewText();
+
+    void createListWidgetItems();
+    void deleteListWidgetItems();
 
     void showDefaultSettings();
 

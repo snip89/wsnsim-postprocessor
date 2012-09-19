@@ -43,7 +43,7 @@ private:
     void createListWidgetItems();
     void deleteListWidgetItems();
 
-    // void updatePreviewText();
+    void updatePreviewText();
     void updateColorsList();
 
     void showDefaultSettings();

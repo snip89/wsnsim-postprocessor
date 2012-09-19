@@ -60,11 +60,11 @@ void HexAppearanceColorsAndFontsSettings::deleteListWidgetItems()
     delete itemCurrentLine;
 }
 
-/*void HexAppearanceColorsAndFontsSettings::updatePreviewText()
+void HexAppearanceColorsAndFontsSettings::updatePreviewText()
 {
-    ui->previewTextEdit->clear();
-    ui->previewTextEdit->setText(tr("This is font preview text"));
-}*/
+    // ui->previewTextEdit->clear();
+    // ui->previewTextEdit->setText(tr("This is font preview text"));
+}
 
 void HexAppearanceColorsAndFontsSettings::updateColorsList()
 {

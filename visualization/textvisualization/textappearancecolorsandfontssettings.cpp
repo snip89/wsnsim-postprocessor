@@ -3,9 +3,11 @@
 TextAppearanceColorsAndFontsSettings::TextAppearanceColorsAndFontsSettings(QWidget *parent) :
     AbstractTextAppearanceColorsAndFontsSettings(parent)
 {
-    /*connect(ui->changeFontButton, SIGNAL(clicked()), this, SLOT(buttonChangeFontClicked()));
+    createListWidgetItems();
 
-	connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));*/
+    connect(ui->changeFontButton, SIGNAL(clicked()), this, SLOT(buttonChangeFontClicked()));
+
+    connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 }
 
 void TextAppearanceColorsAndFontsSettings::setSettingsName(QString name)
@@ -15,12 +17,15 @@ void TextAppearanceColorsAndFontsSettings::setSettingsName(QString name)
 
 void TextAppearanceColorsAndFontsSettings::showCurrentSettings()
 {
+    itemMainText->setFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    itemCurrentLine->setFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
  /*   ui->previewTextEdit->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
     updatePreviewText();*/
 }
 
 void TextAppearanceColorsAndFontsSettings::applySettings()
 {
+    settings.setValue("Text visualization/Appearance/Colors and Fonts/Font", itemMainText->font());
     // settings.setValue("Text visualization/Appearance/Colors and Fonts/Font", ui->previewTextEdit->currentFont());
 }
 
@@ -31,6 +36,27 @@ QWidget *TextAppearanceColorsAndFontsSettings::getWidget()
 
 TextAppearanceColorsAndFontsSettings::~TextAppearanceColorsAndFontsSettings()
 {
+    deleteListWidgetItems();
+}
+
+void TextAppearanceColorsAndFontsSettings::createListWidgetItems()
+{
+    itemMainText = new QListWidgetItem(tr("main text"));
+    itemMainText->setTextAlignment(Qt::AlignHCenter);
+
+    itemCurrentLine = new QListWidgetItem(tr("current line"));
+    itemCurrentLine->setTextAlignment(Qt::AlignHCenter);
+
+    ui->fontListWidget->addItem(itemMainText);
+    ui->fontListWidget->addItem(itemCurrentLine);
+
+    ui->fontListWidget->setCurrentItem(itemMainText);
+}
+
+void TextAppearanceColorsAndFontsSettings::deleteListWidgetItems()
+{
+    delete itemMainText;
+    delete itemCurrentLine;
 }
 
 void TextAppearanceColorsAndFontsSettings::updatePreviewText()
@@ -41,13 +67,15 @@ void TextAppearanceColorsAndFontsSettings::updatePreviewText()
 
 void TextAppearanceColorsAndFontsSettings::showDefaultSettings()
 {
+       itemMainText->setFont(settings.value("Defaults/Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    itemCurrentLine->setFont(settings.value("Defaults/Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
  /*   ui->previewTextEdit->setCurrentFont(settings.value("Defaults/Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
     updatePreviewText();*/
 }
 
 void TextAppearanceColorsAndFontsSettings::buttonClicked(QAbstractButton *button)
 {
- /*   if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::ApplyRole)
+    if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::ApplyRole)
     {
         applySettings();
     }
@@ -55,23 +83,25 @@ void TextAppearanceColorsAndFontsSettings::buttonClicked(QAbstractButton *button
     else if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::ResetRole)
     {
         showDefaultSettings();
-    }*/
+    }
 }
 
 void TextAppearanceColorsAndFontsSettings::buttonChangeFontClicked()
 {
- /*   QFont resultFont = settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>();
+    QFont resultFont = itemMainText->font();
 
     QFontDialog *fontDialog = new QFontDialog(this);
+//    fontDialog->setCurrentFont(resultFont);
 
     bool ok;
-    resultFont = fontDialog->getFont(&ok);
+    resultFont = fontDialog->getFont(&ok, resultFont);
 
     if(ok)
     {
-        ui->previewTextEdit->setCurrentFont(resultFont);
-        updatePreviewText();
+        itemMainText->setFont(resultFont);
+        itemCurrentLine->setFont(resultFont);
+        // updatePreviewText();
     }
 
-    delete fontDialog;*/
+    delete fontDialog;
 }
