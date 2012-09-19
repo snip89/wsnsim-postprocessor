@@ -7,7 +7,7 @@
 #include "ui_filtrationwidget.h"
 
 FiltrationWidget::FiltrationWidget(QWidget *parent) :
-    QWidget(parent),
+    QDialog(parent),
     ui(new Ui::FiltrationWidget)
 {
     ui->setupUi(this);
@@ -334,12 +334,24 @@ void FiltrationWidget::addFilter()
 
 void FiltrationWidget::buttonClicked(QAbstractButton *button)
 {
-    if(button->text() == tr("OK"))
+    /*if(button->text() == tr("OK"))
     {
         execute();
     }
     else if(button->text() == tr("Cancel"))
     {
+        emit filtrationCanceled();
+    }*/
+
+    if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole)
+    {
+        // applySettings();
+        execute();
+    }
+
+    else if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::RejectRole)
+    {
+        // showDefaultSettings();
         emit filtrationCanceled();
     }
 }

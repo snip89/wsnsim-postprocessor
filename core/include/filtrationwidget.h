@@ -17,6 +17,7 @@
 #include <QListWidgetItem>
 #include <QListWidget>
 #include <QAbstractButton>
+#include <QDialog>
 
 #include "log.h"
 #include "project.h"
@@ -30,7 +31,7 @@ namespace Ui {
     class FiltrationWidget;
 }
 
-class FiltrationWidget : public QWidget
+class FiltrationWidget : public QDialog
 {
     Q_OBJECT
 

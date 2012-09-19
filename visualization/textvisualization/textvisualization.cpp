@@ -27,7 +27,7 @@ void TextVisualization::activity(bool status)
 
 void TextVisualization::update(IProject *project, ILog *log)
 {
-    viewer->setCurrentFont(settings.value(tr("Text visualization/Appearance/Colors and Fonts/Font")).value<QFont>());
+    viewer->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
 
     currentProject = project;
     currentLog = log;
