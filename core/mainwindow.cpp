@@ -424,9 +424,11 @@ void MainWindow::closeLog()
         for(int i = 0; i < logs->size(); i ++)
         {
             Log *log = logs->at(i).log;
-            logs->removeAt(i);
+            // logs->removeAt(i);
             delete log;
         }
+
+        logs->clear();
 
         updateActionsCurrentLogMenu();
         filtrationWidget->clearLogs();
