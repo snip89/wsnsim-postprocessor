@@ -17,15 +17,17 @@ void HexAppearanceColorsAndFontsSettings::setSettingsName(QString name)
 
 void HexAppearanceColorsAndFontsSettings::showCurrentSettings()
 {
-    ui->previewTextEdit->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
-    updatePreviewText();
+    itemMainText->setFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    itemCurrentLine->setFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    // ui->fontListWidget->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    // updatePreviewText();
 
-    updateColorsList();
+    // updateColorsList();
 }
 
 void HexAppearanceColorsAndFontsSettings::applySettings()
 {
-    settings.setValue("Hex visualization/Appearance/Colors and Fonts/Font", ui->previewTextEdit->currentFont());
+    settings.setValue("Hex visualization/Appearance/Colors and Fonts/Font", itemMainText->font());
 }
 
 QWidget *HexAppearanceColorsAndFontsSettings::getWidget()
@@ -46,10 +48,10 @@ void HexAppearanceColorsAndFontsSettings::createListWidgetItems()
     itemCurrentLine = new QListWidgetItem(tr("current line"));
     itemCurrentLine->setTextAlignment(Qt::AlignHCenter);
 
-    ui->colorsListWidget->addItem(itemMainText);
-    ui->colorsListWidget->addItem(itemCurrentLine);
+    ui->fontListWidget->addItem(itemMainText);
+    ui->fontListWidget->addItem(itemCurrentLine);
 
-    ui->colorsListWidget->setCurrentItem(itemMainText);
+    ui->fontListWidget->setCurrentItem(itemMainText);
 }
 
 void HexAppearanceColorsAndFontsSettings::deleteListWidgetItems()
@@ -58,11 +60,11 @@ void HexAppearanceColorsAndFontsSettings::deleteListWidgetItems()
     delete itemCurrentLine;
 }
 
-void HexAppearanceColorsAndFontsSettings::updatePreviewText()
+/*void HexAppearanceColorsAndFontsSettings::updatePreviewText()
 {
     ui->previewTextEdit->clear();
     ui->previewTextEdit->setText(tr("This is font preview text"));
-}
+}*/
 
 void HexAppearanceColorsAndFontsSettings::updateColorsList()
 {
@@ -70,8 +72,9 @@ void HexAppearanceColorsAndFontsSettings::updateColorsList()
 
 void HexAppearanceColorsAndFontsSettings::showDefaultSettings()
 {
-    ui->previewTextEdit->setCurrentFont(settings.value("Defaults/Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
-    updatePreviewText();
+    itemMainText->setFont(settings.value("Defaults/Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    itemCurrentLine->setFont(settings.value("Defaults/Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+    // updatePreviewText();
 }
 
 void HexAppearanceColorsAndFontsSettings::buttonClicked(QAbstractButton *button)
@@ -89,7 +92,7 @@ void HexAppearanceColorsAndFontsSettings::buttonClicked(QAbstractButton *button)
 
 void HexAppearanceColorsAndFontsSettings::buttonChangeFontClicked()
 {
-    QFont resultFont = ui->previewTextEdit->currentFont();
+    QFont resultFont = itemMainText->font();
 
     QFontDialog *fontDialog = new QFontDialog(this);
 //    fontDialog->setCurrentFont(resultFont);
@@ -99,8 +102,9 @@ void HexAppearanceColorsAndFontsSettings::buttonChangeFontClicked()
 
     if(ok)
     {
-        ui->previewTextEdit->setCurrentFont(resultFont);
-        updatePreviewText();
+        itemMainText->setFont(resultFont);
+        itemCurrentLine->setFont(resultFont);
+        // updatePreviewText();
     }
 
     delete fontDialog;
