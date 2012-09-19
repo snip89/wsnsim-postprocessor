@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE TS>
-<TS version="2.0">
+<TS version="2.0" language="ru_RU" sourcelanguage="en_GB">
 <context>
     <name>AbstractTextAppearanceColorsAndFontsSettings</name>
     <message>
@@ -9,34 +9,24 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/abstracttextappearancecolorsandfontssettings.ui" line="103"/>
+        <location filename="ui/abstracttextappearancecolorsandfontssettings.ui" line="116"/>
         <source>Font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Шрифт</translation>
     </message>
     <message>
-        <location filename="ui/abstracttextappearancecolorsandfontssettings.ui" line="109"/>
-        <source>Preview:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ui/abstracttextappearancecolorsandfontssettings.ui" line="135"/>
+        <location filename="ui/abstracttextappearancecolorsandfontssettings.ui" line="133"/>
         <source>Change font</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Изменить шрифт</translation>
     </message>
     <message>
-        <location filename="ui/abstracttextappearancecolorsandfontssettings.ui" line="162"/>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ui/abstracttextappearancecolorsandfontssettings.ui" line="194"/>
+        <location filename="ui/abstracttextappearancecolorsandfontssettings.ui" line="126"/>
         <source>Foreground</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Цвет шрифта</translation>
     </message>
     <message>
-        <location filename="ui/abstracttextappearancecolorsandfontssettings.ui" line="205"/>
+        <location filename="ui/abstracttextappearancecolorsandfontssettings.ui" line="144"/>
         <source>Background</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Цвет фона</translation>
     </message>
 </context>
 <context>
@@ -58,22 +48,22 @@
 <context>
     <name>FiltrationWidget</name>
     <message>
-        <location filename="ui/filtrationwidget.ui" line="14"/>
+        <location filename="ui/filtrationwidget.ui" line="35"/>
         <source>Filter log</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Фильтрация журнала</translation>
     </message>
     <message>
-        <location filename="ui/filtrationwidget.ui" line="44"/>
+        <location filename="ui/filtrationwidget.ui" line="65"/>
         <source>Filtration</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Фильтрация</translation>
     </message>
     <message>
-        <location filename="ui/filtrationwidget.ui" line="89"/>
+        <location filename="ui/filtrationwidget.ui" line="110"/>
         <source>Expression:</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Выражение:</translation>
     </message>
     <message>
-        <location filename="ui/filtrationwidget.ui" line="144"/>
+        <location filename="ui/filtrationwidget.ui" line="171"/>
         <source>+</source>
         <translation type="unfinished"></translation>
     </message>
@@ -81,7 +71,7 @@
         <location filename="core/filtrationwidget.cpp" line="185"/>
         <location filename="core/filtrationwidget.cpp" line="218"/>
         <source>Filtration error</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Ошибка фильтрации</translation>
     </message>
     <message>
         <location filename="core/filtrationwidget.cpp" line="277"/>
@@ -120,7 +110,7 @@
     <message>
         <location filename="core/filtrationwidget.cpp" line="300"/>
         <source>Value field is empty</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">Поле значение не заполнено</translation>
     </message>
     <message>
         <location filename="core/filtrationwidget.cpp" line="337"/>
@@ -151,12 +141,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/generalcoresettings.ui" line="191"/>
+        <location filename="ui/generalcoresettings.ui" line="203"/>
         <source>Block size (records):</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/generalcoresettings.ui" line="295"/>
+        <location filename="ui/generalcoresettings.ui" line="319"/>
         <source>This settings will be applied after log reloading!</source>
         <translation type="unfinished"></translation>
     </message>
@@ -177,12 +167,12 @@
 <context>
     <name>GoToLineDialog</name>
     <message>
-        <location filename="ui/gotolinedialog.ui" line="14"/>
+        <location filename="ui/gotolinedialog.ui" line="32"/>
         <source>Go to line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/gotolinedialog.ui" line="32"/>
+        <location filename="ui/gotolinedialog.ui" line="50"/>
         <source>Line number:</source>
         <translation type="unfinished"></translation>
     </message>
@@ -190,53 +180,48 @@
 <context>
     <name>HexAppearanceColorsAndFontsSettings</name>
     <message>
-        <location filename="ui/hexappearancecolorsandfontssettings.ui" line="14"/>
+        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="235"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/hexappearancecolorsandfontssettings.ui" line="88"/>
+        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="237"/>
         <source>Font</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/hexappearancecolorsandfontssettings.ui" line="100"/>
+        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="238"/>
         <source>Family:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/hexappearancecolorsandfontssettings.ui" line="127"/>
+        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="239"/>
         <source>Size:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/hexappearancecolorsandfontssettings.ui" line="157"/>
+        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="240"/>
         <source>Colors</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/hexappearancecolorsandfontssettings.ui" line="195"/>
+        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="241"/>
         <source>Foreground:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/hexappearancecolorsandfontssettings.ui" line="219"/>
+        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="242"/>
         <source>Background:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="43"/>
+        <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="45"/>
         <source>main text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="46"/>
+        <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="48"/>
         <source>current line</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="64"/>
-        <source>This is font preview text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
@@ -248,17 +233,22 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/localizationsettings.ui" line="66"/>
+        <location filename="ui/localizationsettings.ui" line="154"/>
         <source>GUI language:</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/localizationsettings.ui" line="86"/>
+        <location filename="ui/localizationsettings.ui" line="165"/>
+        <source>This settings will be applied after restart program!</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ui/localizationsettings.ui" line="128"/>
         <source>En</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/localizationsettings.ui" line="91"/>
+        <location filename="ui/localizationsettings.ui" line="133"/>
         <source>Ru</source>
         <translation type="unfinished"></translation>
     </message>
@@ -284,58 +274,58 @@
 <context>
     <name>MainSettings</name>
     <message>
-        <location filename="ui/mainsettings.ui" line="14"/>
-        <location filename="ui/mainsettings.ui" line="61"/>
+        <location filename="ui/mainsettings.ui" line="32"/>
+        <location filename="ui/mainsettings.ui" line="59"/>
         <source>Settings</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="64"/>
-        <location filename="core/mainsettings.cpp" line="157"/>
+        <location filename="core/mainsettings.cpp" line="56"/>
+        <location filename="core/mainsettings.cpp" line="120"/>
         <source>General</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="65"/>
-        <location filename="core/mainsettings.cpp" line="162"/>
+        <location filename="core/mainsettings.cpp" line="57"/>
+        <location filename="core/mainsettings.cpp" line="125"/>
         <source>Core</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="66"/>
-        <location filename="core/mainsettings.cpp" line="172"/>
+        <location filename="core/mainsettings.cpp" line="58"/>
+        <location filename="core/mainsettings.cpp" line="135"/>
         <source>Gui</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="71"/>
-        <location filename="core/mainsettings.cpp" line="182"/>
+        <location filename="core/mainsettings.cpp" line="63"/>
+        <location filename="core/mainsettings.cpp" line="145"/>
         <source>Hex visualization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="72"/>
-        <location filename="core/mainsettings.cpp" line="78"/>
-        <location filename="core/mainsettings.cpp" line="187"/>
-        <location filename="core/mainsettings.cpp" line="202"/>
+        <location filename="core/mainsettings.cpp" line="64"/>
+        <location filename="core/mainsettings.cpp" line="70"/>
+        <location filename="core/mainsettings.cpp" line="150"/>
+        <location filename="core/mainsettings.cpp" line="165"/>
         <source>Colors and Fonts</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="77"/>
-        <location filename="core/mainsettings.cpp" line="197"/>
+        <location filename="core/mainsettings.cpp" line="69"/>
+        <location filename="core/mainsettings.cpp" line="160"/>
         <source>Text visualization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="83"/>
-        <location filename="core/mainsettings.cpp" line="212"/>
+        <location filename="core/mainsettings.cpp" line="75"/>
+        <location filename="core/mainsettings.cpp" line="175"/>
         <source>Localization</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="84"/>
-        <location filename="core/mainsettings.cpp" line="217"/>
+        <location filename="core/mainsettings.cpp" line="76"/>
+        <location filename="core/mainsettings.cpp" line="180"/>
         <source>Language</source>
         <translation type="unfinished"></translation>
     </message>
@@ -363,152 +353,144 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="156"/>
+        <location filename="core/mainwindow.cpp" line="158"/>
         <source>&amp;Open project...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="160"/>
+        <location filename="core/mainwindow.cpp" line="162"/>
         <source>&amp;Open log...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="164"/>
+        <location filename="core/mainwindow.cpp" line="166"/>
         <source>&amp;Close project</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="169"/>
+        <location filename="core/mainwindow.cpp" line="171"/>
         <source>&amp;Print...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="173"/>
+        <location filename="core/mainwindow.cpp" line="175"/>
         <source>&amp;Exit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="177"/>
+        <location filename="core/mainwindow.cpp" line="179"/>
         <source>&amp;Settings...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="180"/>
+        <location filename="core/mainwindow.cpp" line="182"/>
         <source>&amp;Hex</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="185"/>
+        <location filename="core/mainwindow.cpp" line="187"/>
         <source>&amp;Text</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="190"/>
+        <location filename="core/mainwindow.cpp" line="192"/>
         <source>&amp;Copy</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="194"/>
+        <location filename="core/mainwindow.cpp" line="196"/>
         <source>&amp;Paste</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="198"/>
+        <location filename="core/mainwindow.cpp" line="200"/>
         <source>&amp;Select all</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="202"/>
+        <location filename="core/mainwindow.cpp" line="204"/>
         <source>&amp;Find</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="206"/>
+        <location filename="core/mainwindow.cpp" line="208"/>
         <source>&amp;Find next</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="210"/>
+        <location filename="core/mainwindow.cpp" line="212"/>
         <source>&amp;Find previous</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="214"/>
+        <location filename="core/mainwindow.cpp" line="216"/>
         <source>&amp;Go to line</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="219"/>
+        <location filename="core/mainwindow.cpp" line="221"/>
         <source>&amp;Filter log...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="223"/>
+        <location filename="core/mainwindow.cpp" line="225"/>
         <source>&amp;Full screen</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="228"/>
-        <location filename="core/mainwindow.cpp" line="290"/>
+        <location filename="core/mainwindow.cpp" line="230"/>
+        <location filename="core/mainwindow.cpp" line="292"/>
         <source>&amp;Help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="230"/>
+        <location filename="core/mainwindow.cpp" line="232"/>
         <source>&amp;Context help</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="233"/>
+        <location filename="core/mainwindow.cpp" line="235"/>
         <source>&amp;About...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="238"/>
+        <location filename="core/mainwindow.cpp" line="240"/>
         <source>&amp;File</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="242"/>
+        <location filename="core/mainwindow.cpp" line="244"/>
         <source>&amp;Filtration</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="244"/>
+        <location filename="core/mainwindow.cpp" line="246"/>
         <source>&amp;Logs</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="253"/>
+        <location filename="core/mainwindow.cpp" line="255"/>
         <source>&amp;Recent projects...</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="261"/>
+        <location filename="core/mainwindow.cpp" line="263"/>
         <source>&amp;Edit</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="270"/>
+        <location filename="core/mainwindow.cpp" line="272"/>
         <source>&amp;Search</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="279"/>
+        <location filename="core/mainwindow.cpp" line="281"/>
         <source>&amp;View</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="287"/>
+        <location filename="core/mainwindow.cpp" line="289"/>
         <source>&amp;Tools</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="core/mainwindow.cpp" line="522"/>
-        <location filename="core/mainwindow.cpp" line="536"/>
-        <location filename="core/mainwindow.cpp" line="565"/>
-        <location filename="core/mainwindow.cpp" line="575"/>
-        <source>Log size: </source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -516,31 +498,39 @@
         <location filename="core/mainwindow.cpp" line="538"/>
         <location filename="core/mainwindow.cpp" line="567"/>
         <location filename="core/mainwindow.cpp" line="577"/>
+        <source>Log size: </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="core/mainwindow.cpp" line="526"/>
+        <location filename="core/mainwindow.cpp" line="540"/>
+        <location filename="core/mainwindow.cpp" line="569"/>
+        <location filename="core/mainwindow.cpp" line="579"/>
         <source> records</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="625"/>
+        <location filename="core/mainwindow.cpp" line="627"/>
         <source>Open project file</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="625"/>
+        <location filename="core/mainwindow.cpp" line="627"/>
         <source>XML project files (*xml)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="656"/>
+        <location filename="core/mainwindow.cpp" line="658"/>
         <source>Project file not found</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="686"/>
+        <location filename="core/mainwindow.cpp" line="688"/>
         <source>Project is empty</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="800"/>
+        <location filename="core/mainwindow.cpp" line="802"/>
         <source>No filters</source>
         <translation type="unfinished"></translation>
     </message>
@@ -562,8 +552,13 @@
 <context>
     <name>TextAppearanceColorsAndFontsSettings</name>
     <message>
-        <location filename="visualization/textvisualization/textappearancecolorsandfontssettings.cpp" line="39"/>
-        <source>This is font preview text</source>
+        <location filename="visualization/textvisualization/textappearancecolorsandfontssettings.cpp" line="44"/>
+        <source>main text</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="visualization/textvisualization/textappearancecolorsandfontssettings.cpp" line="47"/>
+        <source>current line</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
