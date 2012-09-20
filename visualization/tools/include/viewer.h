@@ -32,6 +32,7 @@ private slots:
 
 private:
     QColor lineColor;
+    QColor lineFontColor;
 };
 
 #endif // VIEWER_H
