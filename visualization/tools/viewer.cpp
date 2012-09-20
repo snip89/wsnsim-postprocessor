@@ -12,6 +12,8 @@ Viewer::Viewer(QString group, QWidget *parent)
     // QSettings settings;
 
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+
+    invisible = false;
 }
 
 void Viewer::setLineColor(QColor color)
@@ -24,12 +26,20 @@ void Viewer::setLineFontColor(QColor color)
     lineFontColor = color;
 }
 
+void Viewer::setInvisible(bool logical)
+{
+    invisible = logical;
+}
+
 Viewer::~Viewer()
 {
 }
 
 void Viewer::highlightCurrentLine()
 {
+    if(!invisible)
+    {
+
     QList<QTextEdit::ExtraSelection> extraSelections;
 
     QTextEdit::ExtraSelection selection;
@@ -42,4 +52,5 @@ void Viewer::highlightCurrentLine()
     extraSelections.append(selection);
 
     this->setExtraSelections(extraSelections);
+    }
 }

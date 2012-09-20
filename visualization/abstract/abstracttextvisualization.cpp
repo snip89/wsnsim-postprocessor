@@ -27,6 +27,8 @@ AbstractTextVisualization::AbstractTextVisualization(QString group, QWidget *par
 
     connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), viewer->horizontalScrollBar(), SLOT(setValue(int)));
 
+    currentLine = 0;
+
 //    connect(viewer->horizontalScrollBar(), SIGNAL(rangeChanged(int, int)), ui->horizontalScrollBar, SLOT(hscrollBarRangeChanging(int, int)));
 
 //    viewer->addScrollBarWidget(ui->horizontalScrollBar, Qt::AlignBottom);
@@ -64,6 +66,12 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
             {
                 viewer->moveCursor(QTextCursor::Up);
             }
+
+            if((currentLine - 1) >= 0)
+                currentLine --;
+
+            qDebug() << "currentLine --";
+            qDebug() << currentLine;
         }
 
         else if(keyEvent->key() == Qt::Key_Down)
@@ -82,30 +90,61 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
                 viewer->moveCursor(QTextCursor::StartOfLine);
                 viewer->moveCursor(QTextCursor::Down);
             }
+
+            if((currentLine + 1) < currentLog->size())
+                currentLine ++;
+
+            qDebug() << "currentLine ++";
+            qDebug() << currentLine;
         }
 
         else if(keyEvent->key() == Qt::Key_PageUp)
         {
             direction = Up;
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepSub);
+
+            currentLine = topLinePos;
+
+            qDebug() << "currentLine = topLinePos";
+            qDebug() << currentLine;
         }
 
         else if(keyEvent->key() == Qt::Key_PageDown)
         {
             direction = Down;
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepAdd);
+
+            currentLine = topLinePos + linesOnPage() - 1;
+
+            qDebug() << "currentLine = topLinePos + linesOnPage - 1";
+            qDebug() << currentLine;
         }
 
         else if(keyEvent->key() == Qt::Key_Home)
         {
             direction = Up;
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderToMinimum);
+
+            viewer->moveCursor(QTextCursor::Start);
+
+            currentLine = topLinePos;
+
+            qDebug() << "currentLine - HOME";
+            qDebug() << currentLine;
         }
 
         else if(keyEvent->key() == Qt::Key_End)
         {
             direction = Down;
             ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderToMaximum);
+
+            viewer->moveCursor(QTextCursor::End);
+            viewer->moveCursor(QTextCursor::StartOfLine);
+
+            currentLine = currentLog->size() - 1;
+
+            qDebug() << "currentLine - END";
+            qDebug() << currentLine;
         }
     }
 
@@ -143,6 +182,10 @@ void AbstractTextVisualization::scrollBarMoving(int value)
 {
     qDebug() << value;
     topLinePos = value;
+
+    qDebug() << "topLinePos";
+    qDebug() << topLinePos;
+
     updatePage();
 }
 

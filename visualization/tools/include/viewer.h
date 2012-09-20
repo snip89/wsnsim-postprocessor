@@ -28,6 +28,7 @@ public:
 
     void setLineColor(QColor color);
     void setLineFontColor(QColor color);
+    void setInvisible(bool logical);
 
     virtual ~Viewer();
 
@@ -37,6 +38,8 @@ private slots:
 private:
     QColor lineColor;
     QColor lineFontColor;
+
+    bool invisible;
 };
 
 #endif // VIEWER_H

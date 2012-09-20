@@ -51,6 +51,8 @@ protected:
     ILog *currentLog;
     IProject *currentProject;
 
+    qint64 currentLine;
+
     bool isActive;
     qint64 topLinePos;
 
