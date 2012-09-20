@@ -38,6 +38,15 @@ void HexVisualization::activity(bool status)
 
 void HexVisualization::update(IProject *project, ILog *log)
 {
+    viewer->setLineColor(settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
+    viewer->setLineFontColor(settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
+
+    viewer->setTextColor(settings.value("Hex visualization/Appearance/Colors and Fonts/Main_text_foreground").value<QColor>());
+
+    QPalette p = viewer->palette();
+    p.setColor(QPalette::Base, settings.value("Hex visualization/Appearance/Colors and Fonts/Main_text_background").value<QColor>());
+    viewer->setPalette(p);
+
     viewer->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
 
     currentProject = project;
@@ -66,6 +75,30 @@ HexVisualization::~HexVisualization()
 
 void HexVisualization::setSettings(QSettings &someSettings)
 {
+    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+
+    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+
+    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color"))
+        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color", QColor(Qt::black));
+
+    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color"))
+        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color", QColor(Qt::black));
+
+    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Main_text_background"))
+        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Main_text_background", QColor(Qt::white));
+
+    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Main_text_background"))
+        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Main_text_background", QColor(Qt::white));
+
+    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Main_text_foreground"))
+        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Main_text_foreground", QColor(Qt::black));
+
+    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Main_text_foreground"))
+        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Main_text_foreground", QColor(Qt::black));
+
     if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Font"))
         someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Font", QFont());
 

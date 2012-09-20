@@ -9,11 +9,19 @@ Viewer::Viewer(QString group, QWidget *parent)
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 //    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
 
-    QSettings settings;
-    lineColor = settings.value(group + "/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>();
-    lineFontColor = settings.value(group + "/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>();
+    // QSettings settings;
 
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
+}
+
+void Viewer::setLineColor(QColor color)
+{
+    lineColor = color;
+}
+
+void Viewer::setLineFontColor(QColor color)
+{
+    lineFontColor = color;
 }
 
 Viewer::~Viewer()

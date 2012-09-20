@@ -108,63 +108,7 @@ void MainWindow::setSettings(QSettings &someSettings)
             emptyRecent.append(" ");
 
         someSettings.setValue("General/Gui/Recent", emptyRecent);
-    }
-
-    // cursor line color
-
-    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
-        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
-
-    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color"))
-        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
-
-    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
-        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
-
-    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
-        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
-
-    // cursor line font color
-
-    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color"))
-        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color", QColor(Qt::black));
-
-    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color"))
-        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color", QColor(Qt::black));
-
-    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color"))
-        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color", QColor(Qt::black));
-
-    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color"))
-        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color", QColor(Qt::black));
-
-    // main text background            
-
-    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Main_text_background"))
-        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Main_text_background", QColor(Qt::white));
-
-    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Main_text_background"))
-        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Main_text_background", QColor(Qt::white));
-
-    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Main_text_background"))
-        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Main_text_background", QColor(Qt::white));
-
-    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Main_text_background"))
-        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Main_text_background", QColor(Qt::white));
-
-    // main text foreground
-
-    if(!someSettings.contains("Defaults/Hex visualization/Appearance/Colors and Fonts/Main_text_foreground"))
-        someSettings.setValue("Defaults/Hex visualization/Appearance/Colors and Fonts/Main_text_foreground", QColor(Qt::black));
-
-    if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Main_text_foreground"))
-        someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Main_text_foreground", QColor(Qt::black));
-
-    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Main_text_foreground"))
-        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Main_text_foreground", QColor(Qt::black));
-
-    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Main_text_foreground"))
-        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Main_text_foreground", QColor(Qt::black));    
+    }    
 
     if(!someSettings.contains("Defaults/General/Gui/Default_visualization"))
         someSettings.setValue("Defaults/General/Gui/Default_visualization", "hex");

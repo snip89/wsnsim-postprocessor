@@ -27,6 +27,15 @@ void TextVisualization::activity(bool status)
 
 void TextVisualization::update(IProject *project, ILog *log)
 {
+    viewer->setLineColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
+    viewer->setLineFontColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
+
+    viewer->setTextColor(settings.value("Text visualization/Appearance/Colors and Fonts/Main_text_foreground").value<QColor>());
+
+    QPalette p = viewer->palette();
+    p.setColor(QPalette::Base, settings.value("Text visualization/Appearance/Colors and Fonts/Main_text_background").value<QColor>());
+    viewer->setPalette(p);
+
     viewer->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
 
     currentProject = project;
@@ -55,6 +64,30 @@ TextVisualization::~TextVisualization()
 
 void TextVisualization::setSettings(QSettings &someSettings)
 {
+    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+
+    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Cursor_line_color"))
+        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Cursor_line_color", QColor(Qt::yellow).lighter(160));
+
+    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color"))
+        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color", QColor(Qt::black));
+
+    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color"))
+        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color", QColor(Qt::black));         
+
+    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Main_text_background"))
+        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Main_text_background", QColor(Qt::white));
+
+    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Main_text_background"))
+        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Main_text_background", QColor(Qt::white));
+
+    if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Main_text_foreground"))
+        someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Main_text_foreground", QColor(Qt::black));
+
+    if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Main_text_foreground"))
+        someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Main_text_foreground", QColor(Qt::black));
+
     if(!someSettings.contains("Defaults/Text visualization/Appearance/Colors and Fonts/Font"))
         someSettings.setValue("Defaults/Text visualization/Appearance/Colors and Fonts/Font", QFont());
 

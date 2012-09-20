@@ -6,6 +6,8 @@ HexAppearanceColorsAndFontsSettings::HexAppearanceColorsAndFontsSettings(QWidget
     createListWidgetItems();
 
     connect(ui->changeFontButton, SIGNAL(clicked()), this, SLOT(buttonChangeFontClicked()));
+    connect(ui->foregroundPushButton, SIGNAL(clicked()), this, SLOT(buttonChangeForegroundClicked()));
+    connect(ui->backgroundPushButton, SIGNAL(clicked()), this, SLOT(buttonChangeBackgroundClicked()));
 
 	connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
 }
@@ -19,15 +21,23 @@ void HexAppearanceColorsAndFontsSettings::showCurrentSettings()
 {
     itemMainText->setFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
     itemCurrentLine->setFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
-    // ui->fontListWidget->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
-    // updatePreviewText();
 
-    // updateColorsList();
+    itemMainText->setBackground(settings.value("Hex visualization/Appearance/Colors and Fonts/Main_text_background").value<QColor>());
+    itemCurrentLine->setBackground(settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
+
+    itemMainText->setForeground(settings.value("Hex visualization/Appearance/Colors and Fonts/Main_text_foreground").value<QColor>());
+    itemCurrentLine->setForeground(settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
 }
 
 void HexAppearanceColorsAndFontsSettings::applySettings()
 {
     settings.setValue("Hex visualization/Appearance/Colors and Fonts/Font", itemMainText->font());
+
+    settings.setValue("Hex visualization/Appearance/Colors and Fonts/Main_text_background", itemMainText->background().color());
+    settings.setValue("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color", itemCurrentLine->background().color());
+
+    settings.setValue("Hex visualization/Appearance/Colors and Fonts/Main_text_foreground", itemMainText->foreground().color());
+    settings.setValue("Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color", itemCurrentLine->foreground().color());
 }
 
 QWidget *HexAppearanceColorsAndFontsSettings::getWidget()
@@ -74,7 +84,12 @@ void HexAppearanceColorsAndFontsSettings::showDefaultSettings()
 {
     itemMainText->setFont(settings.value("Defaults/Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
     itemCurrentLine->setFont(settings.value("Defaults/Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
-    // updatePreviewText();
+
+    itemMainText->setBackground(settings.value("Defaults/Hex visualization/Appearance/Colors and Fonts/Main_text_background").value<QColor>());
+    itemCurrentLine->setBackground(settings.value("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
+
+    itemMainText->setForeground(settings.value("Defaults/Hex visualization/Appearance/Colors and Fonts/Main_text_foreground").value<QColor>());
+    itemCurrentLine->setForeground(settings.value("Defaults/Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
 }
 
 void HexAppearanceColorsAndFontsSettings::buttonClicked(QAbstractButton *button)
@@ -104,8 +119,69 @@ void HexAppearanceColorsAndFontsSettings::buttonChangeFontClicked()
     {
         itemMainText->setFont(resultFont);
         itemCurrentLine->setFont(resultFont);
-        // updatePreviewText();
     }
 
     delete fontDialog;
+}
+
+void HexAppearanceColorsAndFontsSettings::buttonChangeForegroundClicked()
+{
+    if(ui->fontListWidget->currentItem() == itemMainText)
+    {
+        QColor resultColor = itemMainText->foreground().color();
+
+        QColorDialog *colorDialog = new QColorDialog(this);
+
+        resultColor = colorDialog->getColor(resultColor);
+
+        if(resultColor.isValid())
+            itemMainText->setForeground(resultColor);
+
+        delete colorDialog;
+    }
+
+    else if(ui->fontListWidget->currentItem() == itemCurrentLine)
+    {
+        QColor resultColor = itemCurrentLine->foreground().color();
+
+        QColorDialog *colorDialog = new QColorDialog(this);
+
+        resultColor = colorDialog->getColor(resultColor);
+
+        if(resultColor.isValid())
+            itemCurrentLine->setForeground(resultColor);
+
+        delete colorDialog;
+    }
+}
+
+void HexAppearanceColorsAndFontsSettings::buttonChangeBackgroundClicked()
+{
+    if(ui->fontListWidget->currentItem() == itemMainText)
+    {
+        QColor resultColor = itemMainText->background().color();
+
+        QColorDialog *colorDialog = new QColorDialog(this);
+
+        resultColor = colorDialog->getColor(resultColor);
+
+        if(resultColor.isValid())
+            itemMainText->setBackground(resultColor);
+
+        delete colorDialog;
+    }
+
+    else if(ui->fontListWidget->currentItem() == itemCurrentLine)
+    {
+        QColor resultColor = itemCurrentLine->background().color();
+
+        QColorDialog *colorDialog = new QColorDialog(this);
+
+        resultColor = colorDialog->getColor(resultColor);
+
+        if(resultColor.isValid())
+            itemCurrentLine->setBackground(resultColor);
+
+        delete colorDialog;
+    }
 }

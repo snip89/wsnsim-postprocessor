@@ -12,6 +12,7 @@
 #include <QFont>
 #include <QFontDialog>
 #include <QListWidgetItem>
+#include <QColorDialog> 
 #include <QDebug>
 
 #include "ui_abstracttextappearancecolorsandfontssettings.h"
@@ -51,6 +52,8 @@ private:
 private slots:
     void buttonClicked(QAbstractButton *button);
     void buttonChangeFontClicked();
+    void buttonChangeForegroundClicked();
+    void buttonChangeBackgroundClicked();
 };
 
 #endif // HEXAPPEARANCECOLORSANDFONTSSETTINGS_H
