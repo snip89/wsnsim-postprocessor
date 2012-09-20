@@ -105,18 +105,21 @@ void TextAppearanceColorsAndFontsSettings::buttonChangeFontClicked()
 {
     QFont resultFont = itemMainText->font();
 
-    QFontDialog *fontDialog = new QFontDialog(this);
-//    fontDialog->setCurrentFont(resultFont);
+    QFontDialog *fontDialog = new QFontDialog(resultFont, this);
 
-    bool ok;
-    resultFont = fontDialog->getFont(&ok, resultFont);
+    fontDialog->move(settings.value("Hidden/Gui/Font_dialog_pos").value<QPoint>());
+    fontDialog->resize(settings.value("Hidden/Gui/Font_dialog_size").value<QSize>());
 
-    if(ok)
+    if(fontDialog->exec())
     {
+        resultFont = fontDialog->selectedFont();
+
         itemMainText->setFont(resultFont);
         itemCurrentLine->setFont(resultFont);
-        // updatePreviewText();
     }
+
+    settings.setValue("Hidden/Gui/Font_dialog_pos", fontDialog->pos());
+    settings.setValue("Hidden/Gui/Font_dialog_size", fontDialog->size());
 
     delete fontDialog;
 }
@@ -127,12 +130,20 @@ void TextAppearanceColorsAndFontsSettings::buttonChangeForegroundClicked()
     {
         QColor resultColor = itemMainText->foreground().color();
 
-        QColorDialog *colorDialog = new QColorDialog(this);
+        QColorDialog *colorDialog = new QColorDialog(resultColor, this);
 
-        resultColor = colorDialog->getColor(resultColor);
+        colorDialog->move(settings.value("Hidden/Gui/Color_dialog_pos").value<QPoint>());
+        colorDialog->resize(settings.value("Hidden/Gui/Color_dialog_size").value<QSize>());
 
-        if(resultColor.isValid())
+        if(colorDialog->exec())
+        {
+            resultColor = colorDialog->selectedColor();
+
             itemMainText->setForeground(resultColor);
+        }
+
+        settings.setValue("Hidden/Gui/Color_dialog_pos", colorDialog->pos());
+        settings.setValue("Hidden/Gui/Color_dialog_size", colorDialog->size());
 
         delete colorDialog;
     }
@@ -141,12 +152,20 @@ void TextAppearanceColorsAndFontsSettings::buttonChangeForegroundClicked()
     {
         QColor resultColor = itemCurrentLine->foreground().color();
 
-        QColorDialog *colorDialog = new QColorDialog(this);
+        QColorDialog *colorDialog = new QColorDialog(resultColor, this);
 
-        resultColor = colorDialog->getColor(resultColor);
+        colorDialog->move(settings.value("Hidden/Gui/Color_dialog_pos").value<QPoint>());
+        colorDialog->resize(settings.value("Hidden/Gui/Color_dialog_size").value<QSize>());
 
-        if(resultColor.isValid())
+        if(colorDialog->exec())
+        {
+            resultColor = colorDialog->selectedColor();
+
             itemCurrentLine->setForeground(resultColor);
+        }
+
+        settings.setValue("Hidden/Gui/Color_dialog_pos", colorDialog->pos());
+        settings.setValue("Hidden/Gui/Color_dialog_size", colorDialog->size());
 
         delete colorDialog;
     }
@@ -158,12 +177,20 @@ void TextAppearanceColorsAndFontsSettings::buttonChangeBackgroundClicked()
     {
         QColor resultColor = itemMainText->background().color();
 
-        QColorDialog *colorDialog = new QColorDialog(this);
+        QColorDialog *colorDialog = new QColorDialog(resultColor, this);
 
-        resultColor = colorDialog->getColor(resultColor);
+        colorDialog->move(settings.value("Hidden/Gui/Color_dialog_pos").value<QPoint>());
+        colorDialog->resize(settings.value("Hidden/Gui/Color_dialog_size").value<QSize>());
 
-        if(resultColor.isValid())
-            itemMainText->setBackground(resultColor);
+        if(colorDialog->exec())
+        {
+            resultColor = colorDialog->selectedColor();
+
+            itemMainText->setForeground(resultColor);
+        }
+
+        settings.setValue("Hidden/Gui/Color_dialog_pos", colorDialog->pos());
+        settings.setValue("Hidden/Gui/Color_dialog_size", colorDialog->size());
 
         delete colorDialog;
     }
@@ -172,12 +199,20 @@ void TextAppearanceColorsAndFontsSettings::buttonChangeBackgroundClicked()
     {
         QColor resultColor = itemCurrentLine->background().color();
 
-        QColorDialog *colorDialog = new QColorDialog(this);
+        QColorDialog *colorDialog = new QColorDialog(resultColor, this);
 
-        resultColor = colorDialog->getColor(resultColor);
+        colorDialog->move(settings.value("Hidden/Gui/Color_dialog_pos").value<QPoint>());
+        colorDialog->resize(settings.value("Hidden/Gui/Color_dialog_size").value<QSize>());
 
-        if(resultColor.isValid())
-            itemCurrentLine->setBackground(resultColor);
+        if(colorDialog->exec())
+        {
+            resultColor = colorDialog->selectedColor();
+
+            itemCurrentLine->setForeground(resultColor);
+        }
+
+        settings.setValue("Hidden/Gui/Color_dialog_pos", colorDialog->pos());
+        settings.setValue("Hidden/Gui/Color_dialog_size", colorDialog->size());
 
         delete colorDialog;
     }

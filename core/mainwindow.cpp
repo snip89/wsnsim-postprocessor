@@ -139,6 +139,15 @@ void MainWindow::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Hidden/Gui/Settings_dialog_pos"))
         someSettings.setValue("Hidden/Gui/Settings_dialog_pos", QPoint(0, 0));
+
+    if(!someSettings.contains("Hidden/Gui/Font_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Font_dialog_pos", QPoint(0, 0));
+
+    if(!someSettings.contains("Hidden/Gui/Font_dialog_size"))
+        someSettings.setValue("Hidden/Gui/Font_dialog_size", QSize(320, 240));
+
+    if(!someSettings.contains("Hidden/Gui/Color_dialog_size"))
+        someSettings.setValue("Hidden/Gui/Color_dialog_size", QPoint(320, 240));
 }
 
 void MainWindow::createActions()
