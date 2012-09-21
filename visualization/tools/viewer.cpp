@@ -40,17 +40,17 @@ void Viewer::highlightCurrentLine()
     if(!invisible)
     {
 
-    QList<QTextEdit::ExtraSelection> extraSelections;
+        QList<QTextEdit::ExtraSelection> extraSelections;
 
-    QTextEdit::ExtraSelection selection;
+        QTextEdit::ExtraSelection selection;
 
-    selection.format.setBackground(lineColor);
-    selection.format.setForeground(lineFontColor);
-    selection.format.setProperty(QTextFormat::FullWidthSelection, true);
-    selection.cursor = textCursor();
-    selection.cursor.clearSelection();
-    extraSelections.append(selection);
+        selection.format.setBackground(lineColor);
+        selection.format.setForeground(lineFontColor);
+        selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+        selection.cursor = textCursor();
+        selection.cursor.clearSelection();
+        extraSelections.append(selection);
 
-    this->setExtraSelections(extraSelections);
+        this->setExtraSelections(extraSelections);
     }
 }

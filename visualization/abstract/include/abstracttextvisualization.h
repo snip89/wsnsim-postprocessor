@@ -68,6 +68,7 @@ protected:
 
 private slots:
     void scrollBarMoving(int value);
+    void cursorPosChanging();
 //    void hscrollBarRangeChanging(int min, int max);
 };
 

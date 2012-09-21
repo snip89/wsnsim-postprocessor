@@ -56,6 +56,7 @@ MainWindow::MainWindow(QWidget *parent) :
     stackedWidget->addWidget(textVisualization->getWidget());
 
     stackedWidget->setCurrentWidget(emptyWidget);
+
     activeWidget = EMPTY;
     previousActiveWidget = EMPTY;
 }
