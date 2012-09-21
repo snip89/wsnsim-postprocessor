@@ -58,6 +58,18 @@ void HexVisualization::update(IProject *project, ILog *log)
 
 void HexVisualization::update()
 {
+    viewer->setLineColor(settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
+    viewer->setLineFontColor(settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
+
+    viewer->setTextColor(settings.value("Hex visualization/Appearance/Colors and Fonts/Main_text_foreground").value<QColor>());
+
+    QPalette p = viewer->palette();
+    p.setColor(QPalette::Base, settings.value("Hex visualization/Appearance/Colors and Fonts/Main_text_background").value<QColor>());
+    viewer->setPalette(p);
+
+    viewer->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+
+    updatePage();
 }
 
 QWidget *HexVisualization::getWidget()
