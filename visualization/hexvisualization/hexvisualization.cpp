@@ -56,6 +56,10 @@ void HexVisualization::update(IProject *project, ILog *log)
     updatePage();
 }
 
+void HexVisualization::update()
+{
+}
+
 QWidget *HexVisualization::getWidget()
 {
     return this;

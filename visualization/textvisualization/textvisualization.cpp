@@ -45,6 +45,10 @@ void TextVisualization::update(IProject *project, ILog *log)
     updatePage();
 }
 
+void TextVisualization::update()
+{
+}
+
 QWidget *TextVisualization::getWidget()
 {
     return this;
