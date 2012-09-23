@@ -146,6 +146,9 @@ private:
     IVisualization *hexVisualization;
     IVisualization *textVisualization;
 
+    bool hexUpdated;
+    bool textUpdated;
+
     Project *project;
 
     // TODO: remove after implemention new logs list

@@ -16,6 +16,9 @@ MainWindow::MainWindow(QWidget *parent) :
     delimT1 = tr(" : ");
     delimT2 = tr(" -> ");
 
+    hexUpdated = false;
+    textUpdated = false;
+
     setSettings(settings);
 
     ui->setupUi(this);
@@ -417,6 +420,9 @@ void MainWindow::closeLog()
 
     switchToWidget(EMPTY);
 
+    hexUpdated = false;
+    textUpdated = false;
+
     if(isLogOpened)
     {
         for(int i = 0; i < logs->size(); i ++)
@@ -528,10 +534,19 @@ void MainWindow::switchToWidget(WidgetType type)
         labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
         stackedWidget->setCurrentWidget(hexVisualization->getWidget());
-//        hexVisualization->update(project, logs->at(logs->size() - 1));
-        hexVisualization->update(project, logs->at(currentLogId).log);
+
         hexVisualization->activity(true);
         activeWidget = HEXVISUALIZATION;
+
+        if(!hexUpdated)
+        {
+            hexVisualization->update(project, logs->at(currentLogId).log);
+            hexUpdated = true;
+            return;
+        }
+        else
+            hexVisualization->update();
+
         break;
 
     case TEXTVISUALIZATION:
@@ -542,8 +557,16 @@ void MainWindow::switchToWidget(WidgetType type)
         labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
         stackedWidget->setCurrentWidget(textVisualization->getWidget());
-//        textVisualization->update(project, logs->at(logs->size() - 1));
-        textVisualization->update(project, logs->at(currentLogId).log);
+
+        if(!textUpdated)
+        {
+            textVisualization->update(project, logs->at(currentLogId).log);
+            textUpdated = true;
+            return;
+        }
+        else
+            textVisualization->update();
+
         textVisualization->activity(true);
         activeWidget = TEXTVISUALIZATION;
         break;
@@ -571,7 +594,16 @@ void MainWindow::updateVisualization(WidgetType type)
         labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
         stackedWidget->setCurrentWidget(textVisualization->getWidget());
-        textVisualization->update(project, logs->at(currentLogId).log);
+
+        if(!textUpdated)
+        {
+            textVisualization->update(project, logs->at(currentLogId).log);
+            textUpdated = true;
+            return;
+        }
+        else
+            textVisualization->update();
+
         break;
     case HEXVISUALIZATION:
         statusString += tr("Log size: ");
@@ -581,7 +613,16 @@ void MainWindow::updateVisualization(WidgetType type)
         labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
         stackedWidget->setCurrentWidget(hexVisualization->getWidget());
-        hexVisualization->update(project, logs->at(currentLogId).log);
+
+        if(!hexUpdated)
+        {
+            hexVisualization->update(project, logs->at(currentLogId).log);
+            hexUpdated = true;
+            return;
+        }
+        else
+            hexVisualization->update();
+
         break;
     case EMPTY:
         break;
@@ -921,6 +962,9 @@ void MainWindow::filteredLog(int id)
 
     filtrationWidget->close();
 
+    hexUpdated = false;
+    textUpdated = false;
+
     if(activeWidget == TEXTVISUALIZATION)
         updateVisualization(TEXTVISUALIZATION);
     else if(activeWidget == HEXVISUALIZATION)
@@ -948,6 +992,7 @@ void MainWindow::toggleFullScreen(bool checked)
     }
 }
 
+// ИЗМЕНЕНИЯ ТУТ
 void MainWindow::switchCurrentLog()
 {
     QAction *sender = (QAction*)QObject::sender();
@@ -958,6 +1003,7 @@ void MainWindow::switchCurrentLog()
     {
         if(logs->at(i).fileName == sender->text())
         {
+            // ПРОВЕРИТЬ НЕ ВЫБРАН ЛИ ТОТ ЖЕ ЛОГ
             logs->at(currentLogId).log->toggleActivity(false);
 
             currentLogId = i;

@@ -42,7 +42,8 @@ private:
 
     void setSettings(QSettings &someSettings);
 
-    /*virtual*/ void updatePage();
+    void updatePage();
+    void updatePage(int cursorMoving);
 };
 
 #endif // TEXTVISUALIZATION_H

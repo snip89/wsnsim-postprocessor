@@ -31,8 +31,8 @@ void HexVisualization::activity(bool status)
 
     if(!isActive)
     {
-        ui->verticalScrollBar->setValue(0);
-        viewer->clear();
+        //ui->verticalScrollBar->setValue(0);
+        //viewer->clear();
     }
 }
 
@@ -53,6 +53,9 @@ void HexVisualization::update(IProject *project, ILog *log)
     currentLog = log;
 
     topLinePos = 0;
+
+    viewer->clear();
+
     updatePage();
 }
 
@@ -69,7 +72,16 @@ void HexVisualization::update()
 
     viewer->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
 
-    updatePage();
+    int cursorMoving = currentLine - topLinePos;
+
+    qDebug() << "cursorMoving";
+    qDebug() << cursorMoving;
+    qDebug() << currentLine;
+    qDebug() << "cursorMoving";
+
+    viewer->clear();
+
+    updatePage(cursorMoving);
 }
 
 QWidget *HexVisualization::getWidget()
@@ -181,4 +193,27 @@ void HexVisualization::updatePage()
 
     ui->horizontalScrollBar->setMinimum(viewer->horizontalScrollBar()->minimum());
     ui->horizontalScrollBar->setMaximum(viewer->horizontalScrollBar()->maximum());
+}
+
+void HexVisualization::updatePage(int cursorMoving)
+{
+    updatePage();
+
+    if(direction == Up)
+    {
+        for(int i = 0; i < cursorMoving; i++)
+        {
+            viewer->moveCursor(QTextCursor::StartOfLine);
+            viewer->moveCursor(QTextCursor::Down);
+        }
+
+    }
+
+    else if(direction == Down)
+    {
+        for(int i = linesOnPage() - 1; i > cursorMoving; i --)
+        {
+            viewer->moveCursor(QTextCursor::Up);
+        }
+    }
 }
