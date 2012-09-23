@@ -557,6 +557,8 @@ void MainWindow::switchToWidget(WidgetType type)
         labelTotalSize->setVisible(true);
         actionGoToLine->setEnabled(true);
         stackedWidget->setCurrentWidget(textVisualization->getWidget());
+        textVisualization->activity(true);
+        activeWidget = TEXTVISUALIZATION;
 
         if(!textUpdated)
         {
@@ -567,8 +569,6 @@ void MainWindow::switchToWidget(WidgetType type)
         else
             textVisualization->update();
 
-        textVisualization->activity(true);
-        activeWidget = TEXTVISUALIZATION;
         break;
 
     case FILTRATION:
@@ -1011,6 +1011,9 @@ void MainWindow::switchCurrentLog()
             logs->at(currentLogId).log->toggleActivity(true);
 
             WidgetType tempWidgetType = activeWidget;
+
+            textUpdated = false;
+            hexUpdated = false;
 
             if(tempWidgetType == HEXVISUALIZATION || tempWidgetType == TEXTVISUALIZATION)
                 switchToWidget(tempWidgetType);
