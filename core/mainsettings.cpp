@@ -107,12 +107,12 @@ void MainSettings::deleteItems()
     delete generalItem;
 
     delete hexVisualizationColorsAndFontsItem;
-    delete hexVisualizationItem;
     delete hexVisualizationGuiItem;
+    delete hexVisualizationItem;
 
     delete textVisualizationColorsAndFontsItem;
-    delete textVisualizationItem;
     delete textVisualizationGuiItem;
+    delete textVisualizationItem;
 
     delete languageItem;
     delete localizationItem;
