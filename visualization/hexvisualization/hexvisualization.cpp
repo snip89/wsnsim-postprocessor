@@ -74,11 +74,6 @@ void HexVisualization::update()
 
     int cursorMoving = currentLine - topLinePos;
 
-    qDebug() << "cursorMoving";
-    qDebug() << cursorMoving;
-    qDebug() << currentLine;
-    qDebug() << "cursorMoving";
-
     viewer->clear();
 
     updatePage(cursorMoving);

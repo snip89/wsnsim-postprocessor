@@ -57,6 +57,7 @@ protected:
     qint64 topLinePos;
 
     virtual void updatePage() = 0;
+    virtual void updatePage(int cursorMoving) = 0;
 
     int linesOnPage();
 

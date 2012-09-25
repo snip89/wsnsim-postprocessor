@@ -42,7 +42,9 @@ void AbstractTextVisualization::resizeEvent(QResizeEvent *e)
 
     if(isActive)
     {
-        updatePage();
+        int cursorMoving = currentLine - topLinePos;
+
+        updatePage(cursorMoving);
     }
 }
 
@@ -182,7 +184,6 @@ int AbstractTextVisualization::linesOnPage()
 
 void AbstractTextVisualization::scrollBarMoving(int value)
 {
-    qDebug() << value;
     topLinePos = value;
 
     updatePage();
@@ -191,14 +192,6 @@ void AbstractTextVisualization::scrollBarMoving(int value)
 void AbstractTextVisualization::cursorPosChanging()
 {
     currentLine = topLinePos + viewer->textCursor().blockNumber();
-    qDebug() << currentLine;
-    /*qDebug() << "cursor Pos CH";
-    qDebug() << "top line pos";
-    qDebug() << topLinePos;
-    qDebug() << "currentLine";
-    qDebug() << currentLine;
-    qDebug() << "viewer->textCursor().blockNumber()";
-    qDebug() << viewer->textCursor().blockNumber();*/
 }
 
 /*void AbstractTextVisualization::hscrollBarRangeChanging(int min, int max)
