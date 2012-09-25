@@ -51,7 +51,25 @@ void AbstractTextVisualization::resizeEvent(QResizeEvent *e)
 bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
 {
     if(event->type() == QEvent::Wheel && target == viewer)
-        QCoreApplication::sendEvent(ui->verticalScrollBar, event);
+    {
+        int increment = 0;
+
+        if(name == "Hex")
+        {
+            increment = settings.value("Hex visualization/Gui/Increment").value<int>();
+        }
+        else if(name == "Text")
+        {
+            increment = settings.value("Text visualization/Gui/Increment").value<int>();
+        }
+
+        increment = (currentLog->size() * increment) / 100;
+
+        if(((QWheelEvent*)event)->delta() < 0)
+            ui->verticalScrollBar->setValue(topLinePos + increment);
+        else
+            ui->verticalScrollBar->setValue(topLinePos - increment);
+    }
 
     else if(event->type() == QEvent::KeyPress && target == viewer)
     {

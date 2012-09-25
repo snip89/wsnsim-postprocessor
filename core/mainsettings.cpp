@@ -29,6 +29,12 @@ MainSettings::MainSettings(QWidget *parent) :
     textColorsAndFontsSettings = new TextAppearanceColorsAndFontsSettings();
     textColorsAndFontsSettings->showCurrentSettings();
 
+    hexGuiSettings = new HexGuiSettings();
+    hexGuiSettings->showCurrentSettings();
+
+    textGuiSettings = new TextGuiSettings();
+    textGuiSettings->showCurrentSettings();
+
     initConnections();
 }
 
@@ -42,6 +48,8 @@ MainSettings::~MainSettings()
     delete generalGuiSettings;
     delete hexColorsAndFontsSettings;
     delete textColorsAndFontsSettings;
+    delete hexGuiSettings;
+    delete textGuiSettings;
 
     delete settingsFrameWidget;
     delete ui;
@@ -59,15 +67,19 @@ void MainSettings::createItems()
 
     hexVisualizationItem = new QTreeWidgetItem(ui->settingsTree);
     hexVisualizationColorsAndFontsItem = new QTreeWidgetItem(hexVisualizationItem);
+    hexVisualizationGuiItem = new QTreeWidgetItem(hexVisualizationItem);
 
     hexVisualizationItem->setText(0, tr("Hex visualization"));
     hexVisualizationColorsAndFontsItem->setText(0, tr("Colors and Fonts"));
+    hexVisualizationGuiItem->setText(0, tr("Gui"));
 
     textVisualizationItem = new QTreeWidgetItem(ui->settingsTree);
     textVisualizationColorsAndFontsItem = new QTreeWidgetItem(textVisualizationItem);
+    textVisualizationGuiItem = new QTreeWidgetItem(textVisualizationItem);
 
     textVisualizationItem->setText(0, tr("Text visualization"));
     textVisualizationColorsAndFontsItem->setText(0, tr("Colors and Fonts"));
+    textVisualizationGuiItem->setText(0, tr("Gui"));
 
     localizationItem = new QTreeWidgetItem(ui->settingsTree);
     languageItem = new QTreeWidgetItem(localizationItem);
@@ -96,9 +108,11 @@ void MainSettings::deleteItems()
 
     delete hexVisualizationColorsAndFontsItem;
     delete hexVisualizationItem;
+    delete hexVisualizationGuiItem;
 
     delete textVisualizationColorsAndFontsItem;
     delete textVisualizationItem;
+    delete textVisualizationGuiItem;
 
     delete languageItem;
     delete localizationItem;
@@ -155,6 +169,16 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
         settingsFrameWidget->setCurrentWidget(hexColorsAndFontsSettings);
     }
 
+    else if(item == hexVisualizationGuiItem)
+    {
+        hexGuiSettings->setSettingsName(tr("Gui"));
+
+        if(!settingsFrameWidget->isAncestorOf(hexGuiSettings))
+            settingsFrameWidget->addWidget(hexGuiSettings);
+
+        settingsFrameWidget->setCurrentWidget(hexGuiSettings);
+    }
+
     else if(item == textVisualizationItem)
     {
         showEmptySettings(tr("Text visualization"));
@@ -169,6 +193,16 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
 
         settingsFrameWidget->setCurrentWidget(textColorsAndFontsSettings);
     }
+
+    else if(item == textVisualizationGuiItem)
+    {
+        textGuiSettings->setSettingsName(tr("Gui"));
+
+        if(!settingsFrameWidget->isAncestorOf(textGuiSettings))
+            settingsFrameWidget->addWidget(textGuiSettings);
+
+        settingsFrameWidget->setCurrentWidget(textGuiSettings);
+    }    
 
     else if(item == localizationItem)
     {
@@ -192,7 +226,9 @@ void MainSettings::dialogIsAccepted()
     generalGuiSettings->applySettings();
     generalCoreSettings->applySettings();
     hexColorsAndFontsSettings->applySettings();
+    hexGuiSettings->applySettings();
     textColorsAndFontsSettings->applySettings();
+    textGuiSettings->applySettings();
 
     emit settingsApplied();
 
@@ -205,7 +241,9 @@ void MainSettings::dialogIsRejected()
     generalGuiSettings->showCurrentSettings();
     generalCoreSettings->showCurrentSettings();
     hexColorsAndFontsSettings->showCurrentSettings();
+    hexGuiSettings->showCurrentSettings();
     textColorsAndFontsSettings->showCurrentSettings();
+    textGuiSettings->showCurrentSettings();
 
     settings.setValue("Hidden/Gui/Settings_dialog_pos", pos());
 }

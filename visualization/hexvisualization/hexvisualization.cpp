@@ -11,6 +11,8 @@ HexVisualization::HexVisualization(QWidget *parent) :
 {
     setSettings(settings);
 
+    name = "Hex";
+
     // colorsAndFontsSettings = new HexAppearanceColorsAndFontsSettings();
     // colorsAndFontsSettings->showCurrentSettings();
 }
@@ -127,6 +129,12 @@ void HexVisualization::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Hex visualization/Appearance/Colors and Fonts/Font"))
         someSettings.setValue("Hex visualization/Appearance/Colors and Fonts/Font", QFont());
+
+    if(!someSettings.contains("Hex visualization/Gui/Increment"))
+        someSettings.setValue("Hex visualization/Gui/Increment", 1);
+
+    if(!someSettings.contains("Defaults/Hex visualization/Gui/Increment"))
+        someSettings.setValue("Defaults/Hex visualization/Gui/Increment", 1);
 }
 
 void HexVisualization::updatePage()

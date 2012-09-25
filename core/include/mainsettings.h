@@ -23,6 +23,8 @@
 #include "localizationsettings.h"
 #include "hexappearancecolorsandfontssettings.h"
 #include "textappearancecolorsandfontssettings.h"
+#include "hexguisettings.h"
+#include "textguisettings.h"
 
 namespace Ui {
     class MainSettings;
@@ -46,9 +48,11 @@ private:
     QTreeWidgetItem *generalCoreItem;
     QTreeWidgetItem *generalGuiItem;
     QTreeWidgetItem *hexVisualizationItem;
-    QTreeWidgetItem *textVisualizationItem;
     QTreeWidgetItem *hexVisualizationColorsAndFontsItem;
+    QTreeWidgetItem *hexVisualizationGuiItem;
+    QTreeWidgetItem *textVisualizationItem;
     QTreeWidgetItem *textVisualizationColorsAndFontsItem;
+    QTreeWidgetItem *textVisualizationGuiItem;
     QTreeWidgetItem *localizationItem;
     QTreeWidgetItem *languageItem;
 
@@ -59,6 +63,8 @@ private:
     GeneralCoreSettings *generalCoreSettings;
     HexAppearanceColorsAndFontsSettings *hexColorsAndFontsSettings;
     TextAppearanceColorsAndFontsSettings *textColorsAndFontsSettings;
+    HexGuiSettings *hexGuiSettings;
+    TextGuiSettings *textGuiSettings;
 
     Ui::MainSettings *ui;
 

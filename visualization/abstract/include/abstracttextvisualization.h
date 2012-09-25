@@ -65,6 +65,8 @@ protected:
 
     QSettings settings;
 
+    QString name;
+
     Ui::AbstractTextVisualization *ui;
 
 private slots:

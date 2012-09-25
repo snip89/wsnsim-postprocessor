@@ -12,6 +12,8 @@ TextVisualization::TextVisualization(QWidget *parent) :
     AbstractTextVisualization("Text visualization", parent)
 {
     setSettings(settings);
+
+    name = "Text";
 }
 
 void TextVisualization::activity(bool status)
@@ -116,6 +118,12 @@ void TextVisualization::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Text visualization/Appearance/Colors and Fonts/Font"))
         someSettings.setValue("Text visualization/Appearance/Colors and Fonts/Font", QFont());
+
+    if(!someSettings.contains("Text visualization/Gui/Increment"))
+        someSettings.setValue("Text visualization/Gui/Increment", 1);
+
+    if(!someSettings.contains("Defaults/Text visualization/Gui/Increment"))
+        someSettings.setValue("Defaults/Text visualization/Gui/Increment", 1);    
 }
 
 void TextVisualization::updatePage()
