@@ -30,6 +30,19 @@
     </message>
 </context>
 <context>
+    <name>AbstractTextGuiSettings</name>
+    <message>
+        <location filename="ui/abstracttextguisettings.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ui/abstracttextguisettings.ui" line="115"/>
+        <source>Scroll increment (percents):</source>
+        <translation type="unfinished">Приращение прокрутки (проценты):</translation>
+    </message>
+</context>
+<context>
     <name>AbstractTextVisualization</name>
     <message>
         <location filename="ui/abstracttextvisualization.ui" line="14"/>
@@ -205,12 +218,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="45"/>
+        <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="55"/>
         <source>main text</source>
         <translation type="unfinished">основной текст</translation>
     </message>
     <message>
-        <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="48"/>
+        <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="58"/>
         <source>current line</source>
         <translation type="unfinished">текущая строка</translation>
     </message>
@@ -265,57 +278,61 @@
     <name>MainSettings</name>
     <message>
         <location filename="ui/mainsettings.ui" line="32"/>
-        <location filename="ui/mainsettings.ui" line="59"/>
+        <location filename="ui/mainsettings.ui" line="62"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="56"/>
-        <location filename="core/mainsettings.cpp" line="120"/>
+        <location filename="core/mainsettings.cpp" line="64"/>
+        <location filename="core/mainsettings.cpp" line="134"/>
         <source>General</source>
         <translation type="unfinished">Основные</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="57"/>
-        <location filename="core/mainsettings.cpp" line="125"/>
+        <location filename="core/mainsettings.cpp" line="65"/>
+        <location filename="core/mainsettings.cpp" line="139"/>
         <source>Core</source>
         <translation type="unfinished">Ядро</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="58"/>
-        <location filename="core/mainsettings.cpp" line="135"/>
+        <location filename="core/mainsettings.cpp" line="66"/>
+        <location filename="core/mainsettings.cpp" line="74"/>
+        <location filename="core/mainsettings.cpp" line="82"/>
+        <location filename="core/mainsettings.cpp" line="149"/>
+        <location filename="core/mainsettings.cpp" line="174"/>
+        <location filename="core/mainsettings.cpp" line="199"/>
         <source>Gui</source>
         <translation type="unfinished">Интерфейс</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="63"/>
-        <location filename="core/mainsettings.cpp" line="145"/>
+        <location filename="core/mainsettings.cpp" line="72"/>
+        <location filename="core/mainsettings.cpp" line="159"/>
         <source>Hex visualization</source>
         <translation type="unfinished">Шестнадцатиричное представление</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="64"/>
-        <location filename="core/mainsettings.cpp" line="70"/>
-        <location filename="core/mainsettings.cpp" line="150"/>
-        <location filename="core/mainsettings.cpp" line="165"/>
+        <location filename="core/mainsettings.cpp" line="73"/>
+        <location filename="core/mainsettings.cpp" line="81"/>
+        <location filename="core/mainsettings.cpp" line="164"/>
+        <location filename="core/mainsettings.cpp" line="189"/>
         <source>Colors and Fonts</source>
         <translation type="unfinished">Цвета и Шрифты</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="69"/>
-        <location filename="core/mainsettings.cpp" line="160"/>
+        <location filename="core/mainsettings.cpp" line="80"/>
+        <location filename="core/mainsettings.cpp" line="184"/>
         <source>Text visualization</source>
         <translation type="unfinished">Текстовое представление</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="75"/>
-        <location filename="core/mainsettings.cpp" line="175"/>
+        <location filename="core/mainsettings.cpp" line="87"/>
+        <location filename="core/mainsettings.cpp" line="209"/>
         <source>Localization</source>
         <translation type="unfinished">Локализация</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="76"/>
-        <location filename="core/mainsettings.cpp" line="180"/>
+        <location filename="core/mainsettings.cpp" line="88"/>
+        <location filename="core/mainsettings.cpp" line="214"/>
         <source>Language</source>
         <translation type="unfinished">Язык</translation>
     </message>
@@ -343,184 +360,184 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="158"/>
+        <location filename="core/mainwindow.cpp" line="159"/>
         <source>&amp;Open project...</source>
         <translation type="unfinished">&amp;Открыть проект...</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="162"/>
+        <location filename="core/mainwindow.cpp" line="163"/>
         <source>&amp;Open log...</source>
         <translation type="unfinished">&amp;Открыть журнал...</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="166"/>
+        <location filename="core/mainwindow.cpp" line="167"/>
         <source>&amp;Close project</source>
         <translation type="unfinished">&amp;Закрыть проект</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="171"/>
+        <location filename="core/mainwindow.cpp" line="172"/>
         <source>&amp;Print...</source>
         <translation type="unfinished">&amp;Печать...</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="175"/>
+        <location filename="core/mainwindow.cpp" line="176"/>
         <source>&amp;Exit</source>
         <translation type="unfinished">&amp;Выход</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="179"/>
+        <location filename="core/mainwindow.cpp" line="180"/>
         <source>&amp;Settings...</source>
         <translation type="unfinished">&amp;Настройки...</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="182"/>
+        <location filename="core/mainwindow.cpp" line="183"/>
         <source>&amp;Hex</source>
         <translation type="unfinished">&amp;Шестнадцатиричное</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="187"/>
+        <location filename="core/mainwindow.cpp" line="188"/>
         <source>&amp;Text</source>
         <translation type="unfinished">&amp;Текстовое</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="192"/>
+        <location filename="core/mainwindow.cpp" line="193"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">&amp;Копировать</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="196"/>
+        <location filename="core/mainwindow.cpp" line="197"/>
         <source>&amp;Paste</source>
         <translation type="unfinished">&amp;Вставить</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="200"/>
+        <location filename="core/mainwindow.cpp" line="201"/>
         <source>&amp;Select all</source>
         <translation type="unfinished">&amp;Выделить все</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="204"/>
+        <location filename="core/mainwindow.cpp" line="205"/>
         <source>&amp;Find</source>
         <translation type="unfinished">&amp;Найти</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="208"/>
+        <location filename="core/mainwindow.cpp" line="209"/>
         <source>&amp;Find next</source>
         <translation type="unfinished">&amp;Найти следующее</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="212"/>
+        <location filename="core/mainwindow.cpp" line="213"/>
         <source>&amp;Find previous</source>
         <translation type="unfinished">&amp;Найти предыдущее</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="216"/>
+        <location filename="core/mainwindow.cpp" line="217"/>
         <source>&amp;Go to line</source>
         <translation type="unfinished">&amp;Перейти к строке</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="221"/>
+        <location filename="core/mainwindow.cpp" line="222"/>
         <source>&amp;Filter log...</source>
         <translation type="unfinished">&amp;Фильтрация журнала...</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="225"/>
+        <location filename="core/mainwindow.cpp" line="226"/>
         <source>&amp;Full screen</source>
         <translation type="unfinished">&amp;На весь экран</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="230"/>
-        <location filename="core/mainwindow.cpp" line="292"/>
+        <location filename="core/mainwindow.cpp" line="231"/>
+        <location filename="core/mainwindow.cpp" line="293"/>
         <source>&amp;Help</source>
         <translation type="unfinished">&amp;Справка</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="232"/>
+        <location filename="core/mainwindow.cpp" line="233"/>
         <source>&amp;Context help</source>
         <translation type="unfinished">&amp;Контекстная справка</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="235"/>
+        <location filename="core/mainwindow.cpp" line="236"/>
         <source>&amp;About...</source>
         <translation type="unfinished">&amp;О программе...</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="240"/>
+        <location filename="core/mainwindow.cpp" line="241"/>
         <source>&amp;File</source>
         <translation type="unfinished">&amp;Файл</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="244"/>
+        <location filename="core/mainwindow.cpp" line="245"/>
         <source>&amp;Filtration</source>
         <translation type="unfinished">&amp;Фильтрация</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="246"/>
+        <location filename="core/mainwindow.cpp" line="247"/>
         <source>&amp;Logs</source>
         <translation type="unfinished">&amp;Журналы</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="255"/>
+        <location filename="core/mainwindow.cpp" line="256"/>
         <source>&amp;Recent projects...</source>
         <translation type="unfinished">&amp;Последние проекты...</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="263"/>
+        <location filename="core/mainwindow.cpp" line="264"/>
         <source>&amp;Edit</source>
         <translation type="unfinished">&amp;Правка</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="272"/>
+        <location filename="core/mainwindow.cpp" line="273"/>
         <source>&amp;Search</source>
         <translation type="unfinished">&amp;Поиск</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="281"/>
+        <location filename="core/mainwindow.cpp" line="282"/>
         <source>&amp;View</source>
         <translation type="unfinished">&amp;Вид</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="289"/>
+        <location filename="core/mainwindow.cpp" line="290"/>
         <source>&amp;Tools</source>
         <translation type="unfinished">&amp;Сервис</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="524"/>
-        <location filename="core/mainwindow.cpp" line="538"/>
-        <location filename="core/mainwindow.cpp" line="567"/>
-        <location filename="core/mainwindow.cpp" line="577"/>
+        <location filename="core/mainwindow.cpp" line="530"/>
+        <location filename="core/mainwindow.cpp" line="553"/>
+        <location filename="core/mainwindow.cpp" line="590"/>
+        <location filename="core/mainwindow.cpp" line="609"/>
         <source>Log size: </source>
         <translation type="unfinished">Размер журнала: </translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="526"/>
-        <location filename="core/mainwindow.cpp" line="540"/>
-        <location filename="core/mainwindow.cpp" line="569"/>
-        <location filename="core/mainwindow.cpp" line="579"/>
+        <location filename="core/mainwindow.cpp" line="532"/>
+        <location filename="core/mainwindow.cpp" line="555"/>
+        <location filename="core/mainwindow.cpp" line="592"/>
+        <location filename="core/mainwindow.cpp" line="611"/>
         <source> records</source>
         <translation type="unfinished"> записей</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="627"/>
+        <location filename="core/mainwindow.cpp" line="668"/>
         <source>Open project file</source>
         <translation type="unfinished">Открыть файл проекта</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="627"/>
+        <location filename="core/mainwindow.cpp" line="668"/>
         <source>XML project files (*xml)</source>
         <translation type="unfinished">XML файлы проекта (*xml)</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="658"/>
+        <location filename="core/mainwindow.cpp" line="699"/>
         <source>Project file not found</source>
         <translation type="unfinished">Файл проекта не найден</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="688"/>
+        <location filename="core/mainwindow.cpp" line="729"/>
         <source>Project is empty</source>
         <translation type="unfinished">Проект пуст</translation>
     </message>
     <message>
-        <location filename="core/mainwindow.cpp" line="802"/>
+        <location filename="core/mainwindow.cpp" line="843"/>
         <source>No filters</source>
         <translation type="unfinished">Нет фильтров</translation>
     </message>
@@ -542,12 +559,12 @@
 <context>
     <name>TextAppearanceColorsAndFontsSettings</name>
     <message>
-        <location filename="visualization/textvisualization/textappearancecolorsandfontssettings.cpp" line="44"/>
+        <location filename="visualization/textvisualization/textappearancecolorsandfontssettings.cpp" line="55"/>
         <source>main text</source>
         <translation type="unfinished">основной текст</translation>
     </message>
     <message>
-        <location filename="visualization/textvisualization/textappearancecolorsandfontssettings.cpp" line="47"/>
+        <location filename="visualization/textvisualization/textappearancecolorsandfontssettings.cpp" line="58"/>
         <source>current line</source>
         <translation type="unfinished">текущая строка</translation>
     </message>

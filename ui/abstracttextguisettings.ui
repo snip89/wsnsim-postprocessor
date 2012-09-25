@@ -112,7 +112,7 @@
           </sizepolicy>
          </property>
          <property name="text">
-          <string>Increment (percents):</string>
+          <string>Scroll increment (percents):</string>
          </property>
         </widget>
        </item>
