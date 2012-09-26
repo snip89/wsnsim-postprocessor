@@ -186,7 +186,7 @@ void TextAppearanceColorsAndFontsSettings::buttonChangeBackgroundClicked()
         {
             resultColor = colorDialog->selectedColor();
 
-            itemMainText->setForeground(resultColor);
+            itemMainText->setBackground(resultColor);
         }
 
         settings.setValue("Hidden/Gui/Color_dialog_pos", colorDialog->pos());
@@ -208,7 +208,7 @@ void TextAppearanceColorsAndFontsSettings::buttonChangeBackgroundClicked()
         {
             resultColor = colorDialog->selectedColor();
 
-            itemCurrentLine->setForeground(resultColor);
+            itemCurrentLine->setBackground(resultColor);
         }
 
         settings.setValue("Hidden/Gui/Color_dialog_pos", colorDialog->pos());
