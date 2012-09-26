@@ -35,6 +35,19 @@ MainSettings::MainSettings(QWidget *parent) :
     textGuiSettings = new TextGuiSettings();
     textGuiSettings->showCurrentSettings();
 
+    QPluginLoader loader("libSnifferSettings.so");
+    QObject *plugin = loader.instance();
+
+    if(plugin == NULL)
+    {
+        errorMessager.showMessage(tr("Sniffer settings plugin not found"));
+    }
+    else
+        snifferSettings = qobject_cast<ISnifferSettings*>(plugin);
+
+    snifferSettings->applySettings();
+    //qDebug() << snifferSettings->getWidget();
+
     initConnections();
 }
 
@@ -86,6 +99,9 @@ void MainSettings::createItems()
 
     localizationItem->setText(0, tr("Localization"));
     languageItem->setText(0, tr("Language"));
+
+    snifferItem = new QTreeWidgetItem(ui->settingsTree);
+    snifferItem->setText(0, tr("Sniffer"));
 }
 
 void MainSettings::initConnections()
@@ -116,6 +132,8 @@ void MainSettings::deleteItems()
 
     delete languageItem;
     delete localizationItem;
+
+    delete snifferItem;
 }
 
 void MainSettings::showEmptySettings(QString name)
@@ -217,6 +235,16 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
             settingsFrameWidget->addWidget(localizationSettings);
 
         settingsFrameWidget->setCurrentWidget(localizationSettings);
+    }
+
+    else if(item == snifferItem)
+    {
+        snifferSettings->setSettingsName(tr("Sniffer"));
+
+        if(!settingsFrameWidget->isAncestorOf(snifferSettings->getWidget()))
+            settingsFrameWidget->addWidget(snifferSettings->getWidget());
+
+        settingsFrameWidget->setCurrentWidget(snifferSettings->getWidget());
     }
 }
 

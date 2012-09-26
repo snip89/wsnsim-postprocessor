@@ -15,6 +15,8 @@
 #include <QList>
 #include <QStackedWidget>
 #include <QAbstractButton>
+#include <QPluginLoader> 
+#include <QErrorMessage>
 #include <QDialog>
 
 #include "emptysettings.h"
@@ -25,6 +27,7 @@
 #include "textappearancecolorsandfontssettings.h"
 #include "hexguisettings.h"
 #include "textguisettings.h"
+#include "isniffersettings.h" 
 
 namespace Ui {
     class MainSettings;
@@ -55,6 +58,7 @@ private:
     QTreeWidgetItem *textVisualizationGuiItem;
     QTreeWidgetItem *localizationItem;
     QTreeWidgetItem *languageItem;
+    QTreeWidgetItem *snifferItem;
 
     //settings widgets
     EmptySettings *emptySettings;
@@ -65,6 +69,9 @@ private:
     TextAppearanceColorsAndFontsSettings *textColorsAndFontsSettings;
     HexGuiSettings *hexGuiSettings;
     TextGuiSettings *textGuiSettings;
+    ISnifferSettings *snifferSettings;
+
+    QErrorMessage errorMessager;
 
     Ui::MainSettings *ui;
 
