@@ -56,10 +56,12 @@ protected:
     bool isActive;
     qint64 topLinePos;
 
+    int decrement;
+
     virtual void updatePage() = 0;
     virtual void updatePage(int cursorMoving) = 0;
 
-    int linesOnPage();
+    int linesOnPage(int decrement);
 
     Viewer *viewer;
 

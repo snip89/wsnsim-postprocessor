@@ -141,7 +141,7 @@ void HexVisualization::updatePage()
 {
     currentLog->seek(topLinePos);
     viewer->clear();
-    int recordsCount = linesOnPage();
+    int recordsCount = linesOnPage(decrement);
 
     while(topLinePos > 0 && recordsCount > currentLog->size() - topLinePos)
     {
@@ -191,11 +191,21 @@ void HexVisualization::updatePage()
     else if(direction == Down)
     {
         viewer->moveCursor(QTextCursor::End);
-        viewer->moveCursor(QTextCursor::StartOfLine);
+        viewer->moveCursor(QTextCursor::StartOfBlock);
     }
 
     ui->horizontalScrollBar->setMinimum(viewer->horizontalScrollBar()->minimum());
     ui->horizontalScrollBar->setMaximum(viewer->horizontalScrollBar()->maximum());
+
+    if(viewer->document()->size().height() > viewer->viewport()->height())
+    {
+        decrement ++;
+        updatePage();
+    }
+    else
+    {
+        decrement = 0;
+    }
 }
 
 void HexVisualization::updatePage(int cursorMoving)
@@ -206,17 +216,16 @@ void HexVisualization::updatePage(int cursorMoving)
     {
         for(int i = 0; i < cursorMoving; i++)
         {
-            viewer->moveCursor(QTextCursor::StartOfLine);
-            viewer->moveCursor(QTextCursor::Down);
+            viewer->moveCursor(QTextCursor::NextBlock);
         }
 
     }
 
     else if(direction == Down)
     {
-        for(int i = linesOnPage() - 1; i > cursorMoving; i --)
+        for(int i = linesOnPage(decrement) - 1; i > cursorMoving; i --)
         {
-            viewer->moveCursor(QTextCursor::Up);
+            viewer->moveCursor(QTextCursor::PreviousBlock);
         }
     }
 }

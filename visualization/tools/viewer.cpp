@@ -13,6 +13,8 @@ Viewer::Viewer(QString group, QWidget *parent)
 
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
 
+    this->setLineWrapMode(QTextEdit::WidgetWidth);
+
     invisible = false;
 }
 
@@ -39,7 +41,6 @@ void Viewer::highlightCurrentLine()
 {
     if(!invisible)
     {
-
         QList<QTextEdit::ExtraSelection> extraSelections;
 
         QTextEdit::ExtraSelection selection;
@@ -48,7 +49,6 @@ void Viewer::highlightCurrentLine()
         selection.format.setForeground(lineFontColor);
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);
         selection.cursor = textCursor();
-        selection.cursor.clearSelection();
         extraSelections.append(selection);
 
         this->setExtraSelections(extraSelections);
