@@ -8,6 +8,7 @@
 
 #include <QWidget>
 #include <QObject>
+#include <QtCore>
 
 #include "ui_abstracttextguisettings.h"
 

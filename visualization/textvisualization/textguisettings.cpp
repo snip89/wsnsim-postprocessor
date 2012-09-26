@@ -16,7 +16,7 @@ void TextGuiSettings::setSettingsName(QString name)
 
 void TextGuiSettings::showCurrentSettings()
 {
-    ui->incrementSpinBox->setValue(settings.value("Text visualization/Gui/Increment").value<int>());
+    ui->incrementLineEdit->setText(QString::number(settings.value("Text visualization/Gui/Increment").value<int>()));
 
     bool lineWrapMode = settings.value("Text visualization/Gui/LineWrapMode").value<bool>();
 
@@ -28,7 +28,7 @@ void TextGuiSettings::showCurrentSettings()
 
 void TextGuiSettings::applySettings()
 {
-    settings.setValue("Text visualization/Gui/Increment", ui->incrementSpinBox->value());
+        settings.setValue("Text visualization/Gui/Increment", ui->incrementLineEdit->text().toInt());
 
     if(ui->lineWrapComboBox->currentIndex() == 0)
         settings.setValue("Text visualization/Gui/LineWrapMode", 1);
@@ -42,7 +42,7 @@ TextGuiSettings::~TextGuiSettings()
 
 void TextGuiSettings::showDefaultSettings()
 {
-    ui->incrementSpinBox->setValue(settings.value("Defaults/Text visualization/Gui/Increment").value<int>());
+    ui->incrementLineEdit->setText(QString::number(settings.value("Defaults/Text visualization/Gui/Increment").value<int>()));
 
     bool lineWrapMode = settings.value("Defaults/Text visualization/Gui/LineWrapMode").value<bool>();
 

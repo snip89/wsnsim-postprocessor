@@ -48,7 +48,7 @@ void Viewer::highlightCurrentLine()
         selection.format.setBackground(lineColor);
         selection.format.setForeground(lineFontColor);
         selection.cursor = textCursor();
-        selection.cursor.movePosition(QTextCursor::StartOfLine);
+        selection.cursor.movePosition(QTextCursor::StartOfBlock);
         selection.cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
 
         selection.format.setProperty(QTextFormat::FullWidthSelection, true);

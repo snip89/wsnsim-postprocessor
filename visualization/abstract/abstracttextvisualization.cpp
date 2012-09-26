@@ -65,7 +65,7 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
             increment = settings.value("Text visualization/Gui/Increment").value<int>();
         }
 
-        increment = (currentLog->size() * increment) / 100;
+        //increment = (currentLog->size() * increment) / 100;
 
         if(((QWheelEvent*)event)->delta() < 0)
             ui->verticalScrollBar->setValue(topLinePos + increment);

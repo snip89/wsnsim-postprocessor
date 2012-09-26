@@ -16,7 +16,7 @@ void HexGuiSettings::setSettingsName(QString name)
 
 void HexGuiSettings::showCurrentSettings()
 {
-    ui->incrementSpinBox->setValue(settings.value("Hex visualization/Gui/Increment").value<int>());
+    ui->incrementLineEdit->setText(QString::number(settings.value("Hex visualization/Gui/Increment").value<int>()));
 
     bool lineWrapMode = settings.value("Hex visualization/Gui/LineWrapMode").value<bool>();
 
@@ -28,7 +28,7 @@ void HexGuiSettings::showCurrentSettings()
 
 void HexGuiSettings::applySettings()
 {
-    settings.setValue("Hex visualization/Gui/Increment", ui->incrementSpinBox->value());
+    settings.setValue("Hex visualization/Gui/Increment", ui->incrementLineEdit->text().toInt());
 
     if(ui->lineWrapComboBox->currentIndex() == 0)
         settings.setValue("Hex visualization/Gui/LineWrapMode", 1);
@@ -42,7 +42,7 @@ HexGuiSettings::~HexGuiSettings()
 
 void HexGuiSettings::showDefaultSettings()
 {
-    ui->incrementSpinBox->setValue(settings.value("Defaults/Hex visualization/Gui/Increment").value<int>());
+    ui->incrementLineEdit->setText(QString::number(settings.value("Defaults/Hex visualization/Gui/Increment").value<int>()));
 
     bool lineWrapMode = settings.value("Defaults/Hex visualization/Gui/LineWrapMode").value<bool>();
 

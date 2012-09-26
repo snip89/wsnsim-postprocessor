@@ -41,6 +41,11 @@
         <source>Scroll increment (percents):</source>
         <translation type="unfinished">Приращение прокрутки (проценты):</translation>
     </message>
+    <message>
+        <location filename="ui/abstracttextguisettings.ui" line="155"/>
+        <source>Line wrap mode:</source>
+        <translation type="unfinished">Перенос строки:</translation>
+    </message>
 </context>
 <context>
     <name>AbstractTextVisualization</name>
@@ -226,6 +231,19 @@
         <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="58"/>
         <source>current line</source>
         <translation type="unfinished">текущая строка</translation>
+    </message>
+</context>
+<context>
+    <name>HexGuiSettings</name>
+    <message>
+        <location filename="visualization/hexvisualization/hexguisettings.cpp" line="8"/>
+        <source>On</source>
+        <translation type="unfinished">Вкл</translation>
+    </message>
+    <message>
+        <location filename="visualization/hexvisualization/hexguisettings.cpp" line="9"/>
+        <source>Off</source>
+        <translation type="unfinished">Выкл</translation>
     </message>
 </context>
 <context>
@@ -567,6 +585,19 @@
         <location filename="visualization/textvisualization/textappearancecolorsandfontssettings.cpp" line="58"/>
         <source>current line</source>
         <translation type="unfinished">текущая строка</translation>
+    </message>
+</context>
+<context>
+    <name>TextGuiSettings</name>
+    <message>
+        <location filename="visualization/textvisualization/textguisettings.cpp" line="8"/>
+        <source>On</source>
+        <translation type="unfinished">Вкл</translation>
+    </message>
+    <message>
+        <location filename="visualization/textvisualization/textguisettings.cpp" line="9"/>
+        <source>Off</source>
+        <translation type="unfinished">Выкл</translation>
     </message>
 </context>
 </TS>
