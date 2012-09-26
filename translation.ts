@@ -37,12 +37,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="ui/abstracttextguisettings.ui" line="115"/>
-        <source>Scroll increment (percents):</source>
-        <translation type="unfinished">Приращение прокрутки (проценты):</translation>
+        <location filename="ui/abstracttextguisettings.ui" line="128"/>
+        <source>Scroll increment:</source>
+        <translation type="unfinished">Приращение прокрутки:</translation>
     </message>
     <message>
-        <location filename="ui/abstracttextguisettings.ui" line="155"/>
+        <source>Scroll increment (percents):</source>
+        <translation type="obsolete">Приращение прокрутки (проценты):</translation>
+    </message>
+    <message>
+        <location filename="ui/abstracttextguisettings.ui" line="167"/>
         <source>Line wrap mode:</source>
         <translation type="unfinished">Перенос строки:</translation>
     </message>
