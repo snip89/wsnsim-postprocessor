@@ -4,6 +4,9 @@ TextGuiSettings::TextGuiSettings(QWidget *parent) :
 	AbstractTextGuiSettings(parent)
 {
 	connect(ui->buttonBox, SIGNAL(clicked(QAbstractButton*)), this, SLOT(buttonClicked(QAbstractButton*)));
+
+    ui->lineWrapComboBox->addItem(tr("On"));
+    ui->lineWrapComboBox->addItem(tr("Off"));    
 }
 
 void TextGuiSettings::setSettingsName(QString name)
@@ -13,12 +16,24 @@ void TextGuiSettings::setSettingsName(QString name)
 
 void TextGuiSettings::showCurrentSettings()
 {
-    ui->incrementSpinBox->setValue(settings.value("Text visualization/Gui/Increment").value<int>());    
+    ui->incrementSpinBox->setValue(settings.value("Text visualization/Gui/Increment").value<int>());
+
+    bool lineWrapMode = settings.value("Text visualization/Gui/LineWrapMode").value<bool>();
+
+    if(lineWrapMode)
+        ui->lineWrapComboBox->setCurrentIndex(0);
+    else
+        ui->lineWrapComboBox->setCurrentIndex(1);    
 }
 
 void TextGuiSettings::applySettings()
 {
-    settings.setValue("Text visualization/Gui/Increment", ui->incrementSpinBox->value());    
+    settings.setValue("Text visualization/Gui/Increment", ui->incrementSpinBox->value());
+
+    if(ui->lineWrapComboBox->currentIndex() == 0)
+        settings.setValue("Text visualization/Gui/LineWrapMode", 1);
+    else
+        settings.setValue("Text visualization/Gui/LineWrapMode", 0);    
 }
 
 TextGuiSettings::~TextGuiSettings()
@@ -27,7 +42,14 @@ TextGuiSettings::~TextGuiSettings()
 
 void TextGuiSettings::showDefaultSettings()
 {
-    ui->incrementSpinBox->setValue(settings.value("Defaults/Text visualization/Gui/Increment").value<int>());    
+    ui->incrementSpinBox->setValue(settings.value("Defaults/Text visualization/Gui/Increment").value<int>());
+
+    bool lineWrapMode = settings.value("Defaults/Text visualization/Gui/LineWrapMode").value<bool>();
+
+    if(lineWrapMode)
+        ui->lineWrapComboBox->setCurrentIndex(0);
+    else
+        ui->lineWrapComboBox->setCurrentIndex(1);        
 }
 
 void TextGuiSettings::buttonClicked(QAbstractButton *button)

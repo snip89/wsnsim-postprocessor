@@ -4,7 +4,6 @@ Viewer::Viewer(QString group, QWidget *parent)
     : QTextEdit(parent)
 {
     this->setReadOnly(true);
-    this->setLineWrapMode(QTextEdit::NoWrap);
     this->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 //    this->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
@@ -12,8 +11,6 @@ Viewer::Viewer(QString group, QWidget *parent)
     // QSettings settings;
 
     connect(this, SIGNAL(cursorPositionChanged()), this, SLOT(highlightCurrentLine()));
-
-    this->setLineWrapMode(QTextEdit::WidgetWidth);
 
     invisible = false;
 }

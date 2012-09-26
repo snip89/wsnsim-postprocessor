@@ -13,7 +13,7 @@ TextVisualization::TextVisualization(QWidget *parent) :
 {
     setSettings(settings);
 
-    name = "Text";
+    name = "Text";    
 }
 
 void TextVisualization::activity(bool status)
@@ -29,6 +29,11 @@ void TextVisualization::activity(bool status)
 
 void TextVisualization::update(IProject *project, ILog *log)
 {
+    if(settings.value("Text visualization/Gui/LineWrapMode").value<bool>())
+        viewer->setLineWrapMode(QTextEdit::WidgetWidth);
+    else
+        viewer->setLineWrapMode(QTextEdit::NoWrap);    
+
     viewer->setLineColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
     viewer->setLineFontColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
 
@@ -52,6 +57,11 @@ void TextVisualization::update(IProject *project, ILog *log)
 
 void TextVisualization::update()
 {
+    if(settings.value("Text visualization/Gui/LineWrapMode").value<bool>())
+        viewer->setLineWrapMode(QTextEdit::WidgetWidth);
+    else
+        viewer->setLineWrapMode(QTextEdit::NoWrap);    
+    
     viewer->setLineColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
     viewer->setLineFontColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
 
@@ -123,7 +133,13 @@ void TextVisualization::setSettings(QSettings &someSettings)
         someSettings.setValue("Text visualization/Gui/Increment", 1);
 
     if(!someSettings.contains("Defaults/Text visualization/Gui/Increment"))
-        someSettings.setValue("Defaults/Text visualization/Gui/Increment", 1);    
+        someSettings.setValue("Defaults/Text visualization/Gui/Increment", 1);
+
+    if(!someSettings.contains("Text visualization/Gui/LineWrapMode"))
+        someSettings.setValue("Text visualization/Gui/LineWrapMode", 0);
+
+    if(!someSettings.contains("Defaults/Text visualization/Gui/LineWrapMode"))
+        someSettings.setValue("Defaults/Text visualization/Gui/LineWrapMode", 0);            
 }
 
 void TextVisualization::updatePage()

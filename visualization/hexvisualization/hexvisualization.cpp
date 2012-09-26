@@ -12,20 +12,7 @@ HexVisualization::HexVisualization(QWidget *parent) :
     setSettings(settings);
 
     name = "Hex";
-
-    // colorsAndFontsSettings = new HexAppearanceColorsAndFontsSettings();
-    // colorsAndFontsSettings->showCurrentSettings();
 }
-
-/*IVisualizationSettings *HexVisualization::visualizationSettings(QString name)
-{
-    if(name == tr("Colors and Fonts"))
-    {
-        return (IVisualizationSettings*)colorsAndFontsSettings;
-    }
-
-    return NULL;
-}*/
 
 void HexVisualization::activity(bool status)
 {
@@ -40,6 +27,11 @@ void HexVisualization::activity(bool status)
 
 void HexVisualization::update(IProject *project, ILog *log)
 {
+    if(settings.value("Hex visualization/Gui/LineWrapMode").value<bool>())
+        viewer->setLineWrapMode(QTextEdit::WidgetWidth);
+    else
+        viewer->setLineWrapMode(QTextEdit::NoWrap);
+
     viewer->setLineColor(settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
     viewer->setLineFontColor(settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
 
@@ -63,6 +55,11 @@ void HexVisualization::update(IProject *project, ILog *log)
 
 void HexVisualization::update()
 {
+    if(settings.value("Hex visualization/Gui/LineWrapMode").value<bool>())
+        viewer->setLineWrapMode(QTextEdit::WidgetWidth);
+    else
+        viewer->setLineWrapMode(QTextEdit::NoWrap);    
+    
     viewer->setLineColor(settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
     viewer->setLineFontColor(settings.value("Hex visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
 
@@ -135,6 +132,12 @@ void HexVisualization::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Defaults/Hex visualization/Gui/Increment"))
         someSettings.setValue("Defaults/Hex visualization/Gui/Increment", 1);
+
+    if(!someSettings.contains("Hex visualization/Gui/LineWrapMode"))
+        someSettings.setValue("Hex visualization/Gui/LineWrapMode", 0);
+
+    if(!someSettings.contains("Defaults/Hex visualization/Gui/LineWrapMode"))
+        someSettings.setValue("Defaults/Hex visualization/Gui/LineWrapMode", 0);
 }
 
 void HexVisualization::updatePage()
