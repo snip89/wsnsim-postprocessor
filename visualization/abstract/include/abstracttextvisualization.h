@@ -55,6 +55,7 @@ protected:
 
     bool isActive;
     qint64 topLinePos;
+    bool wheel;
 
     int decrement;
 

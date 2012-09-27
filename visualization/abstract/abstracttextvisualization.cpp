@@ -7,35 +7,23 @@ AbstractTextVisualization::AbstractTextVisualization(QString group, QWidget *par
 {
     ui->setupUi(this);
 
-//    ui->horizontalScrollBar->setVisible(false);
-
     connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarMoving(int)));
 
     viewer = new Viewer(group);
-
     viewer->installEventFilter(this);
 
     ui->vAreaGridLayout->addWidget(viewer);
-//    ui->gridLayout->addWidget(viewer, 0, 1);
 
     isActive = false;
 
     direction = Up;
-
     decrement = 0;
-
-//    viewer->setHorizontalScrollBar(ui->horizontalScrollBar);
-//    viewer->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
-
-    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), viewer->horizontalScrollBar(), SLOT(setValue(int)));
-
     currentLine = 0;
 
+    wheel = false;
+
+    connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), viewer->horizontalScrollBar(), SLOT(setValue(int)));
     connect(viewer, SIGNAL(cursorPositionChanged()), this, SLOT(cursorPosChanging()));
-
-//    connect(viewer->horizontalScrollBar(), SIGNAL(rangeChanged(int, int)), ui->horizontalScrollBar, SLOT(hscrollBarRangeChanging(int, int)));
-
-//    viewer->addScrollBarWidget(ui->horizontalScrollBar, Qt::AlignBottom);
 }
 
 void AbstractTextVisualization::resizeEvent(QResizeEvent *e)
@@ -54,6 +42,8 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
 {
     if(event->type() == QEvent::Wheel && target == viewer)
     {
+        wheel = true;
+
         int increment = 0;
 
         if(name == "Hex")
@@ -65,12 +55,20 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
             increment = settings.value("Text visualization/Gui/Increment").value<int>();
         }
 
-        //increment = (currentLog->size() * increment) / 100;
-
         if(((QWheelEvent*)event)->delta() < 0)
+        {
+            /*if(currentLine < (topLinePos + increment))
+                viewer->setInvisible(true);*/
+
             ui->verticalScrollBar->setValue(topLinePos + increment);
+        }
         else
+        {
+/*            if(currentLine >= (topLinePos - increment + linesOnPage(decrement)))
+                viewer->setInvisible(true);*/
+
             ui->verticalScrollBar->setValue(topLinePos - increment);
+        }
     }
 
     else if(event->type() == QEvent::KeyPress && target == viewer)
@@ -167,7 +165,18 @@ void AbstractTextVisualization::scrollBarMoving(int value)
 {
     topLinePos = value;
 
-    updatePage();
+    int cursorMoving = 0;
+
+    if(wheel)
+    {
+        cursorMoving = currentLine - topLinePos;
+        updatePage(cursorMoving);
+        wheel = false;
+    }
+    else
+    {
+        updatePage();
+    }
 }
 
 void AbstractTextVisualization::cursorPosChanging()
