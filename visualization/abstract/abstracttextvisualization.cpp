@@ -58,13 +58,16 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
         if(((QWheelEvent*)event)->delta() < 0)
         {
             /*if(currentLine < (topLinePos + increment))
-                viewer->setInvisible(true);*/
+                viewer->setInvisible(true);
+
+            if(currentLine > (topLinePos + increment))
+                viewer->setInvisible(false);*/
 
             ui->verticalScrollBar->setValue(topLinePos + increment);
         }
         else
         {
-/*            if(currentLine >= (topLinePos - increment + linesOnPage(decrement)))
+            /*if(currentLine > (topLinePos - increment + linesOnPage(decrement) - 1))
                 viewer->setInvisible(true);*/
 
             ui->verticalScrollBar->setValue(topLinePos - increment);
