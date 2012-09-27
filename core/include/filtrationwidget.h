@@ -18,6 +18,7 @@
 #include <QListWidget>
 #include <QAbstractButton>
 #include <QDialog>
+#include <QSettings> 
 
 #include "log.h"
 #include "project.h"
@@ -50,6 +51,8 @@ public:
     ~FiltrationWidget();
 
 private:
+    QSettings settings;
+
     Ui::FiltrationWidget *ui;
 
     Project *currentProject;
@@ -75,7 +78,6 @@ private:
 
 signals:
     void logFiltered(int id);
-    void filtrationCanceled();
 
 private slots:
     void addFilter();
@@ -84,6 +86,9 @@ private slots:
 //    void showLogsListWidgetContextMenu(const QPoint& pos);
     void paramSelected(int index);
     void selectedListItem(QListWidgetItem *item);
+
+    void dialogIsAccepted();
+    void dialogIsRejected();
 };
 
 #endif // FILTRATIONWIDGET_H

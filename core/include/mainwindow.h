@@ -210,7 +210,7 @@ private slots:
     // void canceledSettings();
 
     void filteredLog(int id);
-    void canceledFiltration();
+    // void canceledFiltration();
 
     void toggleFullScreen(bool checked);
 

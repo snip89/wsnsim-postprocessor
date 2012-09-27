@@ -42,7 +42,7 @@ MainWindow::MainWindow(QWidget *parent) :
     filtrationWidget = new FiltrationWidget();
 
     connect(filtrationWidget, SIGNAL(logFiltered(int)), this, SLOT(filteredLog(int)));
-    connect(filtrationWidget, SIGNAL(filtrationCanceled()), this, SLOT(canceledFiltration()));
+    // connect(filtrationWidget, SIGNAL(filtrationCanceled()), this, SLOT(canceledFiltration()));
 
     hexVisualization = new HexVisualization();
     textVisualization = new TextVisualization();
@@ -973,12 +973,12 @@ void MainWindow::filteredLog(int id)
     setTitle(project->projectName(), logs->at(currentLogId).fileName);
 }
 
-void MainWindow::canceledFiltration()
+/*void MainWindow::canceledFiltration()
 {
     settings.setValue("Hidden/Gui/Filtration_dialog_pos", filtrationWidget->pos());
 
     filtrationWidget->close();
-}
+}*/
 
 void MainWindow::toggleFullScreen(bool checked)
 {

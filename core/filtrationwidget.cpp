@@ -21,9 +21,8 @@ FiltrationWidget::FiltrationWidget(QWidget *parent) :
     connect(ui->filtrationListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
             this, SLOT(showFiltrationListWidgetContextMenu(const QPoint&)));
 
-//    ui->logsListWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-//    connect(ui->logsListWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
-//            this, SLOT(showLogsListWidgetContextMenu(const QPoint&)));
+    connect(this, SIGNAL(accepted()), this, SLOT(dialogIsAccepted()));
+    connect(this, SIGNAL(rejected()), this, SLOT(dialogIsRejected()));
 
     connect(ui->filtrationParamComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(paramSelected(int)));
 
@@ -334,25 +333,14 @@ void FiltrationWidget::addFilter()
 
 void FiltrationWidget::buttonClicked(QAbstractButton *button)
 {
-    /*if(button->text() == tr("OK"))
-    {
-        execute();
-    }
-    else if(button->text() == tr("Cancel"))
-    {
-        emit filtrationCanceled();
-    }*/
-
     if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::AcceptRole)
     {
-        // applySettings();
-        execute();
+        done(QDialog::Accepted);
     }
 
     else if(ui->buttonBox->buttonRole(button) == QDialogButtonBox::RejectRole)
     {
-        // showDefaultSettings();
-        emit filtrationCanceled();
+        done(QDialog::Rejected);
     }
 }
 
@@ -375,102 +363,6 @@ void FiltrationWidget::showFiltrationListWidgetContextMenu(const QPoint& pos)
         }
     }
 }
-
-//void FiltrationWidget::showLogsListWidgetContextMenu(const QPoint& pos)
-//{
-/*    QPoint globalPos = ui->logsListWidget->mapToGlobal(pos);
-
-    QMenu contextMenu;
-    contextMenu.addAction(tr("set current"));
-    contextMenu.addAction(tr("delete"));
-
-    QListWidgetItem *item = ui->logsListWidget->itemAt(pos);
-
-    if(item)
-    {
-        QAction* selectedItem = contextMenu.exec(globalPos);
-        if(selectedItem)
-        {
-            
-            if(selectedItem->text() == "set current")
-            {
-                QString fileName = item->text();
-
-                for(int i = 0; i < logs->size(); i ++)
-                {
-                    if(logs->at(i).fileName == fileName)
-                    {
-                        logs->at(currentLogId).log->toggleActivity(false);
-
-//                        setCurrentLog(logs->at(i).id);
-                        setCurrentLog(i);
-
-                        logs->at(currentLogId).log->toggleActivity(true);
-                    }
-                }
-
-                // foreach(LogInfo logInfo, logs)
-                // {
-                //     if(logInfo.fileName == fileName)
-                //     {
-                //         setCurrentLog(logInfo.id);
-                //     }
-                // }
-
-//            filters.removeAt(ui->filtrationListWidget->row(item));
-//            delete item;
-            }
-            else if(selectedItem->text() == "delete")
-            {
-                QString fileName = item->text();
-
-                for(int i = 0; i < logs->size(); i ++)
-                {
-                    if(logs->at(i).fileName == fileName)
-                    {
-                        if(i == mainLogId)
-                            return;
-                        else
-                        {
-                            if(i == currentLogId)
-                            {
-                                logs->at(currentLogId).log->toggleActivity(false);
-
-                                Log *log = logs->at(currentLogId).log;
-
-                                logs->removeAt(currentLogId);
-
-                                delete log;
-
-                                delete item;
-
-                                setCurrentLog(mainLogId);
-
-                                logs->at(currentLogId).log->toggleActivity(true);
-                            }
-                            else
-                            {
-                                Log *log = logs->at(i).log;
-
-                                logs->removeAt(i);
-
-                                delete log;
-
-                                delete item;
-
-                                if(i < currentLogId)
-                                {
-                                    currentLogId --;
-                                    setCurrentLog(currentLogId);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        }*/
-//}
 
 void FiltrationWidget::paramSelected(int index)
 {
@@ -497,4 +389,16 @@ void FiltrationWidget::selectedListItem(QListWidgetItem *item)
             logs->at(currentLogId).log->toggleActivity(true);
         }
     }
+}
+
+void FiltrationWidget::dialogIsAccepted()
+{
+    execute();
+
+    settings.setValue("Hidden/Gui/Filtration_dialog_pos", pos());
+}
+
+void FiltrationWidget::dialogIsRejected()
+{
+    settings.setValue("Hidden/Gui/Filtration_dialog_pos", pos());
 }
