@@ -49,9 +49,16 @@ void Viewer::highlightCurrentLine()
         selection.format.setForeground(lineFontColor);
         selection.cursor = textCursor();
         selection.cursor.movePosition(QTextCursor::StartOfBlock);
-        selection.cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
 
-        selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+        selection.cursor.movePosition(QTextCursor::EndOfLine);
+
+        if(selection.cursor.atBlockEnd())
+            selection.format.setProperty(QTextFormat::FullWidthSelection, true);
+        else
+        {
+            selection.cursor.movePosition(QTextCursor::StartOfBlock);
+            selection.cursor.movePosition(QTextCursor::EndOfBlock, QTextCursor::KeepAnchor);
+        }
 
         
         extraSelections.append(selection);
