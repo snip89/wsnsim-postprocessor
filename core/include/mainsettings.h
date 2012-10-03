@@ -27,7 +27,6 @@
 #include "textappearancecolorsandfontssettings.h"
 #include "hexguisettings.h"
 #include "textguisettings.h"
-#include "isniffersettings.h" 
 
 namespace Ui {
     class MainSettings;
@@ -58,7 +57,6 @@ private:
     QTreeWidgetItem *textVisualizationGuiItem;
     QTreeWidgetItem *localizationItem;
     QTreeWidgetItem *languageItem;
-    QTreeWidgetItem *snifferItem;
 
     //settings widgets
     EmptySettings *emptySettings;
@@ -69,7 +67,6 @@ private:
     TextAppearanceColorsAndFontsSettings *textColorsAndFontsSettings;
     HexGuiSettings *hexGuiSettings;
     TextGuiSettings *textGuiSettings;
-    ISnifferSettings *snifferSettings;
 
     QErrorMessage errorMessager;
 
@@ -83,14 +80,7 @@ private:
 
     void showEmptySettings(QString name);
 
-    // QList<QWidget*> widgets;
-
-    // void addChildSettings(QSettings &settings, QTreeWidgetItem *parent, QString group);
-
 signals:
-    // void settingSelected(QString topLevelName, QString settingName);
-    // void settingsApplied();
-    // void settingsCanceled();
 
     void settingsApplied();
 
