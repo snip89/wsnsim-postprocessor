@@ -27,6 +27,8 @@
 #include "textappearancecolorsandfontssettings.h"
 #include "hexguisettings.h"
 #include "textguisettings.h"
+#include "sniffercoresettings.h"
+#include "snifferguisettings.h"
 
 namespace Ui {
     class MainSettings;
@@ -57,6 +59,9 @@ private:
     QTreeWidgetItem *textVisualizationGuiItem;
     QTreeWidgetItem *localizationItem;
     QTreeWidgetItem *languageItem;
+    QTreeWidgetItem *snifferItem;
+    QTreeWidgetItem *snifferCoreItem;
+    QTreeWidgetItem *snifferGuiItem;
 
     //settings widgets
     EmptySettings *emptySettings;
@@ -67,6 +72,8 @@ private:
     TextAppearanceColorsAndFontsSettings *textColorsAndFontsSettings;
     HexGuiSettings *hexGuiSettings;
     TextGuiSettings *textGuiSettings;
+    SnifferCoreSettings *snifferCoreSettings;
+    SnifferGuiSettings *snifferGuiSettings;
 
     QErrorMessage errorMessager;
 

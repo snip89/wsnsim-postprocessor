@@ -90,52 +90,52 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/filtrationwidget.cpp" line="185"/>
-        <location filename="core/filtrationwidget.cpp" line="218"/>
+        <location filename="core/filtrationwidget.cpp" line="184"/>
+        <location filename="core/filtrationwidget.cpp" line="217"/>
         <source>Filtration error</source>
         <translation type="unfinished">Ошибка фильтрации</translation>
     </message>
     <message>
-        <location filename="core/filtrationwidget.cpp" line="277"/>
-        <location filename="core/filtrationwidget.cpp" line="293"/>
+        <location filename="core/filtrationwidget.cpp" line="276"/>
+        <location filename="core/filtrationwidget.cpp" line="292"/>
         <source>==</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/filtrationwidget.cpp" line="278"/>
-        <location filename="core/filtrationwidget.cpp" line="287"/>
+        <location filename="core/filtrationwidget.cpp" line="277"/>
+        <location filename="core/filtrationwidget.cpp" line="286"/>
         <source>&lt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/filtrationwidget.cpp" line="279"/>
+        <location filename="core/filtrationwidget.cpp" line="278"/>
         <source>&lt;=</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/filtrationwidget.cpp" line="280"/>
-        <location filename="core/filtrationwidget.cpp" line="288"/>
+        <location filename="core/filtrationwidget.cpp" line="279"/>
+        <location filename="core/filtrationwidget.cpp" line="287"/>
         <source>&gt;</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/filtrationwidget.cpp" line="281"/>
+        <location filename="core/filtrationwidget.cpp" line="280"/>
         <source>&gt;=</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/filtrationwidget.cpp" line="282"/>
-        <location filename="core/filtrationwidget.cpp" line="294"/>
+        <location filename="core/filtrationwidget.cpp" line="281"/>
+        <location filename="core/filtrationwidget.cpp" line="293"/>
         <source>!=</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="core/filtrationwidget.cpp" line="300"/>
+        <location filename="core/filtrationwidget.cpp" line="299"/>
         <source>Value field is empty</source>
         <translation type="unfinished">Поле значение не заполнено</translation>
     </message>
     <message>
-        <location filename="core/filtrationwidget.cpp" line="364"/>
+        <location filename="core/filtrationwidget.cpp" line="352"/>
         <source>delete</source>
         <translation type="unfinished">удалить</translation>
     </message>
@@ -192,39 +192,8 @@
 <context>
     <name>HexAppearanceColorsAndFontsSettings</name>
     <message>
-        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="235"/>
-        <source>Form</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="237"/>
         <source>Font</source>
-        <translation type="unfinished">Шрифт</translation>
-    </message>
-    <message>
-        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="238"/>
-        <source>Family:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="239"/>
-        <source>Size:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="240"/>
-        <source>Colors</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="241"/>
-        <source>Foreground:</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="ui/ui_hexappearancecolorsandfontssettings.h" line="242"/>
-        <source>Background:</source>
-        <translation type="unfinished"></translation>
+        <translation type="obsolete">Шрифт</translation>
     </message>
     <message>
         <location filename="visualization/hexvisualization/hexappearancecolorsandfontssettings.cpp" line="55"/>
@@ -305,58 +274,68 @@
         <translation type="unfinished">Настройки</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="64"/>
-        <location filename="core/mainsettings.cpp" line="134"/>
+        <location filename="core/mainsettings.cpp" line="71"/>
+        <location filename="core/mainsettings.cpp" line="153"/>
         <source>General</source>
         <translation type="unfinished">Основные</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="65"/>
-        <location filename="core/mainsettings.cpp" line="139"/>
+        <location filename="core/mainsettings.cpp" line="72"/>
+        <location filename="core/mainsettings.cpp" line="102"/>
+        <location filename="core/mainsettings.cpp" line="158"/>
+        <location filename="core/mainsettings.cpp" line="248"/>
         <source>Core</source>
         <translation type="unfinished">Ядро</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="66"/>
-        <location filename="core/mainsettings.cpp" line="74"/>
-        <location filename="core/mainsettings.cpp" line="82"/>
-        <location filename="core/mainsettings.cpp" line="149"/>
-        <location filename="core/mainsettings.cpp" line="174"/>
-        <location filename="core/mainsettings.cpp" line="199"/>
+        <location filename="core/mainsettings.cpp" line="73"/>
+        <location filename="core/mainsettings.cpp" line="81"/>
+        <location filename="core/mainsettings.cpp" line="89"/>
+        <location filename="core/mainsettings.cpp" line="103"/>
+        <location filename="core/mainsettings.cpp" line="168"/>
+        <location filename="core/mainsettings.cpp" line="193"/>
+        <location filename="core/mainsettings.cpp" line="218"/>
+        <location filename="core/mainsettings.cpp" line="258"/>
         <source>Gui</source>
         <translation type="unfinished">Интерфейс</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="72"/>
-        <location filename="core/mainsettings.cpp" line="159"/>
+        <location filename="core/mainsettings.cpp" line="79"/>
+        <location filename="core/mainsettings.cpp" line="178"/>
         <source>Hex visualization</source>
         <translation type="unfinished">Шестнадцатиричное представление</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="73"/>
-        <location filename="core/mainsettings.cpp" line="81"/>
-        <location filename="core/mainsettings.cpp" line="164"/>
-        <location filename="core/mainsettings.cpp" line="189"/>
+        <location filename="core/mainsettings.cpp" line="80"/>
+        <location filename="core/mainsettings.cpp" line="88"/>
+        <location filename="core/mainsettings.cpp" line="183"/>
+        <location filename="core/mainsettings.cpp" line="208"/>
         <source>Colors and Fonts</source>
         <translation type="unfinished">Цвета и Шрифты</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="80"/>
-        <location filename="core/mainsettings.cpp" line="184"/>
+        <location filename="core/mainsettings.cpp" line="87"/>
+        <location filename="core/mainsettings.cpp" line="203"/>
         <source>Text visualization</source>
         <translation type="unfinished">Текстовое представление</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="87"/>
-        <location filename="core/mainsettings.cpp" line="209"/>
+        <location filename="core/mainsettings.cpp" line="94"/>
+        <location filename="core/mainsettings.cpp" line="228"/>
         <source>Localization</source>
         <translation type="unfinished">Локализация</translation>
     </message>
     <message>
-        <location filename="core/mainsettings.cpp" line="88"/>
-        <location filename="core/mainsettings.cpp" line="214"/>
+        <location filename="core/mainsettings.cpp" line="95"/>
+        <location filename="core/mainsettings.cpp" line="233"/>
         <source>Language</source>
         <translation type="unfinished">Язык</translation>
+    </message>
+    <message>
+        <location filename="core/mainsettings.cpp" line="101"/>
+        <location filename="core/mainsettings.cpp" line="243"/>
+        <source>Sniffer monitor</source>
+        <translation type="unfinished">Монитор сниффера</translation>
     </message>
 </context>
 <context>
@@ -576,6 +555,37 @@
         <location filename="core/project.cpp" line="56"/>
         <source>Bad log files info</source>
         <translation type="unfinished">Неверная информация о файлах журналов</translation>
+    </message>
+</context>
+<context>
+    <name>SnifferCoreSettings</name>
+    <message>
+        <location filename="ui/sniffercoresettings.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ui/sniffercoresettings.ui" line="95"/>
+        <source>Port:</source>
+        <translation type="unfinished">Порт:</translation>
+    </message>
+</context>
+<context>
+    <name>SnifferGuiSettings</name>
+    <message>
+        <location filename="ui/snifferguisettings.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="ui/snifferguisettings.ui" line="117"/>
+        <source>Refresh after</source>
+        <translation type="unfinished">Обновление после</translation>
+    </message>
+    <message>
+        <location filename="ui/snifferguisettings.ui" line="124"/>
+        <source>lines</source>
+        <translation type="unfinished">строк</translation>
     </message>
 </context>
 <context>
