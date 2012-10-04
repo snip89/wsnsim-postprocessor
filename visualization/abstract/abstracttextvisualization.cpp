@@ -40,8 +40,6 @@ void AbstractTextVisualization::resizeEvent(QResizeEvent *e)
 
 bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
 {
-    qDebug() << "currentLine: " << currentLine;
-
     if(event->type() == QEvent::Wheel && target == viewer)
     {
         wheel = true;
