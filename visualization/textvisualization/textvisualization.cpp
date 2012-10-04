@@ -219,7 +219,6 @@ void TextVisualization::updatePage()
     if(viewer->document()->size().height() > viewer->viewport()->height())
     {
         decrement ++;
-        topLinePos ++;
         updatePage();
     }
     else
