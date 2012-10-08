@@ -221,10 +221,10 @@ void TextVisualization::updatePage()
         decrement ++;
         updatePage();
     }
-    else
+    /*else
     {
         decrement = 0;
-    }
+    }*/
 }
 
 void TextVisualization::updatePage(int cursorMoving)

@@ -32,6 +32,8 @@ void AbstractTextVisualization::resizeEvent(QResizeEvent *e)
 
     if(isActive)
     {
+        decrement = 0;
+
         int cursorMoving = currentLine - topLinePos;
 
         updatePage(cursorMoving);
@@ -178,6 +180,7 @@ void AbstractTextVisualization::scrollBarMoving(int value)
     }
     else
     {
+
         updatePage();
     }
 }
