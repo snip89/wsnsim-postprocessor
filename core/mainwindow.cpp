@@ -18,6 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     hexUpdated = false;
     textUpdated = false;
+    tableUpdated = false;
 
     setSettings(settings);
 
@@ -46,7 +47,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     hexVisualization = new HexVisualization();
     textVisualization = new TextVisualization();
-    //tableVisualization = new TableVisualization();
+    tableVisualization = new TableVisualization();
 
     mainSettings = new MainSettings();
 
@@ -58,6 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     stackedWidget->addWidget(hexVisualization->getWidget());
     stackedWidget->addWidget(textVisualization->getWidget());
+    stackedWidget->addWidget(tableVisualization->getWidget());
 
     stackedWidget->setCurrentWidget(emptyWidget);
 
@@ -77,6 +79,7 @@ MainWindow::~MainWindow()
     delete filtrationWidget;
     delete hexVisualization;
     delete textVisualization;
+    delete tableVisualization;
     delete mainSettings;
     delete stackedWidget;
 
@@ -288,6 +291,7 @@ void MainWindow::createMenus()
     menuView = new QMenu(tr("&View"), this);
     menuView->addAction(actionHexVisualization);
     menuView->addAction(actionTextVisualization);
+    menuView->addAction(actionTableVisualization);
     menuView->addSeparator();
     menuView->addMenu(menuViewFiltration);
     menuView->addSeparator();
@@ -328,6 +332,7 @@ void MainWindow::deleteActions()
     delete actionSettings;
     delete actionHexVisualization;
     delete actionTextVisualization;
+    delete actionTableVisualization;
     delete actionFiltration;
     delete actionFullScreen;
     delete actionCopy;
@@ -512,6 +517,13 @@ void MainWindow::switchToWidget(WidgetType type)
         previousActiveWidget = TEXTVISUALIZATION;
         break;
 
+    case TABLEVISUALIZATION:
+        labelTotalSize->setVisible(false);
+        actionGoToLine->setEnabled(false);
+        tableVisualization->activity(false);
+        previousActiveWidget = TABLEVISUALIZATION;
+        break;
+
     case FILTRATION:
         filtrationWidget->deactivate();
         previousActiveWidget = FILTRATION;
@@ -577,6 +589,27 @@ void MainWindow::switchToWidget(WidgetType type)
 
         break;
 
+    case TABLEVISUALIZATION:
+        statusString += tr("Log size: ");
+        statusString += QString::number(logs->at(currentLogId).log->size());
+        statusString += tr(" records");
+        labelTotalSize->setText(statusString);
+        labelTotalSize->setVisible(true);
+        actionGoToLine->setEnabled(true);
+        stackedWidget->setCurrentWidget(tableVisualization->getWidget());
+        tableVisualization->activity(true);
+        activeWidget = TABLEVISUALIZATION;
+
+        if(!tableUpdated)
+        {
+            tableVisualization->update(project, logs->at(currentLogId).log);
+            tableUpdated = true;
+            return;
+        }
+        else
+            tableVisualization->update();
+        break;
+
     case FILTRATION:
         filtrationWidget->setCurrentLog(currentLogId);
         filtrationWidget->activate();
@@ -628,6 +661,25 @@ void MainWindow::updateVisualization(WidgetType type)
         }
         else
             hexVisualization->update();
+
+        break;
+    case TABLEVISUALIZATION:
+        statusString += tr("Log size: ");
+        statusString += QString::number(logs->at(currentLogId).log->size());
+        statusString += tr(" records");
+        labelTotalSize->setText(statusString);
+        labelTotalSize->setVisible(true);
+        actionGoToLine->setEnabled(true);
+        stackedWidget->setCurrentWidget(tableVisualization->getWidget());
+
+        if(!hexUpdated)
+        {
+            tableVisualization->update(project, logs->at(currentLogId).log);
+            tableUpdated = true;
+            return;
+        }
+        else
+            tableVisualization->update();
 
         break;
     case EMPTY:
@@ -871,6 +923,7 @@ void MainWindow::openLog(QString name)
     // TODO: enable all visualization actions here
     actionHexVisualization->setEnabled(true);
     actionTextVisualization->setEnabled(true);
+    actionTableVisualization->setEnabled(true);
 
     actionFiltration->setEnabled(true);
     
@@ -878,6 +931,8 @@ void MainWindow::openLog(QString name)
         actionHexVisualization->toggle();
     else if(settings.value("General/Gui/Default_visualization").value<QString>() == "text")
         actionTextVisualization->toggle();
+
+    // TODO: добавить table visualization
 }
 
 void MainWindow::showSettings()
@@ -898,6 +953,8 @@ void MainWindow::showTextVisualization(bool checked)
     {
         if(actionHexVisualization->isChecked())
             actionHexVisualization->setChecked(false);
+        else if(actionTableVisualization->isChecked())
+            actionTableVisualization->setChecked(false);
     
         switchToWidget(TEXTVISUALIZATION);
     }
@@ -912,6 +969,9 @@ void MainWindow::showHexVisualization(bool checked)
     {
         if(actionTextVisualization->isChecked())
             actionTextVisualization->setChecked(false);
+        else if(actionTableVisualization->isChecked())
+            actionTableVisualization->setChecked(false);
+
         switchToWidget(HEXVISUALIZATION);
     }
 
@@ -923,8 +983,11 @@ void MainWindow::showTableVisualization(bool checked)
 {
     if(checked)
     {
-        if(actionTableVisualization->isChecked())
-            actionTableVisualization->setChecked(false);
+        if(actionTextVisualization->isChecked())
+            actionTextVisualization->setChecked(false);
+        if(actionHexVisualization->isChecked())
+            actionHexVisualization->setChecked(false);
+
         switchToWidget(TABLEVISUALIZATION);
     }
 
@@ -966,6 +1029,12 @@ void MainWindow::showGoToLineDialog()
             if(number < logs->at(currentLogId).log->size() || number >= 0)
                 textVisualization->fromLine(goToLineDialog->lineNumber());
         }
+        else if(activeWidget == TABLEVISUALIZATION)
+        {
+            qint64 number = goToLineDialog->lineNumber();
+            if(number < logs->at(currentLogId).log->size() || number >= 0)
+                tableVisualization->fromLine(goToLineDialog->lineNumber());
+        }
     }
 
     settings.setValue("Hidden/Gui/Line_dialog_pos", goToLineDialog->pos());
@@ -983,11 +1052,14 @@ void MainWindow::filteredLog(int id)
 
     hexUpdated = false;
     textUpdated = false;
+    tableUpdated = false;
 
     if(activeWidget == TEXTVISUALIZATION)
         updateVisualization(TEXTVISUALIZATION);
     else if(activeWidget == HEXVISUALIZATION)
         updateVisualization(HEXVISUALIZATION);
+    else if(activeWidget == TABLEVISUALIZATION)
+        updateVisualization(TABLEVISUALIZATION);
 
     setTitle(project->projectName(), logs->at(currentLogId).fileName);
 }
@@ -1034,7 +1106,7 @@ void MainWindow::switchCurrentLog()
             textUpdated = false;
             hexUpdated = false;
 
-            if(tempWidgetType == HEXVISUALIZATION || tempWidgetType == TEXTVISUALIZATION)
+            if(tempWidgetType == HEXVISUALIZATION || tempWidgetType == TEXTVISUALIZATION || tempWidgetType == TABLEVISUALIZATION)
                 switchToWidget(tempWidgetType);
             
             else if(tempWidgetType == FILTRATION)
@@ -1069,4 +1141,7 @@ void MainWindow::appliedSettings()
 
     else if(activeWidget == TEXTVISUALIZATION)
         updateVisualization(TEXTVISUALIZATION);
+
+    else if(activeWidget == TABLEVISUALIZATION)
+        updateVisualization(TABLEVISUALIZATION);
 }

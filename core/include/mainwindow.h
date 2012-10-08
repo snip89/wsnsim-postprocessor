@@ -38,7 +38,7 @@
 #include "simpleeventinfo.h"
 #include "textvisualization.h"
 #include "hexvisualization.h"
-//#include "tablevisualization.h"
+#include "tablevisualization.h"
 #include "ivisualization.h"
 #include "staticlogfilter.h"
 #include "filter.h"
@@ -152,6 +152,7 @@ private:
 
     bool hexUpdated;
     bool textUpdated;
+    bool tableUpdated;
 
     Project *project;
 
