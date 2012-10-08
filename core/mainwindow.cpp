@@ -46,6 +46,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     hexVisualization = new HexVisualization();
     textVisualization = new TextVisualization();
+    //tableVisualization = new TableVisualization();
 
     mainSettings = new MainSettings();
 
@@ -189,6 +190,11 @@ void MainWindow::createActions()
     actionTextVisualization->setEnabled(false);
     actionTextVisualization->setCheckable(true);
     connect(actionTextVisualization, SIGNAL(toggled(bool)), this, SLOT(showTextVisualization(bool)));
+
+    actionTableVisualization = new QAction(tr("&Table"), this);
+    actionTableVisualization->setEnabled(false);
+    actionTableVisualization->setCheckable(true);
+    connect(actionTableVisualization, SIGNAL(toggled(bool)), this, SLOT(showTableVisualization(bool)));
 
     actionCopy = new QAction(tr("&Copy"), this);
     actionCopy->setShortcut(QKeySequence::Copy);
@@ -910,6 +916,19 @@ void MainWindow::showHexVisualization(bool checked)
     }
 
     if(!checked && activeWidget == HEXVISUALIZATION)
+        switchToWidget(EMPTY);
+}
+
+void MainWindow::showTableVisualization(bool checked)
+{
+    if(checked)
+    {
+        if(actionTableVisualization->isChecked())
+            actionTableVisualization->setChecked(false);
+        switchToWidget(TABLEVISUALIZATION);
+    }
+
+    if(!checked && activeWidget == TABLEVISUALIZATION)
         switchToWidget(EMPTY);
 }
 

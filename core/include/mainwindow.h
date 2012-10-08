@@ -38,6 +38,7 @@
 #include "simpleeventinfo.h"
 #include "textvisualization.h"
 #include "hexvisualization.h"
+//#include "tablevisualization.h"
 #include "ivisualization.h"
 #include "staticlogfilter.h"
 #include "filter.h"
@@ -64,6 +65,7 @@ enum WidgetType
     MAINSETTINGS,
     HEXVISUALIZATION,
     TEXTVISUALIZATION,
+    TABLEVISUALIZATION,
     FILTRATION
 };
 
@@ -90,6 +92,7 @@ private:
     QAction *actionSettings;
     QAction *actionHexVisualization;
     QAction *actionTextVisualization;
+    QAction *actionTableVisualization;
     QAction *actionCopy;
     QAction *actionPaste;
     QAction *actionSelectAll;
@@ -145,6 +148,7 @@ private:
     MainSettings *mainSettings;
     IVisualization *hexVisualization;
     IVisualization *textVisualization;
+    IVisualization *tableVisualization;
 
     bool hexUpdated;
     bool textUpdated;
@@ -202,6 +206,7 @@ private slots:
     void showSettings();
     void showTextVisualization(bool checked);
     void showHexVisualization(bool checked);
+    void showTableVisualization(bool checked);
     void showFiltration();
     void showGoToLineDialog();
 
