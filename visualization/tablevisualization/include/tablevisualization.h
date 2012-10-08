@@ -25,6 +25,9 @@ private:
     QSettings settings;
 
     void setSettings(QSettings &someSettings);
+
+    void updatePage();
+    void updatePage(int cursorMoving);
 };
 
 #endif // TABLEVISUALIZATION_H

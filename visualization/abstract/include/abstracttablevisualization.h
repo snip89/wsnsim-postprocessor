@@ -2,7 +2,13 @@
 #define ABSTRACTTABLEVISUALIZATION_H
 
 #include <QWidget>
+#include <QToolBar>
+#include <QAction>
+#include <QLabel>
+#include <QComboBox>
+#include <QPushButton>
 
+#include "tableviewer.h"
 #include "ui_abstracttablevisualization.h"
 
 namespace Ui {
@@ -16,6 +22,11 @@ public:
     explicit AbstractTableVisualization(QWidget *parent = 0);
     virtual ~AbstractTableVisualization();
 protected:
+    TableViewer *viewer;
+
+    virtual void updatePage() = 0;
+    virtual void updatePage(int cursorMoving) = 0;
+
     Ui::AbstractTableVisualization *ui;
 };
 
