@@ -24,6 +24,12 @@ public:
 protected:
     TableViewer *viewer;
 
+    //ILog *currentLog;
+    //IProject *currentProject;
+
+    bool isActive;
+    qint64 topLinePos;
+
     virtual void updatePage() = 0;
     virtual void updatePage(int cursorMoving) = 0;
 

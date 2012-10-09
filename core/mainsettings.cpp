@@ -88,6 +88,9 @@ void MainSettings::createItems()
     textVisualizationColorsAndFontsItem->setText(0, tr("Colors and Fonts"));
     textVisualizationGuiItem->setText(0, tr("Gui"));
 
+    tableVisualizationItem = new QTreeWidgetItem(ui->settingsTree);
+    tableVisualizationItem->setText(0, tr("Table visualization"));
+
     localizationItem = new QTreeWidgetItem(ui->settingsTree);
     languageItem = new QTreeWidgetItem(localizationItem);
 
@@ -128,6 +131,8 @@ void MainSettings::deleteItems()
     delete textVisualizationColorsAndFontsItem;
     delete textVisualizationGuiItem;
     delete textVisualizationItem;
+
+    delete tableVisualizationItem;
 
     delete languageItem;
     delete localizationItem;
@@ -221,7 +226,12 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
             settingsFrameWidget->addWidget(textGuiSettings);
 
         settingsFrameWidget->setCurrentWidget(textGuiSettings);
-    }    
+    }
+
+    else if(item == tableVisualizationItem)
+    {
+        showEmptySettings(tr("Table visualization"));
+    }
 
     else if(item == localizationItem)
     {

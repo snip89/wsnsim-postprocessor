@@ -57,6 +57,7 @@ private:
     QTreeWidgetItem *textVisualizationItem;
     QTreeWidgetItem *textVisualizationColorsAndFontsItem;
     QTreeWidgetItem *textVisualizationGuiItem;
+    QTreeWidgetItem *tableVisualizationItem;
     QTreeWidgetItem *localizationItem;
     QTreeWidgetItem *languageItem;
     QTreeWidgetItem *snifferItem;
