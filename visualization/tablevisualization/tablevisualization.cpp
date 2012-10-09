@@ -11,33 +11,16 @@ void TableVisualization::activity(bool status)
 
 void TableVisualization::update(IProject *project, ILog *log)
 {
-    /*if(settings.value("Text visualization/Gui/LineWrapMode").value<bool>())
-        viewer->setLineWrapMode(QTextEdit::WidgetWidth);
-    else
-        viewer->setLineWrapMode(QTextEdit::NoWrap);
-
-    viewer->setLineColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
-    viewer->setLineFontColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
-
-    viewer->setTextColor(settings.value("Text visualization/Appearance/Colors and Fonts/Main_text_foreground").value<QColor>());
-
-    QPalette p = viewer->palette();
-    p.setColor(QPalette::Base, settings.value("Text visualization/Appearance/Colors and Fonts/Main_text_background").value<QColor>());
-    viewer->setPalette(p);
-
-    viewer->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
-
     currentProject = project;
     currentLog = log;
 
-    topLinePos = 0;
-
-    viewer->clear();*/
-
-    //currentProject = project;
-    //currentLog = log;
+    disconnect(ui->toolBoxComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(selectedEventChanged(QString)));
+    initEventSelector();
+    connect(ui->toolBoxComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(selectedEventChanged(QString)));
 
     topLinePos = 0;
+
+    currentEvent = ui->toolBoxComboBox->currentText();
 
     updatePage();
 }
@@ -58,8 +41,29 @@ void TableVisualization::fromLine(qint64 line)
 
 void TableVisualization::updatePage()
 {
-    viewer->setColumnCount(10);
-    viewer->setRowCount(10);
+    int size = 0;
+    SimpleEventInfo *info = currentProject->info(size);
+
+    for(int i = 0; i < size; i++)
+    {
+        if(info[i].type == currentEvent)
+        {
+            int argsCount = info[i].argsCount;
+
+            viewer->setColumnCount(argsCount + 1);
+
+            QStringList header;
+            header.append("vTime");
+
+            SimpleArgInfo *argsInfo = info[i].argsInfo;
+            for(int j = 0; j < argsCount; j++)
+            {
+                header.append(*argsInfo[j].name);
+            }
+
+            viewer->setHorizontalHeaderLabels(header);
+        }
+    }
 
     ui->horizontalScrollBar->setMinimum(viewer->horizontalScrollBar()->minimum());
     ui->horizontalScrollBar->setMaximum(viewer->horizontalScrollBar()->maximum());
@@ -76,4 +80,15 @@ TableVisualization::~TableVisualization()
 
 void TableVisualization::setSettings(QSettings &someSettings)
 {
+}
+
+void TableVisualization::initEventSelector()
+{
+    int size = 0;
+    SimpleEventInfo *info = currentProject->info(size);
+
+    for(int i = 0; i < size; i ++)
+    {
+        ui->toolBoxComboBox->addItem(*info[i].type);
+    }
 }

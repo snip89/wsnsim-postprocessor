@@ -9,6 +9,9 @@
 #include <QPushButton>
 
 #include "tableviewer.h"
+#include "ilog.h"
+#include "iproject.h"
+
 #include "ui_abstracttablevisualization.h"
 
 namespace Ui {
@@ -24,8 +27,10 @@ public:
 protected:
     TableViewer *viewer;
 
-    //ILog *currentLog;
-    //IProject *currentProject;
+    ILog *currentLog;
+    IProject *currentProject;
+
+    QString currentEvent;
 
     bool isActive;
     qint64 topLinePos;
@@ -34,6 +39,8 @@ protected:
     virtual void updatePage(int cursorMoving) = 0;
 
     Ui::AbstractTableVisualization *ui;
+private slots:
+    void selectedEventChanged(QString event);
 };
 
 #endif // ABSTRACTTABLEVISUALIZATION_H

@@ -17,3 +17,9 @@ AbstractTableVisualization::~AbstractTableVisualization()
 
     delete ui;
 }
+
+void AbstractTableVisualization::selectedEventChanged(QString event)
+{
+    currentEvent = event;
+    updatePage();
+}

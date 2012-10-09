@@ -28,6 +28,8 @@ private:
 
     void updatePage();
     void updatePage(int cursorMoving);
+
+    void initEventSelector();
 };
 
 #endif // TABLEVISUALIZATION_H
