@@ -35,12 +35,6 @@ MainSettings::MainSettings(QWidget *parent) :
     textGuiSettings = new TextGuiSettings();
     textGuiSettings->showCurrentSettings();
 
-    snifferCoreSettings = new SnifferCoreSettings();
-    snifferCoreSettings->showCurrentSettings();
-
-    snifferGuiSettings = new SnifferGuiSettings();
-    snifferGuiSettings->showCurrentSettings();
-
     initConnections();
 }
 
@@ -56,7 +50,6 @@ MainSettings::~MainSettings()
     delete textColorsAndFontsSettings;
     delete hexGuiSettings;
     delete textGuiSettings;
-    delete snifferCoreSettings;
 
     delete settingsFrameWidget;
     delete ui;
@@ -96,14 +89,6 @@ void MainSettings::createItems()
 
     localizationItem->setText(0, tr("Localization"));
     languageItem->setText(0, tr("Language"));
-
-    snifferItem = new QTreeWidgetItem(ui->settingsTree);
-    snifferCoreItem = new QTreeWidgetItem(snifferItem);
-    snifferGuiItem = new QTreeWidgetItem(snifferItem);
-
-    snifferItem->setText(0, tr("Sniffer monitor"));
-    snifferCoreItem->setText(0, tr("Core"));
-    snifferGuiItem->setText(0, tr("Gui"));
 }
 
 void MainSettings::initConnections()
@@ -136,10 +121,6 @@ void MainSettings::deleteItems()
 
     delete languageItem;
     delete localizationItem;
-
-    delete snifferGuiItem;
-    delete snifferCoreItem;
-    delete snifferItem;
 }
 
 void MainSettings::showEmptySettings(QString name)
@@ -246,31 +227,6 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
             settingsFrameWidget->addWidget(localizationSettings);
 
         settingsFrameWidget->setCurrentWidget(localizationSettings);
-    }
-
-    else if(item == snifferItem)
-    {
-        showEmptySettings(tr("Sniffer monitor"));
-    }
-
-    else if(item == snifferCoreItem)
-    {
-        snifferCoreSettings->setSettingsName(tr("Core"));
-
-        if(!settingsFrameWidget->isAncestorOf(snifferCoreSettings))
-            settingsFrameWidget->addWidget(snifferCoreSettings);
-
-        settingsFrameWidget->setCurrentWidget(snifferCoreSettings);
-    }
-
-    else if(item == snifferGuiItem)
-    {
-        snifferGuiSettings->setSettingsName(tr("Gui"));
-
-        if(!settingsFrameWidget->isAncestorOf(snifferGuiSettings))
-            settingsFrameWidget->addWidget(snifferGuiSettings);
-
-        settingsFrameWidget->setCurrentWidget(snifferGuiSettings);
     }
 }
 

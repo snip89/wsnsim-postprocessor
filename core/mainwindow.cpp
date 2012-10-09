@@ -828,6 +828,8 @@ void MainWindow::closeProject()
             settings.setValue("General/Gui/Default_visualization", "hex");
         else if(activeWidget == TEXTVISUALIZATION)
             settings.setValue("General/Gui/Default_visualization", "text");
+        else if(activeWidget == TABLEVISUALIZATION)
+            settings.setValue("General/Gui/Default_visualization", "table");
 
         actionClose->setEnabled(false);
 
@@ -931,6 +933,8 @@ void MainWindow::openLog(QString name)
         actionHexVisualization->toggle();
     else if(settings.value("General/Gui/Default_visualization").value<QString>() == "text")
         actionTextVisualization->toggle();
+    else if(settings.value("General/Gui/Default_visualization").value<QString>() == "table")
+        actionTableVisualization->toggle();
 
     // TODO: добавить table visualization
 }
