@@ -7,6 +7,11 @@ TableViewer::TableViewer(QWidget *parent)
     this->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
 }
 
+int TableViewer::rowSize(int index)
+{
+    return sizeHintForRow(index);
+}
+
 TableViewer::~TableViewer()
 {
 }

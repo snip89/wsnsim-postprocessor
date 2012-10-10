@@ -16,6 +16,7 @@
 #include "simpleeventinfo.h"
 #include "staticlogreader.h"
 #include "staticrecordsreader.h"
+#include "staticfromlogselector.h"
 
 struct Index
 {
@@ -29,6 +30,7 @@ public:
     friend class Log;
     friend class StaticLogFilter;
     friend class FiltrationWidget;
+    friend class StaticFromLogSelector;
 
     LogIndex(QFile *logFile, qint64 bSize, qint64 mSize, SimpleEventInfo *info);
     void generate();

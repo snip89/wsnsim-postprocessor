@@ -19,12 +19,14 @@
 #include "logindex.h"
 #include "staticlogreader.h"
 #include "staticrecordsreader.h"
+#include "staticfromlogselector.h"
 
 class Log : public ILog
 {
 public:
     friend class StaticLogFilter;
     friend class FiltrationWidget;
+    friend class StaticFromLogSelector;
 
     Log(QString fileName, qint64 bSize, qint64 mSize, SimpleEventInfo *info, bool temp);
     bool load(bool generateIndex, bool createNew);

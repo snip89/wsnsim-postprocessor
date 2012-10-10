@@ -3,12 +3,18 @@
 
 #include <QTableWidget>
 #include <QDebug>
+#include <QSize>
+
+#define VIEWER_PADDING_KOEFF 15
 
 class TableViewer : public QTableWidget
 {
     Q_OBJECT
 public:
     explicit TableViewer(QWidget *parent = 0);
+
+    int rowSize(int index);
+
     virtual ~TableViewer();
 };
 

@@ -23,12 +23,16 @@ class AbstractTableVisualization : public QWidget
     Q_OBJECT
 public:
     explicit AbstractTableVisualization(QWidget *parent = 0);
+
+    /*virtual*/ void resizeEvent(QResizeEvent *e);
+
     virtual ~AbstractTableVisualization();
 protected:
     TableViewer *viewer;
 
     ILog *currentLog;
     IProject *currentProject;
+    ILog *currentEventLog;
 
     QString currentEvent;
 
@@ -39,6 +43,8 @@ protected:
     virtual void updatePage(int cursorMoving) = 0;
 
     Ui::AbstractTableVisualization *ui;
+
+    int linesOnPage(int decrement);
 private slots:
     void selectedEventChanged(QString event);
 };

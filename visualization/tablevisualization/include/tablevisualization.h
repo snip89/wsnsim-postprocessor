@@ -5,7 +5,9 @@
 #include <QWidget>
 
 #include "ivisualization.h"
+#include "log.h"
 #include "abstracttablevisualization.h"
+#include "staticfromlogselector.h"
 
 class TableVisualization : public IVisualization, protected AbstractTableVisualization
 {
@@ -23,6 +25,8 @@ public:
     virtual ~TableVisualization();
 private:
     QSettings settings;
+
+    bool firstTime;
 
     void setSettings(QSettings &someSettings);
 
