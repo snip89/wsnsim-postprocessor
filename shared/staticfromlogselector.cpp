@@ -1,4 +1,6 @@
 #include "staticfromlogselector.h"
+#include "log.h"
+#include "staticlogwriter.h"
 
 ILog* StaticFromLogSelector::selectFromLog(ILog *log, IProject *project, QString name, int eventID)
 {

@@ -49,5 +49,5 @@ int AbstractTableVisualization::linesOnPage(int decrement)
     viewer->setItem(0, 0, new QTableWidgetItem("test"));
     viewer->resizeRowToContents(0);
 
-    return (viewer->viewport()->size().height() - VIEWER_PADDING_KOEFF) / viewer->visualItemRect(viewer->item(0,0)).size().height();
+    return (viewer->viewport()->size().height() - TVIEWER_PADDING_KOEFF) / viewer->visualItemRect(viewer->item(0,0)).size().height();
 }

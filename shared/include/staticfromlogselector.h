@@ -3,9 +3,8 @@
 
 #include <QString>
 
-#include "log.h"
+#include "ilog.h"
 #include "iproject.h"
-#include "staticlogwriter.h"
 
 class StaticFromLogSelector
 {

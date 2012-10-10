@@ -15,8 +15,8 @@
 #include <QDebug>
 
 #include "ilog.h"
-#include "simpleeventinfo.h"
 #include "logindex.h"
+#include "simpleeventinfo.h"
 #include "staticlogreader.h"
 #include "staticrecordsreader.h"
 #include "staticfromlogselector.h"

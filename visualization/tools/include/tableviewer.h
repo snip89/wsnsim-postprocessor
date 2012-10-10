@@ -5,7 +5,7 @@
 #include <QDebug>
 #include <QSize>
 
-#define VIEWER_PADDING_KOEFF 15
+#define TVIEWER_PADDING_KOEFF 15
 
 class TableViewer : public QTableWidget
 {
