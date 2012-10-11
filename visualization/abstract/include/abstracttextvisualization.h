@@ -24,12 +24,6 @@
 
 #include "viewer.h"
 
-enum Direction
-{
-    Up,
-    Down
-};
-
 namespace Ui {
     class AbstractTextVisualization;
 }
@@ -38,6 +32,11 @@ class AbstractTextVisualization : public QWidget
 {
     Q_OBJECT
 public:
+    enum Direction
+    {
+        Up,
+        Down
+    };
     explicit AbstractTextVisualization(QString group, QWidget *parent = 0);
 
     /*virtual*/ void resizeEvent(QResizeEvent *e);

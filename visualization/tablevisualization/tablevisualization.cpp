@@ -3,6 +3,8 @@
 TableVisualization::TableVisualization(QWidget *parent)
     : AbstractTableVisualization(parent)
 {
+    setSettings(settings);
+
     firstTime = true;
 }
 
@@ -26,6 +28,9 @@ void TableVisualization::update(IProject *project, ILog *log)
     connect(ui->toolBoxComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(selectedEventChanged(QString)));
 
     topLinePos = 0;
+
+    currentRow = 0;
+    currentColumn = 0;
 
     currentEvent = ui->toolBoxComboBox->currentText();
     currentEventLog = StaticFromLogSelector::selectFromLog(currentLog, currentProject, "tablev.templog", ui->toolBoxComboBox->currentIndex());
@@ -147,6 +152,7 @@ void TableVisualization::updatePage()
     }
 
     viewer->setVerticalHeaderLabels(header);
+    viewer->setCurrentCell(currentRow, currentColumn);
 
     ui->verticalScrollBar->setPageStep(recordsCount);
     ui->verticalScrollBar->setMaximum(currentEventLog->size() - recordsCount);
@@ -168,6 +174,11 @@ TableVisualization::~TableVisualization()
 
 void TableVisualization::setSettings(QSettings &someSettings)
 {
+    if(!someSettings.contains("Defaults/Table visualization/Gui/Increment"))
+        someSettings.setValue("Defaults/Table visualization/Gui/Increment", 1);
+
+    if(!someSettings.contains("Table visualization/Gui/Increment"))
+        someSettings.setValue("Table visualization/Gui/Increment", 1);
 }
 
 void TableVisualization::initEventSelector()

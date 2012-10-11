@@ -7,6 +7,8 @@
 #include <QLabel>
 #include <QComboBox>
 #include <QPushButton>
+#include <QSettings>
+#include <QWheelEvent>
 
 #include "tableviewer.h"
 #include "ilog.h"
@@ -22,6 +24,12 @@ class AbstractTableVisualization : public QWidget
 {
     Q_OBJECT
 public:
+    enum Direction
+    {
+        Up,
+        Down
+    };
+
     explicit AbstractTableVisualization(QWidget *parent = 0);
 
     /*virtual*/ void resizeEvent(QResizeEvent *e);
@@ -37,8 +45,15 @@ protected:
 
     QString currentEvent;
 
+    Direction direction;
+
     bool isActive;
     qint64 topLinePos;
+
+    int currentRow;
+    int currentColumn;
+
+    QSettings settings;
 
     virtual void updatePage() = 0;
     virtual void updatePage(int cursorMoving) = 0;

@@ -11,6 +11,11 @@ AbstractTableVisualization::AbstractTableVisualization(QWidget *parent)
     isActive = false;
 
     viewer = new TableViewer();
+
+    direction = Up;
+
+    viewer->installEventFilter(this);
+
     ui->vAreaGridLayout->addWidget(viewer);
     connect(ui->horizontalScrollBar, SIGNAL(valueChanged(int)), viewer->horizontalScrollBar(), SLOT(setValue(int)));
 }
@@ -47,6 +52,93 @@ void AbstractTableVisualization::resizeEvent(QResizeEvent *e)
 
 bool AbstractTableVisualization::eventFilter(QObject *target, QEvent *event)
 {
+    if(event->type() == QEvent::Wheel && target == viewer)
+    {
+        //wheel = true;
+
+        int increment = settings.value("Table visualization/Gui/Increment").value<int>();
+
+        if(((QWheelEvent*)event)->delta() < 0)
+        {
+            ui->verticalScrollBar->setValue(topLinePos + increment);
+        }
+        else
+        {
+            ui->verticalScrollBar->setValue(topLinePos - increment);
+        }
+
+        return true;
+    }
+
+    else if(event->type() == QEvent::KeyPress && target == viewer)
+    {
+        QKeyEvent *keyEvent = (QKeyEvent *)event;
+        if(keyEvent->key() == Qt::Key_Up)
+        {
+            if(currentRow == 0)
+            {
+                ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepSub);
+            }
+            else
+            {
+                currentRow --;
+                viewer->setCurrentCell(currentRow, currentColumn);
+            }
+
+            return true;
+        }
+
+        else if(keyEvent->key() == Qt::Key_Down)
+        {
+            if(currentRow == viewer->rowCount() - 1)
+            {
+                ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderSingleStepAdd);
+            }
+            else
+            {
+                currentRow ++;
+                viewer->setCurrentCell(currentRow, currentColumn);
+            }
+
+            return true;
+        }
+
+        else if(keyEvent->key() == Qt::Key_PageUp)
+        {
+            currentRow = 0;
+            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepSub);
+
+            return true;
+        }
+
+        else if(keyEvent->key() == Qt::Key_PageDown)
+        {
+            currentRow = viewer->rowCount() - 1;
+            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderPageStepAdd);
+            viewer->setCurrentCell(currentRow, currentColumn);
+
+            return true;
+        }
+
+        else if(keyEvent->key() == Qt::Key_Home)
+        {
+            currentRow = 0;
+            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderToMinimum);
+
+            return true;
+        }
+
+        else if(keyEvent->key() == Qt::Key_End)
+        {
+            currentRow = viewer->rowCount() - 1;
+            ui->verticalScrollBar->triggerAction(QAbstractSlider::SliderToMaximum);
+            viewer->setCurrentCell(currentRow, currentColumn);
+
+            return true;
+        }
+    }
+
+    return false;
 }
 
 void AbstractTableVisualization::scrollBarMoving(int value)
