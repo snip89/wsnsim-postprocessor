@@ -88,6 +88,28 @@ bool AbstractTableVisualization::eventFilter(QObject *target, QEvent *event)
             return true;
         }
 
+        else if(keyEvent->key() == Qt::Key_Left)
+        {
+            if(!currentColumn == 0)
+            {
+                currentColumn--;
+                viewer->setCurrentCell(currentRow, currentColumn);
+            }
+
+            return true;
+        }
+
+        else if(keyEvent->key() == Qt::Key_Right)
+        {
+            if(!currentColumn == viewer->columnCount() - 1)
+            {
+                currentColumn ++;
+                viewer->setCurrentCell(currentRow, currentColumn);
+            }
+
+            return true;
+        }
+
         else if(keyEvent->key() == Qt::Key_Down)
         {
             if(currentRow == viewer->rowCount() - 1)
