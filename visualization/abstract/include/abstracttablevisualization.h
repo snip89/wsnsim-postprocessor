@@ -25,6 +25,7 @@ public:
     explicit AbstractTableVisualization(QWidget *parent = 0);
 
     /*virtual*/ void resizeEvent(QResizeEvent *e);
+    /*virtual*/ bool eventFilter(QObject *target, QEvent *event);
 
     virtual ~AbstractTableVisualization();
 protected:
@@ -44,8 +45,9 @@ protected:
 
     Ui::AbstractTableVisualization *ui;
 
-    int linesOnPage(int decrement);
+    int linesOnPage();
 private slots:
+    void scrollBarMoving(int value);
     void selectedEventChanged(QString event);
 };
 

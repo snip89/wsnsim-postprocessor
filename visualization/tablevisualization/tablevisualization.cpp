@@ -75,7 +75,18 @@ void TableVisualization::updatePage()
 
     currentEventLog->seek(topLinePos);
 
-    int recordsCount = linesOnPage(0);
+    int recordsCount = linesOnPage();
+
+    while(topLinePos > 0 && recordsCount > currentEventLog->size() - topLinePos)
+    {
+        topLinePos --;
+        currentEventLog->seek(topLinePos);
+    }
+
+    if(topLinePos == 0 && recordsCount > currentEventLog->size())
+    {
+        recordsCount = currentEventLog->size();
+    }
 
     qint64 binPageSize = 0;
     char *binPage = currentEventLog->read(recordsCount, binPageSize);
@@ -118,9 +129,6 @@ void TableVisualization::updatePage()
         resultLines.append(resultLine);
     }
 
-    //viewer->setRowCount(1);
-    //viewer->setItem(0,0,new QTableWidgetItem(resultLines.at(0).at(0)));
-
     viewer->setRowCount(recordsCount);
 
     for(int i = 0; i < resultLines.size(); i ++)
@@ -131,6 +139,17 @@ void TableVisualization::updatePage()
             viewer->resizeRowToContents(i);
         }
     }
+
+    QStringList header;
+    for(int i = topLinePos; i < topLinePos + recordsCount; i ++)
+    {
+        header.append(QString::number(i));
+    }
+
+    viewer->setVerticalHeaderLabels(header);
+
+    ui->verticalScrollBar->setPageStep(recordsCount);
+    ui->verticalScrollBar->setMaximum(currentEventLog->size() - recordsCount);
 
     ui->horizontalScrollBar->setMinimum(viewer->horizontalScrollBar()->minimum());
     ui->horizontalScrollBar->setMaximum(viewer->horizontalScrollBar()->maximum());

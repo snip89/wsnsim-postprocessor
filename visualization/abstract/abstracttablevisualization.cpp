@@ -6,6 +6,8 @@ AbstractTableVisualization::AbstractTableVisualization(QWidget *parent)
 {
     ui->setupUi(this);
 
+    connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarMoving(int)));
+
     isActive = false;
 
     viewer = new TableViewer();
@@ -43,7 +45,32 @@ void AbstractTableVisualization::resizeEvent(QResizeEvent *e)
     }*/
 }
 
-int AbstractTableVisualization::linesOnPage(int decrement)
+bool AbstractTableVisualization::eventFilter(QObject *target, QEvent *event)
+{
+}
+
+void AbstractTableVisualization::scrollBarMoving(int value)
+{
+    topLinePos = value;
+
+    /*int cursorMoving = 0;
+
+    if(wheel)
+    {
+        cursorMoving = currentLine - topLinePos;
+        updatePage(cursorMoving);
+        wheel = false;
+    }
+    else
+    {
+
+        updatePage();
+    }*/
+
+    updatePage();
+}
+
+int AbstractTableVisualization::linesOnPage()
 {
     viewer->setRowCount(1);
     viewer->setItem(0, 0, new QTableWidgetItem("test"));
