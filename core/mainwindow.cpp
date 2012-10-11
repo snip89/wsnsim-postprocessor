@@ -427,12 +427,16 @@ void MainWindow::closeLog()
     actionTextVisualization->setEnabled(false);
     actionTextVisualization->setChecked(false);
 
+    actionTableVisualization->setEnabled(false);
+    actionTableVisualization->setChecked(false);
+
     actionFiltration->setEnabled(false);
 
     switchToWidget(EMPTY);
 
     hexUpdated = false;
     textUpdated = false;
+    tableUpdated = false;
 
     if(isLogOpened)
     {
@@ -1109,6 +1113,7 @@ void MainWindow::switchCurrentLog()
 
             textUpdated = false;
             hexUpdated = false;
+            tableUpdated = false;
 
             if(tempWidgetType == HEXVISUALIZATION || tempWidgetType == TEXTVISUALIZATION || tempWidgetType == TABLEVISUALIZATION)
                 switchToWidget(tempWidgetType);

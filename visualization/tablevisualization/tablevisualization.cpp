@@ -16,7 +16,10 @@ void TableVisualization::activity(bool status)
 void TableVisualization::update(IProject *project, ILog *log)
 {
     if(!firstTime)
+    {
+        qDebug() << "its here";
         delete currentEventLog;
+    }
     else
         firstTime = false;
 
@@ -31,8 +34,6 @@ void TableVisualization::update(IProject *project, ILog *log)
 
     currentRow = 0;
     currentColumn = 0;
-
-
 
     updatePage(true);
 }
@@ -49,12 +50,15 @@ QWidget *TableVisualization::getWidget()
 
 void TableVisualization::fromLine(qint64 line)
 {
+    ui->verticalScrollBar->setValue(line);
 }
 
 void TableVisualization::updatePage(bool eventChanged)
 {
     if(eventChanged)
     {
+        currentRow = 0;
+        currentColumn = 0;
         currentEvent = ui->toolBoxComboBox->currentText();
         currentEventLog = StaticFromLogSelector::selectFromLog(currentLog, currentProject, "tablev.templog", ui->toolBoxComboBox->currentIndex());
     }
