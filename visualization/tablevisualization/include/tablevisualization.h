@@ -30,7 +30,7 @@ private:
 
     void setSettings(QSettings &someSettings);
 
-    void updatePage();
+    void updatePage(bool eventChanged);
     void updatePage(int cursorMoving);
 
     void initEventSelector();

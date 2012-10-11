@@ -12,8 +12,6 @@ AbstractTableVisualization::AbstractTableVisualization(QWidget *parent)
 
     viewer = new TableViewer();
 
-    direction = Up;
-
     viewer->installEventFilter(this);
 
     ui->vAreaGridLayout->addWidget(viewer);
@@ -30,7 +28,7 @@ AbstractTableVisualization::~AbstractTableVisualization()
 void AbstractTableVisualization::selectedEventChanged(QString event)
 {
     currentEvent = event;
-    updatePage();
+    updatePage(true);
 }
 
 void AbstractTableVisualization::resizeEvent(QResizeEvent *e)
@@ -38,23 +36,13 @@ void AbstractTableVisualization::resizeEvent(QResizeEvent *e)
     QWidget::resizeEvent(e);
 
     if(isActive)
-        updatePage();
-
-    /*if(isActive)
-    {
-        decrement = 0;
-
-        int cursorMoving = currentLine - topLinePos;
-
-        updatePage(cursorMoving);
-    }*/
+        updatePage(false);
 }
 
 bool AbstractTableVisualization::eventFilter(QObject *target, QEvent *event)
 {
     if(event->type() == QEvent::Wheel && target == viewer)
     {
-        //wheel = true;
 
         int increment = settings.value("Table visualization/Gui/Increment").value<int>();
 
@@ -181,7 +169,7 @@ void AbstractTableVisualization::scrollBarMoving(int value)
         updatePage();
     }*/
 
-    updatePage();
+    updatePage(false);
 }
 
 int AbstractTableVisualization::linesOnPage()

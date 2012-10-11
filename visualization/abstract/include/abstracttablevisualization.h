@@ -24,12 +24,6 @@ class AbstractTableVisualization : public QWidget
 {
     Q_OBJECT
 public:
-    enum Direction
-    {
-        Up,
-        Down
-    };
-
     explicit AbstractTableVisualization(QWidget *parent = 0);
 
     /*virtual*/ void resizeEvent(QResizeEvent *e);
@@ -45,8 +39,6 @@ protected:
 
     QString currentEvent;
 
-    Direction direction;
-
     bool isActive;
     qint64 topLinePos;
 
@@ -55,7 +47,7 @@ protected:
 
     QSettings settings;
 
-    virtual void updatePage() = 0;
+    virtual void updatePage(bool eventChanged) = 0;
     virtual void updatePage(int cursorMoving) = 0;
 
     Ui::AbstractTableVisualization *ui;

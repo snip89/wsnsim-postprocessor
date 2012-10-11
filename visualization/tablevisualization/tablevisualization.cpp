@@ -32,15 +32,14 @@ void TableVisualization::update(IProject *project, ILog *log)
     currentRow = 0;
     currentColumn = 0;
 
-    currentEvent = ui->toolBoxComboBox->currentText();
-    currentEventLog = StaticFromLogSelector::selectFromLog(currentLog, currentProject, "tablev.templog", ui->toolBoxComboBox->currentIndex());
 
-    updatePage();
+
+    updatePage(true);
 }
 
 void TableVisualization::update()
 {
-    updatePage();
+    updatePage(true);
 }
 
 QWidget *TableVisualization::getWidget()
@@ -52,8 +51,14 @@ void TableVisualization::fromLine(qint64 line)
 {
 }
 
-void TableVisualization::updatePage()
+void TableVisualization::updatePage(bool eventChanged)
 {
+    if(eventChanged)
+    {
+        currentEvent = ui->toolBoxComboBox->currentText();
+        currentEventLog = StaticFromLogSelector::selectFromLog(currentLog, currentProject, "tablev.templog", ui->toolBoxComboBox->currentIndex());
+    }
+
     int size = 0;
     SimpleEventInfo *info = currentProject->info(size);
 
@@ -163,7 +168,7 @@ void TableVisualization::updatePage()
 
 void TableVisualization::updatePage(int cursorMoving)
 {
-    updatePage();
+    updatePage(true);
 }
 
 TableVisualization::~TableVisualization()
