@@ -133,7 +133,7 @@ SOURCES += core/filter.cpp \
            visualization/textvisualization/textvisualization.cpp \
            visualization/tools/tableviewer.cpp \
            visualization/tools/viewer.cpp
-TRANSLATIONS += qt_ru.ts postprocessor.ts
+TRANSLATIONS += resources/localization/qt_ru.ts resources/localization/postprocessor.ts
 include(../wsnsim.pri)
 tr.commands = lrelease $$_PRO_FILE_
 QMAKE_EXTRA_TARGETS += tr
