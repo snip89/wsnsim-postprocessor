@@ -12,6 +12,7 @@
 #include <QAbstractButton>
 #include <QMessageBox>
 #include <QSessionManager>
+#include <QTranslator>
 #include <QDebug>
 
 #include "ui_localizationsettings.h"

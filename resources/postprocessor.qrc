@@ -1,6 +1,8 @@
 <RCC>
-    <qresource>
+    <qresource prefix="/">
+        <file>localization/postprocessor_ru.qm</file>
+        <file>localization/postprocessor_en.qm</file>
         <file>localization/qt_ru.qm</file>
-        <file>localization/postprocessor.qm</file>
+        <file>localization/qt_en.qm</file>
     </qresource>
 </RCC>

@@ -39,6 +39,8 @@ void LocalizationSettings::applySettings()
     {
         settings.setValue("Localization/Language", "Ru");
     }
+
+
 }
 
 LocalizationSettings::~LocalizationSettings()
