@@ -35,6 +35,9 @@ MainSettings::MainSettings(QWidget *parent) :
     textGuiSettings = new TextGuiSettings();
     textGuiSettings->showCurrentSettings();
 
+    tableGuiSettings = new TableGuiSettings();
+    tableGuiSettings->showCurrentSettings();
+
     initConnections();
 }
 
@@ -50,6 +53,7 @@ MainSettings::~MainSettings()
     delete textColorsAndFontsSettings;
     delete hexGuiSettings;
     delete textGuiSettings;
+    delete tableGuiSettings;
 
     delete settingsFrameWidget;
     delete ui;
@@ -82,7 +86,10 @@ void MainSettings::createItems()
     textVisualizationGuiItem->setText(0, tr("Gui"));
 
     tableVisualizationItem = new QTreeWidgetItem(ui->settingsTree);
+    tableVisualizationGuiItem = new QTreeWidgetItem(tableVisualizationItem);
+
     tableVisualizationItem->setText(0, tr("Table visualization"));
+    tableVisualizationGuiItem->setText(0, tr("Gui"));
 
     localizationItem = new QTreeWidgetItem(ui->settingsTree);
     languageItem = new QTreeWidgetItem(localizationItem);
@@ -117,6 +124,7 @@ void MainSettings::deleteItems()
     delete textVisualizationGuiItem;
     delete textVisualizationItem;
 
+    delete tableVisualizationGuiItem;
     delete tableVisualizationItem;
 
     delete languageItem;
@@ -214,6 +222,16 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
         showEmptySettings(tr("Table visualization"));
     }
 
+    else if(item == tableVisualizationGuiItem)
+    {
+        tableGuiSettings->setSettingsName(tr("Gui"));
+
+        if(!settingsFrameWidget->isAncestorOf(tableGuiSettings))
+            settingsFrameWidget->addWidget(tableGuiSettings);
+
+        settingsFrameWidget->setCurrentWidget(tableGuiSettings);
+    }
+
     else if(item == localizationItem)
     {
         showEmptySettings(tr("Localization"));
@@ -239,6 +257,7 @@ void MainSettings::dialogIsAccepted()
     hexGuiSettings->applySettings();
     textColorsAndFontsSettings->applySettings();
     textGuiSettings->applySettings();
+    tableGuiSettings->applySettings();
 
     emit settingsApplied();
 
@@ -254,6 +273,7 @@ void MainSettings::dialogIsRejected()
     hexGuiSettings->showCurrentSettings();
     textColorsAndFontsSettings->showCurrentSettings();
     textGuiSettings->showCurrentSettings();
+    tableGuiSettings->showCurrentSettings();
 
     settings.setValue("Hidden/Gui/Settings_dialog_pos", pos());
 }

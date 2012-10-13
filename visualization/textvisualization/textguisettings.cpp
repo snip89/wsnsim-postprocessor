@@ -23,7 +23,7 @@ void TextGuiSettings::showCurrentSettings()
     if(lineWrapMode)
         ui->lineWrapComboBox->setCurrentIndex(0);
     else
-        ui->lineWrapComboBox->setCurrentIndex(1);    
+        ui->lineWrapComboBox->setCurrentIndex(1);
 }
 
 void TextGuiSettings::applySettings()

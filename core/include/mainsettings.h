@@ -27,6 +27,7 @@
 #include "textappearancecolorsandfontssettings.h"
 #include "hexguisettings.h"
 #include "textguisettings.h"
+#include "tableguisettings.h"
 #include "sniffercoresettings.h"
 #include "snifferguisettings.h"
 
@@ -58,11 +59,9 @@ private:
     QTreeWidgetItem *textVisualizationColorsAndFontsItem;
     QTreeWidgetItem *textVisualizationGuiItem;
     QTreeWidgetItem *tableVisualizationItem;
+    QTreeWidgetItem *tableVisualizationGuiItem;
     QTreeWidgetItem *localizationItem;
     QTreeWidgetItem *languageItem;
-    QTreeWidgetItem *snifferItem;
-    QTreeWidgetItem *snifferCoreItem;
-    QTreeWidgetItem *snifferGuiItem;
 
     //settings widgets
     EmptySettings *emptySettings;
@@ -73,8 +72,7 @@ private:
     TextAppearanceColorsAndFontsSettings *textColorsAndFontsSettings;
     HexGuiSettings *hexGuiSettings;
     TextGuiSettings *textGuiSettings;
-    SnifferCoreSettings *snifferCoreSettings;
-    SnifferGuiSettings *snifferGuiSettings;
+    TableGuiSettings *tableGuiSettings;
 
     QErrorMessage errorMessager;
 
