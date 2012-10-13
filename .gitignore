@@ -5,3 +5,5 @@
 *.sh
 *.bat
 ui_*.h
+qrc_*.cpp
+*.qm
