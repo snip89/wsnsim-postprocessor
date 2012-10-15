@@ -157,9 +157,13 @@ void TableVisualization::updatePage(bool eventChanged)
         for(int j = 0; j < resultLines.at(i).size(); j ++)
         {
             viewer->setItem(i, j, new QTableWidgetItem(resultLines.at(i).at(j)));
-            viewer->resizeRowToContents(i);
+            //viewer->resizeRowToContents(i);
         }
     }
+
+    viewer->resizeRowsToContents();
+    viewer->resizeColumnsToContents();
+    viewer->resizeRowsToContents();
 
     QStringList header;
     for(int i = topLinePos; i < topLinePos + recordsCount; i ++)
