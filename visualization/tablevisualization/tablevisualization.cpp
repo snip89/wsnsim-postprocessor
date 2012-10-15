@@ -128,6 +128,7 @@ void TableVisualization::updatePage(bool eventChanged)
         {
             if(info[record.eventID].argsInfo[j].type == BYTE_ARRAY_TYPE)
             {
+                QString hexed_string = "";
                 foreach(char nextHex, record.other[j].toByteArray())
                 {
                     QString hexed = QString::number(nextHex, 16);
@@ -135,8 +136,12 @@ void TableVisualization::updatePage(bool eventChanged)
                     if(hexed.size() == 1)
                         hexed.insert(0, '0');
 
-                    resultLine.append(hexed);
+                    hexed_string += hexed + " ";
                 }
+
+                hexed_string.chop(1);
+
+                resultLine.append(hexed_string);
             }
             else
                 resultLine.append(record.other[j].toString());
