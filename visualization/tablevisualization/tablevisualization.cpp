@@ -61,6 +61,8 @@ void TableVisualization::updatePage(bool eventChanged)
         currentColumn = 0;
         currentEvent = ui->toolBoxComboBox->currentText();
         currentEventLog = StaticFromLogSelector::selectFromLog(currentLog, currentProject, "tablev.templog", ui->toolBoxComboBox->currentIndex());
+
+        ui->recordsCountLabel->setText(QString::number(currentEventLog->size()));
     }
 
     int size = 0;

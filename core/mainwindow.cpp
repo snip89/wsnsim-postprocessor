@@ -12,7 +12,7 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {   
-    prName = tr("Simulation logs visualizator");
+    prName = tr("Logs visualizer");
     delimT1 = tr(" : ");
     delimT2 = tr(" -> ");
 

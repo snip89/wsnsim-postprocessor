@@ -28,7 +28,7 @@ void setUpCodec()
 void setApplicationInfo()
 {
     QCoreApplication::setOrganizationName("wsnsim");
-    QCoreApplication::setApplicationName("postprocessor");
+    QCoreApplication::setApplicationName("logsVisualizer");
 }
 
 void setSettings(QSettings &settings)

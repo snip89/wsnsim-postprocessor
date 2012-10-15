@@ -13,6 +13,16 @@
         <source>Select event type:</source>
         <translation type="unfinished">Select event type:</translation>
     </message>
+    <message>
+        <location filename="../../ui/abstracttablevisualization.ui" line="130"/>
+        <source> records</source>
+        <translation type="unfinished"> records</translation>
+    </message>
+    <message>
+        <location filename="../../ui/abstracttablevisualization.ui" line="143"/>
+        <source>Log size for current event: </source>
+        <translation type="unfinished">Log size for current event: </translation>
+    </message>
 </context>
 <context>
     <name>AbstractTextAppearanceColorsAndFontsSettings</name>
@@ -384,9 +394,17 @@
         <translation type="unfinished">Postprocessor</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="15"/>
         <source>Simulation logs visualizator</source>
-        <translation type="unfinished">Simulation logs visualizator</translation>
+        <translation type="obsolete">Simulation logs visualizator</translation>
+    </message>
+    <message>
+        <source>Logs visualizator</source>
+        <translation type="obsolete">Logs visualizator</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="15"/>
+        <source>Logs visualizer</source>
+        <translation type="unfinished">Logs visualizer</translation>
     </message>
     <message>
         <location filename="../../core/mainwindow.cpp" line="16"/>
