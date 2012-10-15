@@ -4,9 +4,8 @@
 
 QT += core gui xml
 INCLUDEPATH += ../libs/projectData
-TARGET += logsVisualizer
+TARGET = logsVisualizer
 TEMPLATE = app
-TARGET = 
 DEPENDPATH += . \
               core \
               interfaces \
