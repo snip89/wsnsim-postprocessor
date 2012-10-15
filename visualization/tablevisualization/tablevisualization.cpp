@@ -57,6 +57,8 @@ void TableVisualization::updatePage(bool eventChanged)
 {
     if(eventChanged)
     {
+        topLinePos = 0;
+
         currentRow = 0;
         currentColumn = 0;
         currentEvent = ui->toolBoxComboBox->currentText();
