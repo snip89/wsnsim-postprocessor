@@ -25,18 +25,12 @@ AbstractTableVisualization::~AbstractTableVisualization()
     delete ui;
 }
 
-void AbstractTableVisualization::selectedEventChanged(QString event)
-{
-    currentEvent = event;
-    updatePage(true);
-}
-
 void AbstractTableVisualization::resizeEvent(QResizeEvent *e)
 {
     QWidget::resizeEvent(e);
 
     if(isActive)
-        updatePage(false);
+        updatePage();
 }
 
 bool AbstractTableVisualization::eventFilter(QObject *target, QEvent *event)
@@ -155,21 +149,7 @@ void AbstractTableVisualization::scrollBarMoving(int value)
 {
     topLinePos = value;
 
-    /*int cursorMoving = 0;
-
-    if(wheel)
-    {
-        cursorMoving = currentLine - topLinePos;
-        updatePage(cursorMoving);
-        wheel = false;
-    }
-    else
-    {
-
-        updatePage();
-    }*/
-
-    updatePage(false);
+    updatePage();
 }
 
 int AbstractTableVisualization::linesOnPage()

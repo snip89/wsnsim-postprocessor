@@ -47,7 +47,7 @@ protected:
 
     QSettings settings;
 
-    virtual void updatePage(bool eventChanged) = 0;
+    virtual void updatePage() = 0;
     virtual void updatePage(int cursorMoving) = 0;
 
     Ui::AbstractTableVisualization *ui;
@@ -55,7 +55,6 @@ protected:
     int linesOnPage();
 private slots:
     void scrollBarMoving(int value);
-    void selectedEventChanged(QString event);
 };
 
 #endif // ABSTRACTTABLEVISUALIZATION_H

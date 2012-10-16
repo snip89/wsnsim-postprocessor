@@ -26,18 +26,15 @@ public:
 private:
     QSettings settings;
 
-    bool firstTime;
-    bool allEvents;
-
     void setSettings(QSettings &someSettings);
 
-    void updatePage(bool eventChanged);
+    void updatePage();
     void updatePage(int cursorMoving);
 
-    void allEventsUpdate(bool eventChanged);
-    void eventsUpdate(bool eventChanged);
+    QStringList eventTypes;
 
-    void initEventSelector();
+    /*void allEventsUpdate(bool eventChanged);
+    void eventsUpdate(bool eventChanged);*/
 };
 
 #endif // TABLEVISUALIZATION_H

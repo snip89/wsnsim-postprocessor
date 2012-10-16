@@ -4,9 +4,6 @@ TableVisualization::TableVisualization(QWidget *parent)
     : AbstractTableVisualization(parent)
 {
     setSettings(settings);
-
-    firstTime = true;
-    allEvents = false;
 }
 
 void TableVisualization::activity(bool status)
@@ -16,32 +13,44 @@ void TableVisualization::activity(bool status)
 
 void TableVisualization::update(IProject *project, ILog *log)
 {
-    if(!firstTime)
-    {
-        qDebug() << "its here";
-        delete currentEventLog;
-    }
-    else
-        firstTime = false;
-
     currentProject = project;
     currentLog = log;
 
-    disconnect(ui->toolBoxComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(selectedEventChanged(QString)));
-    initEventSelector();
-    connect(ui->toolBoxComboBox, SIGNAL(currentIndexChanged(QString)), this, SLOT(selectedEventChanged(QString)));
-
     topLinePos = 0;
-
     currentRow = 0;
     currentColumn = 0;
 
-    updatePage(true);
+    viewer->clear();
+
+    eventTypes.clear();
+
+    int size = 0;
+    SimpleEventInfo *info = currentProject->info(size);
+
+    for(int i = 0; i < size; i++)
+    {
+        int argsCount = info[i].argsCount;
+
+        SimpleArgInfo *argsInfo = info[i].argsInfo;
+        for(int j = 0; j < argsCount; j++)
+        {
+            if(!eventTypes.contains(*argsInfo[j].name))
+                eventTypes.append(*argsInfo[j].name);
+        }
+    }
+
+    eventTypes.insert(0, "event");
+    eventTypes.insert(0, "vTime");
+
+    viewer->setColumnCount(eventTypes.size());
+    viewer->setHorizontalHeaderLabels(eventTypes);
+
+    updatePage();
 }
 
 void TableVisualization::update()
 {
-    updatePage(true);
+    updatePage();
 }
 
 QWidget *TableVisualization::getWidget()
@@ -54,26 +63,107 @@ void TableVisualization::fromLine(qint64 line)
     ui->verticalScrollBar->setValue(line);
 }
 
-void TableVisualization::updatePage(bool eventChanged)
+void TableVisualization::updatePage()
 {
-    if(eventChanged)
+    currentLog->seek(topLinePos);
+
+    int recordsCount = linesOnPage();
+
+    while(topLinePos > 0 && recordsCount > currentLog->size() - topLinePos)
     {
-        topLinePos = 0;
-        currentRow = 0;
-        currentColumn = 0;
-        currentEvent = ui->toolBoxComboBox->currentText();
+        topLinePos --;
+        currentLog->seek(topLinePos);
     }
 
-    if(ui->toolBoxComboBox->currentText() == tr("All events"))
+    if(topLinePos == 0 && recordsCount > currentLog->size())
     {
-        allEventsUpdate(eventChanged);
+        recordsCount = currentLog->size();
     }
-    else
-        eventsUpdate(eventChanged);
+
+    qint64 binPageSize = 0;
+    char *binPage = currentLog->read(recordsCount, binPageSize);
+
+    viewer->setRowCount(recordsCount);
+
+    qint64 posInBinPage = 0;
+    for(int i = 0; i < recordsCount; i ++)
+    {
+        qint64 readedSize = 0;
+        Record record;
+        int infoSize = 0;
+        SimpleEventInfo *info = currentProject->info(infoSize);
+
+        StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
+        posInBinPage += readedSize;
+
+        for(int k = 0; k < eventTypes.size(); k ++)
+        {
+            if(k == 0)
+            {
+                viewer->setItem(i, k, new QTableWidgetItem(QString::number(record.vTime)));
+            }
+            else if(k == 1)
+            {
+                viewer->setItem(i, k, new QTableWidgetItem(*info[record.eventID].type));
+            }
+            else
+            {
+                bool wasEvent = false;
+                for(int j = 0; j < info[record.eventID].argsCount; j ++)
+                {
+                    if(eventTypes[k] == info[record.eventID].argsInfo[j].name)
+                    {
+                        wasEvent = true;
+
+                        if(info[record.eventID].argsInfo[j].type == BYTE_ARRAY_TYPE)
+                        {
+                            QString hexed_string = "";
+                            foreach(char nextHex, record.other[j].toByteArray())
+                            {
+                                QString hexed = QString::number(nextHex, 16);
+                                hexed = hexed.toUpper();
+                                if(hexed.size() == 1)
+                                    hexed.insert(0, '0');
+
+                                hexed_string += hexed + " ";
+                            }
+
+                            hexed_string.chop(1);
+
+                            //resultLine.append(hexed_string);
+                            viewer->setItem(i, k, new QTableWidgetItem(hexed_string));
+                        }
+                        else
+                            //resultLine.append(record.other[j].toString());
+                            viewer->setItem(i, k, new QTableWidgetItem(record.other[j].toString()));
+                    }
+                }
+
+                if(!wasEvent)
+                    //resultLine.append("");
+                    viewer->setItem(i, k, new QTableWidgetItem(""));
+
+            }
+        }
+    }
+
+    ui->verticalScrollBar->setPageStep(recordsCount);
+    ui->verticalScrollBar->setMaximum(currentLog->size() - recordsCount);
+
+    QStringList header;
+    for(int i = topLinePos; i < topLinePos + recordsCount; i ++)
+    {
+        header.append(QString::number(i));
+    }
+
+    viewer->setVerticalHeaderLabels(header);
+    viewer->setCurrentCell(currentRow, currentColumn);
 
     viewer->resizeRowsToContents();
-    viewer->resizeColumnsToContents();
-    viewer->resizeRowsToContents();
+
+    //viewer->resizeRowsToContents();
+    //viewer->resizeColumnsToContents();
+    //viewer->resizeRowsToContents();
 
     ui->horizontalScrollBar->setMinimum(viewer->horizontalScrollBar()->minimum());
     ui->horizontalScrollBar->setMaximum(viewer->horizontalScrollBar()->maximum());
@@ -81,10 +171,10 @@ void TableVisualization::updatePage(bool eventChanged)
 
 void TableVisualization::updatePage(int cursorMoving)
 {
-    updatePage(true);
+    updatePage();
 }
 
-void TableVisualization::allEventsUpdate(bool eventChanged)
+/*void TableVisualization::allEventsUpdate(bool eventChanged)
 {
     allEvents = true;
 
@@ -212,9 +302,9 @@ void TableVisualization::allEventsUpdate(bool eventChanged)
 
     ui->verticalScrollBar->setPageStep(recordsCount);
     ui->verticalScrollBar->setMaximum(currentLog->size() - recordsCount);
-}
+}*/
 
-void TableVisualization::eventsUpdate(bool eventChanged)
+/*void TableVisualization::eventsUpdate(bool eventChanged)
 {
     allEvents = false;
 
@@ -331,12 +421,10 @@ void TableVisualization::eventsUpdate(bool eventChanged)
 
     ui->verticalScrollBar->setPageStep(recordsCount);
     ui->verticalScrollBar->setMaximum(currentEventLog->size() - recordsCount);
-}
+}*/
 
 TableVisualization::~TableVisualization()
 {
-    if(!firstTime && !allEvents)
-        delete currentEventLog;
 }
 
 void TableVisualization::setSettings(QSettings &someSettings)
@@ -346,19 +434,4 @@ void TableVisualization::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Table visualization/Gui/Increment"))
         someSettings.setValue("Table visualization/Gui/Increment", 1);
-}
-
-void TableVisualization::initEventSelector()
-{
-    ui->toolBoxComboBox->clear();
-
-    ui->toolBoxComboBox->addItem(tr("All events"));
-
-    int size = 0;
-    SimpleEventInfo *info = currentProject->info(size);
-
-    for(int i = 0; i < size; i ++)
-    {
-        ui->toolBoxComboBox->addItem(*info[i].type);
-    }
 }
