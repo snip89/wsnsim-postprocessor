@@ -27,11 +27,15 @@ private:
     QSettings settings;
 
     bool firstTime;
+    bool allEvents;
 
     void setSettings(QSettings &someSettings);
 
     void updatePage(bool eventChanged);
     void updatePage(int cursorMoving);
+
+    void allEventsUpdate(bool eventChanged);
+    void eventsUpdate(bool eventChanged);
 
     void initEventSelector();
 };
