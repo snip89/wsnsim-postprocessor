@@ -39,6 +39,8 @@ void TableVisualization::update(IProject *project, ILog *log)
         }
     }
 
+    eventTypes.sort();
+
     eventTypes.insert(0, "event");
     eventTypes.insert(0, "vTime");
 
@@ -145,6 +147,8 @@ void TableVisualization::updatePage()
 
             }
         }
+
+        viewer->setRowHeight(i, 20);
     }
 
     ui->verticalScrollBar->setPageStep(recordsCount);
@@ -158,12 +162,6 @@ void TableVisualization::updatePage()
 
     viewer->setVerticalHeaderLabels(header);
     viewer->setCurrentCell(currentRow, currentColumn);
-
-    viewer->resizeRowsToContents();
-
-    //viewer->resizeRowsToContents();
-    //viewer->resizeColumnsToContents();
-    //viewer->resizeRowsToContents();
 
     ui->horizontalScrollBar->setMinimum(viewer->horizontalScrollBar()->minimum());
     ui->horizontalScrollBar->setMaximum(viewer->horizontalScrollBar()->maximum());

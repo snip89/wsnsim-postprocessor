@@ -154,9 +154,10 @@ void AbstractTableVisualization::scrollBarMoving(int value)
 
 int AbstractTableVisualization::linesOnPage()
 {
-    viewer->setRowCount(1);
-    viewer->setItem(0, 0, new QTableWidgetItem("test"));
-    viewer->resizeRowToContents(0);
+    //viewer->setRowCount(1);
+    //viewer->setItem(0, 0, new QTableWidgetItem("test"));
+    //viewer->resizeRowToContents(0);
 
-    return (viewer->viewport()->size().height() - TVIEWER_PADDING_KOEFF) / viewer->visualItemRect(viewer->item(0,0)).size().height();
+    //return (viewer->viewport()->size().height() - TVIEWER_PADDING_KOEFF) / viewer->visualItemRect(viewer->item(0,0)).size().height();
+    return (viewer->viewport()->size().height()) / 20;
 }
