@@ -163,9 +163,9 @@ qint64 Log::getRecordFilePos(qint64 record)
         for(qint64 i = 0; i < blockRecordsCount; i ++)
         {
             qint64 skippedSize = 0;
-            quint64 vTime = 0;
+            quint64 time = 0;
 
-            if(!StaticRecordsReader::skipRecord(memory, reallyMemSize, memoryPos, skippedSize, vTime, eventsInfo))
+            if(!StaticRecordsReader::skipRecord(memory, reallyMemSize, memoryPos, skippedSize, time, eventsInfo))
             {
                 errorMessager.showMessage(QObject::tr("Unexpected end of record"));
                 return 0;

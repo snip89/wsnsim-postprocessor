@@ -7,11 +7,11 @@
 
 #include "staticrecordsreader.h"
 
-bool StaticRecordsReader::skipRecord(char *mem, qint64 memSize, qint64 pos, qint64 &skippedSize, quint64 &vTime, SimpleEventInfo *info)
+bool StaticRecordsReader::skipRecord(char *mem, qint64 memSize, qint64 pos, qint64 &skippedSize, quint64 &time, SimpleEventInfo *info)
 {
-    vTime = 0;
+    time = 0;
 
-    if(!translateArg(mem, memSize, pos, vTime))
+    if(!translateArg(mem, memSize, pos, time))
         return false;
 
     pos += sizeof(quint64);
@@ -35,8 +35,8 @@ bool StaticRecordsReader::skipRecord(char *mem, qint64 memSize, qint64 pos, qint
 
 bool StaticRecordsReader::readRecord(char *mem, qint64 memSize, qint64 pos, qint64 &readedSize, Record &record, SimpleEventInfo *info)
 {
-    quint64 vTime = 0;
-    if(!translateArg(mem, memSize, pos, vTime))
+    quint64 time = 0;
+    if(!translateArg(mem, memSize, pos, time))
         return false;
 
     readedSize += sizeof(quint64);
@@ -46,7 +46,7 @@ bool StaticRecordsReader::readRecord(char *mem, qint64 memSize, qint64 pos, qint
     copyArg(mem, bytesValue, pos, sizeof(quint64));
     pos += sizeof(quint64);
     record.byteRecord.append(bytesValue, sizeof(quint64));
-    record.vTime = vTime;
+    record.time = time;
 
     delete[] bytesValue;
 
@@ -70,21 +70,21 @@ bool StaticRecordsReader::readRecord(char *mem, qint64 memSize, qint64 pos, qint
     return true;
 }
 
-bool StaticRecordsReader::checkRecord(char *mem, qint64 memSize, qint64 pos, qint64 &readedSize, bool &success, QString argName, QVariant &argValue, quint64 &vTime, SimpleEventInfo *info)
+bool StaticRecordsReader::checkRecord(char *mem, qint64 memSize, qint64 pos, qint64 &readedSize, bool &success, QString argName, QVariant &argValue, quint64 &time, SimpleEventInfo *info)
 {
-    vTime = 0;
+    time = 0;
     success = false;
 
-    if(!translateArg(mem, memSize, pos, vTime))
+    if(!translateArg(mem, memSize, pos, time))
         return false;
 
     pos += sizeof(quint64);
 
     readedSize += sizeof(quint64);
 
-    if(argName == "vTime")
+    if(argName == "time")
     {
-        argValue.setValue(vTime);
+        argValue.setValue(time);
         success = true;
     }
 

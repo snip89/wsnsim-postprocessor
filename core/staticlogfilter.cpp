@@ -47,8 +47,8 @@ bool StaticLogFilter::useFilter(Log *currentLog, Log *newLog, AbstractFilter *fi
             qint64 readedSize = 0;
             bool success = false;
             QVariant argValue;
-            quint64 vTime = 0;
-            if(!StaticRecordsReader::checkRecord(blockBuffer, blockSize, pos, readedSize, success, filter->argName(), argValue, vTime, currentLog->eventsInfo))
+            quint64 time = 0;
+            if(!StaticRecordsReader::checkRecord(blockBuffer, blockSize, pos, readedSize, success, filter->argName(), argValue, time, currentLog->eventsInfo))
             {
                 QErrorMessage errorMessager;
                 errorMessager.showMessage(QObject::tr("Unexpected end of record"));
@@ -67,7 +67,7 @@ bool StaticLogFilter::useFilter(Log *currentLog, Log *newLog, AbstractFilter *fi
                         newLog->index->blockElementsCount ++;
                         newLog->index->logSize ++;
 
-                        newLog->index->append(newLog->index->filePos, vTime);
+                        newLog->index->append(newLog->index->filePos, time);
                         newLog->index->filePos += readedSize;
                     }
                     else
@@ -78,7 +78,7 @@ bool StaticLogFilter::useFilter(Log *currentLog, Log *newLog, AbstractFilter *fi
 
                         if(newLog->index->blockElementsCount == newLog->index->blockSize)
                         {
-                            newLog->index->append(newLog->index->filePos, vTime);
+                            newLog->index->append(newLog->index->filePos, time);
 
                             newLog->index->blockElementsCount = 0;
 
@@ -91,7 +91,7 @@ bool StaticLogFilter::useFilter(Log *currentLog, Log *newLog, AbstractFilter *fi
                 }
                 else
                 {
-//                    if(filter->argName() == "vTime")
+//                    if(filter->argName() == "time")
 //                    {
 //                        pos += readedSize;
 //                        breakFirst = true;

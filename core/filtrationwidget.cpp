@@ -161,7 +161,7 @@ void FiltrationWidget::execute()
 
         if(i == 0)
         {
-//            if(((Filter*)filters[i])->argumentName == "vTime")
+//            if(((Filter*)filters[i])->argumentName == "time")
 //            {
 //                if(((Filter*)filters[i])->booleanOperator == EQ ||
 //                        ((Filter*)filters[i])->booleanOperator == GT ||
@@ -169,7 +169,7 @@ void FiltrationWidget::execute()
 //                {
 //                    for(qint64 j = 0; j < currentLog->index->indexSize; j ++)
 //                    {
-//                        if((currentLog->index->index[j].vTime + currentLog->blockSize) >= ((Filter*)filters[i])->compareValue.toULongLong())
+//                        if((currentLog->index->index[j].time + currentLog->blockSize) >= ((Filter*)filters[i])->compareValue.toULongLong())
 //                        {
 //                            fromPos = currentLog->index->index[j].filePos;
 //                            break;
@@ -192,7 +192,7 @@ void FiltrationWidget::execute()
         }
         else
         {
-//            if(((Filter*)filters[i])->argumentName == "vTime")
+//            if(((Filter*)filters[i])->argumentName == "time")
 //            {
 //                if(((Filter*)filters[i])->booleanOperator == EQ ||
 //                        ((Filter*)filters[i])->booleanOperator == GT ||
@@ -200,7 +200,7 @@ void FiltrationWidget::execute()
 //                {
 //                    for(qint64 j = 0; j < tempLog->index->indexSize; j ++)
 //                    {
-//                        if((tempLog->index->index[j].vTime + tempLog->blockSize) >= ((Filter*)filters[i])->compareValue.toULongLong())
+//                        if((tempLog->index->index[j].time + tempLog->blockSize) >= ((Filter*)filters[i])->compareValue.toULongLong())
 //                        {
 //                            fromPos = tempLog->index->index[j].filePos;
 //                            break;

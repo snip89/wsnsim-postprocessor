@@ -74,7 +74,7 @@ void LogIndex::append(qint64 pos, quint64 time)
 {
     // добавить элемент в индекс
     index[indexSize - 1].filePos = pos;
-    index[indexSize - 1].vTime = time;
+    index[indexSize - 1].time = time;
 
     // увеличен размер индекса
     indexSize ++;
@@ -97,10 +97,10 @@ void LogIndex::generateFromMemory(char *memory, qint64 memorySize, qint64 &logSi
     if(indexSize == 1)
     {
         qint64 skippedSize = 0;
-        quint64 vTime = 0;
+        quint64 time = 0;
 
         // попытка пропустить запись
-        StaticRecordsReader::skipRecord(memory, memorySize, pos, skippedSize, vTime, eventsInfo);
+        StaticRecordsReader::skipRecord(memory, memorySize, pos, skippedSize, time, eventsInfo);
 
         // увеличить размер формируемого блока
 //        currentBlockSize += skippedSize;
@@ -112,7 +112,7 @@ void LogIndex::generateFromMemory(char *memory, qint64 memorySize, qint64 &logSi
         logSize ++;
 
         // добавить в индекс новый элемент
-        append(filePos, vTime);
+        append(filePos, time);
 
         // увеличить позиции в файле и буфере
         filePos += skippedSize;
@@ -123,10 +123,10 @@ void LogIndex::generateFromMemory(char *memory, qint64 memorySize, qint64 &logSi
     while(pos < memorySize)
     {
         qint64 skippedSize = 0;
-        quint64 vTime = 0;
+        quint64 time = 0;
 
         // попытка пропустить запись
-        if(!StaticRecordsReader::skipRecord(memory, memorySize, pos, skippedSize, vTime, eventsInfo))
+        if(!StaticRecordsReader::skipRecord(memory, memorySize, pos, skippedSize, time, eventsInfo))
             return;
 
         // увеличить размер формируемого блока
@@ -146,7 +146,7 @@ void LogIndex::generateFromMemory(char *memory, qint64 memorySize, qint64 &logSi
         if(blockElementsCount == blockSize)
         {
             // добавить в индекс новый элемент
-            append(filePos, vTime);
+            append(filePos, time);
 
             // сбросить счетчик блоков
             blockElementsCount = 0;

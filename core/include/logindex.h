@@ -21,7 +21,7 @@
 struct Index
 {
     qint64 filePos;
-    quint64 vTime;
+    quint64 time;
 };
 
 class LogIndex

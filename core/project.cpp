@@ -114,7 +114,7 @@ QString Project::projectName()
 QStringList Project::paramsNames()
 {
     QStringList result;
-    result.append("vTime");
+    result.append("time");
     result.append("eventID");
 
     foreach(EventParams params, projectParams.events.systemEvents)
@@ -142,7 +142,7 @@ LogDataType Project::paramType(QString paramName)
 {
     LogDataType result = UNKNOWN_TYPE;
 
-    if(paramName == "vTime")
+    if(paramName == "time")
         return UINT64_TYPE;
 
     if(paramName == "eventID")

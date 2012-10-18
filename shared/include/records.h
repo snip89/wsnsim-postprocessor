@@ -16,7 +16,7 @@
 struct Record
 {
     QByteArray byteRecord;
-    quint64 vTime;
+    quint64 time;
     quint8 eventID;
     QList<QVariant> other;
 };

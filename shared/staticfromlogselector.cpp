@@ -45,8 +45,8 @@ ILog* StaticFromLogSelector::selectFromLog(ILog *log, IProject *project, QString
             qint64 readedSize = 0;
             bool success = false;
             QVariant argValue;
-            quint64 vTime = 0;
-            if(!StaticRecordsReader::checkRecord(blockBuffer, blockSize, pos, readedSize, success, "eventID", argValue, vTime, currentLog->eventsInfo))
+            quint64 time = 0;
+            if(!StaticRecordsReader::checkRecord(blockBuffer, blockSize, pos, readedSize, success, "eventID", argValue, time, currentLog->eventsInfo))
             {
                 QErrorMessage errorMessager;
                 errorMessager.showMessage(QObject::tr("Unexpected end of record"));
@@ -65,7 +65,7 @@ ILog* StaticFromLogSelector::selectFromLog(ILog *log, IProject *project, QString
                         newLog->index->blockElementsCount ++;
                         newLog->index->logSize ++;
 
-                        newLog->index->append(newLog->index->filePos, vTime);
+                        newLog->index->append(newLog->index->filePos, time);
                         newLog->index->filePos += readedSize;
                     }
                     else
@@ -76,7 +76,7 @@ ILog* StaticFromLogSelector::selectFromLog(ILog *log, IProject *project, QString
 
                         if(newLog->index->blockElementsCount == newLog->index->blockSize)
                         {
-                            newLog->index->append(newLog->index->filePos, vTime);
+                            newLog->index->append(newLog->index->filePos, time);
 
                             newLog->index->blockElementsCount = 0;
 

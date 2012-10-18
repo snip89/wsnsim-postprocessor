@@ -42,7 +42,7 @@ void TableVisualization::update(IProject *project, ILog *log)
     eventTypes.sort();
 
     eventTypes.insert(0, "event");
-    eventTypes.insert(0, "vTime");
+    eventTypes.insert(0, "time");
 
     viewer->setColumnCount(eventTypes.size());
     viewer->setHorizontalHeaderLabels(eventTypes);
@@ -102,7 +102,7 @@ void TableVisualization::updatePage()
         {
             if(k == 0)
             {
-                viewer->setItem(i, k, new QTableWidgetItem(QString::number(record.vTime)));
+                viewer->setItem(i, k, new QTableWidgetItem(QString::number(record.time)));
             }
             else if(k == 1)
             {
@@ -200,7 +200,7 @@ void TableVisualization::updatePage(int cursorMoving)
 
     eventTypes.sort();
     eventTypes.insert(0, "event");
-    eventTypes.insert(0, "vTime");
+    eventTypes.insert(0, "time");
 
     viewer->setColumnCount(eventTypes.size());
     viewer->setHorizontalHeaderLabels(eventTypes);
@@ -238,7 +238,7 @@ void TableVisualization::updatePage(int cursorMoving)
         StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
         posInBinPage += readedSize;
 
-        resultLine.append(QString::number(record.vTime));
+        resultLine.append(QString::number(record.time));
         resultLine.append(*info[record.eventID].type);
 
         for(int k = 2; k < eventTypes.size(); k ++)
@@ -324,7 +324,7 @@ void TableVisualization::updatePage(int cursorMoving)
             viewer->setColumnCount(argsCount + 1);
 
             QStringList header;
-            header.append("vTime");
+            header.append("time");
 
             SimpleArgInfo *argsInfo = info[i].argsInfo;
             for(int j = 0; j < argsCount; j++)
@@ -369,7 +369,7 @@ void TableVisualization::updatePage(int cursorMoving)
         StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
         posInBinPage += readedSize;
 
-        resultLine.append(QString::number(record.vTime));
+        resultLine.append(QString::number(record.time));
 
         for(int j = 0; j < info[record.eventID].argsCount; j ++)
         {

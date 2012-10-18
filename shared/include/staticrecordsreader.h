@@ -24,9 +24,9 @@
 class StaticRecordsReader
 {
 public:
-    static bool skipRecord(char *mem, qint64 memSize, qint64 pos, qint64 &skippedSize, quint64 &vTime, SimpleEventInfo *info);
+    static bool skipRecord(char *mem, qint64 memSize, qint64 pos, qint64 &skippedSize, quint64 &time, SimpleEventInfo *info);
     static bool readRecord(char *mem, qint64 memSize, qint64 pos, qint64 &readedSize, Record &record, SimpleEventInfo *info);
-    static bool checkRecord(char *mem, qint64 memSize, qint64 pos, qint64 &readedSize, bool &success, QString argName, QVariant &argValue, quint64 &vTime, SimpleEventInfo *info);
+    static bool checkRecord(char *mem, qint64 memSize, qint64 pos, qint64 &readedSize, bool &success, QString argName, QVariant &argValue, quint64 &time, SimpleEventInfo *info);
 private:
     static bool skipArguments(char *mem, qint64 memSize, qint64 pos, qint64 &skippedSize, SimpleEventInfo *info, quint8 eventID);
     template <typename T>

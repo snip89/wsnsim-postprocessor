@@ -174,7 +174,7 @@ void TextVisualization::updatePage()
         posInBinPage += readedSize;
 
         QString resultLine = QString::number(topLinePos + i) + ": ";
-        resultLine += "vTime: " + QString::number(record.vTime) + "; ";
+        resultLine += "time: " + QString::number(record.time) + "; ";
         resultLine += "event: " + *info[record.eventID].type + "; ";
 
         for(int j = 0; j < info[record.eventID].argsCount; j ++)
