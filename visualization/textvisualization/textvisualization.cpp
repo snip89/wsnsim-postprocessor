@@ -183,7 +183,7 @@ void TextVisualization::updatePage()
             {
                 resultLine += *info[record.eventID].argsInfo[j].name + ": ";
 
-                foreach(char nextHex, record.other[j].toByteArray())
+                foreach(quint8 nextHex, record.other[j].value<QByteArray>())
                 {
                     QString hexed = QString::number(nextHex, 16);
                     hexed = hexed.toUpper();

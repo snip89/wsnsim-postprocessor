@@ -315,8 +315,10 @@ bool StaticRecordsReader::readArguments(char *mem, qint64 memSize, qint64 pos, q
             pos += argSize;
             readedSize += argSize;
 
+            QByteArray arr(value, argSize);
+
             record.byteRecord.append(value, argSize);
-            record.other.append(QVariant(value));
+            record.other.append(QVariant(arr));
 
             delete[] value;
         }
