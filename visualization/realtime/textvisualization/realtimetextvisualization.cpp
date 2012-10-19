@@ -9,11 +9,18 @@ RealTimeTextVisualization::RealTimeTextVisualization(QWidget *parent) :
 
 void RealTimeTextVisualization::update(IProject *project, QUdpSocket *socket)
 {
+    if(!firstTime)
+        disconnect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
+    else
+        firstTime = false;
+
     viewer->clear();
     recordsCount = 0;
 
     currentProject = project;
     currentSocket = socket;
+
+    connect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
 }
 
 QWidget *RealTimeTextVisualization::getWidget()

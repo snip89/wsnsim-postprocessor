@@ -10,9 +10,9 @@ AbstractRealTimeTextVisualization::AbstractRealTimeTextVisualization(QWidget *pa
 
     ui->vAreaGridLayout->addWidget(viewer);
 
-    connect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
-
     recordsCount = 0;
+
+    firstTime = true;
 }
 
 AbstractRealTimeTextVisualization::~AbstractRealTimeTextVisualization()

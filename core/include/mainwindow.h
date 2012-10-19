@@ -54,6 +54,9 @@
 #include "gotolinedialog.h"
 // #include "localizationsettings.h"
 #include "realtimetextvisualization.h"
+#include "irealtimevisualization.h"
+#include "realtimetextvisualization.h"
+#include "openconnectiondialog.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -157,11 +160,15 @@ private:
     IVisualization *textVisualization;
     IVisualization *tableVisualization;
 
+    IRealTimeVisualization *realTimeTextVisualization;
+
     bool hexUpdated;
     bool textUpdated;
     bool tableUpdated;
 
     Project *project;
+
+    QUdpSocket *socket;
 
     // TODO: remove after implemention new logs list
 //    QList<Log*> *logs;
@@ -201,6 +208,7 @@ private:
 
 public slots:
     void openProject(QString name = QString::null);
+    void openConnection();
 
 private slots:
     void updateVisualization(WidgetType type);

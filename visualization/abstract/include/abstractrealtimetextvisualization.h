@@ -26,6 +26,8 @@ protected:
     quint64 recordsCount;
     quint64 recordsLimit;
 
+    bool firstTime;
+
     QSettings settings;
 
     virtual void addRecord(QByteArray byteRecord) = 0;

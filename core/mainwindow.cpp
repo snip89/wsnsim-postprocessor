@@ -49,6 +49,8 @@ MainWindow::MainWindow(QWidget *parent) :
     textVisualization = new TextVisualization();
     tableVisualization = new TableVisualization();
 
+    realTimeTextVisualization = new RealTimeTextVisualization();
+
     mainSettings = new MainSettings();
 
     connect(mainSettings, SIGNAL(settingsApplied()), this, SLOT(appliedSettings()));
@@ -60,6 +62,8 @@ MainWindow::MainWindow(QWidget *parent) :
     stackedWidget->addWidget(hexVisualization->getWidget());
     stackedWidget->addWidget(textVisualization->getWidget());
     stackedWidget->addWidget(tableVisualization->getWidget());
+
+    stackedWidget->addWidget(realTimeTextVisualization->getWidget());
 
     stackedWidget->setCurrentWidget(emptyWidget);
 
@@ -80,6 +84,9 @@ MainWindow::~MainWindow()
     delete hexVisualization;
     delete textVisualization;
     delete tableVisualization;
+
+    delete realTimeTextVisualization;
+
     delete mainSettings;
     delete stackedWidget;
 
@@ -169,6 +176,7 @@ void MainWindow::createActions()
     connect(actionOpenLog, SIGNAL(triggered()), this, SLOT(openLog()));
 
     actionOpenConnection = new QAction(tr("&Open connection..."), this);
+    connect(actionOpenConnection, SIGNAL(triggered()), this, SLOT(openConnection()));
 
     actionClose = new QAction(tr("&Close project"), this);
     actionClose->setShortcut(QKeySequence::Close);
@@ -538,6 +546,10 @@ void MainWindow::switchToWidget(WidgetType type)
         previousActiveWidget = TABLEVISUALIZATION;
         break;
 
+    case RTTEXTVISUALIZATION:
+        previousActiveWidget = RTTEXTVISUALIZATION;
+        break;
+
     case FILTRATION:
         filtrationWidget->deactivate();
         previousActiveWidget = FILTRATION;
@@ -624,6 +636,13 @@ void MainWindow::switchToWidget(WidgetType type)
             tableVisualization->update();
         break;
 
+    case RTTEXTVISUALIZATION:
+        stackedWidget->setCurrentWidget(realTimeTextVisualization->getWidget());
+        realTimeTextVisualization->update(project, socket);
+        activeWidget = RTTEXTVISUALIZATION;
+
+        break;
+
     case FILTRATION:
         filtrationWidget->setCurrentLog(currentLogId);
         filtrationWidget->activate();
@@ -696,6 +715,14 @@ void MainWindow::updateVisualization(WidgetType type)
             tableVisualization->update();
 
         break;
+
+    case RTTEXTVISUALIZATION:
+        stackedWidget->setCurrentWidget(realTimeTextVisualization->getWidget());
+        realTimeTextVisualization->update(project, socket);
+        activeWidget = RTTEXTVISUALIZATION;
+
+        break;
+
     case EMPTY:
         break;
     case MAINSETTINGS:
@@ -729,6 +756,64 @@ void MainWindow::openRecentProject()
     QAction *action = qobject_cast<QAction *>(sender());
     if(action)
         openProject(action->data().toString());
+}
+
+void MainWindow::openConnection()
+{
+    QString errorString = QString::null;
+
+    // must be filled by QSettings
+    QString projectFileName = "project_sniff.xml";
+
+    if(isProjectOpened)
+        closeProject();
+
+    QFile pFile(projectFileName);
+
+    if(!pFile.exists())
+    {
+        errorMessager.showMessage(tr("Project file not found"));
+        return;
+    }
+
+    project = new Project(projectFileName);
+    project->load(errorString);
+
+    if(!errorString.isNull())
+    {
+        errorMessager.showMessage(errorString);
+        delete project;
+        return;
+    }
+
+    QString type = "";
+
+    OpenConnectionDialog *openConnectionDialog = new OpenConnectionDialog();
+    //goToLineDialog->move(settings.value("Hidden/Gui/Line_dialog_pos").value<QPoint>());
+    //goToLineDialog->resize(settings.value("Hidden/Gui/Line_dialog_size").value<QSize>());
+
+    if(openConnectionDialog->exec())
+    {
+        type = openConnectionDialog->getConnectionType();
+    }
+
+    delete openConnectionDialog;
+
+    //settings.setValue("Hidden/Gui/Line_dialog_pos", goToLineDialog->pos());
+    //settings.setValue("Hidden/Gui/Line_dialog_size", goToLineDialog->size());
+
+    if(type == tr("Sniffer"))
+    {
+        // must be filled by QSettings
+        socket = new QUdpSocket();
+        socket->bind(QHostAddress("127.0.0.1"), 10000, QUdpSocket::ShareAddress);
+    }
+
+    actionCloseConnection->setEnabled(true);
+
+    isProjectOpened = true;
+
+    switchToWidget(RTTEXTVISUALIZATION);
 }
 
 void MainWindow::openProject(QString name)
