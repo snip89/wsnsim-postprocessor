@@ -168,10 +168,15 @@ void MainWindow::createActions()
     actionOpenLog->setEnabled(false);
     connect(actionOpenLog, SIGNAL(triggered()), this, SLOT(openLog()));
 
+    actionOpenConnection = new QAction(tr("&Open connection..."), this);
+
     actionClose = new QAction(tr("&Close project"), this);
     actionClose->setShortcut(QKeySequence::Close);
     actionClose->setEnabled(false);
     connect(actionClose, SIGNAL(triggered()), this, SLOT(closeProject()));
+
+    actionCloseConnection = new QAction(tr("&Close connection..."), this);
+    actionCloseConnection->setEnabled(false);
 
     actionPrint = new QAction(tr("&Print..."), this);
     actionPrint->setShortcut(QKeySequence::Print);
@@ -250,6 +255,7 @@ void MainWindow::createMenus()
     menuFile = new QMenu(tr("&File"), this);
     menuFile->addAction(actionOpen);
     menuFile->addAction(actionOpenLog);
+    menuFile->addAction(actionOpenConnection);
 
     menuViewFiltration = new QMenu(tr("&Filtration"), this);
 
@@ -260,6 +266,7 @@ void MainWindow::createMenus()
 
     menuFile->addSeparator();
     menuFile->addAction(actionClose);
+    menuFile->addAction(actionCloseConnection);
     menuFile->addSeparator();
 
     menuRecentProjects = new QMenu(tr("&Recent projects..."), this);
@@ -323,11 +330,14 @@ void MainWindow::createStatusWidgets()
 void MainWindow::deleteActions()
 {
     delete actionOpen;
+    delete actionOpenLog;
+    delete actionOpenConnection;
 
     removeActionsRecent();
 
     delete actionPrint;
     delete actionClose;
+    delete actionCloseConnection;
     delete actionExit;
     delete actionSettings;
     delete actionHexVisualization;

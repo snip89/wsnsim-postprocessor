@@ -9,7 +9,7 @@ AbstractTextVisualization::AbstractTextVisualization(QString group, QWidget *par
 
     connect(ui->verticalScrollBar, SIGNAL(valueChanged(int)), this, SLOT(scrollBarMoving(int)));
 
-    viewer = new Viewer(group);
+    viewer = new Viewer();
     viewer->installEventFilter(this);
 
     ui->vAreaGridLayout->addWidget(viewer);
@@ -149,6 +149,7 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
 
 AbstractTextVisualization::~AbstractTextVisualization()
 {
+    delete viewer;
     delete ui;
 }
 

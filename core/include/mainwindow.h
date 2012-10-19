@@ -30,6 +30,7 @@
 #include <QPoint>
 #include <QSize>
 #include <QLabel>
+#include <QUdpSocket>
 #include <QDebug>
 
 #include "project.h"
@@ -52,6 +53,7 @@
 #include "loginfo.h"
 #include "gotolinedialog.h"
 // #include "localizationsettings.h"
+#include "realtimetextvisualization.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -66,6 +68,7 @@ enum WidgetType
     HEXVISUALIZATION,
     TEXTVISUALIZATION,
     TABLEVISUALIZATION,
+    RTTEXTVISUALIZATION,
     FILTRATION
 };
 
@@ -82,10 +85,14 @@ public:
     virtual ~MainWindow();
 
 private:
+    bool realTime;
+
     // actions
     QAction *actionOpen;
     QAction *actionOpenLog;
+    QAction *actionOpenConnection;
     QAction *actionClose;
+    QAction *actionCloseConnection;
     QActionGroup *actionsRecent;
     QAction *actionPrint;
     QAction *actionExit;

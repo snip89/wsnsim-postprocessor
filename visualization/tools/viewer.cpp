@@ -1,6 +1,6 @@
 #include "viewer.h"
 
-Viewer::Viewer(QString group, QWidget *parent)
+Viewer::Viewer(QWidget *parent)
     : QTextEdit(parent)
 {
     this->setReadOnly(true);

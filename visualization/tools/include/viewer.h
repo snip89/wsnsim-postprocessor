@@ -24,7 +24,7 @@ class Viewer : public QTextEdit
 {
     Q_OBJECT
 public:
-    explicit Viewer(QString group, QWidget *parent = 0);
+    explicit Viewer(QWidget *parent = 0);
 
     void setLineColor(QColor color);
     void setLineFontColor(QColor color);
