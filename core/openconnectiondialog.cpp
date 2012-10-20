@@ -6,12 +6,22 @@ OpenConnectionDialog::OpenConnectionDialog(QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->comboBox->addItem(tr("Sniffer"));
+    initComboBox();
 }
 
 QString OpenConnectionDialog::getConnectionType()
 {
     return ui->comboBox->currentText();
+}
+
+void OpenConnectionDialog::initComboBox()
+{
+    StaticCoreUtils::setPublicApplicationInfo();
+
+    QSettings settings;
+    QStringList clients = settings.value("Main/ClientsList").value<QStringList>();
+
+    ui->comboBox->addItems(clients);
 }
 
 OpenConnectionDialog::~OpenConnectionDialog()

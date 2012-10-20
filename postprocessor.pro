@@ -90,7 +90,8 @@ HEADERS += interfaces/ilog.h \
            visualization/textvisualization/include/textvisualization.h \
            visualization/tools/include/tableviewer.h \
            visualization/tools/include/viewer.h \
-           visualization/realtime/textvisualization/include/realtimetextvisualization.h
+           visualization/realtime/textvisualization/include/realtimetextvisualization.h \
+    core/include/staticcoreutils.h
 FORMS += ui/abstractrealtimetextvisualization.ui \
          ui/abstracttablevisualization.ui \
          ui/abstracttextappearancecolorsandfontssettings.ui \
@@ -147,7 +148,8 @@ SOURCES += core/filter.cpp \
            visualization/tools/tableviewer.cpp \
            visualization/tools/viewer.cpp \
            visualization/realtime/textvisualization/realtimetextvisualization.cpp \
-    core/openconnectiondialog.cpp
+    core/openconnectiondialog.cpp \
+    core/staticcoreutils.cpp
 RESOURCES += resources/postprocessor.qrc
 TRANSLATIONS += resources/localization/postprocessor_en.ts \
                 resources/localization/postprocessor_ru.ts \

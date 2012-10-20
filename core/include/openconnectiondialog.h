@@ -1,7 +1,11 @@
 #ifndef OPENCONNECTIONDIALOG_H
 #define OPENCONNECTIONDIALOG_H
 
+#include <QSettings>
+#include <QStringList>
+
 #include "ui_openconnectiondialog.h"
+#include "staticcoreutils.h"
 
 namespace Ui {
     class OpenConnectionDialog;
@@ -15,6 +19,8 @@ public:
     QString getConnectionType();
     virtual ~OpenConnectionDialog();
 private:
+    void initComboBox();
+
     Ui::OpenConnectionDialog *ui;
 };
 
