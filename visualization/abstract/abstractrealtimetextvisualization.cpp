@@ -32,6 +32,6 @@ void AbstractRealTimeTextVisualization::readPendingDatagrams()
         currentSocket->readDatagram(datagram.data(), datagram.size(),
                                 &sender, &senderPort);
 
-        // update record here
+        addRecord(datagram);
     }
 }
