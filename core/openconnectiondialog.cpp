@@ -16,12 +16,14 @@ QString OpenConnectionDialog::getConnectionType()
 
 void OpenConnectionDialog::initComboBox()
 {
-    StaticCoreUtils::setPublicApplicationInfo();
+    /*StaticCoreUtils::setPublicApplicationInfo();
 
     QSettings settings;
     QStringList clients = settings.value("Main/ClientsList").value<QStringList>();
 
-    ui->comboBox->addItems(clients);
+    ui->comboBox->addItems(clients);*/
+
+    ui->comboBox->addItem("Sniffer");
 }
 
 OpenConnectionDialog::~OpenConnectionDialog()
