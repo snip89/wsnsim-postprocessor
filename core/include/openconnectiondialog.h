@@ -3,9 +3,12 @@
 
 #include <QSettings>
 #include <QStringList>
+#include <QLibrary>
+#include <QDir>
 
 #include "ui_openconnectiondialog.h"
 #include "staticcoreutils.h"
+#include "ihostrealtimesettings.h"
 
 namespace Ui {
     class OpenConnectionDialog;

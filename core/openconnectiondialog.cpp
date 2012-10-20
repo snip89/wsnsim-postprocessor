@@ -16,14 +16,19 @@ QString OpenConnectionDialog::getConnectionType()
 
 void OpenConnectionDialog::initComboBox()
 {
-    /*StaticCoreUtils::setPublicApplicationInfo();
+    QDir::setCurrent(QApplication::applicationDirPath());
 
-    QSettings settings;
-    QStringList clients = settings.value("Main/ClientsList").value<QStringList>();
+    QLibrary globalSettings("./globalSettings");
 
-    ui->comboBox->addItems(clients);*/
+    typedef IHostRealTimeSettings*(*getRealTimeSettings) ();
+    getRealTimeSettings func = (getRealTimeSettings) globalSettings.resolve("getRealTimeSettings");
 
-    ui->comboBox->addItem("Sniffer");
+    IHostRealTimeSettings* settings = func();
+
+    foreach(QString client, settings->clients())
+    {
+        ui->comboBox->addItem(client);
+    }
 }
 
 OpenConnectionDialog::~OpenConnectionDialog()
