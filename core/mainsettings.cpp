@@ -120,6 +120,8 @@ void MainSettings::createClientsItems()
         item->setText(0, client);
         clientsItems.append(item);
     }
+
+    delete rtSettings;
 }
 
 void MainSettings::deleteClientsItems()
@@ -137,10 +139,12 @@ void MainSettings::createClientsSettings()
     foreach(QString client, rtSettings->clients())
     {
         ClientSettings *clientSettings = new ClientSettings();
-        clientSettings->showCurrentSettings();
         clientSettings->setSettingsName(client);
+        clientSettings->showCurrentSettings();
         clientsSettings.append(clientSettings);
     }
+
+    delete rtSettings;
 }
 
 void MainSettings::deleteClientsSettings()
@@ -340,6 +344,8 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
                 }
             }
         }
+
+        delete rtSettings;
     }
 }
 
@@ -353,6 +359,11 @@ void MainSettings::dialogIsAccepted()
     textColorsAndFontsSettings->applySettings();
     textGuiSettings->applySettings();
     tableGuiSettings->applySettings();
+
+    foreach(ClientSettings *clientSettings, clientsSettings)
+    {
+        clientSettings->applySettings();
+    }
 
     emit settingsApplied();
 
@@ -369,6 +380,11 @@ void MainSettings::dialogIsRejected()
     textColorsAndFontsSettings->showCurrentSettings();
     textGuiSettings->showCurrentSettings();
     tableGuiSettings->showCurrentSettings();
+
+    foreach(ClientSettings *clientSettings, clientsSettings)
+    {
+        clientSettings->showCurrentSettings();
+    }
 
     settings.setValue("Hidden/Gui/Settings_dialog_pos", pos());
 }
