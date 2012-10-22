@@ -8,13 +8,13 @@
 #include <QPluginLoader>
 #include <QDebug>
 
-#include "irealtimesettings.h"
+#include "ihostrealtimesettings.h"
 
 class StaticCoreUtils
 {
 public:
     static void setApplicationInfo();
-    static IRealTimeSettings *getRealTimeSettings();
+    static IHostRealTimeSettings *getHostRealTimeSettings();
 };
 
 #endif // STATICCOREUTILS_H

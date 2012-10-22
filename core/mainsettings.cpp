@@ -112,7 +112,7 @@ void MainSettings::createItems()
 
 void MainSettings::createClientsItems()
 {
-    IRealTimeSettings *rtSettings = StaticCoreUtils::getRealTimeSettings();
+    IHostRealTimeSettings *rtSettings = StaticCoreUtils::getHostRealTimeSettings();
 
     foreach(QString client, rtSettings->clients())
     {
@@ -134,7 +134,7 @@ void MainSettings::deleteClientsItems()
 
 void MainSettings::createClientsSettings()
 {
-    IRealTimeSettings *rtSettings = StaticCoreUtils::getRealTimeSettings();
+    IHostRealTimeSettings *rtSettings = StaticCoreUtils::getHostRealTimeSettings();
 
     foreach(QString client, rtSettings->clients())
     {
@@ -321,7 +321,7 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
 
     else
     {
-        IRealTimeSettings *rtSettings = StaticCoreUtils::getRealTimeSettings();
+        IHostRealTimeSettings *rtSettings = StaticCoreUtils::getHostRealTimeSettings();
 
         foreach(QTreeWidgetItem *currentItem, clientsItems)
         {

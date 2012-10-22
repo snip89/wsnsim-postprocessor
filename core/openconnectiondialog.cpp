@@ -16,7 +16,7 @@ QString OpenConnectionDialog::getConnectionType()
 
 void OpenConnectionDialog::initComboBox()
 {
-    IRealTimeSettings* settings = StaticCoreUtils::getRealTimeSettings();
+    IHostRealTimeSettings* settings = StaticCoreUtils::getHostRealTimeSettings();
 
     foreach(QString client, settings->clients())
     {

@@ -8,7 +8,6 @@
 
 #include "ui_openconnectiondialog.h"
 #include "staticcoreutils.h"
-#include "irealtimesettings.h"
 
 namespace Ui {
     class OpenConnectionDialog;

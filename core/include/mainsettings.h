@@ -29,7 +29,6 @@
 #include "textguisettings.h"
 #include "tableguisettings.h"
 #include "staticcoreutils.h"
-#include "irealtimesettings.h"
 #include "clientsettings.h"
 
 namespace Ui {

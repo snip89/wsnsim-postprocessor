@@ -9,14 +9,14 @@ void StaticCoreUtils::setApplicationInfo()
     QCoreApplication::setApplicationName("logsvisualizer");
 }
 
-IRealTimeSettings *StaticCoreUtils::getRealTimeSettings()
+IHostRealTimeSettings *StaticCoreUtils::getHostRealTimeSettings()
 {
     QDir::setCurrent(QApplication::applicationDirPath());
 
     QLibrary globalSettings("./globalSettings");
 
-    typedef IRealTimeSettings*(*getRealTimeSettings) ();
-    getRealTimeSettings func = (getRealTimeSettings) globalSettings.resolve("getRealTimeSettings");
+    typedef IHostRealTimeSettings*(*getHostRealTimeSettings) ();
+    getHostRealTimeSettings func = (getHostRealTimeSettings) globalSettings.resolve("getHostRealTimeSettings");
 
     return func();
 }

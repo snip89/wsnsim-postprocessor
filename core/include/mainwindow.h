@@ -58,7 +58,6 @@
 #include "realtimetextvisualization.h"
 #include "openconnectiondialog.h"
 #include "staticcoreutils.h"
-#include "irealtimesettings.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 

@@ -16,7 +16,7 @@ void ClientSettings::setSettingsName(QString name)
 
 void ClientSettings::showCurrentSettings()
 {
-    IRealTimeSettings *settings = StaticCoreUtils::getRealTimeSettings();
+    IHostRealTimeSettings *settings = StaticCoreUtils::getHostRealTimeSettings();
 
     ui->ipLineEdit->setText(settings->ip(ui->settingsNameLabel->text()));
     ui->portLineEdit->setText(QString::number(settings->port(ui->settingsNameLabel->text())));
@@ -26,7 +26,7 @@ void ClientSettings::showCurrentSettings()
 
 void ClientSettings::applySettings()
 {
-    IRealTimeSettings *settings = StaticCoreUtils::getRealTimeSettings();
+    IHostRealTimeSettings *settings = StaticCoreUtils::getHostRealTimeSettings();
 
     settings->setClientConnectionInfo(ui->settingsNameLabel->text(), ui->ipLineEdit->text(), ui->portLineEdit->text().toULongLong());
 
@@ -45,7 +45,7 @@ ClientSettings::~ClientSettings()
 
 void ClientSettings::showDefaultSettings()
 {
-    IRealTimeSettings *settings = StaticCoreUtils::getRealTimeSettings();
+    IHostRealTimeSettings *settings = StaticCoreUtils::getHostRealTimeSettings();
 
     ui->ipLineEdit->setText(settings->defaultIp(ui->settingsNameLabel->text()));
     ui->portLineEdit->setText(QString::number(settings->defaultPort(ui->settingsNameLabel->text())));

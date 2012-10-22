@@ -789,7 +789,7 @@ void MainWindow::openConnection()
         socket->bind(QHostAddress("127.0.0.1"), 10000, QUdpSocket::ShareAddress);
     }*/
 
-    IRealTimeSettings* rtSettings = StaticCoreUtils::getRealTimeSettings();
+    IHostRealTimeSettings* rtSettings = StaticCoreUtils::getHostRealTimeSettings();
 
     // must be filled by QSettings
     QString projectFileName = rtSettings->projectPath(type);

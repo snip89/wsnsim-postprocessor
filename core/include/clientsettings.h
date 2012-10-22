@@ -5,7 +5,6 @@
 
 #include "ui_clientsettings.h"
 #include "staticcoreutils.h"
-#include "irealtimesettings.h"
 
 namespace Ui {
     class ClientSettings;
