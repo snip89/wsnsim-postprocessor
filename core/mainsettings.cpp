@@ -38,6 +38,8 @@ MainSettings::MainSettings(QWidget *parent) :
     tableGuiSettings = new TableGuiSettings();
     tableGuiSettings->showCurrentSettings();
 
+    createClientsSettings();
+
     initConnections();
 }
 
@@ -54,6 +56,8 @@ MainSettings::~MainSettings()
     delete hexGuiSettings;
     delete textGuiSettings;
     delete tableGuiSettings;
+
+    deleteClientsSettings();
 
     delete settingsFrameWidget;
     delete ui;
@@ -96,6 +100,55 @@ void MainSettings::createItems()
 
     localizationItem->setText(0, tr("Localization"));
     languageItem->setText(0, tr("Language"));
+
+    realTimeItem = new QTreeWidgetItem(ui->settingsTree);
+    realTimeItem->setText(0, tr("Real time"));
+
+    clientsItem = new QTreeWidgetItem(realTimeItem);
+    clientsItem->setText(0, tr("Clients"));
+
+    createClientsItems();
+}
+
+void MainSettings::createClientsItems()
+{
+    IRealTimeSettings *rtSettings = StaticCoreUtils::getRealTimeSettings();
+
+    foreach(QString client, rtSettings->clients())
+    {
+        QTreeWidgetItem *item = new QTreeWidgetItem(clientsItem);
+        item->setText(0, client);
+        clientsItems.append(item);
+    }
+}
+
+void MainSettings::deleteClientsItems()
+{
+    foreach(QTreeWidgetItem *item, clientsItems)
+    {
+        delete item;
+    }
+}
+
+void MainSettings::createClientsSettings()
+{
+    IRealTimeSettings *rtSettings = StaticCoreUtils::getRealTimeSettings();
+
+    foreach(QString client, rtSettings->clients())
+    {
+        ClientSettings *clientSettings = new ClientSettings();
+        clientSettings->showCurrentSettings();
+        clientSettings->setSettingsName(client);
+        clientsSettings.append(clientSettings);
+    }
+}
+
+void MainSettings::deleteClientsSettings()
+{
+    foreach(ClientSettings *rtSettings, clientsSettings)
+    {
+        delete rtSettings;
+    }
 }
 
 void MainSettings::initConnections()
@@ -129,6 +182,11 @@ void MainSettings::deleteItems()
 
     delete languageItem;
     delete localizationItem;
+
+    deleteClientsItems();
+
+    delete clientsItem;
+    delete realTimeItem;
 }
 
 void MainSettings::showEmptySettings(QString name)
@@ -245,6 +303,43 @@ void MainSettings::activatedItem(QTreeWidgetItem *item, int column)
             settingsFrameWidget->addWidget(localizationSettings);
 
         settingsFrameWidget->setCurrentWidget(localizationSettings);
+    }
+
+    else if(item == realTimeItem)
+    {
+        showEmptySettings(tr("Real time"));
+    }
+
+    else if(item == clientsItem)
+    {
+        showEmptySettings(tr("Clients"));
+    }
+
+    else
+    {
+        IRealTimeSettings *rtSettings = StaticCoreUtils::getRealTimeSettings();
+
+        foreach(QTreeWidgetItem *currentItem, clientsItems)
+        {
+            if(item == currentItem)
+            {
+                ClientSettings *currentClientSettings;
+
+                foreach(ClientSettings *clientSettings, clientsSettings)
+                {
+                    if(currentItem->text(0) == clientSettings->client())
+                        currentClientSettings = clientSettings;
+                }
+
+                if(currentClientSettings != NULL)
+                {
+                    if(!settingsFrameWidget->isAncestorOf(currentClientSettings))
+                        settingsFrameWidget->addWidget(currentClientSettings);
+
+                    settingsFrameWidget->setCurrentWidget(currentClientSettings);
+                }
+            }
+        }
     }
 }
 

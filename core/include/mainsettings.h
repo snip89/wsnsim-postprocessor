@@ -28,8 +28,9 @@
 #include "hexguisettings.h"
 #include "textguisettings.h"
 #include "tableguisettings.h"
-#include "sniffercoresettings.h"
-#include "snifferguisettings.h"
+#include "staticcoreutils.h"
+#include "irealtimesettings.h"
+#include "clientsettings.h"
 
 namespace Ui {
     class MainSettings;
@@ -62,6 +63,10 @@ private:
     QTreeWidgetItem *tableVisualizationGuiItem;
     QTreeWidgetItem *localizationItem;
     QTreeWidgetItem *languageItem;
+    QTreeWidgetItem *realTimeItem;
+    QTreeWidgetItem *clientsItem;
+
+    QList<QTreeWidgetItem*> clientsItems;
 
     //settings widgets
     EmptySettings *emptySettings;
@@ -74,6 +79,8 @@ private:
     TextGuiSettings *textGuiSettings;
     TableGuiSettings *tableGuiSettings;
 
+    QList<ClientSettings*> clientsSettings;
+
     QErrorMessage errorMessager;
 
     Ui::MainSettings *ui;
@@ -85,6 +92,12 @@ private:
     void deleteItems();
 
     void showEmptySettings(QString name);
+
+    void createClientsItems();
+    void deleteClientsItems();
+
+    void createClientsSettings();
+    void deleteClientsSettings();
 
 signals:
 
