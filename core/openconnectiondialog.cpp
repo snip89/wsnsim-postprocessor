@@ -16,19 +16,14 @@ QString OpenConnectionDialog::getConnectionType()
 
 void OpenConnectionDialog::initComboBox()
 {
-    QDir::setCurrent(QApplication::applicationDirPath());
-
-    QLibrary globalSettings("./globalSettings");
-
-    typedef IHostRealTimeSettings*(*getRealTimeSettings) ();
-    getRealTimeSettings func = (getRealTimeSettings) globalSettings.resolve("getRealTimeSettings");
-
-    IHostRealTimeSettings* settings = func();
+    IRealTimeSettings* settings = StaticCoreUtils::getRealTimeSettings();
 
     foreach(QString client, settings->clients())
     {
         ui->comboBox->addItem(client);
     }
+
+    delete settings;
 }
 
 OpenConnectionDialog::~OpenConnectionDialog()

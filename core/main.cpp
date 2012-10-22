@@ -62,34 +62,11 @@ void setSettings(QSettings &settings)
         settings.setValue("Defaults/Localization/Language", "En");
 }
 
-void setPublicSettings(QSettings &settings)
-{
-    if(!settings.contains("Main/ClientsList"))
-        settings.setValue("Main/ClientsList", QStringList());
-    else
-    {
-        QStringList clients = settings.value("Main/ClientsList").value<QStringList>();
-
-        foreach(QString client, clients)
-        {
-            if(!settings.contains("Client/" + client + "/IP"))
-                settings.setValue("Client/" + client + "/IP", "127.0.0.1");
-
-            if(!settings.contains("Client/" + client + "Port"))
-                settings.setValue("Client/" + client + "/Port", "10000");
-        }
-    }
-}
-
 int main(int argc, char **argv) {
     QApplication a(argc, argv);
 
-    StaticCoreUtils::setPublicApplicationInfo();
-    QSettings publicSettings;
-    setPublicSettings(publicSettings);
-
     setUpCodec();
-    StaticCoreUtils::setPrivateApplicationInfo();
+    StaticCoreUtils::setApplicationInfo();
 
     QSettings settings;
 

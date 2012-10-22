@@ -3,16 +3,22 @@
 
 #include "staticcoreutils.h"
 
-void StaticCoreUtils::setPrivateApplicationInfo()
+void StaticCoreUtils::setApplicationInfo()
 {
-    QCoreApplication::setOrganizationName("LogsVisualizer");
-    QCoreApplication::setApplicationName("Private");
+    QCoreApplication::setOrganizationName("wsnsim");
+    QCoreApplication::setApplicationName("logsvisualizer");
 }
 
-void StaticCoreUtils::setPublicApplicationInfo()
+IRealTimeSettings *StaticCoreUtils::getRealTimeSettings()
 {
-    QCoreApplication::setOrganizationName("LogsVisualizer");
-    QCoreApplication::setApplicationName("Public");
+    QDir::setCurrent(QApplication::applicationDirPath());
+
+    QLibrary globalSettings("./globalSettings");
+
+    typedef IRealTimeSettings*(*getRealTimeSettings) ();
+    getRealTimeSettings func = (getRealTimeSettings) globalSettings.resolve("getRealTimeSettings");
+
+    return func();
 }
 
 #endif // STATICCOREUTILS_CPP

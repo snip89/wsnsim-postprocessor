@@ -762,8 +762,37 @@ void MainWindow::openConnection()
 {
     QString errorString = QString::null;
 
+    QString type = "";
+
+    OpenConnectionDialog *openConnectionDialog = new OpenConnectionDialog();
+    //goToLineDialog->move(settings.value("Hidden/Gui/Line_dialog_pos").value<QPoint>());
+    //goToLineDialog->resize(settings.value("Hidden/Gui/Line_dialog_size").value<QSize>());
+
+    if(openConnectionDialog->exec())
+    {
+        type = openConnectionDialog->getConnectionType();
+        delete openConnectionDialog;
+    }
+    else
+    {
+        delete openConnectionDialog;
+        return;
+    }
+
+    //settings.setValue("Hidden/Gui/Line_dialog_pos", goToLineDialog->pos());
+    //settings.setValue("Hidden/Gui/Line_dialog_size", goToLineDialog->size());
+
+    /*if(type == tr("Sniffer"))
+    {
+        // must be filled by QSettings
+        socket = new QUdpSocket();
+        socket->bind(QHostAddress("127.0.0.1"), 10000, QUdpSocket::ShareAddress);
+    }*/
+
+    IRealTimeSettings* rtSettings = StaticCoreUtils::getRealTimeSettings();
+
     // must be filled by QSettings
-    QString projectFileName = "project_sniff.xml";
+    QString projectFileName = rtSettings->projectPath(type);
 
     if(isProjectOpened)
         closeProject();
@@ -786,34 +815,16 @@ void MainWindow::openConnection()
         return;
     }
 
-    QString type = "";
-
-    OpenConnectionDialog *openConnectionDialog = new OpenConnectionDialog();
-    //goToLineDialog->move(settings.value("Hidden/Gui/Line_dialog_pos").value<QPoint>());
-    //goToLineDialog->resize(settings.value("Hidden/Gui/Line_dialog_size").value<QSize>());
-
-    if(openConnectionDialog->exec())
-    {
-        type = openConnectionDialog->getConnectionType();
-    }
-
-    delete openConnectionDialog;
-
-    //settings.setValue("Hidden/Gui/Line_dialog_pos", goToLineDialog->pos());
-    //settings.setValue("Hidden/Gui/Line_dialog_size", goToLineDialog->size());
-
-    if(type == tr("Sniffer"))
-    {
-        // must be filled by QSettings
-        socket = new QUdpSocket();
-        socket->bind(QHostAddress("127.0.0.1"), 10000, QUdpSocket::ShareAddress);
-    }
+    socket = new QUdpSocket();
+    socket->bind(QHostAddress(rtSettings->ip(type)), rtSettings->port(type), QUdpSocket::ShareAddress);
 
     actionCloseConnection->setEnabled(true);
 
     isProjectOpened = true;
 
     switchToWidget(RTTEXTVISUALIZATION);
+
+    delete rtSettings;
 }
 
 void MainWindow::openProject(QString name)
