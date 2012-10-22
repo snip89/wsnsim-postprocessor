@@ -32,7 +32,7 @@ void TextVisualization::update(IProject *project, ILog *log)
     if(settings.value("Text visualization/Gui/LineWrapMode").value<bool>())
         viewer->setLineWrapMode(QTextEdit::WidgetWidth);
     else
-        viewer->setLineWrapMode(QTextEdit::NoWrap);    
+        viewer->setLineWrapMode(QTextEdit::NoWrap);
 
     viewer->setLineColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
     viewer->setLineFontColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());

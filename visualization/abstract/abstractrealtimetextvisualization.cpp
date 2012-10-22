@@ -10,6 +10,9 @@ AbstractRealTimeTextVisualization::AbstractRealTimeTextVisualization(QWidget *pa
 
     ui->vAreaGridLayout->addWidget(viewer);
 
+    viewer->setVerticalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+    viewer->setHorizontalScrollBarPolicy(Qt::ScrollBarAsNeeded);
+
     recordsCount = 0;
 
     firstTime = true;

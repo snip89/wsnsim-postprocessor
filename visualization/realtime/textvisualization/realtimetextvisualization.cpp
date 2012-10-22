@@ -9,6 +9,22 @@ RealTimeTextVisualization::RealTimeTextVisualization(QWidget *parent) :
 
 void RealTimeTextVisualization::update(IProject *project, QUdpSocket *socket)
 {
+    if(settings.value("Text visualization/Gui/LineWrapMode").value<bool>())
+        viewer->setLineWrapMode(QTextEdit::WidgetWidth);
+    else
+        viewer->setLineWrapMode(QTextEdit::NoWrap);
+
+    viewer->setLineColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
+    viewer->setLineFontColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
+
+    viewer->setTextColor(settings.value("Text visualization/Appearance/Colors and Fonts/Main_text_foreground").value<QColor>());
+
+    QPalette p = viewer->palette();
+    p.setColor(QPalette::Base, settings.value("Text visualization/Appearance/Colors and Fonts/Main_text_background").value<QColor>());
+    viewer->setPalette(p);
+
+    viewer->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
+
     if(!firstTime)
         disconnect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
     else
