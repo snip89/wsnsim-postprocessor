@@ -61,7 +61,7 @@ void RealTimeHexVisualization::addRecord(QByteArray byteRecord)
 
         StaticRecordsReader::readRecord(byteRecord.data(), byteRecord.size(), 0, readedSize, record, info);
 
-        QString resultLine;
+        QString resultLine = QString::number(recordsCount) + ": ";
 
         foreach(char nextHex, record.byteRecord)
         {

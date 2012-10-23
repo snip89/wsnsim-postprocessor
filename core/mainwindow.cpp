@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     realTimeTextVisualization = new RealTimeTextVisualization();
     realTimeHexVisualization = new RealTimeHexVisualization();
+    realTimeTableVisualization = new RealTimeTableVisualization();
 
     mainSettings = new MainSettings();
 
@@ -67,6 +68,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     stackedWidget->addWidget(realTimeTextVisualization->getWidget());
     stackedWidget->addWidget(realTimeHexVisualization->getWidget());
+    stackedWidget->addWidget(realTimeTableVisualization->getWidget());
 
     stackedWidget->setCurrentWidget(emptyWidget);
 
@@ -90,6 +92,7 @@ MainWindow::~MainWindow()
 
     delete realTimeTextVisualization;
     delete realTimeHexVisualization;
+    delete realTimeTableVisualization;
 
     delete mainSettings;
     delete stackedWidget;
@@ -554,6 +557,10 @@ void MainWindow::switchToWidget(WidgetType type)
         previousActiveWidget = RTHEXVISUALIZATION;
         break;
 
+    case RTTABLEVISUALIZATION:
+        previousActiveWidget = RTTABLEVISUALIZATION;
+        break;
+
     case FILTRATION:
         filtrationWidget->deactivate();
         previousActiveWidget = FILTRATION;
@@ -654,6 +661,13 @@ void MainWindow::switchToWidget(WidgetType type)
 
         break;
 
+    case RTTABLEVISUALIZATION:
+        stackedWidget->setCurrentWidget(realTimeTableVisualization->getWidget());
+        realTimeTableVisualization->update();
+        activeWidget = RTTABLEVISUALIZATION;
+
+        break;
+
     case FILTRATION:
         filtrationWidget->setCurrentLog(currentLogId);
         filtrationWidget->activate();
@@ -735,6 +749,11 @@ void MainWindow::updateVisualization(WidgetType type)
     case RTHEXVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeHexVisualization->getWidget());
         realTimeHexVisualization->update();
+        break;
+
+    case RTTABLEVISUALIZATION:
+        stackedWidget->setCurrentWidget(realTimeTableVisualization->getWidget());
+        realTimeTableVisualization->update();
         break;
 
     case EMPTY:
@@ -835,6 +854,7 @@ void MainWindow::openConnection()
 
     realTimeTextVisualization->update(project, socketAdapter);
     realTimeHexVisualization->update(project, socketAdapter);
+    realTimeTableVisualization->update(project, socketAdapter);
 
     if(settings.value("General/Gui/Default_visualization").value<QString>() == "hex")
         actionHexVisualization->toggle();
@@ -1139,11 +1159,21 @@ void MainWindow::showTableVisualization(bool checked)
         if(actionHexVisualization->isChecked())
             actionHexVisualization->setChecked(false);
 
-        switchToWidget(TABLEVISUALIZATION);
+        if(!realTime)
+            switchToWidget(TABLEVISUALIZATION);
+        else
+            switchToWidget(RTTABLEVISUALIZATION);
     }
 
     if(!checked && activeWidget == TABLEVISUALIZATION)
         switchToWidget(EMPTY);
+
+    if(realTime)
+    {
+        if(!checked && activeWidget == RTTABLEVISUALIZATION)
+            switchToWidget(EMPTY);
+    }
+
 }
 
 void MainWindow::showFiltration()

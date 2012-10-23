@@ -51,8 +51,8 @@
 #include "gotolinedialog.h"
 #include "realtimetextvisualization.h"
 #include "realtimehexvisualization.h"
+#include "realtimetablevisualization.h"
 #include "irealtimevisualization.h"
-#include "realtimetextvisualization.h"
 #include "openconnectiondialog.h"
 #include "staticcoreutils.h"
 #include "udpsocketadapter.h"
@@ -72,6 +72,7 @@ enum WidgetType
     TABLEVISUALIZATION,
     RTTEXTVISUALIZATION,
     RTHEXVISUALIZATION,
+    RTTABLEVISUALIZATION,
     FILTRATION
 };
 
@@ -158,6 +159,7 @@ private:
 
     IRealTimeVisualization *realTimeTextVisualization;
     IRealTimeVisualization *realTimeHexVisualization;
+    IRealTimeVisualization *realTimeTableVisualization;
 
     bool hexUpdated;
     bool textUpdated;
