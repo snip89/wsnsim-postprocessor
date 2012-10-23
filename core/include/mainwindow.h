@@ -46,14 +46,11 @@
 #include "booleanoperators.h"
 #include "mainsettings.h"
 #include "ostools.h"
-// #include "emptysettings.h"
-// #include "generalguisettings.h"
-// #include "generalcoresettings.h"
 #include "filtrationwidget.h"
 #include "loginfo.h"
 #include "gotolinedialog.h"
-// #include "localizationsettings.h"
 #include "realtimetextvisualization.h"
+#include "realtimehexvisualization.h"
 #include "irealtimevisualization.h"
 #include "realtimetextvisualization.h"
 #include "openconnectiondialog.h"
@@ -73,6 +70,7 @@ enum WidgetType
     TEXTVISUALIZATION,
     TABLEVISUALIZATION,
     RTTEXTVISUALIZATION,
+    RTHEXVISUALIZATION,
     FILTRATION
 };
 
@@ -150,10 +148,6 @@ private:
     WidgetType activeWidget;
     WidgetType previousActiveWidget;
     QWidget *emptyWidget;
-    // EmptySettings *emptySettings;
-    // LocalizationSettings *localizationSettings;
-    // GeneralGuiSettings *generalGuiSettings;
-    // GeneralCoreSettings *generalCoreSettings;
     FiltrationWidget *filtrationWidget;
     QStackedWidget *stackedWidget;
     MainSettings *mainSettings;
@@ -162,6 +156,7 @@ private:
     IVisualization *tableVisualization;
 
     IRealTimeVisualization *realTimeTextVisualization;
+    IRealTimeVisualization *realTimeHexVisualization;
 
     bool hexUpdated;
     bool textUpdated;

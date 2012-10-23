@@ -7,6 +7,14 @@ RealTimeTextVisualization::RealTimeTextVisualization(QWidget *parent) :
     //recordsLimit = settings.value("RealTime/Text Visualization/Gui/RecordsLimit").value<quint64>();
 }
 
+void RealTimeTextVisualization::activity(bool status)
+{
+    if(status)
+        connect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
+    else
+        disconnect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
+}
+
 void RealTimeTextVisualization::update(IProject *project, QUdpSocket *socket)
 {
     if(settings.value("Text visualization/Gui/LineWrapMode").value<bool>())
@@ -25,18 +33,11 @@ void RealTimeTextVisualization::update(IProject *project, QUdpSocket *socket)
 
     viewer->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
 
-    if(!firstTime)
-        disconnect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
-    else
-        firstTime = false;
-
     viewer->clear();
     recordsCount = 0;
 
     currentProject = project;
     currentSocket = socket;
-
-    connect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
 }
 
 QWidget *RealTimeTextVisualization::getWidget()

@@ -26,6 +26,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setWindowTitle(prName);
 
+    realTime = false;
 
     createActions();
     createMenus();
@@ -50,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) :
     tableVisualization = new TableVisualization();
 
     realTimeTextVisualization = new RealTimeTextVisualization();
+    realTimeHexVisualization = new RealTimeHexVisualization();
 
     mainSettings = new MainSettings();
 
@@ -64,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent) :
     stackedWidget->addWidget(tableVisualization->getWidget());
 
     stackedWidget->addWidget(realTimeTextVisualization->getWidget());
+    stackedWidget->addWidget(realTimeHexVisualization->getWidget());
 
     stackedWidget->setCurrentWidget(emptyWidget);
 
@@ -86,6 +89,7 @@ MainWindow::~MainWindow()
     delete tableVisualization;
 
     delete realTimeTextVisualization;
+    delete realTimeHexVisualization;
 
     delete mainSettings;
     delete stackedWidget;
@@ -398,10 +402,6 @@ void MainWindow::insertActionsRecent()
         }
     }
 
-    // menuFile->insertActions(menuCurrentLog, actionsRecent->actions());
-    // if(actionsRecent->actions().size() != 0)
-    //    menuFile->insertSeparator(actionLogSelect);
-
     menuRecentProjects->addActions(actionsRecent->actions());
 }
 
@@ -548,6 +548,12 @@ void MainWindow::switchToWidget(WidgetType type)
 
     case RTTEXTVISUALIZATION:
         previousActiveWidget = RTTEXTVISUALIZATION;
+        //realTimeTextVisualization->activity(false);
+        break;
+
+    case RTHEXVISUALIZATION:
+        previousActiveWidget = RTHEXVISUALIZATION;
+        //realTimeHexVisualization->activity(false);
         break;
 
     case FILTRATION:
@@ -638,8 +644,17 @@ void MainWindow::switchToWidget(WidgetType type)
 
     case RTTEXTVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTextVisualization->getWidget());
-        realTimeTextVisualization->update(project, socket);
+        //realTimeTextVisualization->update(project, socket);
+        //realTimeTextVisualization->activity(true);
         activeWidget = RTTEXTVISUALIZATION;
+
+        break;
+
+    case RTHEXVISUALIZATION:
+        stackedWidget->setCurrentWidget(realTimeHexVisualization->getWidget());
+        //realTimeHexVisualization->update(project, socket);
+        //realTimeHexVisualization->activity(true);
+        activeWidget = RTHEXVISUALIZATION;
 
         break;
 
@@ -718,9 +733,14 @@ void MainWindow::updateVisualization(WidgetType type)
 
     case RTTEXTVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTextVisualization->getWidget());
-        realTimeTextVisualization->update(project, socket);
-        activeWidget = RTTEXTVISUALIZATION;
+        //realTimeTextVisualization->update(project, socket);
+        //realTimeTextVisualization->activity(true);
+        break;
 
+    case RTHEXVISUALIZATION:
+        stackedWidget->setCurrentWidget(realTimeHexVisualization->getWidget());
+        //realTimeHexVisualization->update(project, socket);
+        //realTimeHexVisualization->activity(true);
         break;
 
     case EMPTY:
@@ -765,8 +785,6 @@ void MainWindow::openConnection()
     QString type = "";
 
     OpenConnectionDialog *openConnectionDialog = new OpenConnectionDialog();
-    //goToLineDialog->move(settings.value("Hidden/Gui/Line_dialog_pos").value<QPoint>());
-    //goToLineDialog->resize(settings.value("Hidden/Gui/Line_dialog_size").value<QSize>());
 
     if(openConnectionDialog->exec())
     {
@@ -778,16 +796,6 @@ void MainWindow::openConnection()
         delete openConnectionDialog;
         return;
     }
-
-    //settings.setValue("Hidden/Gui/Line_dialog_pos", goToLineDialog->pos());
-    //settings.setValue("Hidden/Gui/Line_dialog_size", goToLineDialog->size());
-
-    /*if(type == tr("Sniffer"))
-    {
-        // must be filled by QSettings
-        socket = new QUdpSocket();
-        socket->bind(QHostAddress("127.0.0.1"), 10000, QUdpSocket::ShareAddress);
-    }*/
 
     IHostRealTimeSettings* rtSettings = StaticCoreUtils::getHostRealTimeSettings();
 
@@ -822,7 +830,25 @@ void MainWindow::openConnection()
 
     isProjectOpened = true;
 
-    switchToWidget(RTTEXTVISUALIZATION);
+    // TODO: enable all visualization actions here
+    actionHexVisualization->setEnabled(true);
+    actionTextVisualization->setEnabled(true);
+    actionTableVisualization->setEnabled(true);
+
+    realTime = true;
+
+    realTimeTextVisualization->update(project, socket);
+    realTimeTextVisualization->activity(true);
+
+    realTimeHexVisualization->update(project, socket);
+    realTimeHexVisualization->activity(true);
+
+    if(settings.value("General/Gui/Default_visualization").value<QString>() == "hex")
+        actionHexVisualization->toggle();
+    else if(settings.value("General/Gui/Default_visualization").value<QString>() == "text")
+        actionTextVisualization->toggle();
+    else if(settings.value("General/Gui/Default_visualization").value<QString>() == "table")
+        actionTableVisualization->toggle();
 
     delete rtSettings;
 }
@@ -1070,11 +1096,20 @@ void MainWindow::showTextVisualization(bool checked)
         else if(actionTableVisualization->isChecked())
             actionTableVisualization->setChecked(false);
     
-        switchToWidget(TEXTVISUALIZATION);
+        if(!realTime)
+            switchToWidget(TEXTVISUALIZATION);
+        else
+            switchToWidget(RTTEXTVISUALIZATION);
     }
 
     if(!checked && activeWidget == TEXTVISUALIZATION)
         switchToWidget(EMPTY);
+
+    if(realTime)
+    {
+        if(!checked && activeWidget == RTTEXTVISUALIZATION)
+            switchToWidget(EMPTY);
+    }
 }
 
 void MainWindow::showHexVisualization(bool checked)
@@ -1086,11 +1121,20 @@ void MainWindow::showHexVisualization(bool checked)
         else if(actionTableVisualization->isChecked())
             actionTableVisualization->setChecked(false);
 
-        switchToWidget(HEXVISUALIZATION);
+        if(!realTime)
+            switchToWidget(HEXVISUALIZATION);
+        else
+            switchToWidget(RTHEXVISUALIZATION);
     }
 
     if(!checked && activeWidget == HEXVISUALIZATION)
         switchToWidget(EMPTY);
+
+    if(realTime)
+    {
+        if(!checked && activeWidget == RTHEXVISUALIZATION)
+            switchToWidget(EMPTY);
+    }
 }
 
 void MainWindow::showTableVisualization(bool checked)
@@ -1259,4 +1303,10 @@ void MainWindow::appliedSettings()
 
     else if(activeWidget == TABLEVISUALIZATION)
         updateVisualization(TABLEVISUALIZATION);
+
+    else if(activeWidget == RTTEXTVISUALIZATION)
+        updateVisualization(RTTEXTVISUALIZATION);
+
+    else if(activeWidget == RTHEXVISUALIZATION)
+        updateVisualization(RTHEXVISUALIZATION);
 }

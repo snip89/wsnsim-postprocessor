@@ -1,15 +1,15 @@
-#ifndef REALTIMETEXTVISUALIZATION_H
-#define REALTIMETEXTVISUALIZATION_H
+#ifndef REALTIMEHEXVISUALIZATION_H
+#define REALTIMEHEXVISUALIZATION_H
 
 #include "irealtimevisualization.h"
 #include "abstractrealtimetextvisualization.h"
 #include "records.h"
 #include "staticrecordsreader.h"
 
-class RealTimeTextVisualization : public IRealTimeVisualization, protected AbstractRealTimeTextVisualization
+class RealTimeHexVisualization : public IRealTimeVisualization, protected AbstractRealTimeTextVisualization
 {
 public:
-    explicit RealTimeTextVisualization(QWidget *parent = 0);
+    explicit RealTimeHexVisualization(QWidget *parent = 0);
 
     // interface methods
 
@@ -19,7 +19,7 @@ public:
 
     /*virtual*/ void addRecord(QByteArray byteRecord);
 
-    virtual ~RealTimeTextVisualization();
+    virtual ~RealTimeHexVisualization();
 };
 
-#endif // REALTIMETEXTVISUALIZATION_H
+#endif // REALTIMEHEXVISUALIZATION_H
