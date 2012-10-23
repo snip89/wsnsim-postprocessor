@@ -7,15 +7,23 @@ RealTimeTextVisualization::RealTimeTextVisualization(QWidget *parent) :
     //recordsLimit = settings.value("RealTime/Text Visualization/Gui/RecordsLimit").value<quint64>();
 }
 
-void RealTimeTextVisualization::activity(bool status)
+void RealTimeTextVisualization::stop()
 {
-    if(status)
-        connect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
-    else
-        disconnect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
+    disconnect(currentSocketAdapter, SIGNAL(dataRecieved(QByteArray)), this, SLOT(addRecord(QByteArray)));
 }
 
-void RealTimeTextVisualization::update(IProject *project, QUdpSocket *socket)
+void RealTimeTextVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter)
+{
+    viewer->clear();
+    recordsCount = 0;
+
+    currentProject = project;
+    currentSocketAdapter = socketAdapter;
+
+    connect(currentSocketAdapter, SIGNAL(dataRecieved(QByteArray)), this, SLOT(addRecord(QByteArray)));
+}
+
+void RealTimeTextVisualization::update()
 {
     if(settings.value("Text visualization/Gui/LineWrapMode").value<bool>())
         viewer->setLineWrapMode(QTextEdit::WidgetWidth);
@@ -33,11 +41,9 @@ void RealTimeTextVisualization::update(IProject *project, QUdpSocket *socket)
 
     viewer->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
 
+    QString temp = viewer->toPlainText();
     viewer->clear();
-    recordsCount = 0;
-
-    currentProject = project;
-    currentSocket = socket;
+    viewer->setText(temp);
 }
 
 QWidget *RealTimeTextVisualization::getWidget()

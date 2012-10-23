@@ -55,6 +55,7 @@
 #include "realtimetextvisualization.h"
 #include "openconnectiondialog.h"
 #include "staticcoreutils.h"
+#include "udpsocketadapter.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -163,8 +164,7 @@ private:
     bool tableUpdated;
 
     Project *project;
-
-    QUdpSocket *socket;
+    UdpSocketAdapter *socketAdapter;
 
     // TODO: remove after implemention new logs list
 //    QList<Log*> *logs;

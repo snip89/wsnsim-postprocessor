@@ -5,6 +5,7 @@
 #include "abstractrealtimetextvisualization.h"
 #include "records.h"
 #include "staticrecordsreader.h"
+#include "udpsocketadapter.h"
 
 class RealTimeTextVisualization : public IRealTimeVisualization, protected AbstractRealTimeTextVisualization
 {
@@ -13,8 +14,9 @@ public:
 
     // interface methods
 
-    /*virtual*/ void activity(bool status);
-    /*virtual*/ void update(IProject *project, QUdpSocket *socket);
+    /*virtual*/ void stop();
+    /*virtual*/ void update(IProject *project, UdpSocketAdapter *socketAdapter);
+    /*virtual*/ void update();
     /*virtual*/ QWidget *getWidget();
 
     /*virtual*/ void addRecord(QByteArray byteRecord);

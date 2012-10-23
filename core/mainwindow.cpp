@@ -548,12 +548,10 @@ void MainWindow::switchToWidget(WidgetType type)
 
     case RTTEXTVISUALIZATION:
         previousActiveWidget = RTTEXTVISUALIZATION;
-        //realTimeTextVisualization->activity(false);
         break;
 
     case RTHEXVISUALIZATION:
         previousActiveWidget = RTHEXVISUALIZATION;
-        //realTimeHexVisualization->activity(false);
         break;
 
     case FILTRATION:
@@ -644,16 +642,14 @@ void MainWindow::switchToWidget(WidgetType type)
 
     case RTTEXTVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTextVisualization->getWidget());
-        //realTimeTextVisualization->update(project, socket);
-        //realTimeTextVisualization->activity(true);
+        realTimeTextVisualization->update();
         activeWidget = RTTEXTVISUALIZATION;
 
         break;
 
     case RTHEXVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeHexVisualization->getWidget());
-        //realTimeHexVisualization->update(project, socket);
-        //realTimeHexVisualization->activity(true);
+        realTimeHexVisualization->update();
         activeWidget = RTHEXVISUALIZATION;
 
         break;
@@ -733,14 +729,12 @@ void MainWindow::updateVisualization(WidgetType type)
 
     case RTTEXTVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTextVisualization->getWidget());
-        //realTimeTextVisualization->update(project, socket);
-        //realTimeTextVisualization->activity(true);
+        realTimeTextVisualization->update();
         break;
 
     case RTHEXVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeHexVisualization->getWidget());
-        //realTimeHexVisualization->update(project, socket);
-        //realTimeHexVisualization->activity(true);
+        realTimeHexVisualization->update();
         break;
 
     case EMPTY:
@@ -823,8 +817,10 @@ void MainWindow::openConnection()
         return;
     }
 
-    socket = new QUdpSocket();
+    QUdpSocket *socket = new QUdpSocket();
     socket->bind(QHostAddress(rtSettings->ip(type)), rtSettings->port(type), QUdpSocket::ShareAddress);
+
+    socketAdapter = new UdpSocketAdapter(socket);
 
     actionCloseConnection->setEnabled(true);
 
@@ -837,11 +833,8 @@ void MainWindow::openConnection()
 
     realTime = true;
 
-    realTimeTextVisualization->update(project, socket);
-    realTimeTextVisualization->activity(true);
-
-    realTimeHexVisualization->update(project, socket);
-    realTimeHexVisualization->activity(true);
+    realTimeTextVisualization->update(project, socketAdapter);
+    realTimeHexVisualization->update(project, socketAdapter);
 
     if(settings.value("General/Gui/Default_visualization").value<QString>() == "hex")
         actionHexVisualization->toggle();

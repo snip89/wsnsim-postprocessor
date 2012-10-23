@@ -5,6 +5,7 @@
 
 #include "iproject.h"
 #include "viewer.h"
+#include "udpsocketadapter.h"
 #include "ui_abstractrealtimetextvisualization.h"
 
 namespace Ui {
@@ -21,20 +22,16 @@ protected:
     Viewer *viewer;
 
     IProject *currentProject;
-    QUdpSocket *currentSocket;
+    UdpSocketAdapter *currentSocketAdapter;
 
     quint64 recordsCount;
     quint64 recordsLimit;
 
-    bool firstTime;
-
     QSettings settings;
-
-    virtual void addRecord(QByteArray byteRecord) = 0;
 
     Ui::AbstractRealTimeTextVisualization *ui;
 private slots:
-    void readPendingDatagrams();
+    virtual void addRecord(QByteArray byteRecord) = 0;
 };
 
 #endif // ABSTRACTREALTIMETEXTVISUALIZATION_H

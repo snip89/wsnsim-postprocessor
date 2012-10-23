@@ -6,15 +6,23 @@ RealTimeHexVisualization::RealTimeHexVisualization(QWidget *parent) :
     recordsLimit = 1000;
 }
 
-void RealTimeHexVisualization::activity(bool status)
+void RealTimeHexVisualization::stop()
 {
-    if(status)
-        connect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
-    else
-        disconnect(currentSocket, SIGNAL(readyRead()), this, SLOT(readPendingDatagrams()));
+    disconnect(currentSocketAdapter, SIGNAL(dataRecieved(QByteArray)), this, SLOT(addRecord(QByteArray)));
 }
 
-void RealTimeHexVisualization::update(IProject *project, QUdpSocket *socket)
+void RealTimeHexVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter)
+{
+    viewer->clear();
+    recordsCount = 0;
+
+    currentProject = project;
+    currentSocketAdapter = socketAdapter;
+
+    connect(currentSocketAdapter, SIGNAL(dataRecieved(QByteArray)), this, SLOT(addRecord(QByteArray)));
+}
+
+void RealTimeHexVisualization::update()
 {
     if(settings.value("Hex visualization/Gui/LineWrapMode").value<bool>())
         viewer->setLineWrapMode(QTextEdit::WidgetWidth);
@@ -32,11 +40,9 @@ void RealTimeHexVisualization::update(IProject *project, QUdpSocket *socket)
 
     viewer->setCurrentFont(settings.value("Hex visualization/Appearance/Colors and Fonts/Font").value<QFont>());
 
+    QString temp = viewer->toPlainText();
     viewer->clear();
-    recordsCount = 0;
-
-    currentProject = project;
-    currentSocket = socket;
+    viewer->setText(temp);
 }
 
 QWidget *RealTimeHexVisualization::getWidget()

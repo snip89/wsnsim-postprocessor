@@ -97,7 +97,8 @@ HEADERS += interfaces/ilog.h \
            visualization/tools/include/tableviewer.h \
            visualization/tools/include/viewer.h \
            visualization/realtime/hexvisualization/include/realtimehexvisualization.h \
-           visualization/realtime/textvisualization/include/realtimetextvisualization.h
+           visualization/realtime/textvisualization/include/realtimetextvisualization.h \
+    core/include/udpsocketadapter.h
 FORMS += ui/abstractrealtimetextvisualization.ui \
          ui/abstracttablevisualization.ui \
          ui/abstracttextappearancecolorsandfontssettings.ui \
@@ -154,7 +155,8 @@ SOURCES += core/clientsettings.cpp \
            visualization/tools/tableviewer.cpp \
            visualization/tools/viewer.cpp \
            visualization/realtime/hexvisualization/realtimehexvisualization.cpp \
-           visualization/realtime/textvisualization/realtimetextvisualization.cpp
+           visualization/realtime/textvisualization/realtimetextvisualization.cpp \
+    core/udpsocketadapter.cpp
 RESOURCES += resources/postprocessor.qrc
 TRANSLATIONS += resources/localization/postprocessor_en.ts \
                 resources/localization/postprocessor_ru.ts \
