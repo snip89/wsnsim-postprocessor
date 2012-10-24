@@ -22,6 +22,8 @@ public:
     /*virtual*/ void addRecord(QByteArray byteRecord);
 
     virtual ~RealTimeTableVisualization();
+private:
+    QStringList eventTypes;
 };
 
 #endif // REALTIMETABLEVISUALIZATION_H
