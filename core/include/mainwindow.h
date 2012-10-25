@@ -95,7 +95,6 @@ private:
     QAction *actionOpen;
     QAction *actionOpenConnection;
     QAction *actionClose;
-    QAction *actionCloseConnection;
     QActionGroup *actionsRecent;
     QAction *actionPrint;
     QAction *actionExit;
@@ -214,6 +213,8 @@ private slots:
 
     void closeProject();
     void closeConnection();
+
+    void closeAnything();
 
     void openLog(QString name);
 

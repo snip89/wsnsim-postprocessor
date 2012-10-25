@@ -180,16 +180,13 @@ void MainWindow::createActions()
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(openProject()));
 
     actionOpenConnection = new QAction(tr("&Open connection..."), this);
+    actionOpenConnection->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_R));
     connect(actionOpenConnection, SIGNAL(triggered()), this, SLOT(openConnection()));
 
-    actionClose = new QAction(tr("&Close project"), this);
+    actionClose = new QAction(tr("&Close"), this);
     actionClose->setShortcut(QKeySequence::Close);
     actionClose->setEnabled(false);
-    connect(actionClose, SIGNAL(triggered()), this, SLOT(closeProject()));
-
-    actionCloseConnection = new QAction(tr("&Close connection..."), this);
-    actionCloseConnection->setEnabled(false);
-    connect(actionCloseConnection, SIGNAL(triggered()), this, SLOT(closeConnection()));
+    connect(actionClose, SIGNAL(triggered()), this, SLOT(closeAnything()));
 
     actionPrint = new QAction(tr("&Print..."), this);
     actionPrint->setShortcut(QKeySequence::Print);
@@ -278,7 +275,6 @@ void MainWindow::createMenus()
 
     menuFile->addSeparator();
     menuFile->addAction(actionClose);
-    menuFile->addAction(actionCloseConnection);
     menuFile->addSeparator();
 
     menuRecentProjects = new QMenu(tr("&Recent projects..."), this);
@@ -348,7 +344,6 @@ void MainWindow::deleteActions()
 
     delete actionPrint;
     delete actionClose;
-    delete actionCloseConnection;
     delete actionExit;
     delete actionSettings;
     delete actionHexVisualization;
@@ -837,7 +832,7 @@ void MainWindow::openConnection()
 
     socketAdapter = new UdpSocketAdapter(socket);
 
-    actionCloseConnection->setEnabled(true);
+    actionClose->setEnabled(true);
 
     isProjectOpened = true;
 
@@ -981,7 +976,7 @@ void MainWindow::closeConnection()
         else if(activeWidget == RTTABLEVISUALIZATION)
             settings.setValue("General/Gui/Default_visualization", "table");
 
-        actionCloseConnection->setEnabled(false);
+        actionClose->setEnabled(false);
 
         switchToWidget(EMPTY);
 
@@ -1008,6 +1003,14 @@ void MainWindow::closeConnection()
         textUpdated = false;
         tableUpdated = false;
     }
+}
+
+void MainWindow::closeAnything()
+{
+    if(realTime)
+        closeConnection();
+    else
+        closeProject();
 }
 
 void MainWindow::openLog(QString name)
