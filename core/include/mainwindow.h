@@ -93,7 +93,6 @@ private:
 
     // actions
     QAction *actionOpen;
-    QAction *actionOpenLog;
     QAction *actionOpenConnection;
     QAction *actionClose;
     QAction *actionCloseConnection;
@@ -216,7 +215,7 @@ private slots:
     void closeProject();
     void closeConnection();
 
-    void openLog(QString name = QString::null);
+    void openLog(QString name);
 
     void showSettings();
     void showTextVisualization(bool checked);

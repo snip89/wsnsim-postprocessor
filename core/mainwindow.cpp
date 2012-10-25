@@ -79,6 +79,7 @@ MainWindow::MainWindow(QWidget *parent) :
 MainWindow::~MainWindow()
 {
     closeProject();
+    closeConnection();
 
     deleteActions();
     deleteMenus();
@@ -178,10 +179,6 @@ void MainWindow::createActions()
     actionOpen->setShortcut(QKeySequence::Open);
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(openProject()));
 
-    actionOpenLog = new QAction(tr("&Open log..."), this);
-    actionOpenLog->setEnabled(false);
-    connect(actionOpenLog, SIGNAL(triggered()), this, SLOT(openLog()));
-
     actionOpenConnection = new QAction(tr("&Open connection..."), this);
     connect(actionOpenConnection, SIGNAL(triggered()), this, SLOT(openConnection()));
 
@@ -270,7 +267,6 @@ void MainWindow::createMenus()
 {
     menuFile = new QMenu(tr("&File"), this);
     menuFile->addAction(actionOpen);
-    menuFile->addAction(actionOpenLog);
     menuFile->addAction(actionOpenConnection);
 
     menuViewFiltration = new QMenu(tr("&Filtration"), this);
@@ -346,7 +342,6 @@ void MainWindow::createStatusWidgets()
 void MainWindow::deleteActions()
 {
     delete actionOpen;
-    delete actionOpenLog;
     delete actionOpenConnection;
 
     removeActionsRecent();
@@ -939,30 +934,8 @@ void MainWindow::openProject(QString name)
         return;
     }
 
-    else if(count == 1)
-        openLog(project->logName(0));
-
     else
-    {
-        int selectedLogId = -1;
-
-        LogSelectDialog *logSelectDialog = new LogSelectDialog(this, project);
-        logSelectDialog->move(settings.value("Hidden/Gui/Log_dialog_pos").value<QPoint>());
-        logSelectDialog->resize(settings.value("Hidden/Gui/Log_dialog_size").value<QSize>());
-
-        if(logSelectDialog->exec())
-            selectedLogId = logSelectDialog->logId();
-
-        settings.setValue("Hidden/Gui/Log_dialog_pos", logSelectDialog->pos());
-        settings.setValue("Hidden/Gui/Log_dialog_size", logSelectDialog->size());
-
-        delete logSelectDialog;
-
-        if(selectedLogId != -1)
-            openLog(project->logName(selectedLogId));
-    }
-
-    actionOpenLog->setEnabled(true);
+        openLog(project->logName(0));
 
     // actionLogSelect->setEnabled(true);
     actionClose->setEnabled(true);
@@ -991,7 +964,6 @@ void MainWindow::closeProject()
 
         isProjectOpened = false;
 
-        actionOpenLog->setEnabled(false);
         menuCurrentLog->setEnabled(false);
 
         setWindowTitle(prName);
@@ -1040,36 +1012,8 @@ void MainWindow::closeConnection()
 
 void MainWindow::openLog(QString name)
 {
-    if(name == QString::null)
-    {
-        int selectedLogId = -1;
-
-        LogSelectDialog *logSelectDialog = new LogSelectDialog(this, project);
-        logSelectDialog->move(settings.value("Hidden/Gui/Log_dialog_pos").value<QPoint>());
-        logSelectDialog->resize(settings.value("Hidden/Gui/Log_dialog_size").value<QSize>());
-
-        if(logSelectDialog->exec())
-            selectedLogId = logSelectDialog->logId();
-
-        settings.setValue("Hidden/Gui/Log_dialog_pos", logSelectDialog->pos());
-        settings.setValue("Hidden/Gui/Log_dialog_size", logSelectDialog->size());
-
-        delete logSelectDialog;
-
-        if(selectedLogId != -1)
-        {
-            if(isLogOpened)
-                closeLog();
-            openLog(project->logName(selectedLogId));
-        }
-
-        return;
-    }
-
     QFileInfo projectFileInfo(project->projectName());
     QDir::setCurrent(projectFileInfo.absoluteDir().absolutePath());
-
-    QString errorString;
 
     int eventsInfoSize = 0;
     info = project->info(eventsInfoSize);
