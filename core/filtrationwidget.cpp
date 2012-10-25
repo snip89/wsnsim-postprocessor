@@ -28,6 +28,8 @@ FiltrationWidget::FiltrationWidget(QWidget *parent) :
 
 //    connect(ui->logsListWidget, SIGNAL(itemDoubleClicked(QListWidgetItem*)), this, SLOT(selectedListItem(QListWidgetItem*)));
 
+    ui->eventComboBox->setVisible(false);
+
     logNameCounter = 0;
 }
 
@@ -66,6 +68,16 @@ void FiltrationWidget::activate()
         ui->filtrationParamComboBox->addItem(paramName);
     }
 
+    foreach(EventParams params, currentProject->projectParams.events.systemEvents)
+    {
+        ui->eventComboBox->addItem(params.eventInfo["name"]);
+    }
+
+    foreach(EventParams params, currentProject->projectParams.events.userEvents)
+    {
+        ui->eventComboBox->addItem(params.eventInfo["name"]);
+    }
+
     updateBooleanOperators();
 }
 
@@ -73,6 +85,7 @@ void FiltrationWidget::deactivate()
 {
     ui->filtrationParamComboBox->clear();
     ui->filtrationListWidget->clear();
+    ui->eventComboBox->clear();
 
     filters.clear();
 
@@ -95,46 +108,59 @@ void FiltrationWidget::updateBooleanOperators()
 
     QString currentParamName = ui->filtrationParamComboBox->currentText();
 
-    switch(currentProject->paramType(currentParamName))
+    if(currentParamName != "eventID")
     {
-    case UNKNOWN_TYPE:
-        break;
+        switch(currentProject->paramType(currentParamName))
+        {
+        case UNKNOWN_TYPE:
+            break;
 
-    case UINT8_TYPE:
-        setIntegerBooleanOperators();
-        break;
+        case UINT8_TYPE:
+            setIntegerBooleanOperators();
+            break;
 
-    case UINT16_TYPE:
-        setIntegerBooleanOperators();
-        break;
+        case UINT16_TYPE:
+            setIntegerBooleanOperators();
+            break;
 
-    case UINT32_TYPE:
-        setIntegerBooleanOperators();
-        break;
+        case UINT32_TYPE:
+            setIntegerBooleanOperators();
+            break;
 
-    case UINT64_TYPE:
-        setIntegerBooleanOperators();
-        break;
+        case UINT64_TYPE:
+            setIntegerBooleanOperators();
+            break;
 
-    case INT32_TYPE:
-        setIntegerBooleanOperators();
-        break;
+        case INT32_TYPE:
+            setIntegerBooleanOperators();
+            break;
 
-    case BOOL_TYPE:
-        setEqNeBooleanOperators();
-        break;
+        case BOOL_TYPE:
+            setEqNeBooleanOperators();
+            break;
 
-    case DOUBLE_TYPE:
-        setFloatBooleanOperators();
-        break;
+        case DOUBLE_TYPE:
+            setFloatBooleanOperators();
+            break;
 
-    case BYTE_ARRAY_TYPE:
-        setEqNeBooleanOperators();
-        break;
+        case BYTE_ARRAY_TYPE:
+            setEqNeBooleanOperators();
+            break;
 
-    case STRING_TYPE:
-        setEqNeBooleanOperators();
-        break;
+        case STRING_TYPE:
+            setEqNeBooleanOperators();
+            break;
+        }
+
+        ui->filtrationOperatorComboBox->setVisible(true);
+        ui->filtrationValueComboBox->setVisible(true);
+        ui->eventComboBox->setVisible(false);
+    }
+    else
+    {
+        ui->filtrationOperatorComboBox->setVisible(false);
+        ui->filtrationValueComboBox->setVisible(false);
+        ui->eventComboBox->setVisible(true);
     }
 }
 
@@ -295,39 +321,56 @@ void FiltrationWidget::setEqNeBooleanOperators()
 
 void FiltrationWidget::addFilter()
 {
-    if(ui->filtrationValueComboBox->text() == "")
+    if(ui->filtrationValueComboBox->text() == "" && !ui->eventComboBox->isVisible())
         errorMessager.showMessage(tr("Value field is empty"));
 
     else
     {
-        BooleanOperators booleanOperator;
+        if(!ui->eventComboBox->isVisible())
+        {
+            BooleanOperators booleanOperator;
 
-        if(ui->filtrationOperatorComboBox->currentText() == "==")
+            if(ui->filtrationOperatorComboBox->currentText() == "==")
+                booleanOperator = EQ;
+
+            else if(ui->filtrationOperatorComboBox->currentText() == "<")
+                booleanOperator = LT;
+
+            else if(ui->filtrationOperatorComboBox->currentText() == "<=")
+                booleanOperator = LE;
+
+            else if(ui->filtrationOperatorComboBox->currentText() == ">")
+                booleanOperator = GT;
+
+            else if(ui->filtrationOperatorComboBox->currentText() == ">=")
+                booleanOperator = GE;
+
+            else if(ui->filtrationOperatorComboBox->currentText() == "!=")
+                booleanOperator = NE;
+
+            filters.append(new Filter(ui->filtrationParamComboBox->currentText(), booleanOperator, ui->filtrationValueComboBox->text()));
+
+            QString filterInfoString;
+            filterInfoString += ui->filtrationParamComboBox->currentText() + " ";
+            filterInfoString += ui->filtrationOperatorComboBox->currentText() + " ";
+            filterInfoString += ui->filtrationValueComboBox->text();
+
+            ui->filtrationListWidget->addItem(filterInfoString);
+        }
+        else
+        {
+            BooleanOperators booleanOperator;
             booleanOperator = EQ;
 
-        else if(ui->filtrationOperatorComboBox->currentText() == "<")
-            booleanOperator = LT;
+            filters.append(new Filter(ui->filtrationParamComboBox->currentText(), booleanOperator, QString::number(ui->eventComboBox->currentIndex())));
 
-        else if(ui->filtrationOperatorComboBox->currentText() == "<=")
-            booleanOperator = LE;
+            QString filterInfoString;
+            filterInfoString += ui->filtrationParamComboBox->currentText() + " ";
+            filterInfoString += "== ";
+            filterInfoString += ui->eventComboBox->currentText();
 
-        else if(ui->filtrationOperatorComboBox->currentText() == ">")
-            booleanOperator = GT;
-
-        else if(ui->filtrationOperatorComboBox->currentText() == ">=")
-            booleanOperator = GE;
-
-        else if(ui->filtrationOperatorComboBox->currentText() == "!=")
-            booleanOperator = NE;
-
-        filters.append(new Filter(ui->filtrationParamComboBox->currentText(), booleanOperator, ui->filtrationValueComboBox->text()));
-
-        QString filterInfoString;
-        filterInfoString += ui->filtrationParamComboBox->currentText() + " ";
-        filterInfoString += ui->filtrationOperatorComboBox->currentText() + " ";
-        filterInfoString += ui->filtrationValueComboBox->text();
-
-        ui->filtrationListWidget->addItem(filterInfoString);
+            ui->filtrationListWidget->addItem(filterInfoString);
+        }
     }
 }
 

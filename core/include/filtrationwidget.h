@@ -18,7 +18,7 @@
 #include <QListWidget>
 #include <QAbstractButton>
 #include <QDialog>
-#include <QSettings> 
+#include <QSettings>
 
 #include "log.h"
 #include "project.h"

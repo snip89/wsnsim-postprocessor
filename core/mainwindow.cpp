@@ -957,6 +957,8 @@ void MainWindow::closeProject()
 
         closeLog();
 
+        filtrationWidget->deactivate();
+
         delete project;
 
         isProjectOpened = false;
