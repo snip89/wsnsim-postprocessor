@@ -887,6 +887,9 @@ void MainWindow::openProject(QString name)
         dirPath.chop(finfo.fileName().size());
         settings.setValue("General/Gui/File_dialog_path", dirPath);
 
+        if(realTime)
+            closeConnection();
+
         if(isProjectOpened)
             closeProject();
     }
@@ -899,6 +902,9 @@ void MainWindow::openProject(QString name)
             errorMessager.showMessage(tr("Project file not found"));
             return;
         }
+
+        if(realTime)
+            closeConnection();
 
         if(isProjectOpened)
             closeProject();
@@ -982,16 +988,6 @@ void MainWindow::closeConnection()
 
         actionClose->setEnabled(false);
 
-        switchToWidget(EMPTY);
-
-        delete project;
-        delete socketAdapter;
-
-        actionOpenConnection->setEnabled(true);
-
-        realTime = false;
-        isProjectOpened = false;
-
         actionHexVisualization->setEnabled(false);
         actionHexVisualization->setChecked(false);
 
@@ -1002,6 +998,16 @@ void MainWindow::closeConnection()
         actionTableVisualization->setChecked(false);
 
         actionFiltration->setEnabled(false);
+
+        switchToWidget(EMPTY);
+
+        delete project;
+        delete socketAdapter;
+
+        actionOpenConnection->setEnabled(true);
+
+        realTime = false;
+        isProjectOpened = false;
 
         hexUpdated = false;
         textUpdated = false;
