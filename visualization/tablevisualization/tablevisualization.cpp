@@ -21,6 +21,7 @@ void TableVisualization::update(IProject *project, ILog *log)
     currentColumn = 0;
 
     viewer->clear();
+    viewer->setRowCount( 0);
 
     eventTypes.clear();
 
