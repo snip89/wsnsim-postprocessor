@@ -214,6 +214,7 @@ private slots:
     void openRecentProject();
 
     void closeProject();
+    void closeConnection();
 
     void openLog(QString name = QString::null);
 

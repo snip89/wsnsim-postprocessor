@@ -15,6 +15,8 @@ void RealTimeTableVisualization::stop()
 void RealTimeTableVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter)
 {
     viewer->clear();
+    viewer->setRowCount( 0);
+
     eventTypes.clear();
     recordsCount = 0;
 

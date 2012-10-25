@@ -192,6 +192,7 @@ void MainWindow::createActions()
 
     actionCloseConnection = new QAction(tr("&Close connection..."), this);
     actionCloseConnection->setEnabled(false);
+    connect(actionCloseConnection, SIGNAL(triggered()), this, SLOT(closeConnection()));
 
     actionPrint = new QAction(tr("&Print..."), this);
     actionPrint->setShortcut(QKeySequence::Print);
@@ -994,6 +995,46 @@ void MainWindow::closeProject()
         menuCurrentLog->setEnabled(false);
 
         setWindowTitle(prName);
+    }
+}
+
+void MainWindow::closeConnection()
+{
+    if(realTime)
+    {
+        if(activeWidget == RTHEXVISUALIZATION)
+            settings.setValue("General/Gui/Default_visualization", "hex");
+        else if(activeWidget == RTTEXTVISUALIZATION)
+            settings.setValue("General/Gui/Default_visualization", "text");
+        else if(activeWidget == RTTABLEVISUALIZATION)
+            settings.setValue("General/Gui/Default_visualization", "table");
+
+        actionCloseConnection->setEnabled(false);
+
+        switchToWidget(EMPTY);
+
+        delete project;
+        delete socketAdapter;
+
+        actionOpenConnection->setEnabled(true);
+
+        realTime = false;
+        isProjectOpened = false;
+
+        actionHexVisualization->setEnabled(false);
+        actionHexVisualization->setChecked(false);
+
+        actionTextVisualization->setEnabled(false);
+        actionTextVisualization->setChecked(false);
+
+        actionTableVisualization->setEnabled(false);
+        actionTableVisualization->setChecked(false);
+
+        actionFiltration->setEnabled(false);
+
+        hexUpdated = false;
+        textUpdated = false;
+        tableUpdated = false;
     }
 }
 
