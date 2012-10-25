@@ -35,7 +35,6 @@
 
 #include "project.h"
 #include "log.h"
-#include "logselectdialog.h"
 #include "simpleeventinfo.h"
 #include "textvisualization.h"
 #include "hexvisualization.h"

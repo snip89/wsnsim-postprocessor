@@ -68,7 +68,6 @@ HEADERS += interfaces/ilog.h \
            core/include/log.h \
            core/include/logindex.h \
            core/include/loginfo.h \
-           core/include/logselectdialog.h \
            core/include/mainsettings.h \
            core/include/mainwindow.h \
            core/include/openconnectiondialog.h \
@@ -117,7 +116,6 @@ FORMS += ui/abstractrealtimetablevisualization.ui \
          ui/generalguisettings.ui \
          ui/gotolinedialog.ui \
          ui/localizationsettings.ui \
-         ui/logselectdialog.ui \
          ui/mainsettings.ui \
          ui/mainwindow.ui \
          ui/openconnectiondialog.ui \
@@ -131,7 +129,6 @@ SOURCES += core/clientsettings.cpp \
            core/localizationsettings.cpp \
            core/log.cpp \
            core/logindex.cpp \
-           core/logselectdialog.cpp \
            core/main.cpp \
            core/mainsettings.cpp \
            core/mainwindow.cpp \
