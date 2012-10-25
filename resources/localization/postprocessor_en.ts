@@ -2,6 +2,22 @@
 <!DOCTYPE TS>
 <TS version="2.0" language="en_GB" sourcelanguage="en_GB">
 <context>
+    <name>AbstractRealTimeTableVisualization</name>
+    <message>
+        <location filename="../../ui/abstractrealtimetablevisualization.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>AbstractRealTimeTextVisualization</name>
+    <message>
+        <location filename="../../ui/abstractrealtimetextvisualization.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>AbstractTableVisualization</name>
     <message>
         <location filename="../../ui/abstracttablevisualization.ui" line="14"/>
@@ -9,19 +25,16 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/abstracttablevisualization.ui" line="65"/>
         <source>Select event type:</source>
-        <translation type="unfinished">Select event type:</translation>
+        <translation type="obsolete">Select event type:</translation>
     </message>
     <message>
-        <location filename="../../ui/abstracttablevisualization.ui" line="130"/>
         <source> records</source>
-        <translation type="unfinished"> records</translation>
+        <translation type="obsolete"> records</translation>
     </message>
     <message>
-        <location filename="../../ui/abstracttablevisualization.ui" line="143"/>
         <source>Log size for current event: </source>
-        <translation type="unfinished">Log size for current event: </translation>
+        <translation type="obsolete">Log size for current event: </translation>
     </message>
 </context>
 <context>
@@ -76,6 +89,24 @@
         <location filename="../../ui/abstracttextvisualization.ui" line="14"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>ClientSettings</name>
+    <message>
+        <location filename="../../ui/clientsettings.ui" line="14"/>
+        <source>Form</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../ui/clientsettings.ui" line="115"/>
+        <source>IP:</source>
+        <translation type="unfinished">IP:</translation>
+    </message>
+    <message>
+        <location filename="../../ui/clientsettings.ui" line="167"/>
+        <source>Port:</source>
+        <translation type="unfinished">Port:</translation>
     </message>
 </context>
 <context>
@@ -324,66 +355,78 @@
         <translation type="unfinished">Settings</translation>
     </message>
     <message>
-        <location filename="../../core/mainsettings.cpp" line="68"/>
-        <location filename="../../core/mainsettings.cpp" line="147"/>
+        <location filename="../../core/mainsettings.cpp" line="72"/>
+        <location filename="../../core/mainsettings.cpp" line="209"/>
         <source>General</source>
         <translation type="unfinished">General</translation>
     </message>
     <message>
-        <location filename="../../core/mainsettings.cpp" line="69"/>
-        <location filename="../../core/mainsettings.cpp" line="152"/>
+        <location filename="../../core/mainsettings.cpp" line="73"/>
+        <location filename="../../core/mainsettings.cpp" line="214"/>
         <source>Core</source>
         <translation type="unfinished">Core</translation>
     </message>
     <message>
-        <location filename="../../core/mainsettings.cpp" line="70"/>
-        <location filename="../../core/mainsettings.cpp" line="78"/>
-        <location filename="../../core/mainsettings.cpp" line="86"/>
-        <location filename="../../core/mainsettings.cpp" line="92"/>
-        <location filename="../../core/mainsettings.cpp" line="162"/>
-        <location filename="../../core/mainsettings.cpp" line="187"/>
-        <location filename="../../core/mainsettings.cpp" line="212"/>
-        <location filename="../../core/mainsettings.cpp" line="227"/>
+        <location filename="../../core/mainsettings.cpp" line="74"/>
+        <location filename="../../core/mainsettings.cpp" line="82"/>
+        <location filename="../../core/mainsettings.cpp" line="90"/>
+        <location filename="../../core/mainsettings.cpp" line="96"/>
+        <location filename="../../core/mainsettings.cpp" line="224"/>
+        <location filename="../../core/mainsettings.cpp" line="249"/>
+        <location filename="../../core/mainsettings.cpp" line="274"/>
+        <location filename="../../core/mainsettings.cpp" line="289"/>
         <source>Gui</source>
         <translation type="unfinished">Gui</translation>
     </message>
     <message>
-        <location filename="../../core/mainsettings.cpp" line="76"/>
-        <location filename="../../core/mainsettings.cpp" line="172"/>
+        <location filename="../../core/mainsettings.cpp" line="80"/>
+        <location filename="../../core/mainsettings.cpp" line="234"/>
         <source>Hex visualization</source>
         <translation type="unfinished">Hex visualization</translation>
     </message>
     <message>
-        <location filename="../../core/mainsettings.cpp" line="77"/>
-        <location filename="../../core/mainsettings.cpp" line="85"/>
-        <location filename="../../core/mainsettings.cpp" line="177"/>
-        <location filename="../../core/mainsettings.cpp" line="202"/>
+        <location filename="../../core/mainsettings.cpp" line="81"/>
+        <location filename="../../core/mainsettings.cpp" line="89"/>
+        <location filename="../../core/mainsettings.cpp" line="239"/>
+        <location filename="../../core/mainsettings.cpp" line="264"/>
         <source>Colors and Fonts</source>
         <translation type="unfinished">Colors and Fonts</translation>
     </message>
     <message>
-        <location filename="../../core/mainsettings.cpp" line="84"/>
-        <location filename="../../core/mainsettings.cpp" line="197"/>
+        <location filename="../../core/mainsettings.cpp" line="88"/>
+        <location filename="../../core/mainsettings.cpp" line="259"/>
         <source>Text visualization</source>
         <translation type="unfinished">Text visualization</translation>
     </message>
     <message>
-        <location filename="../../core/mainsettings.cpp" line="91"/>
-        <location filename="../../core/mainsettings.cpp" line="222"/>
+        <location filename="../../core/mainsettings.cpp" line="95"/>
+        <location filename="../../core/mainsettings.cpp" line="284"/>
         <source>Table visualization</source>
         <translation type="unfinished">Table visualization</translation>
     </message>
     <message>
-        <location filename="../../core/mainsettings.cpp" line="97"/>
-        <location filename="../../core/mainsettings.cpp" line="237"/>
+        <location filename="../../core/mainsettings.cpp" line="101"/>
+        <location filename="../../core/mainsettings.cpp" line="299"/>
         <source>Localization</source>
         <translation type="unfinished">Localization</translation>
     </message>
     <message>
-        <location filename="../../core/mainsettings.cpp" line="98"/>
-        <location filename="../../core/mainsettings.cpp" line="242"/>
+        <location filename="../../core/mainsettings.cpp" line="102"/>
+        <location filename="../../core/mainsettings.cpp" line="304"/>
         <source>Language</source>
         <translation type="unfinished">Language</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainsettings.cpp" line="105"/>
+        <location filename="../../core/mainsettings.cpp" line="314"/>
+        <source>Real time</source>
+        <translation type="unfinished">Real time</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainsettings.cpp" line="108"/>
+        <location filename="../../core/mainsettings.cpp" line="319"/>
+        <source>Clients</source>
+        <translation type="unfinished">Clients</translation>
     </message>
 </context>
 <context>
@@ -417,195 +460,217 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="163"/>
+        <location filename="../../core/mainwindow.cpp" line="177"/>
         <source>&amp;Open project...</source>
         <translation type="unfinished">&amp;Open project...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="167"/>
         <source>&amp;Open log...</source>
-        <translation type="unfinished">&amp;Open log...</translation>
+        <translation type="obsolete">&amp;Open log...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="171"/>
         <source>&amp;Close project</source>
-        <translation type="unfinished">&amp;Close project</translation>
+        <translation type="obsolete">&amp;Close project</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="176"/>
+        <location filename="../../core/mainwindow.cpp" line="190"/>
         <source>&amp;Print...</source>
         <translation type="unfinished">&amp;Print...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="180"/>
+        <location filename="../../core/mainwindow.cpp" line="194"/>
         <source>&amp;Exit</source>
         <translation type="unfinished">&amp;Exit</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="184"/>
+        <location filename="../../core/mainwindow.cpp" line="198"/>
         <source>&amp;Settings...</source>
         <translation type="unfinished">&amp;Settings...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="187"/>
+        <location filename="../../core/mainwindow.cpp" line="201"/>
         <source>&amp;Hex</source>
         <translation type="unfinished">&amp;Hex</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="192"/>
+        <location filename="../../core/mainwindow.cpp" line="206"/>
         <source>&amp;Text</source>
         <translation type="unfinished">&amp;Text</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="197"/>
+        <location filename="../../core/mainwindow.cpp" line="211"/>
         <source>&amp;Table</source>
         <translation type="unfinished">&amp;Table</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="202"/>
+        <location filename="../../core/mainwindow.cpp" line="216"/>
         <source>&amp;Copy</source>
         <translation type="unfinished">&amp;Copy</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="206"/>
+        <location filename="../../core/mainwindow.cpp" line="220"/>
         <source>&amp;Paste</source>
         <translation type="unfinished">&amp;Paste</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="210"/>
+        <location filename="../../core/mainwindow.cpp" line="224"/>
         <source>&amp;Select all</source>
         <translation type="unfinished">&amp;Select all</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="214"/>
+        <location filename="../../core/mainwindow.cpp" line="228"/>
         <source>&amp;Find</source>
         <translation type="unfinished">&amp;Find</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="218"/>
+        <location filename="../../core/mainwindow.cpp" line="232"/>
         <source>&amp;Find next</source>
         <translation type="unfinished">&amp;Find next</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="222"/>
+        <location filename="../../core/mainwindow.cpp" line="236"/>
         <source>&amp;Find previous</source>
         <translation type="unfinished">&amp;Find previous</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="226"/>
+        <location filename="../../core/mainwindow.cpp" line="240"/>
         <source>&amp;Go to line</source>
         <translation type="unfinished">&amp;Go to line</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="231"/>
+        <location filename="../../core/mainwindow.cpp" line="245"/>
         <source>&amp;Filter log...</source>
         <translation type="unfinished">&amp;Filter log...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="235"/>
+        <location filename="../../core/mainwindow.cpp" line="249"/>
         <source>&amp;Full screen</source>
         <translation type="unfinished">&amp;Full screen</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="240"/>
-        <location filename="../../core/mainwindow.cpp" line="303"/>
+        <location filename="../../core/mainwindow.cpp" line="254"/>
+        <location filename="../../core/mainwindow.cpp" line="318"/>
         <source>&amp;Help</source>
         <translation type="unfinished">&amp;Help</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="242"/>
+        <location filename="../../core/mainwindow.cpp" line="256"/>
         <source>&amp;Context help</source>
         <translation type="unfinished">&amp;Context help</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="245"/>
+        <location filename="../../core/mainwindow.cpp" line="259"/>
         <source>&amp;About...</source>
         <translation type="unfinished">&amp;About...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="250"/>
+        <location filename="../../core/mainwindow.cpp" line="264"/>
         <source>&amp;File</source>
         <translation type="unfinished">&amp;File</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="254"/>
+        <location filename="../../core/mainwindow.cpp" line="268"/>
         <source>&amp;Filtration</source>
         <translation type="unfinished">&amp;Filtration</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="256"/>
+        <location filename="../../core/mainwindow.cpp" line="270"/>
         <source>&amp;Logs</source>
         <translation type="unfinished">&amp;Logs</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="265"/>
+        <location filename="../../core/mainwindow.cpp" line="279"/>
         <source>&amp;Recent projects...</source>
         <translation type="unfinished">&amp;Recent projects...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="273"/>
+        <location filename="../../core/mainwindow.cpp" line="287"/>
         <source>&amp;Edit</source>
         <translation type="unfinished">&amp;Edit</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="282"/>
+        <location filename="../../core/mainwindow.cpp" line="296"/>
         <source>&amp;Search</source>
         <translation type="unfinished">&amp;Search</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="291"/>
+        <location filename="../../core/mainwindow.cpp" line="306"/>
         <source>&amp;View</source>
         <translation type="unfinished">&amp;View</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="300"/>
+        <location filename="../../core/mainwindow.cpp" line="315"/>
         <source>&amp;Tools</source>
         <translation type="unfinished">&amp;Tools</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="552"/>
-        <location filename="../../core/mainwindow.cpp" line="575"/>
-        <location filename="../../core/mainwindow.cpp" line="597"/>
-        <location filename="../../core/mainwindow.cpp" line="633"/>
-        <location filename="../../core/mainwindow.cpp" line="652"/>
-        <location filename="../../core/mainwindow.cpp" line="671"/>
+        <location filename="../../core/mainwindow.cpp" line="576"/>
+        <location filename="../../core/mainwindow.cpp" line="599"/>
+        <location filename="../../core/mainwindow.cpp" line="621"/>
+        <location filename="../../core/mainwindow.cpp" line="678"/>
+        <location filename="../../core/mainwindow.cpp" line="697"/>
+        <location filename="../../core/mainwindow.cpp" line="716"/>
         <source>Log size: </source>
         <translation type="unfinished">Log size: </translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="554"/>
-        <location filename="../../core/mainwindow.cpp" line="577"/>
-        <location filename="../../core/mainwindow.cpp" line="599"/>
-        <location filename="../../core/mainwindow.cpp" line="635"/>
-        <location filename="../../core/mainwindow.cpp" line="654"/>
-        <location filename="../../core/mainwindow.cpp" line="673"/>
+        <location filename="../../core/mainwindow.cpp" line="578"/>
+        <location filename="../../core/mainwindow.cpp" line="601"/>
+        <location filename="../../core/mainwindow.cpp" line="623"/>
+        <location filename="../../core/mainwindow.cpp" line="680"/>
+        <location filename="../../core/mainwindow.cpp" line="699"/>
+        <location filename="../../core/mainwindow.cpp" line="718"/>
         <source> records</source>
         <translation type="unfinished"> records</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="730"/>
+        <location filename="../../core/mainwindow.cpp" line="866"/>
         <source>Open project file</source>
         <translation type="unfinished">Open project file</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="730"/>
+        <location filename="../../core/mainwindow.cpp" line="866"/>
         <source>XML project files (*xml)</source>
         <translation type="unfinished">XML project files (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="761"/>
+        <location filename="../../core/mainwindow.cpp" line="816"/>
+        <location filename="../../core/mainwindow.cpp" line="897"/>
         <source>Project file not found</source>
         <translation type="unfinished">Project file not found</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="791"/>
+        <location filename="../../core/mainwindow.cpp" line="181"/>
+        <source>&amp;Open connection...</source>
+        <translation type="unfinished">&amp;Open connection...</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="185"/>
+        <source>&amp;Close</source>
+        <translation type="unfinished">&amp;Close</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="927"/>
         <source>Project is empty</source>
         <translation type="unfinished">Project is empty</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="907"/>
+        <location filename="../../core/mainwindow.cpp" line="1040"/>
         <source>No filters</source>
         <translation type="unfinished">No filters</translation>
+    </message>
+</context>
+<context>
+    <name>OpenConnectionDialog</name>
+    <message>
+        <location filename="../../ui/openconnectiondialog.ui" line="26"/>
+        <source>Open connection</source>
+        <translation type="unfinished">Open connection</translation>
+    </message>
+    <message>
+        <location filename="../../ui/openconnectiondialog.ui" line="43"/>
+        <source>Connect to:</source>
+        <translation type="unfinished">Connect to:</translation>
     </message>
 </context>
 <context>
@@ -626,12 +691,12 @@
 <context>
     <name>SnifferCoreSettings</name>
     <message>
-        <location filename="../../ui/sniffercoresettings.ui" line="14"/>
+        <location filename="../../ui/ui_sniffercoresettings.h" line="143"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/sniffercoresettings.ui" line="95"/>
+        <location filename="../../ui/ui_sniffercoresettings.h" line="144"/>
         <source>Port:</source>
         <translation type="unfinished">Port:</translation>
     </message>
@@ -639,17 +704,17 @@
 <context>
     <name>SnifferGuiSettings</name>
     <message>
-        <location filename="../../ui/snifferguisettings.ui" line="14"/>
+        <location filename="../../ui/ui_snifferguisettings.h" line="149"/>
         <source>Form</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="../../ui/snifferguisettings.ui" line="117"/>
+        <location filename="../../ui/ui_snifferguisettings.h" line="150"/>
         <source>Refresh after</source>
         <translation type="unfinished">Refresh after</translation>
     </message>
     <message>
-        <location filename="../../ui/snifferguisettings.ui" line="124"/>
+        <location filename="../../ui/ui_snifferguisettings.h" line="151"/>
         <source>lines</source>
         <translation type="unfinished">lines</translation>
     </message>

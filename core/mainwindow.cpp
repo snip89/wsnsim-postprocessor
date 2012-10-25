@@ -44,7 +44,6 @@ MainWindow::MainWindow(QWidget *parent) :
     filtrationWidget = new FiltrationWidget();
 
     connect(filtrationWidget, SIGNAL(logFiltered(int)), this, SLOT(filteredLog(int)));
-    // connect(filtrationWidget, SIGNAL(filtrationCanceled()), this, SLOT(canceledFiltration()));
 
     hexVisualization = new HexVisualization();
     textVisualization = new TextVisualization();
@@ -299,6 +298,7 @@ void MainWindow::createMenus()
     menuFind->addSeparator();
     menuFind->addAction(actionFindNext);
     menuFind->addAction(actionFindPrevious);
+    menuFind->setEnabled(false);
 
     menuEdit->addMenu(menuFind);
     menuEdit->addAction(actionGoToLine);
@@ -854,6 +854,8 @@ void MainWindow::openConnection()
     else if(settings.value("General/Gui/Default_visualization").value<QString>() == "table")
         actionTableVisualization->toggle();
 
+    setTitle(type, rtSettings->ip(type) + ":" + QString::number(rtSettings->port(type)));
+
     delete rtSettings;
 }
 
@@ -1002,6 +1004,8 @@ void MainWindow::closeConnection()
         hexUpdated = false;
         textUpdated = false;
         tableUpdated = false;
+
+        setWindowTitle(prName);
     }
 }
 
