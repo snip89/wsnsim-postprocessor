@@ -1220,6 +1220,12 @@ void MainWindow::showGoToLineDialog()
 
 void MainWindow::filteredLog(int id)
 {
+    /*if(currentLogId == id)
+    {
+        currentLogId = id;
+        updateActionsCurrentLogMenu();
+    }*/
+
     currentLogId = id;
     updateActionsCurrentLogMenu();
 
