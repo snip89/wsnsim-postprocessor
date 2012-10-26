@@ -231,7 +231,10 @@ int Project::loadEventsInfo(int iterator, QList<EventParams> events)
 
 LogDataType Project::toLogDataType(QString type)
 {
-    if(type == "uint16")
+    if(type == "uint8")
+        return UINT8_TYPE;
+
+    else if(type == "uint16")
         return UINT16_TYPE;
 
     else if(type == "uint32")
@@ -257,7 +260,10 @@ LogDataType Project::toLogDataType(QString type)
 
 int Project::sizeOf(LogDataType type)
 {
-    if(type == UINT16_TYPE)
+    if(type == UINT8_TYPE)
+        return sizeof(quint8);
+
+    else if(type == UINT16_TYPE)
         return sizeof(quint16);
 
     else if(type == UINT32_TYPE)
