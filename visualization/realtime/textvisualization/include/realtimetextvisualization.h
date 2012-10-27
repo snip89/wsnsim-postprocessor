@@ -15,7 +15,7 @@ public:
     // interface methods
 
     /*virtual*/ void stop();
-    /*virtual*/ void update(IProject *project, UdpSocketAdapter *socketAdapter);
+    /*virtual*/ void update(IProject *project, UdpSocketAdapter *socketAdapter, Format *format);
     /*virtual*/ void update();
     /*virtual*/ QWidget *getWidget();
 

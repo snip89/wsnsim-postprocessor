@@ -12,7 +12,7 @@ void RealTimeTableVisualization::stop()
     disconnect(currentSocketAdapter, SIGNAL(dataRecieved(QByteArray)), this, SLOT(addRecord(QByteArray)));
 }
 
-void RealTimeTableVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter)
+void RealTimeTableVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter, Format *format)
 {
     viewer->clear();
     viewer->setRowCount( 0);

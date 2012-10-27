@@ -244,6 +244,7 @@ void MainWindow::createActions()
 
     actionAcceptFormat = new QAction(tr("&Accept format..."), this);
     actionAcceptFormat->setEnabled(false);
+    connect(actionAcceptFormat, SIGNAL(triggered()), this, SLOT(loadFormat()));
 
     actionClearFormat = new QAction(tr("&Clear format"), this);
     actionClearFormat->setEnabled(false);
@@ -597,7 +598,7 @@ void MainWindow::switchToWidget(WidgetType type)
 
         if(!hexUpdated)
         {
-            hexVisualization->update(project, logs->at(currentLogId).log);
+            hexVisualization->update(project, logs->at(currentLogId).log, format);
             hexUpdated = true;
             return;
         }
@@ -619,7 +620,7 @@ void MainWindow::switchToWidget(WidgetType type)
 
         if(!textUpdated)
         {
-            textVisualization->update(project, logs->at(currentLogId).log);
+            textVisualization->update(project, logs->at(currentLogId).log, format);
             textUpdated = true;
             return;
         }
@@ -641,7 +642,7 @@ void MainWindow::switchToWidget(WidgetType type)
 
         if(!tableUpdated)
         {
-            tableVisualization->update(project, logs->at(currentLogId).log);
+            tableVisualization->update(project, logs->at(currentLogId).log, format);
             tableUpdated = true;
             return;
         }
@@ -696,7 +697,7 @@ void MainWindow::updateVisualization(WidgetType type)
 
         if(!textUpdated)
         {
-            textVisualization->update(project, logs->at(currentLogId).log);
+            textVisualization->update(project, logs->at(currentLogId).log, format);
             textUpdated = true;
             return;
         }
@@ -715,7 +716,7 @@ void MainWindow::updateVisualization(WidgetType type)
 
         if(!hexUpdated)
         {
-            hexVisualization->update(project, logs->at(currentLogId).log);
+            hexVisualization->update(project, logs->at(currentLogId).log, format);
             hexUpdated = true;
             return;
         }
@@ -734,7 +735,7 @@ void MainWindow::updateVisualization(WidgetType type)
 
         if(!hexUpdated)
         {
-            tableVisualization->update(project, logs->at(currentLogId).log);
+            tableVisualization->update(project, logs->at(currentLogId).log, format);
             tableUpdated = true;
             return;
         }
@@ -784,6 +785,60 @@ void MainWindow::setTitle(QString project, QString log)
 
     if(project != QString::null && log != QString::null)
         setWindowTitle(prName + delimT1 + project + delimT2 + log);
+}
+
+void MainWindow::loadFormat()
+{
+    if(format == NULL)
+        delete format;
+
+    QString name = "";
+
+    QString dirPath = settings.value("General/Gui/File_dialog_path").toString();
+
+    QFileDialog *fileDialog = new QFileDialog(this, tr("Open format file"), dirPath, tr("XML format files (*xml)"));
+    fileDialog->move(settings.value("Hidden/Gui/File_dialog_pos").value<QPoint>());
+    fileDialog->resize(settings.value("Hidden/Gui/File_dialog_size").value<QSize>());
+
+    if(fileDialog->exec())
+        name = fileDialog->selectedFiles().at(0);
+
+    settings.setValue("Hidden/Gui/File_dialog_pos", fileDialog->pos());
+    settings.setValue("Hidden/Gui/File_dialog_size", fileDialog->size());
+
+    delete fileDialog;
+
+    if(name == "")
+        return;
+
+    QDir dir;
+    QFileInfo finfo = QFileInfo(name);
+
+    dirPath = dir.filePath(name);
+    dirPath.chop(finfo.fileName().size());
+    settings.setValue("General/Gui/File_dialog_path", dirPath);
+
+    QDir::setCurrent(QApplication::applicationDirPath());
+
+    QString errorString = QString::null;
+    QLibrary formatDataLibrary("./formatData");
+
+    typedef Format*(*formatDataLoad) (QString& formatFileName, QString* errorMessage);
+    formatDataLoad load = (formatDataLoad) formatDataLibrary.resolve("load");
+
+    format = load(name, &errorString);
+
+    if(!realTime)
+    {
+        if(activeWidget == TEXTVISUALIZATION)
+            updateVisualization(TEXTVISUALIZATION);
+
+        if(activeWidget == HEXVISUALIZATION)
+            updateVisualization(HEXVISUALIZATION);
+
+        if(activeWidget == TABLEVISUALIZATION);
+            updateVisualization(TABLEVISUALIZATION);
+    }
 }
 
 void MainWindow::openRecentProject()
@@ -854,9 +909,9 @@ void MainWindow::openConnection()
 
     realTime = true;
 
-    realTimeTextVisualization->update(project, socketAdapter);
-    realTimeHexVisualization->update(project, socketAdapter);
-    realTimeTableVisualization->update(project, socketAdapter);
+    realTimeTextVisualization->update(project, socketAdapter, format);
+    realTimeHexVisualization->update(project, socketAdapter, format);
+    realTimeTableVisualization->update(project, socketAdapter, format);
 
     if(settings.value("General/Gui/Default_visualization").value<QString>() == "hex")
         actionHexVisualization->toggle();
@@ -1086,6 +1141,8 @@ void MainWindow::openLog(QString name)
     actionHexVisualization->setEnabled(true);
     actionTextVisualization->setEnabled(true);
     actionTableVisualization->setEnabled(true);
+
+    actionAcceptFormat->setEnabled(true);
 
     actionFiltration->setEnabled(true);
     

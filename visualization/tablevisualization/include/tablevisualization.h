@@ -17,7 +17,7 @@ public:
     // interface methods
 
     /*virtual*/ void activity(bool status);
-    /*virtual*/ void update(IProject *project, ILog *log);
+    /*virtual*/ void update(IProject *project, ILog *log, Format *format);
     /*virtual*/ void update();
     /*virtual*/ QWidget *getWidget();
     /*virtual*/ void fromLine(qint64 line);

@@ -12,11 +12,9 @@
 #include <QFont>
 
 #include "ivisualization.h"
-// #include "ivisualizationsettings.h"
 #include "abstracttextvisualization.h"
 #include "records.h"
 #include "staticrecordsreader.h"
-// #include "hexappearancecolorsandfontssettings.h"
 
 class HexVisualization : public IVisualization, protected AbstractTextVisualization
 {
@@ -28,7 +26,7 @@ public:
     // /*virtual*/ IVisualizationSettings *visualizationSettings(QString name);
 
     /*virtual*/ void activity(bool status);
-    /*virtual*/ void update(IProject *project, ILog *log);
+    /*virtual*/ void update(IProject *project, ILog *log, Format *format);
     /*virtual*/ void update();
     /*virtual*/ QWidget *getWidget();
     /*virtual*/ void fromLine(qint64 line);

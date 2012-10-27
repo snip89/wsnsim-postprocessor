@@ -12,7 +12,7 @@ void RealTimeTextVisualization::stop()
     disconnect(currentSocketAdapter, SIGNAL(dataRecieved(QByteArray)), this, SLOT(addRecord(QByteArray)));
 }
 
-void RealTimeTextVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter)
+void RealTimeTextVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter, Format *format)
 {
     viewer->clear();
     recordsCount = 0;

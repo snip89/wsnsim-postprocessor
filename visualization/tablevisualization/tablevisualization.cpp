@@ -11,7 +11,7 @@ void TableVisualization::activity(bool status)
     isActive = status;
 }
 
-void TableVisualization::update(IProject *project, ILog *log)
+void TableVisualization::update(IProject *project, ILog *log, Format *format)
 {
     currentProject = project;
     currentLog = log;

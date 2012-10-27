@@ -168,6 +168,8 @@ private:
     Project *project;
     UdpSocketAdapter *socketAdapter;
 
+    Format *format;
+
     // TODO: remove after implemention new logs list
 //    QList<Log*> *logs;
 
@@ -226,6 +228,8 @@ private slots:
     void showTableVisualization(bool checked);
     void showFiltration();
     void showGoToLineDialog();
+
+    void loadFormat();
 
     // void selectedSetting(QString topLevelName, QString settingName);
     void appliedSettings();
