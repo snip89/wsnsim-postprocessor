@@ -242,6 +242,12 @@ void MainWindow::createActions()
     connect(actionGoToLine, SIGNAL(triggered()), this, SLOT(showGoToLineDialog()));
     actionGoToLine->setEnabled(false);
 
+    actionAcceptFormat = new QAction(tr("&Accept format..."), this);
+    actionAcceptFormat->setEnabled(false);
+
+    actionClearFormat = new QAction(tr("&Clear format"), this);
+    actionClearFormat->setEnabled(false);
+
     actionFiltration = new QAction(tr("&Filter log..."), this);
     actionFiltration->setEnabled(false);
     connect(actionFiltration, SIGNAL(triggered()), this, SLOT(showFiltration()));
@@ -289,6 +295,9 @@ void MainWindow::createMenus()
     menuEdit->addAction(actionPaste);
     menuEdit->addSeparator();
     menuEdit->addAction(actionSelectAll);
+    menuEdit->addSeparator();
+    menuEdit->addAction(actionAcceptFormat);
+    menuEdit->addAction(actionClearFormat);
     menuEdit->addSeparator();
     menuEdit->addAction(actionFiltration);
     menuEdit->addSeparator();
@@ -349,6 +358,8 @@ void MainWindow::deleteActions()
     delete actionHexVisualization;
     delete actionTextVisualization;
     delete actionTableVisualization;
+    delete actionAcceptFormat;
+    delete actionClearFormat;
     delete actionFiltration;
     delete actionFullScreen;
     delete actionCopy;

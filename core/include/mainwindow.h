@@ -109,6 +109,9 @@ private:
     QAction *actionFindPrevious;
     QAction *actionGoToLine;
 
+    QAction *actionAcceptFormat;
+    QAction *actionClearFormat;
+
     // FIXME: rename this later
     QAction *actionFiltration;
 
