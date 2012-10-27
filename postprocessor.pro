@@ -5,9 +5,8 @@
 QT += core gui xml network
 INCLUDEPATH += ../libs/projectData
 INCLUDEPATH += ../libs/globalSettings/realtime/interfaces
-TARGET += logsVisualizer
 TEMPLATE = app
-TARGET = 
+TARGET =
 DEPENDPATH += . \
               core \
               interfaces \

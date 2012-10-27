@@ -68,14 +68,18 @@ void FiltrationWidget::activate()
         ui->filtrationParamComboBox->addItem(paramName);
     }
 
+    int i = 0;
+
     foreach(EventParams params, currentProject->projectParams.events.systemEvents)
     {
-        ui->eventComboBox->addItem(params.eventInfo["name"]);
+        ui->eventComboBox->addItem(QString::number(i) + ": " + params.eventInfo["name"]);
+        i++;
     }
 
     foreach(EventParams params, currentProject->projectParams.events.userEvents)
     {
-        ui->eventComboBox->addItem(params.eventInfo["name"]);
+        ui->eventComboBox->addItem(QString::number(i) + ": " + params.eventInfo["name"]);
+        i++;
     }
 
     updateBooleanOperators();
