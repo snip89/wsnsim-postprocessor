@@ -7,6 +7,7 @@
 #include "iproject.h"
 #include "tableviewer.h"
 #include "udpsocketadapter.h"
+#include "formatParams.h"
 #include "ui_abstractrealtimetablevisualization.h"
 
 namespace Ui {
@@ -24,6 +25,7 @@ protected:
 
     IProject *currentProject;
     UdpSocketAdapter *currentSocketAdapter;
+    QList<Format*> formats;
 
     quint64 recordsCount;
     quint64 recordsLimit;

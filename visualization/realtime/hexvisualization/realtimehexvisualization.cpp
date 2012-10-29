@@ -11,7 +11,7 @@ void RealTimeHexVisualization::stop()
     disconnect(currentSocketAdapter, SIGNAL(dataRecieved(QByteArray)), this, SLOT(addRecord(QByteArray)));
 }
 
-void RealTimeHexVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter, Format *format)
+void RealTimeHexVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter, QList<Format*> formats)
 {
     viewer->clear();
     recordsCount = 0;

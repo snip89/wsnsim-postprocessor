@@ -55,6 +55,7 @@
 #include "openconnectiondialog.h"
 #include "staticcoreutils.h"
 #include "udpsocketadapter.h"
+#include "formatacceptingdialog.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -168,7 +169,8 @@ private:
     Project *project;
     UdpSocketAdapter *socketAdapter;
 
-    Format *format;
+    // Format *format;
+    QList<Format*> formats;
 
     // TODO: remove after implemention new logs list
 //    QList<Log*> *logs;

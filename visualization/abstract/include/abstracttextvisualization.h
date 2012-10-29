@@ -21,6 +21,7 @@
 
 #include "ilog.h"
 #include "iproject.h"
+#include "formatParams.h"
 
 #include "viewer.h"
 
@@ -49,6 +50,7 @@ protected:
 
     ILog *currentLog;
     IProject *currentProject;
+    QList<Format*> formats;
 
     qint64 currentLine;
 

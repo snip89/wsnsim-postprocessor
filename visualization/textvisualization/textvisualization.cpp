@@ -27,7 +27,7 @@ void TextVisualization::activity(bool status)
     }
 }
 
-void TextVisualization::update(IProject *project, ILog *log, Format *format)
+void TextVisualization::update(IProject *project, ILog *log, QList<Format*> formats)
 {
     if(settings.value("Text visualization/Gui/LineWrapMode").value<bool>())
         viewer->setLineWrapMode(QTextEdit::WidgetWidth);

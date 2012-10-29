@@ -13,6 +13,7 @@
 #include "tableviewer.h"
 #include "ilog.h"
 #include "iproject.h"
+#include "formatParams.h"
 
 #include "ui_abstracttablevisualization.h"
 
@@ -36,6 +37,7 @@ protected:
     ILog *currentLog;
     IProject *currentProject;
     ILog *currentEventLog;
+    QList<Format*> formats;
 
     QString currentEvent;
 

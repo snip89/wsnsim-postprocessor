@@ -11,8 +11,10 @@ void TableVisualization::activity(bool status)
     isActive = status;
 }
 
-void TableVisualization::update(IProject *project, ILog *log, Format *format)
+void TableVisualization::update(IProject *project, ILog *log, QList<Format*> formats)
 {
+    this->formats = formats;
+
     currentProject = project;
     currentLog = log;
 
@@ -118,27 +120,12 @@ void TableVisualization::updatePage()
                     {
                         wasEvent = true;
 
-                        if(info[record.eventID].argsInfo[j].type == BYTE_ARRAY_TYPE)
-                        {
-                            QString hexed_string = "";
-                            foreach(quint8 nextHex, record.other[j].value<QByteArray>())
-                            {
-                                QString hexed = QString::number(nextHex, 16);
-                                hexed = hexed.toUpper();
-                                if(hexed.size() == 1)
-                                    hexed.insert(0, '0');
-
-                                hexed_string += hexed + " ";
-                            }
-
-                            hexed_string.chop(1);
-
-                            //resultLine.append(hexed_string);
-                            viewer->setItem(i, k, new QTableWidgetItem(hexed_string));
-                        }
-                        else
-                            //resultLine.append(record.other[j].toString());
-                            viewer->setItem(i, k, new QTableWidgetItem(record.other[j].toString()));
+                        viewer->setItem(i, k, new QTableWidgetItem(
+                                            updateValue(record.eventID,
+                                                        j,
+                                                        record.other[j],
+                                                        info[record.eventID].argsInfo[j].type)
+                                                        ));
                     }
                 }
 
@@ -171,6 +158,144 @@ void TableVisualization::updatePage()
 void TableVisualization::updatePage(int cursorMoving)
 {
     updatePage();
+}
+
+QString TableVisualization::updateValue(int eventID, int argumentID, QVariant value, LogDataType type)
+{
+    // OMG:
+
+    QString result;
+
+    if(formats.size() == 0)
+    {
+        if(type == BYTE_ARRAY_TYPE)
+        {
+            QString hexed_string = "";
+            foreach(quint8 nextHex, value.value<QByteArray>())
+            {
+                QString hexed = QString::number(nextHex, 16);
+                hexed = hexed.toUpper();
+                if(hexed.size() == 1)
+                    hexed.insert(0, '0');
+
+                hexed_string += hexed + " ";
+            }
+
+            hexed_string.chop(1);
+
+            result = hexed_string;
+        }
+        else
+        {
+            result = value.toString();
+        }
+    }
+    else
+    {
+        foreach(Format *format, formats)
+        {
+            /*qDebug() << "---------";
+            qDebug() << "type1" << type;
+            qDebug() << "type2" << LogDataTypes::toLogDataType(format->formatInfo["argumentType"]);
+            qDebug() << "eventID1" << eventID;
+            qDebug() << "eventID2" << format->argument["eventID"].toInt();
+            qDebug() << "argumentID1" << argumentID;
+            qDebug() << "argumentID2" << format->argument["argumentID"].toInt();*/
+
+            if(LogDataTypes::toLogDataType(format->formatInfo["argumentType"]) == type
+                    && format->argument["eventID"].toInt() == eventID
+                    && format->argument["argumentID"].toInt() == argumentID)
+            {
+                if(type == BYTE_ARRAY_TYPE)
+                {
+                    int length = 0;
+
+                    if((format->formatInfo["unsizedField"].toInt() == 1))
+                    {
+                        length = formatLength(format);
+                        length += value.value<QByteArray>().size() - length;
+                    }
+                    else
+                    {
+                        length = formatLength(format);
+                    }
+
+                    if(length != value.value<QByteArray>().size())
+                    {
+                        result += "Bad format(" + format->formatInfo["name"] + ") array: ";
+
+                        QString hexed_string = "";
+                        foreach(quint8 nextHex, value.value<QByteArray>())
+                        {
+                            QString hexed = QString::number(nextHex, 16);
+                            hexed = hexed.toUpper();
+                            if(hexed.size() == 1)
+                                hexed.insert(0, '0');
+
+                            hexed_string += hexed + " ";
+                        }
+
+                        hexed_string.chop(1);
+
+                        result += hexed_string;
+                    }
+                    else
+                    {
+                        int iterator = 0;
+
+                        foreach(FieldInfo field, format->fieldsInfo)
+                        {
+                            result += field["name"] + ": ";
+
+                            int fieldSize = field["length"].toInt();
+
+                            if(fieldSize == -1)
+                                fieldSize = value.value<QByteArray>().size() - formatLength(format);
+
+                            for(int i = 0; i < fieldSize; i ++)
+                            {
+                                QString hexed = QString::number((quint8)value.value<QByteArray>()[iterator], 16);
+                                hexed = hexed.toUpper();
+                                if(hexed.size() == 1)
+                                    hexed.insert(0, '0');
+
+                                result += hexed + " ";
+
+                                iterator ++;
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    result = value.toString();
+                }
+            }
+            else if(type == BYTE_ARRAY_TYPE)
+            {
+                QString hexed_string = "";
+                foreach(quint8 nextHex, value.value<QByteArray>())
+                {
+                    QString hexed = QString::number(nextHex, 16);
+                    hexed = hexed.toUpper();
+                    if(hexed.size() == 1)
+                        hexed.insert(0, '0');
+
+                    hexed_string += hexed + " ";
+                }
+
+                hexed_string.chop(1);
+
+                result = hexed_string;
+            }
+            else
+            {
+                result = value.toString();
+            }
+        }
+    }
+
+    return result;
 }
 
 /*void TableVisualization::allEventsUpdate(bool eventChanged)
@@ -433,4 +558,27 @@ void TableVisualization::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Table visualization/Gui/Increment"))
         someSettings.setValue("Table visualization/Gui/Increment", 1);
+}
+
+int TableVisualization::formatLength(Format *format)
+{
+    int result = 0;
+
+    if(format->formatInfo["unsizedField"].toInt() != 1)
+    {
+        foreach(FieldInfo field, format->fieldsInfo)
+        {
+            result += field["length"].toInt();
+        }
+    }
+    else
+    {
+        foreach(FieldInfo field, format->fieldsInfo)
+        {
+            if(field["length"].toInt() != -1)
+                result += field["length"].toInt();
+        }
+    }
+
+    return result;
 }

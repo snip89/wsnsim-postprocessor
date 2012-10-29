@@ -26,6 +26,7 @@ class Project : public IProject
 {
 public:
     friend class FiltrationWidget;
+    friend class FormatAcceptingDialog;
 
     Project(QString fileName);
     void load(QString &errorString);
@@ -47,7 +48,6 @@ private:
 
     void loadEventsInfo();
     int loadEventsInfo(int iterator, QList<EventParams> events);
-    LogDataType toLogDataType(QString type);
     int sizeOf(LogDataType type);
 };
 

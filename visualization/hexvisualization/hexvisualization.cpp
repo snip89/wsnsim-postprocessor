@@ -25,7 +25,7 @@ void HexVisualization::activity(bool status)
     }
 }
 
-void HexVisualization::update(IProject *project, ILog *log, Format *format)
+void HexVisualization::update(IProject *project, ILog *log, QList<Format*> formats)
 {
     if(settings.value("Hex visualization/Gui/LineWrapMode").value<bool>())
         viewer->setLineWrapMode(QTextEdit::WidgetWidth);

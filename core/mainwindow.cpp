@@ -97,6 +97,9 @@ MainWindow::~MainWindow()
     delete mainSettings;
     delete stackedWidget;
 
+    foreach(Format *format, formats)
+        delete format;
+
     delete ui;
 }
 
@@ -598,7 +601,7 @@ void MainWindow::switchToWidget(WidgetType type)
 
         if(!hexUpdated)
         {
-            hexVisualization->update(project, logs->at(currentLogId).log, format);
+            hexVisualization->update(project, logs->at(currentLogId).log, formats);
             hexUpdated = true;
             return;
         }
@@ -620,7 +623,7 @@ void MainWindow::switchToWidget(WidgetType type)
 
         if(!textUpdated)
         {
-            textVisualization->update(project, logs->at(currentLogId).log, format);
+            textVisualization->update(project, logs->at(currentLogId).log, formats);
             textUpdated = true;
             return;
         }
@@ -642,7 +645,7 @@ void MainWindow::switchToWidget(WidgetType type)
 
         if(!tableUpdated)
         {
-            tableVisualization->update(project, logs->at(currentLogId).log, format);
+            tableVisualization->update(project, logs->at(currentLogId).log, formats);
             tableUpdated = true;
             return;
         }
@@ -697,7 +700,7 @@ void MainWindow::updateVisualization(WidgetType type)
 
         if(!textUpdated)
         {
-            textVisualization->update(project, logs->at(currentLogId).log, format);
+            textVisualization->update(project, logs->at(currentLogId).log, formats);
             textUpdated = true;
             return;
         }
@@ -716,7 +719,7 @@ void MainWindow::updateVisualization(WidgetType type)
 
         if(!hexUpdated)
         {
-            hexVisualization->update(project, logs->at(currentLogId).log, format);
+            hexVisualization->update(project, logs->at(currentLogId).log, formats);
             hexUpdated = true;
             return;
         }
@@ -733,9 +736,9 @@ void MainWindow::updateVisualization(WidgetType type)
         actionGoToLine->setEnabled(true);
         stackedWidget->setCurrentWidget(tableVisualization->getWidget());
 
-        if(!hexUpdated)
+        if(!tableUpdated)
         {
-            tableVisualization->update(project, logs->at(currentLogId).log, format);
+            tableVisualization->update(project, logs->at(currentLogId).log, formats);
             tableUpdated = true;
             return;
         }
@@ -789,9 +792,6 @@ void MainWindow::setTitle(QString project, QString log)
 
 void MainWindow::loadFormat()
 {
-    if(format == NULL)
-        delete format;
-
     QString name = "";
 
     QString dirPath = settings.value("General/Gui/File_dialog_path").toString();
@@ -826,10 +826,40 @@ void MainWindow::loadFormat()
     typedef Format*(*formatDataLoad) (QString& formatFileName, QString* errorMessage);
     formatDataLoad load = (formatDataLoad) formatDataLibrary.resolve("load");
 
-    format = load(name, &errorString);
+    Format *format = load(name, &errorString);
+
+    FormatAcceptingDialog *formatAcceptingDialog = new FormatAcceptingDialog(project);
+
+    // TODO: сохранять положение диалога
+    if(formatAcceptingDialog->exec())
+    {
+        AttrInfo info = formatAcceptingDialog->getArgument();
+
+        if(info["type"] == format->formatInfo["argumentType"])
+        {
+            format->argument = info;
+            formats.append(format);
+        }
+        else
+        {
+            delete format;
+            return;
+        }
+    }
+    else
+    {
+        delete format;
+        return;
+    }
+
+    delete formatAcceptingDialog;
 
     if(!realTime)
     {
+        hexUpdated = false;
+        textUpdated = false;
+        tableUpdated = false;
+
         if(activeWidget == TEXTVISUALIZATION)
             updateVisualization(TEXTVISUALIZATION);
 
@@ -909,9 +939,9 @@ void MainWindow::openConnection()
 
     realTime = true;
 
-    realTimeTextVisualization->update(project, socketAdapter, format);
-    realTimeHexVisualization->update(project, socketAdapter, format);
-    realTimeTableVisualization->update(project, socketAdapter, format);
+    realTimeTextVisualization->update(project, socketAdapter, formats);
+    realTimeHexVisualization->update(project, socketAdapter, formats);
+    realTimeTableVisualization->update(project, socketAdapter, formats);
 
     if(settings.value("General/Gui/Default_visualization").value<QString>() == "hex")
         actionHexVisualization->toggle();

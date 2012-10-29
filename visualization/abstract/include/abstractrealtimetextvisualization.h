@@ -6,6 +6,7 @@
 #include "iproject.h"
 #include "viewer.h"
 #include "udpsocketadapter.h"
+#include "formatParams.h"
 #include "ui_abstractrealtimetextvisualization.h"
 
 namespace Ui {
@@ -23,6 +24,7 @@ protected:
 
     IProject *currentProject;
     UdpSocketAdapter *currentSocketAdapter;
+    QList<Format*> formats;
 
     quint64 recordsCount;
     quint64 recordsLimit;

@@ -154,7 +154,7 @@ LogDataType Project::paramType(QString paramName)
         {
             if(argument["name"] == paramName)
             {
-                result = toLogDataType(argument["type"]);
+                result = LogDataTypes::toLogDataType(argument["type"]);
                 return result;
             }
         }
@@ -166,7 +166,7 @@ LogDataType Project::paramType(QString paramName)
         {
             if(argument["name"] == paramName)
             {
-                result = toLogDataType(argument["type"]);
+                result = LogDataTypes::toLogDataType(argument["type"]);
                 return result;
             }
         }
@@ -207,7 +207,7 @@ int Project::loadEventsInfo(int iterator, QList<EventParams> events)
 
             QString stringArgType = events[i].arguments[j]["type"];
 
-            LogDataType newArgType = toLogDataType(stringArgType);
+            LogDataType newArgType = LogDataTypes::toLogDataType(stringArgType);
             eventsInfo[iterator].argsInfo[j].type = newArgType;
             int argSize = sizeOf(newArgType);
             eventsInfo[iterator].argsInfo[j].size = argSize;
@@ -227,35 +227,6 @@ int Project::loadEventsInfo(int iterator, QList<EventParams> events)
     }
 
     return iterator;
-}
-
-LogDataType Project::toLogDataType(QString type)
-{
-    if(type == "uint8")
-        return UINT8_TYPE;
-
-    else if(type == "uint16")
-        return UINT16_TYPE;
-
-    else if(type == "uint32")
-        return UINT32_TYPE;
-
-    else if(type == "uint64")
-        return UINT64_TYPE;
-
-    else if(type == "int32")
-        return INT32_TYPE;
-
-    else if(type == "double")
-        return DOUBLE_TYPE;
-
-    else if(type == "ByteArray")
-        return BYTE_ARRAY_TYPE;
-
-    else if(type == "string")
-        return STRING_TYPE;
-
-    return UNKNOWN_TYPE;
 }
 
 int Project::sizeOf(LogDataType type)

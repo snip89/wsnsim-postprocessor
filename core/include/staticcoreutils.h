@@ -9,6 +9,7 @@
 #include <QDebug>
 
 #include "ihostrealtimesettings.h"
+#include "simpleeventinfo.h"
 
 class StaticCoreUtils
 {

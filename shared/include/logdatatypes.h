@@ -8,6 +8,8 @@
 #ifndef LOGDATATYPES_H_
 #define LOGDATATYPES_H_
 
+#include <QString>
+
 enum LogDataType
 {
     UNKNOWN_TYPE,
@@ -20,6 +22,12 @@ enum LogDataType
     DOUBLE_TYPE,
     BYTE_ARRAY_TYPE,
     STRING_TYPE
+};
+
+class LogDataTypes
+{
+public:
+    static LogDataType toLogDataType(QString type);
 };
 
 #endif /* LOGDATATYPES_H_ */
