@@ -866,7 +866,7 @@ void MainWindow::loadFormat()
         if(activeWidget == HEXVISUALIZATION)
             updateVisualization(HEXVISUALIZATION);
 
-        if(activeWidget == TABLEVISUALIZATION);
+        if(activeWidget == TABLEVISUALIZATION)
             updateVisualization(TABLEVISUALIZATION);
     }
 }
