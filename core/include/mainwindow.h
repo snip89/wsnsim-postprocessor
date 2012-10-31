@@ -236,6 +236,7 @@ private slots:
     void showGoToLineDialog();
 
     void loadFormat();
+    void clearFormat();
 
     // void selectedSetting(QString topLevelName, QString settingName);
     void appliedSettings();

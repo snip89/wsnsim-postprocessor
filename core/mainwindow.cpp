@@ -101,8 +101,8 @@ MainWindow::~MainWindow()
     delete mainSettings;
     delete stackedWidget;
 
-    foreach(Format *format, formats)
-        delete format;
+    /*foreach(Format *format, formats)
+        delete format;*/
 
     delete ui;
 }
@@ -255,6 +255,7 @@ void MainWindow::createActions()
 
     actionClearFormat = new QAction(tr("&Clear format"), this);
     actionClearFormat->setEnabled(false);
+    connect(actionClearFormat, SIGNAL(triggered()), this, SLOT(clearFormat()));
 
     actionFiltration = new QAction(tr("&Filter log..."), this);
     actionFiltration->setEnabled(false);
@@ -486,6 +487,12 @@ void MainWindow::closeLog()
         delete logs;
         isLogOpened = false;
     }
+
+    actionAcceptFormat->setEnabled(false);
+
+    clearFormat();
+
+    actionClearFormat->setEnabled(false);
 }
 
 void MainWindow::insertToRecent(QString fileName)
@@ -945,6 +952,56 @@ void MainWindow::loadFormat()
         if(activeWidget == RTTABLEVISUALIZATION)
             updateVisualization(RTTABLEVISUALIZATION);
     }
+
+    actionClearFormat->setEnabled(true);
+}
+
+void MainWindow::clearFormat()
+{
+    if(realTime)
+    {
+        realTimeTextVisualization->stop();
+        realTimeHexVisualization->stop();
+        realTimeTableVisualization->stop();
+    }
+
+    foreach(Format *format, formats)
+        delete format;
+
+    formats.clear();
+
+    actionClearFormat->setEnabled(false);
+
+    if(!realTime)
+    {
+        hexUpdated = false;
+        textUpdated = false;
+        tableUpdated = false;
+
+        if(activeWidget == TEXTVISUALIZATION)
+            updateVisualization(TEXTVISUALIZATION);
+
+        if(activeWidget == HEXVISUALIZATION)
+            updateVisualization(HEXVISUALIZATION);
+
+        if(activeWidget == TABLEVISUALIZATION)
+            updateVisualization(TABLEVISUALIZATION);
+    }
+    else
+    {
+        rtHexUpdated = false;
+        rtTextUpdated = false;
+        rtTableUpdated = false;
+
+        if(activeWidget == RTTEXTVISUALIZATION)
+            updateVisualization(RTTEXTVISUALIZATION);
+
+        if(activeWidget == RTHEXVISUALIZATION)
+            updateVisualization(RTHEXVISUALIZATION);
+
+        if(activeWidget == RTTABLEVISUALIZATION)
+            updateVisualization(RTTABLEVISUALIZATION);
+    }
 }
 
 void MainWindow::openRecentProject()
@@ -1183,11 +1240,17 @@ void MainWindow::closeConnection()
         realTime = false;
         isProjectOpened = false;
 
-        hexUpdated = false;
-        textUpdated = false;
-        tableUpdated = false;
+        rtHexUpdated = true;
+        rtTextUpdated = true;
+        rtTableUpdated = true;
 
         setWindowTitle(prName);
+
+        actionAcceptFormat->setEnabled(false);
+
+        clearFormat();
+
+        actionClearFormat->setEnabled(false);
     }
 }
 
