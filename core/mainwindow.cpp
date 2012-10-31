@@ -896,7 +896,8 @@ void MainWindow::loadFormat()
 
     Format *format = load(name, &errorString);
 
-    FormatAcceptingDialog *formatAcceptingDialog = new FormatAcceptingDialog(project);
+    FormatAcceptingDialog *formatAcceptingDialog = new FormatAcceptingDialog(project,
+                                                                             format->formatInfo["argumentType"]);
 
     // TODO: сохранять положение диалога
     if(formatAcceptingDialog->exec())

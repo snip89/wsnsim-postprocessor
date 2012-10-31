@@ -17,11 +17,13 @@ class FormatAcceptingDialog : public QDialog
 {
     Q_OBJECT
 public:
-    explicit FormatAcceptingDialog(Project *project, QWidget *parent = 0);
+    explicit FormatAcceptingDialog(Project *project, QString type, QWidget *parent = 0);
     AttrInfo getArgument();
     virtual ~FormatAcceptingDialog();
 private:
     Project *project;
+
+    QString type;
 
     void initComboBox();
 

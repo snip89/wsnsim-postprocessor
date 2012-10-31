@@ -1,10 +1,11 @@
 #include "formatacceptingdialog.h"
 
-FormatAcceptingDialog::FormatAcceptingDialog(Project *project, QWidget *parent) :
+FormatAcceptingDialog::FormatAcceptingDialog(Project *project, QString type, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FormatAcceptingDialog)
 {
     this->project = project;
+    this->type = type;
 
     ui->setupUi(this);
     initComboBox();
@@ -36,9 +37,29 @@ void FormatAcceptingDialog::initComboBox()
     {
         foreach(EventArgument argument, event.arguments)
         {
-            QString info = event.eventInfo["ID"] + ";" + argument["ID"] + ";" + argument["type"];
+            if(type == argument["type"])
+            {
+                QString info = event.eventInfo["ID"] + ";" + argument["ID"] + ";" + argument["type"];
 
-            ui->acceptionComboBox->addItem(argument["name"], QVariant(info));
+                ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"] + " / "
+                                               "argument: " + argument["name"],
+                                               QVariant(info));
+            }
+        }
+    }
+
+    foreach(EventParams event, project->projectParams.events.userEvents)
+    {
+        foreach(EventArgument argument, event.arguments)
+        {
+            if(type == argument["type"])
+            {
+                QString info = event.eventInfo["ID"] + ";" + argument["ID"] + ";" + argument["type"];
+
+                ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"] + " / "
+                                               "argument: " + argument["name"],
+                                               QVariant(info));
+            }
         }
     }
 }
