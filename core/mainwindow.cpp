@@ -176,7 +176,13 @@ void MainWindow::setSettings(QSettings &someSettings)
         someSettings.setValue("Hidden/Gui/Font_dialog_size", QSize(320, 240));
 
     if(!someSettings.contains("Hidden/Gui/Color_dialog_size"))
-        someSettings.setValue("Hidden/Gui/Color_dialog_size", QPoint(320, 240));
+        someSettings.setValue("Hidden/Gui/Color_dialog_size", QSize(320, 240));
+
+    if(!someSettings.contains("Hidden/Gui/Color_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Color_dialog_pos", QPoint(0, 0));
+
+    if(!someSettings.contains("Hidden/Gui/Format_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Format_dialog_pos", QPoint(0, 0));
 }
 
 void MainWindow::createActions()
@@ -899,9 +905,13 @@ void MainWindow::loadFormat()
     FormatAcceptingDialog *formatAcceptingDialog = new FormatAcceptingDialog(project,
                                                                              format->formatInfo["argumentType"]);
 
+    formatAcceptingDialog->move(settings.value("Hidden/Gui/Format_dialog_pos").value<QPoint>());
+
     // TODO: сохранять положение диалога
     if(formatAcceptingDialog->exec())
     {
+        settings.setValue("Hidden/Gui/Format_dialog_pos", formatAcceptingDialog->pos());
+
         AttrInfo info = formatAcceptingDialog->getArgument();
 
         if(info["type"] == format->formatInfo["argumentType"])
@@ -917,6 +927,7 @@ void MainWindow::loadFormat()
     }
     else
     {
+        settings.setValue("Hidden/Gui/Format_dialog_pos", formatAcceptingDialog->pos());
         delete format;
         return;
     }
