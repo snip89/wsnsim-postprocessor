@@ -749,17 +749,47 @@ void MainWindow::updateVisualization(WidgetType type)
 
     case RTTEXTVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTextVisualization->getWidget());
-        realTimeTextVisualization->update();
+
+        if(!textUpdated)
+        {
+            realTimeTextVisualization->stop();
+            realTimeTextVisualization->update(project, socketAdapter, formats);
+            textUpdated = true;
+            return;
+        }
+        else
+            realTimeTextVisualization->update();
+
         break;
 
     case RTHEXVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeHexVisualization->getWidget());
-        realTimeHexVisualization->update();
+
+        if(!hexUpdated)
+        {
+            realTimeHexVisualization->stop();
+            realTimeHexVisualization->update(project, socketAdapter, formats);
+            hexUpdated = true;
+            return;
+        }
+        else
+            realTimeHexVisualization->update();
+
         break;
 
     case RTTABLEVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTableVisualization->getWidget());
-        realTimeTableVisualization->update();
+
+        if(!tableUpdated)
+        {
+            realTimeTableVisualization->stop();
+            realTimeTableVisualization->update(project, socketAdapter, formats);
+            tableUpdated = true;
+            return;
+        }
+        else
+            realTimeTableVisualization->update();
+
         break;
 
     case EMPTY:
@@ -854,12 +884,12 @@ void MainWindow::loadFormat()
 
     delete formatAcceptingDialog;
 
+    hexUpdated = false;
+    textUpdated = false;
+    tableUpdated = false;
+
     if(!realTime)
     {
-        hexUpdated = false;
-        textUpdated = false;
-        tableUpdated = false;
-
         if(activeWidget == TEXTVISUALIZATION)
             updateVisualization(TEXTVISUALIZATION);
 
@@ -868,6 +898,17 @@ void MainWindow::loadFormat()
 
         if(activeWidget == TABLEVISUALIZATION)
             updateVisualization(TABLEVISUALIZATION);
+    }
+    else
+    {
+        if(activeWidget == RTTEXTVISUALIZATION)
+            updateVisualization(RTTEXTVISUALIZATION);
+
+        if(activeWidget == RTHEXVISUALIZATION)
+            updateVisualization(RTHEXVISUALIZATION);
+
+        if(activeWidget == RTTABLEVISUALIZATION)
+            updateVisualization(RTTABLEVISUALIZATION);
     }
 }
 
@@ -936,6 +977,8 @@ void MainWindow::openConnection()
     actionHexVisualization->setEnabled(true);
     actionTextVisualization->setEnabled(true);
     actionTableVisualization->setEnabled(true);
+
+    actionAcceptFormat->setEnabled(true);
 
     realTime = true;
 

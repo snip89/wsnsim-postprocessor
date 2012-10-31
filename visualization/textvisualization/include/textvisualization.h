@@ -17,6 +17,7 @@
 #include "records.h"
 #include "staticrecordsreader.h"
 // #include "textappearancecolorsandfontssettings.h"
+#include "staticvisualizationtools.h"
 
 class TextVisualization : public IVisualization, protected AbstractTextVisualization
 {
@@ -40,14 +41,10 @@ private:
 
     QSettings settings;
 
-    QString updateValue(int eventID, int argumentID, QVariant value, LogDataType type);
-
     void setSettings(QSettings &someSettings);
 
     void updatePage();
     void updatePage(int cursorMoving);
-
-    int formatLength(Format *format);
 };
 
 #endif // TEXTVISUALIZATION_H

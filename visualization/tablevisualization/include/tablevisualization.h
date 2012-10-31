@@ -10,6 +10,7 @@
 #include "staticfromlogselector.h"
 #include "logdatatypes.h"
 #include "formatData.h"
+#include "staticvisualizationtools.h"
 
 class TableVisualization : public IVisualization, protected AbstractTableVisualization
 {
@@ -33,14 +34,7 @@ private:
     void updatePage();
     void updatePage(int cursorMoving);
 
-    QString updateValue(int eventID, int argumentID, QVariant value, LogDataType type);
-
     QStringList eventTypes;
-
-    /*void allEventsUpdate(bool eventChanged);
-    void eventsUpdate(bool eventChanged);*/
-
-    int formatLength(Format *format);
 };
 
 #endif // TABLEVISUALIZATION_H

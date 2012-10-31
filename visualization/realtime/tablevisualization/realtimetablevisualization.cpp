@@ -14,8 +14,10 @@ void RealTimeTableVisualization::stop()
 
 void RealTimeTableVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter, QList<Format*> formats)
 {
+    this->formats = formats;
+
     viewer->clear();
-    viewer->setRowCount( 0);
+    viewer->setRowCount(0);
 
     eventTypes.clear();
     recordsCount = 0;
@@ -51,25 +53,6 @@ void RealTimeTableVisualization::update(IProject *project, UdpSocketAdapter *soc
 
 void RealTimeTableVisualization::update()
 {
-    /*if(settings.value("Text visualization/Gui/LineWrapMode").value<bool>())
-        viewer->setLineWrapMode(QTextEdit::WidgetWidth);
-    else
-        viewer->setLineWrapMode(QTextEdit::NoWrap);
-
-    viewer->setLineColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_color").value<QColor>());
-    viewer->setLineFontColor(settings.value("Text visualization/Appearance/Colors and Fonts/Cursor_line_font_color").value<QColor>());
-
-    viewer->setTextColor(settings.value("Text visualization/Appearance/Colors and Fonts/Main_text_foreground").value<QColor>());
-
-    QPalette p = viewer->palette();
-    p.setColor(QPalette::Base, settings.value("Text visualization/Appearance/Colors and Fonts/Main_text_background").value<QColor>());
-    viewer->setPalette(p);
-
-    viewer->setCurrentFont(settings.value("Text visualization/Appearance/Colors and Fonts/Font").value<QFont>());
-
-    QString temp = viewer->toPlainText();
-    viewer->clear();
-    viewer->setText(temp);*/
 }
 
 QWidget *RealTimeTableVisualization::getWidget()
@@ -109,27 +92,14 @@ void RealTimeTableVisualization::addRecord(QByteArray byteRecord)
                     {
                         wasEvent = true;
 
-                        if(info[record.eventID].argsInfo[j].type == BYTE_ARRAY_TYPE)
-                        {
-                            QString hexed_string = "";
-                            foreach(quint8 nextHex, record.other[j].value<QByteArray>())
-                            {
-                                QString hexed = QString::number(nextHex, 16);
-                                hexed = hexed.toUpper();
-                                if(hexed.size() == 1)
-                                    hexed.insert(0, '0');
+                        viewer->setItem(recordsCount, k, new QTableWidgetItem(
+                                            StaticVisualizationTools::updateValue(record.eventID,
+                                                        j,
+                                                        record.other[j],
+                                                        info[record.eventID].argsInfo[j].type,
+                                                                                  formats)
+                                                        ));
 
-                                hexed_string += hexed + " ";
-                            }
-
-                            hexed_string.chop(1);
-
-                            //resultLine.append(hexed_string);
-                            viewer->setItem(recordsCount, k, new QTableWidgetItem(hexed_string));
-                        }
-                        else
-                            //resultLine.append(record.other[j].toString());
-                            viewer->setItem(recordsCount, k, new QTableWidgetItem(record.other[j].toString()));
                     }
                 }
 

@@ -6,6 +6,7 @@
 #include "records.h"
 #include "staticrecordsreader.h"
 #include "udpsocketadapter.h"
+#include "staticvisualizationtools.h"
 
 class RealTimeTableVisualization : public IRealTimeVisualization, protected AbstractRealTimeTableVisualization
 {

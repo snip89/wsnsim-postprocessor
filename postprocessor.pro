@@ -101,7 +101,8 @@ HEADERS += interfaces/ilog.h \
            visualization/realtime/hexvisualization/include/realtimehexvisualization.h \
            visualization/realtime/tablevisualization/include/realtimetablevisualization.h \
            visualization/realtime/textvisualization/include/realtimetextvisualization.h \
-    core/include/formatacceptingdialog.h
+    core/include/formatacceptingdialog.h \
+    visualization/tools/include/staticvisualizationtools.h
 FORMS += ui/abstractrealtimetablevisualization.ui \
          ui/abstractrealtimetextvisualization.ui \
          ui/abstracttablevisualization.ui \
@@ -163,7 +164,8 @@ SOURCES += core/clientsettings.cpp \
            visualization/realtime/tablevisualization/realtimetablevisualization.cpp \
            visualization/realtime/textvisualization/realtimetextvisualization.cpp \
     core/formatacceptingdialog.cpp \
-    shared/logdatatypes.cpp
+    shared/logdatatypes.cpp \
+    visualization/tools/staticvisualizationtools.cpp
 RESOURCES += resources/postprocessor.qrc
 TRANSLATIONS += resources/localization/postprocessor_en.ts \
                 resources/localization/postprocessor_ru.ts \
