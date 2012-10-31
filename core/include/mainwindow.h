@@ -166,6 +166,10 @@ private:
     bool textUpdated;
     bool tableUpdated;
 
+    bool rtHexUpdated;
+    bool rtTextUpdated;
+    bool rtTableUpdated;
+
     Project *project;
     UdpSocketAdapter *socketAdapter;
 

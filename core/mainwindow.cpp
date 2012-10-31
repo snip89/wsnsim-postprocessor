@@ -20,6 +20,10 @@ MainWindow::MainWindow(QWidget *parent) :
     textUpdated = false;
     tableUpdated = false;
 
+    rtHexUpdated = true;
+    rtTextUpdated = true;
+    rtTableUpdated = true;
+
     setSettings(settings);
 
     ui->setupUi(this);
@@ -655,22 +659,49 @@ void MainWindow::switchToWidget(WidgetType type)
 
     case RTTEXTVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTextVisualization->getWidget());
-        realTimeTextVisualization->update();
         activeWidget = RTTEXTVISUALIZATION;
+
+        if(!rtTextUpdated)
+        {
+            realTimeTextVisualization->stop();
+            realTimeTextVisualization->update(project, socketAdapter, formats);
+            rtTextUpdated = true;
+            return;
+        }
+        else
+            realTimeTextVisualization->update();
 
         break;
 
     case RTHEXVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeHexVisualization->getWidget());
-        realTimeHexVisualization->update();
         activeWidget = RTHEXVISUALIZATION;
+
+        if(!rtHexUpdated)
+        {
+            realTimeHexVisualization->stop();
+            realTimeHexVisualization->update(project, socketAdapter, formats);
+            rtHexUpdated = true;
+            return;
+        }
+        else
+            realTimeHexVisualization->update();
 
         break;
 
     case RTTABLEVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTableVisualization->getWidget());
-        realTimeTableVisualization->update();
         activeWidget = RTTABLEVISUALIZATION;
+
+        if(!rtTableUpdated)
+        {
+            realTimeTableVisualization->stop();
+            realTimeTableVisualization->update(project, socketAdapter, formats);
+            rtTableUpdated = true;
+            return;
+        }
+        else
+            realTimeTableVisualization->update();
 
         break;
 
@@ -750,11 +781,11 @@ void MainWindow::updateVisualization(WidgetType type)
     case RTTEXTVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTextVisualization->getWidget());
 
-        if(!textUpdated)
+        if(!rtTextUpdated)
         {
             realTimeTextVisualization->stop();
             realTimeTextVisualization->update(project, socketAdapter, formats);
-            textUpdated = true;
+            rtTextUpdated = true;
             return;
         }
         else
@@ -765,11 +796,11 @@ void MainWindow::updateVisualization(WidgetType type)
     case RTHEXVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeHexVisualization->getWidget());
 
-        if(!hexUpdated)
+        if(!rtHexUpdated)
         {
             realTimeHexVisualization->stop();
             realTimeHexVisualization->update(project, socketAdapter, formats);
-            hexUpdated = true;
+            rtHexUpdated = true;
             return;
         }
         else
@@ -780,11 +811,11 @@ void MainWindow::updateVisualization(WidgetType type)
     case RTTABLEVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTableVisualization->getWidget());
 
-        if(!tableUpdated)
+        if(!rtTableUpdated)
         {
             realTimeTableVisualization->stop();
             realTimeTableVisualization->update(project, socketAdapter, formats);
-            tableUpdated = true;
+            rtTableUpdated = true;
             return;
         }
         else
@@ -884,12 +915,12 @@ void MainWindow::loadFormat()
 
     delete formatAcceptingDialog;
 
-    hexUpdated = false;
-    textUpdated = false;
-    tableUpdated = false;
-
     if(!realTime)
     {
+        hexUpdated = false;
+        textUpdated = false;
+        tableUpdated = false;
+
         if(activeWidget == TEXTVISUALIZATION)
             updateVisualization(TEXTVISUALIZATION);
 
@@ -901,6 +932,10 @@ void MainWindow::loadFormat()
     }
     else
     {
+        rtHexUpdated = false;
+        rtTextUpdated = false;
+        rtTableUpdated = false;
+
         if(activeWidget == RTTEXTVISUALIZATION)
             updateVisualization(RTTEXTVISUALIZATION);
 

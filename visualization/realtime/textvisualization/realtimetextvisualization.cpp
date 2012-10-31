@@ -14,6 +14,8 @@ void RealTimeTextVisualization::stop()
 
 void RealTimeTextVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter, QList<Format*> formats)
 {
+    this->formats = formats;
+
     viewer->clear();
     recordsCount = 0;
 
@@ -68,24 +70,15 @@ void RealTimeTextVisualization::addRecord(QByteArray byteRecord)
 
         for(int j = 0; j < info[record.eventID].argsCount; j ++)
         {
-            if(info[record.eventID].argsInfo[j].type == BYTE_ARRAY_TYPE)
-            {
-                resultLine += *info[record.eventID].argsInfo[j].name + ": ";
+            resultLine += *info[record.eventID].argsInfo[j].name + ": ";
 
-                foreach(quint8 nextHex, record.other[j].value<QByteArray>())
-                {
-                    QString hexed = QString::number(nextHex, 16);
-                    hexed = hexed.toUpper();
-                    if(hexed.size() == 1)
-                        hexed.insert(0, '0');
+            resultLine += StaticVisualizationTools::updateValue(record.eventID,
+                        j,
+                        record.other[j],
+                        info[record.eventID].argsInfo[j].type,
+                                      formats);
 
-                    resultLine += hexed + " ";
-                }
-
-                resultLine += "; ";
-            }
-            else
-                resultLine += *info[record.eventID].argsInfo[j].name + ": " + record.other[j].toString() + "; ";
+            resultLine += "; ";
         }
 
         viewer->append(resultLine);
