@@ -265,6 +265,7 @@ void MainWindow::createActions()
 
     actionSelectColumns = new QAction(tr("&Select columns..."), this);
     actionSelectColumns->setEnabled(false);
+    connect(actionSelectColumns, SIGNAL(triggered()), this, SLOT(showColumnsSelectionDialog()));
 
     actionFiltration = new QAction(tr("&Filter log..."), this);
     actionFiltration->setEnabled(false);
@@ -576,6 +577,7 @@ void MainWindow::switchToWidget(WidgetType type)
         actionGoToLine->setEnabled(false);
         tableVisualization->activity(false);
         previousActiveWidget = TABLEVISUALIZATION;
+        actionSelectColumns->setEnabled(false);
         break;
 
     case RTTEXTVISUALIZATION:
@@ -588,6 +590,7 @@ void MainWindow::switchToWidget(WidgetType type)
 
     case RTTABLEVISUALIZATION:
         previousActiveWidget = RTTABLEVISUALIZATION;
+        actionSelectColumns->setEnabled(false);
         break;
 
     case FILTRATION:
@@ -665,6 +668,7 @@ void MainWindow::switchToWidget(WidgetType type)
         stackedWidget->setCurrentWidget(tableVisualization->getWidget());
         tableVisualization->activity(true);
         activeWidget = TABLEVISUALIZATION;
+        actionSelectColumns->setEnabled(true);
 
         if(!tableUpdated)
         {
@@ -711,6 +715,7 @@ void MainWindow::switchToWidget(WidgetType type)
     case RTTABLEVISUALIZATION:
         stackedWidget->setCurrentWidget(realTimeTableVisualization->getWidget());
         activeWidget = RTTABLEVISUALIZATION;
+        actionSelectColumns->setEnabled(true);
 
         if(!rtTableUpdated)
         {
@@ -1074,6 +1079,20 @@ void MainWindow::openConnection()
         return;
     }
 
+    int eventsInfoSize = 0;
+    info = project->info(eventsInfoSize);
+
+    QStringList columnsNames = StaticVisualizationTools::argumentsNames(info, eventsInfoSize);
+    QStringList columnsState;
+
+    for(int i = 0; i < columnsNames.size(); i++)
+    {
+        columnsState.append("true");
+    }
+
+    settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
+    settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
+
     QUdpSocket *socket = new QUdpSocket();
     socket->bind(QHostAddress(rtSettings->ip(type)), rtSettings->port(type), QUdpSocket::ShareAddress);
 
@@ -1170,6 +1189,20 @@ void MainWindow::openProject(QString name)
         delete project;
         return;
     }
+
+    int eventsInfoSize = 0;
+    info = project->info(eventsInfoSize);
+
+    QStringList columnsNames = StaticVisualizationTools::argumentsNames(info, eventsInfoSize);
+    QStringList columnsState;
+
+    for(int i = 0; i < columnsNames.size(); i++)
+    {
+        columnsState.append("true");
+    }
+
+    settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
+    settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
 
     setTitle(project->projectName(), QString::null);
 
@@ -1284,20 +1317,6 @@ void MainWindow::openLog(QString name)
 {
     QFileInfo projectFileInfo(project->projectName());
     QDir::setCurrent(projectFileInfo.absoluteDir().absolutePath());
-
-    int eventsInfoSize = 0;
-    info = project->info(eventsInfoSize);
-
-    QStringList columnsNames = StaticVisualizationTools::argumentsNames(info, eventsInfoSize);
-    QStringList columnsState;
-
-    for(int i = 0; i < columnsNames.size(); i++)
-    {
-        columnsState.append("true");
-    }
-
-    settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
-    settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
 
     qint64 blockSize = settings.value("General/Core/Block_size").toLongLong();
 
@@ -1606,4 +1625,20 @@ void MainWindow::appliedSettings()
 
     else if(activeWidget == RTHEXVISUALIZATION)
         updateVisualization(RTHEXVISUALIZATION);
+}
+
+void MainWindow::showColumnsSelectionDialog()
+{
+    ColumnsSelectionDialog *dialog = new ColumnsSelectionDialog();
+
+    if(dialog->exec())
+    {
+        if(activeWidget == TABLEVISUALIZATION)
+            updateVisualization(TABLEVISUALIZATION);
+
+        if(activeWidget == RTTABLEVISUALIZATION)
+            updateVisualization(RTTABLEVISUALIZATION);
+    }
+
+    delete dialog;
 }

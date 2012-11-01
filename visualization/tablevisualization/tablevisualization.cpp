@@ -23,7 +23,7 @@ void TableVisualization::update(IProject *project, ILog *log, QList<Format*> for
     currentColumn = 0;
 
     viewer->clear();
-    viewer->setRowCount( 0);
+    viewer->setRowCount(0);
 
     argumentsNames.clear();
 
@@ -44,6 +44,23 @@ void TableVisualization::update(IProject *project, ILog *log, QList<Format*> for
 
 void TableVisualization::update()
 {
+    viewer->clear();
+    viewer->setRowCount(0);
+
+    argumentsNames.clear();
+
+    QStringList argumentsNamesFull = settings.value("Hidden/Gui/Project/Columns_names").value<QStringList>();
+    QStringList argumentsState = settings.value("Hidden/Gui/Project/Columns_state").value<QStringList>();
+
+    for(int i = 0; i < argumentsNamesFull.size(); i ++)
+    {
+        if(argumentsState[i] == "true")
+            argumentsNames.append(argumentsNamesFull[i]);
+    }
+
+    viewer->setColumnCount(argumentsNames.size());
+    viewer->setHorizontalHeaderLabels(argumentsNames);
+
     updatePage();
 }
 

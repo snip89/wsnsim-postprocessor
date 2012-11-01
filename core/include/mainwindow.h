@@ -58,6 +58,7 @@
 #include "udpsocketadapter.h"
 #include "formatacceptingdialog.h"
 #include "staticvisualizationtools.h"
+#include "columnsselectiondialog.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -252,6 +253,8 @@ private slots:
     void toggleFullScreen(bool checked);
 
     void switchCurrentLog();
+
+    void showColumnsSelectionDialog();
 
     void exit();
 };
