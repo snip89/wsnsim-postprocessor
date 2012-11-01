@@ -19,40 +19,51 @@ void RealTimeTableVisualization::update(IProject *project, UdpSocketAdapter *soc
     viewer->clear();
     viewer->setRowCount(0);
 
-    eventTypes.clear();
     recordsCount = 0;
 
     currentProject = project;
     currentSocketAdapter = socketAdapter;
 
-    int size = 0;
-    SimpleEventInfo *info = currentProject->info(size);
+    argumentsNames.clear();
 
-    for(int i = 0; i < size; i++)
+    QStringList argumentsNamesFull = settings.value("Hidden/Gui/Project/Columns_names").value<QStringList>();
+    QStringList argumentsState = settings.value("Hidden/Gui/Project/Columns_state").value<QStringList>();
+
+    argumentsNames = argumentsNamesFull;
+
+    viewer->setColumnCount(argumentsNames.size());
+    viewer->setHorizontalHeaderLabels(argumentsNames);
+
+    for(int i = 0; i < argumentsNames.size(); i ++)
     {
-        int argsCount = info[i].argsCount;
-
-        SimpleArgInfo *argsInfo = info[i].argsInfo;
-        for(int j = 0; j < argsCount; j++)
-        {
-            if(!eventTypes.contains(*argsInfo[j].name))
-                eventTypes.append(*argsInfo[j].name);
-        }
+        if(argumentsState[i] == "true")
+            viewer->setColumnHidden(i, false);
+        else
+            viewer->setColumnHidden(i, true);
     }
-
-    eventTypes.sort();
-
-    eventTypes.insert(0, "event");
-    eventTypes.insert(0, "time");
-
-    viewer->setColumnCount(eventTypes.size());
-    viewer->setHorizontalHeaderLabels(eventTypes);
 
     connect(currentSocketAdapter, SIGNAL(dataRecieved(QByteArray)), this, SLOT(addRecord(QByteArray)));
 }
 
 void RealTimeTableVisualization::update()
 {
+    argumentsNames.clear();
+
+    QStringList argumentsNamesFull = settings.value("Hidden/Gui/Project/Columns_names").value<QStringList>();
+    QStringList argumentsState = settings.value("Hidden/Gui/Project/Columns_state").value<QStringList>();
+
+    argumentsNames = argumentsNamesFull;
+
+    viewer->setColumnCount(argumentsNames.size());
+    viewer->setHorizontalHeaderLabels(argumentsNames);
+
+    for(int i = 0; i < argumentsNames.size(); i ++)
+    {
+        if(argumentsState[i] == "true")
+            viewer->setColumnHidden(i, false);
+        else
+            viewer->setColumnHidden(i, true);
+    }
 }
 
 QWidget *RealTimeTableVisualization::getWidget()
@@ -73,7 +84,7 @@ void RealTimeTableVisualization::addRecord(QByteArray byteRecord)
 
         StaticRecordsReader::readRecord(byteRecord.data(), byteRecord.size(), 0, readedSize, record, info);
 
-        for(int k = 0; k < eventTypes.size(); k ++)
+        for(int k = 0; k < argumentsNames.size(); k ++)
         {
             if(k == 0)
             {
@@ -88,7 +99,7 @@ void RealTimeTableVisualization::addRecord(QByteArray byteRecord)
                 bool wasEvent = false;
                 for(int j = 0; j < info[record.eventID].argsCount; j ++)
                 {
-                    if(eventTypes[k] == info[record.eventID].argsInfo[j].name)
+                    if(argumentsNames[k] == info[record.eventID].argsInfo[j].name)
                     {
                         wasEvent = true;
 

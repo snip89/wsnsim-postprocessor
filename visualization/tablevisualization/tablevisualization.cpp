@@ -30,14 +30,18 @@ void TableVisualization::update(IProject *project, ILog *log, QList<Format*> for
     QStringList argumentsNamesFull = settings.value("Hidden/Gui/Project/Columns_names").value<QStringList>();
     QStringList argumentsState = settings.value("Hidden/Gui/Project/Columns_state").value<QStringList>();
 
-    for(int i = 0; i < argumentsNamesFull.size(); i ++)
-    {
-        if(argumentsState[i] == "true")
-            argumentsNames.append(argumentsNamesFull[i]);
-    }
+    argumentsNames = argumentsNamesFull;
 
     viewer->setColumnCount(argumentsNames.size());
     viewer->setHorizontalHeaderLabels(argumentsNames);
+
+    for(int i = 0; i < argumentsNames.size(); i ++)
+    {
+        if(argumentsState[i] == "true")
+            viewer->setColumnHidden(i, false);
+        else
+            viewer->setColumnHidden(i, true);
+    }
 
     updatePage();
 }
@@ -52,14 +56,18 @@ void TableVisualization::update()
     QStringList argumentsNamesFull = settings.value("Hidden/Gui/Project/Columns_names").value<QStringList>();
     QStringList argumentsState = settings.value("Hidden/Gui/Project/Columns_state").value<QStringList>();
 
-    for(int i = 0; i < argumentsNamesFull.size(); i ++)
-    {
-        if(argumentsState[i] == "true")
-            argumentsNames.append(argumentsNamesFull[i]);
-    }
+    argumentsNames = argumentsNamesFull;
 
     viewer->setColumnCount(argumentsNames.size());
     viewer->setHorizontalHeaderLabels(argumentsNames);
+
+    for(int i = 0; i < argumentsNames.size(); i ++)
+    {
+        if(argumentsState[i] == "true")
+            viewer->setColumnHidden(i, false);
+        else
+            viewer->setColumnHidden(i, true);
+    }
 
     updatePage();
 }

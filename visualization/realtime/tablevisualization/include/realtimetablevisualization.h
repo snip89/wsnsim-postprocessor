@@ -7,6 +7,7 @@
 #include "staticrecordsreader.h"
 #include "udpsocketadapter.h"
 #include "staticvisualizationtools.h"
+#include "columnsselectiondialog.h"
 
 class RealTimeTableVisualization : public IRealTimeVisualization, protected AbstractRealTimeTableVisualization
 {
@@ -24,7 +25,7 @@ public:
 
     virtual ~RealTimeTableVisualization();
 private:
-    QStringList eventTypes;
+    QStringList argumentsNames;
 };
 
 #endif // REALTIMETABLEVISUALIZATION_H
