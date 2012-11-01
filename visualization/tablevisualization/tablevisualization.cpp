@@ -25,30 +25,19 @@ void TableVisualization::update(IProject *project, ILog *log, QList<Format*> for
     viewer->clear();
     viewer->setRowCount( 0);
 
-    eventTypes.clear();
+    argumentsNames.clear();
 
-    int size = 0;
-    SimpleEventInfo *info = currentProject->info(size);
+    QStringList argumentsNamesFull = settings.value("Hidden/Gui/Project/Columns_names").value<QStringList>();
+    QStringList argumentsState = settings.value("Hidden/Gui/Project/Columns_state").value<QStringList>();
 
-    for(int i = 0; i < size; i++)
+    for(int i = 0; i < argumentsNamesFull.size(); i ++)
     {
-        int argsCount = info[i].argsCount;
-
-        SimpleArgInfo *argsInfo = info[i].argsInfo;
-        for(int j = 0; j < argsCount; j++)
-        {
-            if(!eventTypes.contains(*argsInfo[j].name))
-                eventTypes.append(*argsInfo[j].name);
-        }
+        if(argumentsState[i] == "true")
+            argumentsNames.append(argumentsNamesFull[i]);
     }
 
-    eventTypes.sort();
-
-    eventTypes.insert(0, "event");
-    eventTypes.insert(0, "time");
-
-    viewer->setColumnCount(eventTypes.size());
-    viewer->setHorizontalHeaderLabels(eventTypes);
+    viewer->setColumnCount(argumentsNames.size());
+    viewer->setHorizontalHeaderLabels(argumentsNames);
 
     updatePage();
 }
@@ -101,7 +90,7 @@ void TableVisualization::updatePage()
         StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
         posInBinPage += readedSize;
 
-        for(int k = 0; k < eventTypes.size(); k ++)
+        for(int k = 0; k < argumentsNames.size(); k ++)
         {
             if(k == 0)
             {
@@ -116,7 +105,7 @@ void TableVisualization::updatePage()
                 bool wasEvent = false;
                 for(int j = 0; j < info[record.eventID].argsCount; j ++)
                 {
-                    if(eventTypes[k] == info[record.eventID].argsInfo[j].name)
+                    if(argumentsNames[k] == info[record.eventID].argsInfo[j].name)
                     {
                         wasEvent = true;
 

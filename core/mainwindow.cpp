@@ -1282,6 +1282,17 @@ void MainWindow::openLog(QString name)
     int eventsInfoSize = 0;
     info = project->info(eventsInfoSize);
 
+    QStringList columnsNames = StaticVisualizationTools::argumentsNames(info, eventsInfoSize);
+    QStringList columnsState;
+
+    for(int i = 0; i < columnsNames.size(); i++)
+    {
+        columnsState.append("true");
+    }
+
+    settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
+    settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
+
     qint64 blockSize = settings.value("General/Core/Block_size").toLongLong();
 
     int memoryUsagePercent = settings.value("General/Core/Memory_usage").toInt();

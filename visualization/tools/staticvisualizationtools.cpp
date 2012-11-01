@@ -155,3 +155,27 @@ int StaticVisualizationTools::formatLength(Format *format)
 
     return result;
 }
+
+QStringList StaticVisualizationTools::argumentsNames(SimpleEventInfo *info, int infoSize)
+{
+    QStringList result;
+
+    for(int i = 0; i < infoSize; i++)
+    {
+        int argsCount = info[i].argsCount;
+
+        SimpleArgInfo *argsInfo = info[i].argsInfo;
+        for(int j = 0; j < argsCount; j++)
+        {
+            if(!result.contains(*argsInfo[j].name))
+                result.append(*argsInfo[j].name);
+        }
+    }
+
+    result.sort();
+
+    result.insert(0, "event");
+    result.insert(0, "time");
+
+    return result;
+}

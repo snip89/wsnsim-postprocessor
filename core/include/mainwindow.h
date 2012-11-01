@@ -32,6 +32,7 @@
 #include <QLabel>
 #include <QUdpSocket>
 #include <QDebug>
+#include <QPair>
 
 #include "project.h"
 #include "log.h"
@@ -56,6 +57,7 @@
 #include "staticcoreutils.h"
 #include "udpsocketadapter.h"
 #include "formatacceptingdialog.h"
+#include "staticvisualizationtools.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 

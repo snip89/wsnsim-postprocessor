@@ -34,7 +34,7 @@ private:
     void updatePage();
     void updatePage(int cursorMoving);
 
-    QStringList eventTypes;
+    QStringList argumentsNames;
 };
 
 #endif // TABLEVISUALIZATION_H
