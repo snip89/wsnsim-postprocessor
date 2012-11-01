@@ -44,7 +44,7 @@
        </property>
        <property name="maximumSize">
         <size>
-         <width>200</width>
+         <width>250</width>
          <height>16777208</height>
         </size>
        </property>
@@ -54,7 +54,22 @@
        <property name="editTriggers">
         <set>QAbstractItemView::DoubleClicked|QAbstractItemView::EditKeyPressed</set>
        </property>
+       <property name="tabKeyNavigation">
+        <bool>false</bool>
+       </property>
+       <property name="animated">
+        <bool>true</bool>
+       </property>
+       <property name="allColumnsShowFocus">
+        <bool>true</bool>
+       </property>
+       <property name="wordWrap">
+        <bool>false</bool>
+       </property>
        <attribute name="headerVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="headerHighlightSections">
         <bool>false</bool>
        </attribute>
        <column>
