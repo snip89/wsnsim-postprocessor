@@ -115,6 +115,8 @@ private:
     QAction *actionAcceptFormat;
     QAction *actionClearFormat;
 
+    QAction *actionSelectColumns;
+
     // FIXME: rename this later
     QAction *actionFiltration;
 

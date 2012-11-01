@@ -263,6 +263,9 @@ void MainWindow::createActions()
     actionClearFormat->setEnabled(false);
     connect(actionClearFormat, SIGNAL(triggered()), this, SLOT(clearFormat()));
 
+    actionSelectColumns = new QAction(tr("&Select columns..."), this);
+    actionSelectColumns->setEnabled(false);
+
     actionFiltration = new QAction(tr("&Filter log..."), this);
     actionFiltration->setEnabled(false);
     connect(actionFiltration, SIGNAL(triggered()), this, SLOT(showFiltration()));
@@ -332,6 +335,8 @@ void MainWindow::createMenus()
     menuView->addAction(actionTextVisualization);
     menuView->addAction(actionTableVisualization);
     menuView->addSeparator();
+    menuView->addAction(actionSelectColumns);
+    menuView->addSeparator();
     menuView->addMenu(menuViewFiltration);
     menuView->addSeparator();
     menuView->addAction(actionFullScreen);
@@ -375,6 +380,7 @@ void MainWindow::deleteActions()
     delete actionTableVisualization;
     delete actionAcceptFormat;
     delete actionClearFormat;
+    delete actionSelectColumns;
     delete actionFiltration;
     delete actionFullScreen;
     delete actionCopy;
