@@ -183,6 +183,9 @@ void MainWindow::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Hidden/Gui/Format_dialog_pos"))
         someSettings.setValue("Hidden/Gui/Format_dialog_pos", QPoint(0, 0));
+
+    if(!someSettings.contains("Hidden/Gui/Columns_selection_dialog_pos"))
+        someSettings.setValue("Hidden/Gui/Format_dialog_pos", QPoint(0, 0));
 }
 
 void MainWindow::createActions()
@@ -1631,6 +1634,8 @@ void MainWindow::showColumnsSelectionDialog()
 {
     ColumnsSelectionDialog *dialog = new ColumnsSelectionDialog();
 
+    dialog->move(settings.value("Hidden/Gui/Format_dialog_pos").value<QPoint>());
+
     if(dialog->exec())
     {
         if(activeWidget == TABLEVISUALIZATION)
@@ -1639,6 +1644,8 @@ void MainWindow::showColumnsSelectionDialog()
         if(activeWidget == RTTABLEVISUALIZATION)
             updateVisualization(RTTABLEVISUALIZATION);
     }
+
+    settings.setValue("Hidden/Gui/Format_dialog_pos", dialog->pos());
 
     delete dialog;
 }
