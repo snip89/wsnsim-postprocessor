@@ -166,6 +166,14 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
                 pos += sizeof(qint32);
                 skippedSize += sizeof(qint32);
             }
+            else if(info[eventID].argsInfo[i].type == BOOL_TYPE)
+            {
+                if(pos + sizeof(bool) > memSize)
+                    return false;
+
+                pos += sizeof(bool);
+                skippedSize += sizeof(bool);
+            }
             else if(info[eventID].argsInfo[i].type == DOUBLE_TYPE)
             {
                 if(pos + sizeof(double) > memSize)
@@ -310,6 +318,22 @@ bool StaticRecordsReader::readArguments(char *mem, qint64 memSize, qint64 pos, q
 
             delete[] bytesValue;
         }
+        else if(info[eventID].argsInfo[i].type == BOOL_TYPE)
+        {
+            bool value = false;
+            qint64 temp = pos;
+
+            if(!readArgument(mem, memSize, pos, readedSize, value))
+                return false;
+
+            char *bytesValue = new char[sizeof(bool)];
+
+            copyArg(mem, bytesValue, temp, sizeof(bool));
+            record.byteRecord.append(bytesValue, sizeof(bool));
+            record.other.append(QVariant(value));
+
+            delete[] bytesValue;
+        }
         else if(info[eventID].argsInfo[i].type == DOUBLE_TYPE)
         {
             double value = 0;
@@ -423,6 +447,14 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
                 pos += sizeof(qint32);
                 readedSize += sizeof(qint32);
             }
+            else if(info[eventID].argsInfo[i].type == BOOL_TYPE)
+            {
+                if(pos + sizeof(bool) > memSize)
+                    return false;
+
+                pos += sizeof(bool);
+                readedSize += sizeof(bool);
+            }
             else if(info[eventID].argsInfo[i].type == DOUBLE_TYPE)
             {
                 if(pos + sizeof(double) > memSize)
@@ -514,6 +546,17 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
             else if(info[eventID].argsInfo[i].type == INT32_TYPE)
             {
                 qint32 value = 0;
+
+                if(!readArgument(mem, memSize, pos, readedSize, value))
+                    return false;
+
+                argValue = QVariant(value);
+
+                success = true;
+            }
+            else if(info[eventID].argsInfo[i].type == BOOL_TYPE)
+            {
+                bool value = false;
 
                 if(!readArgument(mem, memSize, pos, readedSize, value))
                     return false;

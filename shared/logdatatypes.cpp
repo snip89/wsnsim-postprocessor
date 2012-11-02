@@ -17,6 +17,9 @@ LogDataType LogDataTypes::toLogDataType(QString type)
     else if(type == "int32")
         return INT32_TYPE;
 
+    else if(type == "bool")
+        return BOOL_TYPE;
+
     else if(type == "double")
         return DOUBLE_TYPE;
 
