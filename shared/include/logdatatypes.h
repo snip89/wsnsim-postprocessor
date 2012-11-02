@@ -14,6 +14,7 @@ enum LogDataType
 {
     UNKNOWN_TYPE,
     UINT8_TYPE,
+    INT8_TYPE,
     UINT16_TYPE,
     UINT32_TYPE,
     UINT64_TYPE,
