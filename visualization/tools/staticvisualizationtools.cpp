@@ -172,7 +172,7 @@ QStringList StaticVisualizationTools::argumentsNames(SimpleEventInfo *info, int 
         }
     }
 
-    result.sort();
+    //result.sort();
 
     result.insert(0, "event");
     result.insert(0, "time");
