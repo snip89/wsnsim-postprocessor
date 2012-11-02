@@ -9,6 +9,7 @@
 #include "logdatatypes.h"
 #include "formatParams.h"
 #include "simpleeventinfo.h"
+#include "staticrecordsreader.h"
 
 class StaticVisualizationTools
 {
@@ -18,7 +19,11 @@ public:
             int argumentID,
             QVariant value,
             LogDataType type,
-            QList<Format*> formats);
+            QList<Format *> formats);
+
+    static QString updateValue(QVariant value, LogDataType type);
+
+    static QString applyFormat(QVariant value, LogDataType type, Format *format);
 
     static int formatLength(Format *format);
 

@@ -1,11 +1,11 @@
 #include "formatacceptingdialog.h"
 
-FormatAcceptingDialog::FormatAcceptingDialog(Project *project, QString type, QWidget *parent) :
+FormatAcceptingDialog::FormatAcceptingDialog(Project *project, QString name, QWidget *parent) :
     QDialog(parent),
     ui(new Ui::FormatAcceptingDialog)
 {
     this->project = project;
-    this->type = type;
+    this->name = name;
 
     ui->setupUi(this);
     initComboBox();
@@ -21,7 +21,6 @@ AttrInfo FormatAcceptingDialog::getArgument()
     AttrInfo info;
     info["eventID"] = values[0];
     info["argumentID"] = values[1];
-    info["type"] = values[2];
 
     return info;
 }
@@ -37,12 +36,11 @@ void FormatAcceptingDialog::initComboBox()
     {
         foreach(EventArgument argument, event.arguments)
         {
-            if(type == argument["type"])
+            if(name == argument["name"])
             {
-                QString info = event.eventInfo["ID"] + ";" + argument["ID"] + ";" + argument["type"];
+                QString info = event.eventInfo["ID"] + ";" + argument["ID"];
 
-                ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"] + " / "
-                                               "argument: " + argument["name"],
+                ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"],
                                                QVariant(info));
             }
         }
@@ -52,12 +50,11 @@ void FormatAcceptingDialog::initComboBox()
     {
         foreach(EventArgument argument, event.arguments)
         {
-            if(type == argument["type"])
+            if(name == argument["name"])
             {
-                QString info = event.eventInfo["ID"] + ";" + argument["ID"] + ";" + argument["type"];
+                QString info = event.eventInfo["ID"] + ";" + argument["ID"];
 
-                ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"] + " / "
-                                               "argument: " + argument["name"],
+                ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"],
                                                QVariant(info));
             }
         }

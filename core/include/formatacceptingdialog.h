@@ -23,7 +23,7 @@ public:
 private:
     Project *project;
 
-    QString type;
+    QString name;
 
     void initComboBox();
 

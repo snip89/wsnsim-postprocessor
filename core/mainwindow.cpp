@@ -917,7 +917,7 @@ void MainWindow::loadFormat()
     Format *format = load(name, &errorString);
 
     FormatAcceptingDialog *formatAcceptingDialog = new FormatAcceptingDialog(project,
-                                                                             format->formatInfo["argumentType"]);
+                                                                             format->formatInfo["argument"]);
 
     formatAcceptingDialog->move(settings.value("Hidden/Gui/Format_dialog_pos").value<QPoint>());
 
@@ -928,16 +928,8 @@ void MainWindow::loadFormat()
 
         AttrInfo info = formatAcceptingDialog->getArgument();
 
-        if(info["type"] == format->formatInfo["argumentType"])
-        {
-            format->argument = info;
-            formats.append(format);
-        }
-        else
-        {
-            delete format;
-            return;
-        }
+        format->argument = info;
+        formats.append(format);
     }
     else
     {
