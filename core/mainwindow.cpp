@@ -293,12 +293,15 @@ void MainWindow::createMenus()
     menuFile->addAction(actionOpen);
     menuFile->addAction(actionOpenConnection);
 
-    menuViewFiltration = new QMenu(tr("&Filtration"), this);
+    //menuViewFiltration = new QMenu(tr("&Filtration"), this);
 
-    menuCurrentLog = new QMenu(tr("&Logs"), this);
-    menuCurrentLog->setEnabled(false);
+    //menuCurrentLog = new QMenu(tr("&Logs"), this);
+    //menuCurrentLog->setEnabled(false);
 
-    menuViewFiltration->addMenu(menuCurrentLog);
+    //menuViewFiltration->addMenu(menuCurrentLog);
+
+    menuFiltrationLogs = new QMenu(tr("&Filtration (logs)"), this);
+    menuFiltrationLogs->setEnabled(false);
 
     menuFile->addSeparator();
     menuFile->addAction(actionClose);
@@ -341,7 +344,8 @@ void MainWindow::createMenus()
     menuView->addSeparator();
     menuView->addAction(actionSelectColumns);
     menuView->addSeparator();
-    menuView->addMenu(menuViewFiltration);
+    //menuView->addMenu(menu);
+    menuView->addMenu(menuFiltrationLogs);
     menuView->addSeparator();
     menuView->addAction(actionFullScreen);
 
@@ -402,13 +406,14 @@ void MainWindow::deleteMenus()
 {
     delete menuFile;
     delete menuRecentProjects;
-    delete menuCurrentLog;
+    //delete menuCurrentLog;
     delete menuEdit;
     delete menuFind;
+    delete menuFiltrationLogs;
     delete menuView;
     delete menuTools;
     delete menuHelp;
-    delete menuViewFiltration;
+    //delete menuViewFiltration;
 }
 
 void MainWindow::deleteStatusWidgets()
@@ -447,9 +452,9 @@ void MainWindow::removeActionsRecent()
 
 void MainWindow::updateActionsCurrentLogMenu()
 {
-    foreach(QAction *action, menuCurrentLog->actions())
+    foreach(QAction *action, menuFiltrationLogs->actions())
     {
-        menuCurrentLog->removeAction(action);
+        menuFiltrationLogs->removeAction(action);
         delete action;
     }
 
@@ -458,7 +463,7 @@ void MainWindow::updateActionsCurrentLogMenu()
         QAction *action = new QAction(logs->at(i).fileName, this);
         connect(action, SIGNAL(triggered()), this, SLOT(switchCurrentLog()));
         action->setCheckable(true);
-        menuCurrentLog->addAction(action);
+        menuFiltrationLogs->addAction(action);
 
         if(i == currentLogId)
         {
@@ -1246,7 +1251,7 @@ void MainWindow::closeProject()
 
         isProjectOpened = false;
 
-        menuCurrentLog->setEnabled(false);
+        menuFiltrationLogs->setEnabled(false);
 
         setWindowTitle(prName);
     }
@@ -1349,7 +1354,7 @@ void MainWindow::openLog(QString name)
 
     isLogOpened = true;
 
-    menuCurrentLog->setEnabled(true);
+    menuFiltrationLogs->setEnabled(true);
 
     // TODO: enable all visualization actions here
     actionHexVisualization->setEnabled(true);
@@ -1589,7 +1594,7 @@ void MainWindow::switchCurrentLog()
         }
     }
 
-    foreach(QAction *action, menuCurrentLog->actions())
+    foreach(QAction *action, menuFiltrationLogs->actions())
     {
         action->setChecked(false);
     }

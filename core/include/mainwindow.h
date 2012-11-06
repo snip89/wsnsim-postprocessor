@@ -129,13 +129,15 @@ private:
     // menus
     QMenu *menuFile;
     QMenu *menuRecentProjects;
-    QMenu *menuCurrentLog;
+    //QMenu *menuCurrentLog;
     QMenu *menuEdit;
     QMenu *menuFind;
     QMenu *menuView;
     QMenu *menuTools;
     QMenu *menuHelp;
-    QMenu *menuViewFiltration;
+    //QMenu *menuViewFiltration;
+
+    QMenu *menuFiltrationLogs;
 
     QLabel *labelTotalSize;
 

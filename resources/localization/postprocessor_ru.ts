@@ -368,7 +368,7 @@
     <name>MainSettings</name>
     <message>
         <location filename="../../ui/mainsettings.ui" line="32"/>
-        <location filename="../../ui/mainsettings.ui" line="62"/>
+        <location filename="../../ui/mainsettings.ui" line="77"/>
         <source>Settings</source>
         <translation type="unfinished">Настройки</translation>
     </message>
@@ -586,7 +586,7 @@
     </message>
     <message>
         <location filename="../../core/mainwindow.cpp" line="282"/>
-        <location filename="../../core/mainwindow.cpp" line="351"/>
+        <location filename="../../core/mainwindow.cpp" line="355"/>
         <source>&amp;Help</source>
         <translation type="unfinished">&amp;Справка</translation>
     </message>
@@ -606,83 +606,81 @@
         <translation type="unfinished">&amp;Файл</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="296"/>
         <source>&amp;Filtration</source>
-        <translation type="unfinished">&amp;Фильтрация</translation>
+        <translation type="obsolete">&amp;Фильтрация</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="298"/>
         <source>&amp;Logs</source>
-        <translation type="unfinished">&amp;Журналы</translation>
+        <translation type="obsolete">&amp;Журналы</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="307"/>
+        <location filename="../../core/mainwindow.cpp" line="310"/>
         <source>&amp;Recent projects...</source>
         <translation type="unfinished">&amp;Последние проекты...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="315"/>
+        <location filename="../../core/mainwindow.cpp" line="318"/>
         <source>&amp;Edit</source>
         <translation type="unfinished">&amp;Правка</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="327"/>
+        <location filename="../../core/mainwindow.cpp" line="330"/>
         <source>&amp;Search</source>
         <translation type="unfinished">&amp;Поиск</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="337"/>
+        <location filename="../../core/mainwindow.cpp" line="340"/>
         <source>&amp;View</source>
         <translation type="unfinished">&amp;Вид</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="348"/>
+        <location filename="../../core/mainwindow.cpp" line="352"/>
         <source>&amp;Tools</source>
         <translation type="unfinished">&amp;Сервис</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="620"/>
-        <location filename="../../core/mainwindow.cpp" line="643"/>
-        <location filename="../../core/mainwindow.cpp" line="665"/>
-        <location filename="../../core/mainwindow.cpp" line="751"/>
-        <location filename="../../core/mainwindow.cpp" line="770"/>
-        <location filename="../../core/mainwindow.cpp" line="789"/>
+        <location filename="../../core/mainwindow.cpp" line="625"/>
+        <location filename="../../core/mainwindow.cpp" line="648"/>
+        <location filename="../../core/mainwindow.cpp" line="670"/>
+        <location filename="../../core/mainwindow.cpp" line="756"/>
+        <location filename="../../core/mainwindow.cpp" line="775"/>
+        <location filename="../../core/mainwindow.cpp" line="794"/>
         <source>Log size: </source>
         <translation type="unfinished">Размер журнала: </translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="622"/>
-        <location filename="../../core/mainwindow.cpp" line="645"/>
-        <location filename="../../core/mainwindow.cpp" line="667"/>
-        <location filename="../../core/mainwindow.cpp" line="753"/>
-        <location filename="../../core/mainwindow.cpp" line="772"/>
-        <location filename="../../core/mainwindow.cpp" line="791"/>
+        <location filename="../../core/mainwindow.cpp" line="627"/>
+        <location filename="../../core/mainwindow.cpp" line="650"/>
+        <location filename="../../core/mainwindow.cpp" line="672"/>
+        <location filename="../../core/mainwindow.cpp" line="758"/>
+        <location filename="../../core/mainwindow.cpp" line="777"/>
+        <location filename="../../core/mainwindow.cpp" line="796"/>
         <source> records</source>
         <translation type="unfinished"> записей</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="887"/>
+        <location filename="../../core/mainwindow.cpp" line="892"/>
         <source>Open format file</source>
         <translation type="unfinished">Открыть файл формата</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="887"/>
+        <location filename="../../core/mainwindow.cpp" line="892"/>
         <source>XML format files (*xml)</source>
         <translation type="unfinished">XML файлы формата (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1139"/>
+        <location filename="../../core/mainwindow.cpp" line="1136"/>
         <source>Open project file</source>
         <translation type="unfinished">Открыть файл проекта</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1139"/>
+        <location filename="../../core/mainwindow.cpp" line="1136"/>
         <source>XML project files (*xml)</source>
         <translation type="unfinished">XML файлы проекта (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1071"/>
-        <location filename="../../core/mainwindow.cpp" line="1173"/>
+        <location filename="../../core/mainwindow.cpp" line="1068"/>
+        <location filename="../../core/mainwindow.cpp" line="1170"/>
         <source>Project file not found</source>
         <translation type="unfinished">Файл проекта не найден</translation>
     </message>
@@ -697,12 +695,17 @@
         <translation type="unfinished">&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1220"/>
+        <location filename="../../core/mainwindow.cpp" line="303"/>
+        <source>&amp;Filtration (logs)</source>
+        <translation type="unfinished">&amp;Фильтрация (журналы)</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="1217"/>
         <source>Project is empty</source>
         <translation type="unfinished">Проект пуст</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1340"/>
+        <location filename="../../core/mainwindow.cpp" line="1337"/>
         <source>No filters</source>
         <translation type="unfinished">Нет фильтров</translation>
     </message>
@@ -733,6 +736,25 @@
         <location filename="../../core/project.cpp" line="56"/>
         <source>Bad log files info</source>
         <translation type="unfinished">Неверная информация о файлах журналов</translation>
+    </message>
+    <message>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="183"/>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="206"/>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="229"/>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="252"/>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="275"/>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="298"/>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="321"/>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="344"/>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="373"/>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="404"/>
+        <source>bad size; </source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="421"/>
+        <source>unrecognized</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 <context>
