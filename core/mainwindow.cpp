@@ -1082,16 +1082,45 @@ void MainWindow::openConnection()
     int eventsInfoSize = 0;
     info = project->info(eventsInfoSize);
 
-    QStringList columnsNames = StaticVisualizationTools::argumentsNames(info, eventsInfoSize);
-    QStringList columnsState;
+    bool injected = project->isInjectedColumnsSettings(errorString);
 
-    for(int i = 0; i < columnsNames.size(); i++)
+    if(!errorString.isNull())
     {
-        columnsState.append("true");
+        errorMessager.showMessage(errorString);
+        delete project;
+        return;
     }
 
-    settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
-    settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
+    if(!injected)
+    {
+        QStringList columnsNames = StaticVisualizationTools::argumentsNames(info, eventsInfoSize);
+        QStringList columnsState;
+
+        for(int i = 0; i < columnsNames.size(); i++)
+        {
+            columnsState.append("true");
+        }
+
+        settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
+        settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
+    }
+    else
+    {
+        QStringList columnsNames;
+        QStringList columnsState;
+
+        project->getInjectedColumnsSettings(columnsNames, columnsState, errorString);
+
+        if(!errorString.isNull())
+        {
+            errorMessager.showMessage(errorString);
+            delete project;
+            return;
+        }
+
+        settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
+        settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
+    }
 
     QUdpSocket *socket = new QUdpSocket();
     socket->bind(QHostAddress(rtSettings->ip(type)), rtSettings->port(type), QUdpSocket::ShareAddress);
@@ -1278,9 +1307,6 @@ void MainWindow::closeProject()
 
         QString errorString;
 
-        //settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
-        //settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
-
         QString columnsValue = "";
 
         foreach(QString str, settings.value("Hidden/Gui/Project/Columns_names").value<QStringList>())
@@ -1342,6 +1368,34 @@ void MainWindow::closeConnection()
         actionFiltration->setEnabled(false);
 
         switchToWidget(EMPTY);
+
+        QString errorString;
+
+        QString columnsValue = "";
+
+        foreach(QString str, settings.value("Hidden/Gui/Project/Columns_names").value<QStringList>())
+        {
+            columnsValue += str + ",";
+        }
+
+        columnsValue.chop(1);
+
+        columnsValue += ";";
+
+        foreach(QString str, settings.value("Hidden/Gui/Project/Columns_state").value<QStringList>())
+        {
+            columnsValue += str + ",";
+        }
+
+        columnsValue.chop(1);
+
+        project->injectColumnsSettings(columnsValue, errorString);
+
+        if(!errorString.isNull())
+        {
+            errorMessager.showMessage(errorString);
+            return;
+        }
 
         delete project;
         delete socketAdapter;
