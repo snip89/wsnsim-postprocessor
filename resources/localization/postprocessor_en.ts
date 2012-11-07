@@ -677,18 +677,18 @@
         <translation type="unfinished">XML format files (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1136"/>
+        <location filename="../../core/mainwindow.cpp" line="1161"/>
         <source>Open project file</source>
         <translation type="unfinished">Open project file</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1136"/>
+        <location filename="../../core/mainwindow.cpp" line="1161"/>
         <source>XML project files (*xml)</source>
         <translation type="unfinished">XML project files (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1068"/>
-        <location filename="../../core/mainwindow.cpp" line="1170"/>
+        <location filename="../../core/mainwindow.cpp" line="1064"/>
+        <location filename="../../core/mainwindow.cpp" line="1195"/>
         <source>Project file not found</source>
         <translation type="unfinished">Project file not found</translation>
     </message>
@@ -708,12 +708,12 @@
         <translation type="unfinished">&amp;Filtration (logs)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1217"/>
+        <location filename="../../core/mainwindow.cpp" line="1271"/>
         <source>Project is empty</source>
         <translation type="unfinished">Project is empty</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1337"/>
+        <location filename="../../core/mainwindow.cpp" line="1447"/>
         <source>No filters</source>
         <translation type="unfinished">No filters</translation>
     </message>
@@ -746,6 +746,20 @@
         <translation type="unfinished">Bad log files info</translation>
     </message>
     <message>
+        <location filename="../../core/project.cpp" line="271"/>
+        <location filename="../../core/project.cpp" line="318"/>
+        <location filename="../../core/project.cpp" line="401"/>
+        <source>Can&apos;t open project file</source>
+        <translation type="unfinished">Can&apos;t open project file</translation>
+    </message>
+    <message>
+        <location filename="../../core/project.cpp" line="284"/>
+        <location filename="../../core/project.cpp" line="331"/>
+        <location filename="../../core/project.cpp" line="414"/>
+        <source>Error in xml structure</source>
+        <translation type="unfinished">Error in xml structure</translation>
+    </message>
+    <message>
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="183"/>
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="206"/>
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="229"/>
@@ -757,12 +771,12 @@
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="373"/>
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="404"/>
         <source>bad size; </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">bad size; </translation>
     </message>
     <message>
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="421"/>
         <source>unrecognized</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">unrecognized</translation>
     </message>
 </context>
 <context>

@@ -669,18 +669,18 @@
         <translation type="unfinished">XML файлы формата (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1136"/>
+        <location filename="../../core/mainwindow.cpp" line="1161"/>
         <source>Open project file</source>
         <translation type="unfinished">Открыть файл проекта</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1136"/>
+        <location filename="../../core/mainwindow.cpp" line="1161"/>
         <source>XML project files (*xml)</source>
         <translation type="unfinished">XML файлы проекта (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1068"/>
-        <location filename="../../core/mainwindow.cpp" line="1170"/>
+        <location filename="../../core/mainwindow.cpp" line="1064"/>
+        <location filename="../../core/mainwindow.cpp" line="1195"/>
         <source>Project file not found</source>
         <translation type="unfinished">Файл проекта не найден</translation>
     </message>
@@ -700,12 +700,12 @@
         <translation type="unfinished">&amp;Фильтрация (журналы)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1217"/>
+        <location filename="../../core/mainwindow.cpp" line="1271"/>
         <source>Project is empty</source>
         <translation type="unfinished">Проект пуст</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1337"/>
+        <location filename="../../core/mainwindow.cpp" line="1447"/>
         <source>No filters</source>
         <translation type="unfinished">Нет фильтров</translation>
     </message>
@@ -738,6 +738,20 @@
         <translation type="unfinished">Неверная информация о файлах журналов</translation>
     </message>
     <message>
+        <location filename="../../core/project.cpp" line="271"/>
+        <location filename="../../core/project.cpp" line="318"/>
+        <location filename="../../core/project.cpp" line="401"/>
+        <source>Can&apos;t open project file</source>
+        <translation type="unfinished">Невозможно открыть файл проекта</translation>
+    </message>
+    <message>
+        <location filename="../../core/project.cpp" line="284"/>
+        <location filename="../../core/project.cpp" line="331"/>
+        <location filename="../../core/project.cpp" line="414"/>
+        <source>Error in xml structure</source>
+        <translation type="unfinished">Ошибка в структуре xml</translation>
+    </message>
+    <message>
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="183"/>
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="206"/>
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="229"/>
@@ -749,12 +763,12 @@
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="373"/>
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="404"/>
         <source>bad size; </source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">неверный размер; </translation>
     </message>
     <message>
         <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="421"/>
         <source>unrecognized</source>
-        <translation type="unfinished"></translation>
+        <translation type="unfinished">неопределено</translation>
     </message>
 </context>
 <context>
