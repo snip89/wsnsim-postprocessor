@@ -31,6 +31,8 @@ FiltrationWidget::FiltrationWidget(QWidget *parent) :
     ui->eventComboBox->setVisible(false);
 
     logNameCounter = 0;
+
+    setWindowIcon(QIcon(":/icons/refresh"));
 }
 
 void FiltrationWidget::setCurrentProject(Project *project)

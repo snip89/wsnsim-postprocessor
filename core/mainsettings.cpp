@@ -41,6 +41,8 @@ MainSettings::MainSettings(QWidget *parent) :
     createClientsSettings();
 
     initConnections();
+
+    setWindowIcon(QIcon(":/icons/options"));
 }
 
 MainSettings::~MainSettings()

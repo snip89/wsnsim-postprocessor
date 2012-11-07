@@ -36,6 +36,8 @@ MainWindow::MainWindow(QWidget *parent) :
     createMenus();
     createStatusWidgets();
 
+    initToolBar();
+
     insertActionsRecent();
 
     isProjectOpened = false;
@@ -77,6 +79,8 @@ MainWindow::MainWindow(QWidget *parent) :
 
     activeWidget = EMPTY;
     previousActiveWidget = EMPTY;
+
+    setWindowIcon(QIcon(":/icons/base"));
 }
 
 MainWindow::~MainWindow()
@@ -190,28 +194,28 @@ void MainWindow::setSettings(QSettings &someSettings)
 
 void MainWindow::createActions()
 {
-    actionOpen = new QAction(tr("&Open project..."), this);
+    actionOpen = new QAction(QIcon(":/icons/folder"), tr("&Open project..."), this);
     actionOpen->setShortcut(QKeySequence::Open);
     connect(actionOpen, SIGNAL(triggered()), this, SLOT(openProject()));
 
-    actionOpenConnection = new QAction(tr("&Open connection..."), this);
+    actionOpenConnection = new QAction(QIcon(":/icons/network"), tr("&Open connection..."), this);
     actionOpenConnection->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_R));
     connect(actionOpenConnection, SIGNAL(triggered()), this, SLOT(openConnection()));
 
-    actionClose = new QAction(tr("&Close"), this);
+    actionClose = new QAction(QIcon(":/icons/close_delete"), tr("&Close"), this);
     actionClose->setShortcut(QKeySequence::Close);
     actionClose->setEnabled(false);
     connect(actionClose, SIGNAL(triggered()), this, SLOT(closeAnything()));
 
-    actionPrint = new QAction(tr("&Print..."), this);
+    actionPrint = new QAction(QIcon(":/icons/printer"), tr("&Print..."), this);
     actionPrint->setShortcut(QKeySequence::Print);
     actionPrint->setEnabled(false);
 
-    actionExit = new QAction(tr("&Exit"), this);
+    actionExit = new QAction(QIcon(":/icons/close_delete_2"), tr("&Exit"), this);
     actionExit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
     connect(actionExit, SIGNAL(triggered()), this, SLOT(exit()));
 
-    actionSettings = new QAction(tr("&Settings..."), this);
+    actionSettings = new QAction(QIcon(":/icons/options"), tr("&Settings..."), this);
     connect(actionSettings, SIGNAL(triggered()), this, SLOT(showSettings()));
 
     actionHexVisualization = new QAction(tr("&Hex"), this);
@@ -229,13 +233,13 @@ void MainWindow::createActions()
     actionTableVisualization->setCheckable(true);
     connect(actionTableVisualization, SIGNAL(toggled(bool)), this, SLOT(showTableVisualization(bool)));
 
-    actionCopy = new QAction(tr("&Copy"), this);
+    actionCopy = new QAction(QIcon(":/icons/copy"), tr("&Copy"), this);
     actionCopy->setShortcut(QKeySequence::Copy);
     actionCopy->setEnabled(false);
 
-    actionPaste = new QAction(tr("&Paste"), this);
-    actionPaste->setShortcut(QKeySequence::Paste);
-    actionPaste->setEnabled(false);
+    //actionPaste = new QAction(tr("&Paste"), this);
+    //actionPaste->setShortcut(QKeySequence::Paste);
+    //actionPaste->setEnabled(false);
 
     actionSelectAll = new QAction(tr("&Select all"), this);
     actionSelectAll->setShortcut(QKeySequence::SelectAll);
@@ -258,11 +262,11 @@ void MainWindow::createActions()
     connect(actionGoToLine, SIGNAL(triggered()), this, SLOT(showGoToLineDialog()));
     actionGoToLine->setEnabled(false);
 
-    actionAcceptFormat = new QAction(tr("&Accept format..."), this);
+    actionAcceptFormat = new QAction(QIcon(":/icons/plus"), tr("&Accept format..."), this);
     actionAcceptFormat->setEnabled(false);
     connect(actionAcceptFormat, SIGNAL(triggered()), this, SLOT(loadFormat()));
 
-    actionClearFormat = new QAction(tr("&Clear format"), this);
+    actionClearFormat = new QAction(QIcon(":/icons/minus"), tr("&Clear format"), this);
     actionClearFormat->setEnabled(false);
     connect(actionClearFormat, SIGNAL(triggered()), this, SLOT(clearFormat()));
 
@@ -270,7 +274,7 @@ void MainWindow::createActions()
     actionSelectColumns->setEnabled(false);
     connect(actionSelectColumns, SIGNAL(triggered()), this, SLOT(showColumnsSelectionDialog()));
 
-    actionFiltration = new QAction(tr("&Filter log..."), this);
+    actionFiltration = new QAction(QIcon(":/icons/refresh"), tr("&Filter log..."), this);
     actionFiltration->setEnabled(false);
     connect(actionFiltration, SIGNAL(triggered()), this, SLOT(showFiltration()));
 
@@ -279,12 +283,37 @@ void MainWindow::createActions()
     actionFullScreen->setCheckable(true);
     connect(actionFullScreen, SIGNAL(toggled(bool)), this, SLOT(toggleFullScreen(bool)));
 
-    actionHelp = new QAction(tr("&Help"), this);
+    actionHelp = new QAction(QIcon(":/icons/help"), tr("&Help"), this);
 
-    actionContextHelp = new QAction(tr("&Context help"), this);
-    actionContextHelp->setShortcut(QKeySequence::HelpContents);
+    //actionContextHelp = new QAction(tr("&Context help"), this);
+    //actionContextHelp->setShortcut(QKeySequence::HelpContents);
 
-    actionAbout = new QAction(tr("&About..."), this);
+    actionAbout = new QAction(QIcon(":/icons/information"), tr("&About..."), this);
+}
+
+void MainWindow::initToolBar()
+{
+    ui->toolBar->addAction(actionOpen);
+    ui->toolBar->addAction(actionOpenConnection);
+    ui->toolBar->addAction(actionClose);
+    ui->toolBar->addAction(actionPrint);
+
+    ui->toolBar->addSeparator();
+
+    ui->toolBar->addAction(actionCopy);
+
+    ui->toolBar->addSeparator();
+
+    ui->toolBar->addAction(actionAcceptFormat);
+    ui->toolBar->addAction(actionClearFormat);
+
+    ui->toolBar->addSeparator();
+
+    ui->toolBar->addAction(actionFiltration);
+
+    ui->toolBar->addSeparator();
+
+    ui->toolBar->addAction(actionSettings);
 }
 
 void MainWindow::createMenus()
@@ -317,7 +346,7 @@ void MainWindow::createMenus()
 
     menuEdit = new QMenu(tr("&Edit"), this);
     menuEdit->addAction(actionCopy);
-    menuEdit->addAction(actionPaste);
+    //menuEdit->addAction(actionPaste);
     menuEdit->addSeparator();
     menuEdit->addAction(actionSelectAll);
     menuEdit->addSeparator();
@@ -354,7 +383,7 @@ void MainWindow::createMenus()
 
     menuHelp = new QMenu(tr("&Help"), this);
     menuHelp->addAction(actionHelp);
-    menuHelp->addAction(actionContextHelp);
+    //menuHelp->addAction(actionContextHelp);
     menuHelp->addSeparator();
     menuHelp->addAction(actionAbout);
 
@@ -392,13 +421,13 @@ void MainWindow::deleteActions()
     delete actionFiltration;
     delete actionFullScreen;
     delete actionCopy;
-    delete actionPaste;
+    //delete actionPaste;
     delete actionFind;
     delete actionFindNext;
     delete actionFindPrevious;
     delete actionGoToLine;
     delete actionHelp;
-    delete actionContextHelp;
+    //delete actionContextHelp;
     delete actionAbout;
 }
 
@@ -892,6 +921,7 @@ void MainWindow::loadFormat()
     QFileDialog *fileDialog = new QFileDialog(this, tr("Open format file"), dirPath, tr("XML format files (*xml)"));
     fileDialog->move(settings.value("Hidden/Gui/File_dialog_pos").value<QPoint>());
     fileDialog->resize(settings.value("Hidden/Gui/File_dialog_size").value<QSize>());
+    fileDialog->setWindowIcon(QIcon(":/icons/folder"));
 
     if(fileDialog->exec())
         name = fileDialog->selectedFiles().at(0);
@@ -1037,6 +1067,7 @@ void MainWindow::openConnection()
     QString type = "";
 
     OpenConnectionDialog *openConnectionDialog = new OpenConnectionDialog();
+    openConnectionDialog->setWindowIcon(QIcon(":/icons/network"));
 
     if(openConnectionDialog->exec())
     {
@@ -1161,6 +1192,7 @@ void MainWindow::openProject(QString name)
         QFileDialog *fileDialog = new QFileDialog(this, tr("Open project file"), dirPath, tr("XML project files (*xml)"));
         fileDialog->move(settings.value("Hidden/Gui/File_dialog_pos").value<QPoint>());
         fileDialog->resize(settings.value("Hidden/Gui/File_dialog_size").value<QSize>());
+        fileDialog->setWindowIcon(QIcon(":/icons/folder"));
         
         if(fileDialog->exec())
             name = fileDialog->selectedFiles().at(0);

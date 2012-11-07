@@ -25,6 +25,7 @@
 #include <QActionGroup>
 #include <QKeySequence>
 #include <QErrorMessage>
+#include <QIcon>
 #include <QList>
 #include <QStyle>
 #include <QPoint>
@@ -106,7 +107,7 @@ private:
     QAction *actionTextVisualization;
     QAction *actionTableVisualization;
     QAction *actionCopy;
-    QAction *actionPaste;
+    //QAction *actionPaste;
     QAction *actionSelectAll;
     QAction *actionFind;
     QAction *actionFindNext;
@@ -123,7 +124,7 @@ private:
 
     QAction *actionFullScreen;
     QAction *actionHelp;
-    QAction *actionContextHelp;
+    //QAction *actionContextHelp;
     QAction *actionAbout;
 
     // menus
@@ -198,6 +199,7 @@ private:
 
     void createActions();
     void createMenus();
+    void initToolBar();
     void createStatusWidgets();
 
     void deleteActions();
