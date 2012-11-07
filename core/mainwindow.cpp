@@ -640,7 +640,7 @@ void MainWindow::switchToWidget(WidgetType type)
             return;
         }
         else
-            hexVisualization->update();
+            hexVisualization->update(formats);
 
         break;
 
@@ -662,7 +662,7 @@ void MainWindow::switchToWidget(WidgetType type)
             return;
         }
         else
-            textVisualization->update();
+            textVisualization->update(formats);
 
         break;
 
@@ -685,7 +685,7 @@ void MainWindow::switchToWidget(WidgetType type)
             return;
         }
         else
-            tableVisualization->update();
+            tableVisualization->update(formats);
         break;
 
     case RTTEXTVISUALIZATION:
@@ -768,7 +768,7 @@ void MainWindow::updateVisualization(WidgetType type)
             return;
         }
         else
-            textVisualization->update();
+            textVisualization->update(formats);
 
         break;
     case HEXVISUALIZATION:
@@ -787,7 +787,7 @@ void MainWindow::updateVisualization(WidgetType type)
             return;
         }
         else
-            hexVisualization->update();
+            hexVisualization->update(formats);
 
         break;
     case TABLEVISUALIZATION:
@@ -806,7 +806,7 @@ void MainWindow::updateVisualization(WidgetType type)
             return;
         }
         else
-            tableVisualization->update();
+            tableVisualization->update(formats);
 
         break;
 
@@ -947,10 +947,6 @@ void MainWindow::loadFormat()
 
     if(!realTime)
     {
-        hexUpdated = false;
-        textUpdated = false;
-        tableUpdated = false;
-
         if(activeWidget == TEXTVISUALIZATION)
             updateVisualization(TEXTVISUALIZATION);
 

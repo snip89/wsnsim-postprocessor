@@ -22,7 +22,7 @@ public:
 
     virtual void activity(bool status) = 0;
     virtual void update(IProject *project, ILog *log, QList<Format*> formats) = 0;
-    virtual void update() = 0;
+    virtual void update(QList<Format*> formats) = 0;
     virtual QWidget *getWidget() = 0;
     virtual void fromLine(qint64 line) = 0;
     virtual ~IVisualization() { }

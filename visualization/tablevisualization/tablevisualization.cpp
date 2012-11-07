@@ -46,8 +46,10 @@ void TableVisualization::update(IProject *project, ILog *log, QList<Format*> for
     updatePage();
 }
 
-void TableVisualization::update()
+void TableVisualization::update(QList<Format *> formats)
 {
+    this->formats = formats;
+
     viewer->clear();
     viewer->setRowCount(0);
 

@@ -53,8 +53,10 @@ void HexVisualization::update(IProject *project, ILog *log, QList<Format*> forma
     updatePage();
 }
 
-void HexVisualization::update()
+void HexVisualization::update(QList<Format *> formats)
 {
+    this->formats = formats;
+
     if(settings.value("Hex visualization/Gui/LineWrapMode").value<bool>())
         viewer->setLineWrapMode(QTextEdit::WidgetWidth);
     else

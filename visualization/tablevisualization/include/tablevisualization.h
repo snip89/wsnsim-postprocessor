@@ -21,7 +21,7 @@ public:
 
     /*virtual*/ void activity(bool status);
     /*virtual*/ void update(IProject *project, ILog *log,  QList<Format*> formats);
-    /*virtual*/ void update();
+    /*virtual*/ void update(QList<Format*> formats);
     /*virtual*/ QWidget *getWidget();
     /*virtual*/ void fromLine(qint64 line);
 
