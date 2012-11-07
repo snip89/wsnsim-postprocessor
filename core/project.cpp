@@ -257,3 +257,190 @@ int Project::sizeOf(LogDataType type)
 
     return -1;
 }
+
+bool Project::isInjectedColumnsSettings(QString &errorString)
+{
+    QDomDocument dd_doc;
+
+    int errorLine;
+    int errorColumn;
+
+    QFile file(projectFileName);
+
+    if (!file.open(QFile::ReadOnly)) {
+        errorString = QObject::tr("Can't open project file");
+
+        return false;
+    }
+
+    QTextStream out(&file);
+    out.setCodec(QTextCodec::codecForName("utf-8"));
+
+    QString content = out.readAll();
+    file.close();
+
+    // переносим текстовую информацию из файла в объекты XML
+    if (!dd_doc.setContent(content, true, &errorString, &errorLine, &errorColumn)) {
+        errorString = QObject::tr("Error in xml structure");
+
+        return false;
+    }
+
+    // переходим к данным XML
+    QDomElement de_root = dd_doc.documentElement();
+
+    projectParams.version = de_root.text();
+
+    QDomNode dn_node = de_root.firstChild();
+
+    // перебираем узлы, пока не закончатся
+    while (!dn_node.isNull()) {
+        if (dn_node.nodeName() == "columnsSettings")
+            return true;
+
+        // переходим к следующему узлу XML
+        dn_node = dn_node.nextSibling();
+    }
+
+    return false;
+}
+
+void Project::injectColumnsSettings(QString settings, QString &errorString)
+{
+    QDomDocument dd_doc;
+
+    int errorLine;
+    int errorColumn;
+
+    QFile file(projectFileName);
+
+    if (!file.open(QFile::ReadOnly)) {
+        errorString = QObject::tr("Can't open project file");
+
+        return;
+    }
+
+    QTextStream out(&file);
+    out.setCodec(QTextCodec::codecForName("utf-8"));
+
+    QString content = out.readAll();
+    file.close();
+
+    // переносим текстовую информацию из файла в объекты XML
+    if (!dd_doc.setContent(content, true, &errorString, &errorLine, &errorColumn)) {
+        errorString = QObject::tr("Error in xml structure");
+
+        return;
+    }
+
+    // переходим к данным XML
+    QDomElement de_root = dd_doc.documentElement();
+
+    projectParams.version = de_root.text();
+
+    QDomNode dn_node = de_root.firstChild();
+
+    // перебираем узлы, пока не закончатся
+    while (!dn_node.isNull()) {
+        if (dn_node.nodeName() == "columnsSettings")
+        {
+            QDomElement element = dn_node.toElement();
+            element.setAttribute("value", settings);
+
+            QFile::remove(projectFileName);
+
+            // открываем файл на запись
+            if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+                // пишем данные из объекта xml в файл
+
+                QTextStream out(&file);
+                out.setCodec(QTextCodec::codecForName("UTF-8"));
+                out << dd_doc.toString(4);
+            }
+
+            file.close();
+
+            return;
+        }
+
+        dn_node = dn_node.nextSibling();
+    }
+
+    QDomDocument new_document;
+
+    QDomElement new_element = new_document.createElement("columnsSettings");
+    new_element.setAttribute("value", settings);
+
+    de_root.appendChild(new_element);
+    new_document.appendChild(de_root);
+
+    QFile::remove(projectFileName);
+
+    // открываем файл на запись
+    if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {
+        // пишем данные из объекта xml в файл
+
+        QTextStream out(&file);
+        out.setCodec(QTextCodec::codecForName("UTF-8"));
+        out << new_document.toString(4);
+    }
+
+    file.close();
+}
+
+void Project::getInjectedColumnsSettings(QStringList &columnsNames, QStringList &columnsState, QString &errorString)
+{
+    QDomDocument dd_doc;
+
+    int errorLine;
+    int errorColumn;
+
+    QFile file(projectFileName);
+
+    if (!file.open(QFile::ReadOnly)) {
+        errorString = QObject::tr("Can't open project file");
+
+        return;
+    }
+
+    QTextStream out(&file);
+    out.setCodec(QTextCodec::codecForName("utf-8"));
+
+    QString content = out.readAll();
+    file.close();
+
+    // переносим текстовую информацию из файла в объекты XML
+    if (!dd_doc.setContent(content, true, &errorString, &errorLine, &errorColumn)) {
+        errorString = QObject::tr("Error in xml structure");
+
+        return;
+    }
+
+    // переходим к данным XML
+    QDomElement de_root = dd_doc.documentElement();
+
+    projectParams.version = de_root.text();
+
+    QDomNode dn_node = de_root.firstChild();
+
+    // перебираем узлы, пока не закончатся
+    while (!dn_node.isNull()) {
+        if (dn_node.nodeName() == "columnsSettings")
+        {
+            QDomElement element = dn_node.toElement();
+            QString value = element.attribute("value");
+
+            QStringList preparedValues = value.split(';');
+
+            if(preparedValues.size() == 2)
+            {
+                columnsNames = preparedValues[0].split(',');
+                columnsState = preparedValues[1].split(',');
+            }
+
+            return;
+        }
+
+        dn_node = dn_node.nextSibling();
+    }
+}

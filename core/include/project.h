@@ -15,6 +15,7 @@
 #include <QLibrary>
 #include <QStringList>
 #include <QDebug>
+#include <QtXml>
 
 #include "iproject.h"
 #include "simpleeventinfo.h"
@@ -38,6 +39,9 @@ public:
     QString projectName();
     QStringList paramsNames();
     LogDataType paramType(QString paramName);
+    bool isInjectedColumnsSettings(QString &errorString);
+    void injectColumnsSettings(QString settings, QString &errorString);
+    void getInjectedColumnsSettings(QStringList &columnsNames, QStringList &columnsState, QString &errorString);
     virtual ~Project();
 private:
     QString projectFileName;
