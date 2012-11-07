@@ -398,7 +398,7 @@ void FiltrationWidget::showFiltrationListWidgetContextMenu(const QPoint& pos)
     QPoint globalPos = ui->filtrationListWidget->mapToGlobal(pos);
 
     QMenu contextMenu;
-    contextMenu.addAction(tr("delete"));
+    contextMenu.addAction(QIcon(":/icons/delete_2"), tr("delete"));
 
     QListWidgetItem *item = ui->filtrationListWidget->itemAt(pos);
 
