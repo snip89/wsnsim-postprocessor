@@ -119,11 +119,14 @@ void MainWindow::setSettings(QSettings &someSettings)
     if(!someSettings.contains("General/Gui/Recent_number"))
         someSettings.setValue("General/Gui/Recent_number", DEFAULT_RECENT_NUMBER);
 
-    if(!someSettings.contains("Defaults/General/Gui/File_dialog_path"))
-        someSettings.setValue("Defaults/General/Gui/File_dialog_path", QDir::homePath());
+    if(!someSettings.contains("Defaults/General/Gui/Project_file_dialog_path"))
+        someSettings.setValue("Defaults/General/Gui/Project_file_dialog_path", QDir::homePath());
 
-    if(!someSettings.contains("General/Gui/File_dialog_path"))
-        someSettings.setValue("General/Gui/File_dialog_path", QDir::homePath());
+    if(!someSettings.contains("General/Gui/Project_file_dialog_path"))
+        someSettings.setValue("General/Gui/Project_file_dialog_path", QDir::homePath());
+
+    if(!someSettings.contains("General/Gui/Format_file_dialog_path"))
+        someSettings.setValue("General/Gui/Format_file_dialog_path", QDir::homePath());
 
     if(!someSettings.contains("Defaults/General/Gui/Recent"))
     {
@@ -916,7 +919,7 @@ void MainWindow::loadFormat()
 {
     QString name = "";
 
-    QString dirPath = settings.value("General/Gui/File_dialog_path").toString();
+    QString dirPath = settings.value("General/Gui/Format_file_dialog_path").toString();
 
     QFileDialog *fileDialog = new QFileDialog(this, tr("Open format file"), dirPath, tr("XML format files (*xml)"));
     fileDialog->move(settings.value("Hidden/Gui/File_dialog_pos").value<QPoint>());
@@ -939,7 +942,7 @@ void MainWindow::loadFormat()
 
     dirPath = dir.filePath(name);
     dirPath.chop(finfo.fileName().size());
-    settings.setValue("General/Gui/File_dialog_path", dirPath);
+    settings.setValue("General/Gui/Format_file_dialog_path", dirPath);
 
     QDir::setCurrent(QApplication::applicationDirPath());
 
@@ -1187,7 +1190,7 @@ void MainWindow::openProject(QString name)
 {
     if(name == QString::null)
     {
-        QString dirPath = settings.value("General/Gui/File_dialog_path").toString();
+        QString dirPath = settings.value("General/Gui/Project_file_dialog_path").toString();
 
         QFileDialog *fileDialog = new QFileDialog(this, tr("Open project file"), dirPath, tr("XML project files (*xml)"));
         fileDialog->move(settings.value("Hidden/Gui/File_dialog_pos").value<QPoint>());
@@ -1210,7 +1213,7 @@ void MainWindow::openProject(QString name)
 
         dirPath = dir.filePath(name);
         dirPath.chop(finfo.fileName().size());
-        settings.setValue("General/Gui/File_dialog_path", dirPath);
+        settings.setValue("General/Gui/Project_file_dialog_path", dirPath);
 
         if(realTime)
             closeConnection();
