@@ -292,6 +292,10 @@ void MainWindow::createActions()
     //actionContextHelp->setShortcut(QKeySequence::HelpContents);
 
     actionAbout = new QAction(QIcon(":/icons/information"), tr("&About..."), this);
+    connect(actionAbout, SIGNAL(triggered()), this, SLOT(showAboutDialog()));
+
+    actionAboutQt = new QAction(QIcon(":/icons/qt"), tr("&About Qt..."), this);
+    connect(actionAboutQt, SIGNAL(triggered()), this, SLOT(showAboutQtDialog()));
 }
 
 void MainWindow::initToolBar()
@@ -389,6 +393,7 @@ void MainWindow::createMenus()
     //menuHelp->addAction(actionContextHelp);
     menuHelp->addSeparator();
     menuHelp->addAction(actionAbout);
+    menuHelp->addAction(actionAboutQt);
 
     ui->menuBar->addMenu(menuFile);
     ui->menuBar->addMenu(menuEdit);
@@ -432,6 +437,7 @@ void MainWindow::deleteActions()
     delete actionHelp;
     //delete actionContextHelp;
     delete actionAbout;
+    delete actionAboutQt;
 }
 
 void MainWindow::deleteMenus()
@@ -913,6 +919,34 @@ void MainWindow::setTitle(QString project, QString log)
 
     if(project != QString::null && log != QString::null)
         setWindowTitle(prName + delimT1 + project + delimT2 + log);
+}
+
+void MainWindow::showAboutDialog()
+{
+    //if(!settings.contains("Localization/Language"))
+
+    QString language = settings.value("Localization/Language").value<QString>();
+
+    QString resName;
+
+    if(language == "Ru")
+        resName = ":/other/about_ru";
+
+    if(language == "En")
+        resName = ":/other/about_en";
+
+    QFile file(resName);
+
+    file.open(QFile::ReadOnly);
+
+    QTextStream stream(&file);
+
+    QMessageBox::about(this, tr("About"), stream.readAll());
+}
+
+void MainWindow::showAboutQtDialog()
+{
+    QMessageBox::aboutQt(this, tr("About Qt"));
 }
 
 void MainWindow::loadFormat()

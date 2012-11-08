@@ -115,5 +115,8 @@
         <file>icons/vote_no.png</file>
         <file>icons/vote_yes.png</file>
         <file>icons/wizard.png</file>
+        <file>icons/qt.png</file>
+        <file>other/about_en</file>
+        <file>other/about_ru</file>
     </qresource>
 </RCC>

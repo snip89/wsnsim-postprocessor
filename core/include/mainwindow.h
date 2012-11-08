@@ -34,6 +34,7 @@
 #include <QUdpSocket>
 #include <QDebug>
 #include <QPair>
+#include <QTextStream>
 
 #include "project.h"
 #include "log.h"
@@ -127,6 +128,7 @@ private:
     QAction *actionHelp;
     //QAction *actionContextHelp;
     QAction *actionAbout;
+    QAction *actionAboutQt;
 
     // menus
     QMenu *menuFile;
@@ -244,6 +246,8 @@ private slots:
     void showTableVisualization(bool checked);
     void showFiltration();
     void showGoToLineDialog();
+    void showAboutDialog();
+    void showAboutQtDialog();
 
     void loadFormat();
     void clearFormat();
