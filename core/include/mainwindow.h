@@ -60,6 +60,7 @@
 #include "formatacceptingdialog.h"
 #include "staticvisualizationtools.h"
 #include "columnsselectiondialog.h"
+#include "formatvalidator.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 

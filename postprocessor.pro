@@ -104,7 +104,8 @@ HEADERS += interfaces/ilog.h \
            visualization/realtime/tablevisualization/include/realtimetablevisualization.h \
            visualization/realtime/textvisualization/include/realtimetextvisualization.h \
     core/include/columnsselectiondialog.h \
-    core/include/projectvalidator.h
+    core/include/projectvalidator.h \
+    core/include/formatvalidator.h
 FORMS += ui/abstractrealtimetablevisualization.ui \
          ui/abstractrealtimetextvisualization.ui \
          ui/abstracttablevisualization.ui \
@@ -170,7 +171,8 @@ SOURCES += core/clientsettings.cpp \
            visualization/realtime/tablevisualization/realtimetablevisualization.cpp \
            visualization/realtime/textvisualization/realtimetextvisualization.cpp \
     core/columnsselectiondialog.cpp \
-    core/projectvalidator.cpp
+    core/projectvalidator.cpp \
+    core/formatvalidator.cpp
 RESOURCES += resources/postprocessor.qrc
 TRANSLATIONS += resources/localization/postprocessor_en.ts \
                 resources/localization/postprocessor_ru.ts \

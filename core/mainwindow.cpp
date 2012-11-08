@@ -959,6 +959,14 @@ void MainWindow::loadFormat()
 
     Format *format = load(name, &errorString);
 
+    FormatValidator::validate(format, errorString);
+
+    if(!errorString.isNull())
+    {
+        errorMessager.showMessage(errorString);
+        return;
+    }
+
     FormatAcceptingDialog *formatAcceptingDialog = new FormatAcceptingDialog(project,
                                                                              format->formatInfo["argument"]);
 
