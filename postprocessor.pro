@@ -8,7 +8,6 @@ INCLUDEPATH += ../libs/formatData
 INCLUDEPATH += ../libs/globalSettings/realtime/interfaces
 TARGET = logsVisualizer
 TEMPLATE = app
-TARGET = 
 DEPENDPATH += . \
               core \
               interfaces \
