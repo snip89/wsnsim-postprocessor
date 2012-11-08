@@ -16,6 +16,7 @@
 #include <QFile>
 #include <QStringList>
 #include <QTextStream>
+#include <QLocale>
 
 #include "mainwindow.h"
 #include "ostools.h"
@@ -55,8 +56,24 @@ void setSettings(QSettings &settings)
     if(!settings.contains("General/Core/Memory_usage"))
         settings.setValue("General/Core/Memory_usage", 10);
 
-    if(!settings.contains("Localization/Language"))
-        settings.setValue("Localization/Language", "En");
+    QLocale locale = QLocale::system();
+
+    if(locale.language() == QLocale::Russian)
+    {
+        if(!settings.contains("Localization/Language"))
+            settings.setValue("Localization/Language", "Ru");
+    }
+    else if(locale.language() == QLocale::English)
+    {
+        if(!settings.contains("Localization/Language"))
+            settings.setValue("Localization/Language", "En");
+    }
+    else
+    {
+        if(!settings.contains("Localization/Language"))
+            settings.setValue("Localization/Language", "En");
+    }
+
 
     if(!settings.contains("Defaults/Localization/Language"))
         settings.setValue("Defaults/Localization/Language", "En");
