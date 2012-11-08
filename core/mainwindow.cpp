@@ -948,6 +948,11 @@ void MainWindow::loadFormat()
 
     QString errorString = QString::null;
     QLibrary formatDataLibrary("./formatData");
+    if(!formatDataLibrary.load())
+    {
+        errorMessager.showMessage(tr("Error while loading formatData library"));
+        return;
+    }
 
     typedef Format*(*formatDataLoad) (QString& formatFileName, QString* errorMessage);
     formatDataLoad load = (formatDataLoad) formatDataLibrary.resolve("load");

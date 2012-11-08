@@ -35,12 +35,11 @@ void Project::load(QString &errorString)
 {
     errorString = QString::null;
     QDir::setCurrent(QApplication::applicationDirPath());
-    QString libraryName;
 
     QLibrary projectDataLibrary("./projectData");
     if(!projectDataLibrary.load())
     {
-        errorString = projectDataLibrary.errorString();
+        errorString = QObject::tr("Error while loading projectData library");
         return;
     }
 

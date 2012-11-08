@@ -15,6 +15,7 @@
 #include <QLibrary>
 #include <QStringList>
 #include <QDebug>
+#include <QErrorMessage>
 #include <QtXml>
 
 #include "iproject.h"

@@ -6,6 +6,7 @@
 #include <QLibrary>
 #include <QApplication>
 #include <QPluginLoader>
+#include <QErrorMessage>
 #include <QDebug>
 
 #include "ihostrealtimesettings.h"
