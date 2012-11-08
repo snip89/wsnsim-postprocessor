@@ -22,6 +22,7 @@
 #include "simpleeventinfo.h"
 #include "logdatatypes.h"
 #include "projectParams.h"
+#include "projectvalidator.h"
 // TODO include projectParams herex
 
 class Project : public IProject
@@ -29,6 +30,7 @@ class Project : public IProject
 public:
     friend class FiltrationWidget;
     friend class FormatAcceptingDialog;
+    friend class ProjectValidator;
 
     Project(QString fileName);
     void load(QString &errorString);

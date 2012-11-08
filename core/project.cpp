@@ -48,14 +48,16 @@ void Project::load(QString &errorString)
 
     projectParams = load(projectFileName, &errorString);
 
-    foreach(LogFileInfo logInfo, projectParams.logFiles)
+    ProjectValidator::validate(projectParams, errorString);
+
+    /*foreach(LogFileInfo logInfo, projectParams.logFiles)
     {
         if(!logInfo.contains("name") || !logInfo.contains("ID"))
         {
             errorString = QObject::tr("Bad log files info");
             return;
         }
-    }
+    }*/
 
     loadEventsInfo();
 

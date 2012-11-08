@@ -1308,7 +1308,7 @@ void MainWindow::openProject(QString name)
 
     if(count == 0)
     {
-        errorMessager.showMessage(tr("Project is empty"));
+        errorMessager.showMessage(tr("No log file in project"));
         delete project;
         return;
     }
