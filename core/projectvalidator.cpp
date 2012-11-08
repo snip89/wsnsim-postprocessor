@@ -53,6 +53,12 @@ void ProjectValidator::validate(ProjectParams projectParams, QString &errorStrin
                 return;
             }
 
+            if(LogDataTypes::toLogDataType(argument["type"]) == UNKNOWN_TYPE)
+            {
+                errorString = QObject::tr("Unknown event argument type");
+                return;
+            }
+
             if(argument["name"] == "")
             {
                 errorString = QObject::tr("No name in some event argument");
@@ -113,6 +119,12 @@ void ProjectValidator::validate(ProjectParams projectParams, QString &errorStrin
             if(argument["type"] == "")
             {
                 errorString = QObject::tr("No type in some event argument");
+                return;
+            }
+
+            if(LogDataTypes::toLogDataType(argument["type"]) == UNKNOWN_TYPE)
+            {
+                errorString = QObject::tr("Unknown event argument type");
                 return;
             }
 

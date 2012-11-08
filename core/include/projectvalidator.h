@@ -4,6 +4,7 @@
 #include <QString>
 
 #include "projectParams.h"
+#include "logdatatypes.h"
 
 class ProjectValidator
 {
