@@ -192,7 +192,7 @@ void MainWindow::setSettings(QSettings &someSettings)
         someSettings.setValue("Hidden/Gui/Format_dialog_pos", QPoint(0, 0));
 
     if(!someSettings.contains("Hidden/Gui/Columns_selection_dialog_pos"))
-        someSettings.setValue("Hidden/Gui/Format_dialog_pos", QPoint(0, 0));
+        someSettings.setValue("Hidden/Gui/Columns_selection_dialog_pos", QPoint(0, 0));
 }
 
 void MainWindow::createActions()
@@ -1004,12 +1004,12 @@ void MainWindow::loadFormat()
     FormatAcceptingDialog *formatAcceptingDialog = new FormatAcceptingDialog(project,
                                                                              format->formatInfo["argument"]);
 
-    formatAcceptingDialog->move(settings.value("Hidden/Gui/Format_dialog_pos").value<QPoint>());
+    formatAcceptingDialog->move(settings.value("Hidden/Gui/Columns_selection_dialog_pos").value<QPoint>());
 
     // TODO: сохранять положение диалога
     if(formatAcceptingDialog->exec())
     {
-        settings.setValue("Hidden/Gui/Format_dialog_pos", formatAcceptingDialog->pos());
+        settings.setValue("Hidden/Gui/Columns_selection_dialog_pos", formatAcceptingDialog->pos());
 
         AttrInfo info = formatAcceptingDialog->getArgument();
 
@@ -1018,7 +1018,7 @@ void MainWindow::loadFormat()
     }
     else
     {
-        settings.setValue("Hidden/Gui/Format_dialog_pos", formatAcceptingDialog->pos());
+        settings.setValue("Hidden/Gui/Columns_selection_dialog_pos", formatAcceptingDialog->pos());
         delete format;
         return;
     }
