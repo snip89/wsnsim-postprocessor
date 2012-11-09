@@ -941,6 +941,9 @@ void MainWindow::showAboutDialog()
 
     QTextStream stream(&file);
 
+    QTextCodec *codec = QTextCodec::codecForName("UTF-8");
+    stream.setCodec(codec);
+
     QMessageBox::about(this, tr("About"), stream.readAll());
 }
 
@@ -1760,7 +1763,7 @@ void MainWindow::switchCurrentLog()
     {
         if(logs->at(i).fileName == sender->text())
         {
-            // ПРОВЕРИТЬ НЕ ВЫБРАН ЛИ ТОТ ЖЕ ЛОГ
+            // П� ОВЕ� ИТЬ НЕ ВЫБ� АН ЛИ ТОТ ЖЕ ЛОГ
             logs->at(currentLogId).log->toggleActivity(false);
 
             currentLogId = i;
