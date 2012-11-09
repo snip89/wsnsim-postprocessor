@@ -36,7 +36,19 @@ private:
     static bool checkArguments(char *mem, qint64 memSize, qint64 pos, qint64 &readedSize, bool &success, QString argName, QVariant &argValue, SimpleEventInfo *info, quint8 eventID);
 
     template <typename T>
-    static bool translateArg(char *mem, qint64 memSize, qint64 sPos, T &value);
+    static bool translateArg(char *mem, qint64 memSize, qint64 sPos, T &value)
+    {
+        if(sPos + sizeof(T) > memSize)
+            return false;
+
+        char *bytesValue = new char[sizeof(T)];
+        copyArgInvert(mem, bytesValue, sPos, sizeof(T));
+        memcpy(&value, bytesValue, sizeof(T));
+
+        delete[] bytesValue;
+        return true;
+    }
+
     static bool translateArg(char *mem, qint64 memSize, qint64 sPos, char *argValue, quint8 argSize);
     static bool translateArg(char *mem, qint64 memSize, qint64 sPos, QString &value, quint16 argSize);
 

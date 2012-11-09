@@ -662,7 +662,7 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
     return true;
 }
 
-template <typename T>
+/*template <typename T>
 bool StaticRecordsReader::translateArg(char *mem, qint64 memSize, qint64 sPos, T &value)
 {
     if(sPos + sizeof(T) > memSize)
@@ -674,7 +674,7 @@ bool StaticRecordsReader::translateArg(char *mem, qint64 memSize, qint64 sPos, T
 
     delete[] bytesValue;
     return true;
-}
+}*/
 
 bool StaticRecordsReader::translateArg(char *mem, qint64 memSize, qint64 sPos, char *argValue, quint8 argSize)
 {
