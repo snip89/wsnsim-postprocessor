@@ -80,6 +80,10 @@ void HexVisualization::update(QList<Format *> formats)
     updatePage(cursorMoving);
 }
 
+void HexVisualization::search(QString str)
+{
+}
+
 QWidget *HexVisualization::getWidget()
 {
     return this;

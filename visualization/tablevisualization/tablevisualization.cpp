@@ -74,6 +74,10 @@ void TableVisualization::update(QList<Format *> formats)
     updatePage();
 }
 
+void TableVisualization::search(QString str)
+{
+}
+
 QWidget *TableVisualization::getWidget()
 {
     return this;

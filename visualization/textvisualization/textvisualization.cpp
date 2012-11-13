@@ -84,6 +84,10 @@ void TextVisualization::update(QList<Format *> formats)
     updatePage(cursorMoving);
 }
 
+void TextVisualization::search(QString str)
+{
+}
+
 QWidget *TextVisualization::getWidget()
 {
     return this;
