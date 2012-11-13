@@ -116,8 +116,6 @@ private:
     //QAction *actionPaste;
     QAction *actionSelectAll;
     QAction *actionFind;
-    QAction *actionFindNext;
-    QAction *actionFindPrevious;
     QAction *actionGoToLine;
 
     QAction *actionAcceptFormat;
@@ -134,12 +132,13 @@ private:
     QAction *actionAbout;
     QAction *actionAboutQt;
 
+    QAction *actionCloseSearch;
+
     // menus
     QMenu *menuFile;
     QMenu *menuRecentProjects;
     //QMenu *menuCurrentLog;
     QMenu *menuEdit;
-    QMenu *menuFind;
     QMenu *menuView;
     QMenu *menuTools;
     QMenu *menuHelp;
@@ -233,6 +232,9 @@ public slots:
     void openConnection();
 
 private slots:
+    void showSearch();
+    void closeSearch();
+
     void updateVisualization(WidgetType type);
 
     void openRecentProject();
