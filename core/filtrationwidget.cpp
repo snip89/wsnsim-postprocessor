@@ -121,6 +121,10 @@ void FiltrationWidget::updateBooleanOperators()
         case UNKNOWN_TYPE:
             break;
 
+        case INT8_TYPE:
+            setIntegerBooleanOperators();
+            break;
+
         case UINT8_TYPE:
             setIntegerBooleanOperators();
             break;

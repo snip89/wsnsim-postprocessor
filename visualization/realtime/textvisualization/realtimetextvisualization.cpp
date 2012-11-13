@@ -55,8 +55,8 @@ QWidget *RealTimeTextVisualization::getWidget()
 
 void RealTimeTextVisualization::addRecord(QByteArray byteRecord)
 {
-    if(recordsCount < recordsLimit)
-    {
+    //if(recordsCount < recordsLimit)
+    //{
         qint64 readedSize = 0;
         Record record;
         int infoSize = 0;
@@ -84,12 +84,12 @@ void RealTimeTextVisualization::addRecord(QByteArray byteRecord)
         viewer->append(resultLine);
 
         recordsCount ++;
-    }
-    else
-    {
-        viewer->clear();
-        recordsCount = 0;
-    }
+    //}
+    //else
+    //{
+    //    viewer->clear();
+    //    recordsCount = 0;
+    //}
 }
 
 RealTimeTextVisualization::~RealTimeTextVisualization()
