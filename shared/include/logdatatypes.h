@@ -13,6 +13,7 @@
 enum LogDataType
 {
     UNKNOWN_TYPE,
+    FIVE_BYTES_TYPE,
     UINT8_TYPE,
     INT8_TYPE,
     UINT16_TYPE,

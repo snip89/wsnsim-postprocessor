@@ -2,7 +2,10 @@
 
 LogDataType LogDataTypes::toLogDataType(QString type)
 {
-    if(type == "uint8")
+    if(type == "FiveBytes")
+        return FIVE_BYTES_TYPE;
+
+    else if(type == "uint8")
         return UINT8_TYPE;
 
     else if(type == "int8")

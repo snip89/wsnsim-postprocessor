@@ -125,7 +125,15 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
     {
         for(int i = 0; i < info[eventID].argsCount; i ++)
         {
-            if(info[eventID].argsInfo[i].type == UINT8_TYPE)
+            if(info[eventID].argsInfo[i].type == FIVE_BYTES_TYPE)
+            {
+                if(pos + 5 > memSize)
+                    return false;
+
+                pos += 5;
+                skippedSize += 5;
+            }
+            else if(info[eventID].argsInfo[i].type == UINT8_TYPE)
             {
                 if(pos + sizeof(quint8) > memSize)
                     return false;
@@ -228,23 +236,28 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
     return true;
 }
 
-template <typename T>
-bool StaticRecordsReader::readArgument(char *mem, qint64 memSize, qint64 &pos, qint64 &readedSize, T &value)
-{
-    if(!translateArg(mem, memSize, pos, value))
-        return false;
-
-    pos += sizeof(T);
-    readedSize += sizeof(T);
-
-    return true;
-}
-
 bool StaticRecordsReader::readArguments(char *mem, qint64 memSize, qint64 pos, qint64 &readedSize, Record &record, SimpleEventInfo *info, quint8 eventID)
 {
     for(int i = 0; i < info[eventID].argsCount; i ++)
     {
-        if(info[eventID].argsInfo[i].type == UINT8_TYPE)
+        if(info[eventID].argsInfo[i].type == FIVE_BYTES_TYPE)
+        {
+            quint64 value = 0;
+            qint64 temp = pos;
+
+            if(!readArgumentUnusualSize(mem, memSize, pos, readedSize, value, 5))
+                return false;
+
+            char *bytesValue = new char[5];
+
+            copyArg(mem, bytesValue, temp, 5);
+
+            record.byteRecord.append(bytesValue, 5);
+            record.other.append(QVariant(value));
+
+            delete[] bytesValue;
+        }
+        else if(info[eventID].argsInfo[i].type == UINT8_TYPE)
         {
             quint8 value = 0;
             qint64 temp = pos;
@@ -431,7 +444,15 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
     {
         if(argName != info[eventID].argsInfo[i].name)
         {
-            if(info[eventID].argsInfo[i].type == UINT8_TYPE)
+            if(info[eventID].argsInfo[i].type == FIVE_BYTES_TYPE)
+            {
+                if(pos + 5 > memSize)
+                    return false;
+
+                pos += 5;
+                readedSize += 5;
+            }
+            else if(info[eventID].argsInfo[i].type == UINT8_TYPE)
             {
                 if(pos + sizeof(quint8) > memSize)
                     return false;
@@ -532,7 +553,18 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
 
         else
         {
-            if(info[eventID].argsInfo[i].type == UINT8_TYPE)
+            if(info[eventID].argsInfo[i].type == FIVE_BYTES_TYPE)
+            {
+                quint64 value = 0;
+
+                if(!readArgumentUnusualSize(mem, memSize, pos, readedSize, value, 5))
+                    return false;
+
+                argValue = QVariant(value);
+
+                success = true;
+            }
+            else if(info[eventID].argsInfo[i].type == UINT8_TYPE)
             {
                 quint8 value = 0;
 
