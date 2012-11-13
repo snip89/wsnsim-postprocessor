@@ -15,6 +15,14 @@ public:
     virtual ~SearchWidget();
 private:
     Ui::SearchWidget *ui;
+
+private slots:
+    void findNextClicked();
+    void findPreviousClicked();
+
+signals:
+    void findNext(QString);
+    void findPrevious(QString);
 };
 
 #endif // SEARCHWIDGET_H

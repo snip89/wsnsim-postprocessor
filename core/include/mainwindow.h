@@ -235,6 +235,9 @@ private slots:
     void showSearch();
     void closeSearch();
 
+    void searchNext(QString str);
+    void searchPrevious(QString str);
+
     void updateVisualization(WidgetType type);
 
     void openRecentProject();

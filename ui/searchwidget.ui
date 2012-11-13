@@ -37,25 +37,10 @@
    </property>
    <item row="0" column="0">
     <layout class="QGridLayout" name="gridLayout">
-     <item row="0" column="0">
-      <widget class="QTextEdit" name="searchTextEdit">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>150</width>
-         <height>30</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>150</width>
-         <height>30</height>
-        </size>
+     <item row="0" column="2">
+      <widget class="QPushButton" name="searchPreviousPushButton">
+       <property name="text">
+        <string>Find previous</string>
        </property>
       </widget>
      </item>
@@ -66,12 +51,8 @@
        </property>
       </widget>
      </item>
-     <item row="0" column="2">
-      <widget class="QPushButton" name="searchPreviousPushButton_2">
-       <property name="text">
-        <string>Find previous</string>
-       </property>
-      </widget>
+     <item row="0" column="0">
+      <widget class="QLineEdit" name="searchLineEdit"/>
      </item>
     </layout>
    </item>

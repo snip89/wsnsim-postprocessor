@@ -74,7 +74,11 @@ void TableVisualization::update(QList<Format *> formats)
     updatePage();
 }
 
-void TableVisualization::search(QString str)
+void TableVisualization::searchNext(QString str)
+{
+}
+
+void TableVisualization::searchPrevious(QString str)
 {
 }
 

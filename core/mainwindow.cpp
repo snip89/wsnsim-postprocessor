@@ -83,6 +83,8 @@ MainWindow::MainWindow(QWidget *parent) :
     setWindowIcon(QIcon(":/icons/base"));
 
     searchWidget = new SearchWidget();
+    connect(searchWidget, SIGNAL(findNext(QString)), this, SLOT(searchNext(QString)));
+    connect(searchWidget, SIGNAL(findPrevious(QString)), this, SLOT(searchPrevious(QString)));
 
     ui->searchToolBar->addWidget(searchWidget);
     ui->searchToolBar->addAction(actionCloseSearch);
@@ -1859,4 +1861,40 @@ void MainWindow::showColumnsSelectionDialog()
     settings.setValue("Hidden/Gui/Format_dialog_pos", dialog->pos());
 
     delete dialog;
+}
+
+void MainWindow::searchNext(QString str)
+{
+    if(str != "")
+    {
+        if(!realTime)
+        {
+            if(activeWidget == HEXVISUALIZATION)
+                hexVisualization->searchNext(str);
+
+            if(activeWidget == TEXTVISUALIZATION)
+                textVisualization->searchNext(str);
+
+            if(activeWidget == TABLEVISUALIZATION)
+                tableVisualization->searchNext(str);
+        }
+    }
+}
+
+void MainWindow::searchPrevious(QString str)
+{
+    if(str != "")
+    {
+        if(!realTime)
+        {
+            if(activeWidget == HEXVISUALIZATION)
+                hexVisualization->searchPrevious(str);
+
+            if(activeWidget == TEXTVISUALIZATION)
+                textVisualization->searchPrevious(str);
+
+            if(activeWidget == TABLEVISUALIZATION)
+                tableVisualization->searchPrevious(str);
+        }
+    }
 }

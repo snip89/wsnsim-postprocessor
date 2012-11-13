@@ -80,7 +80,11 @@ void HexVisualization::update(QList<Format *> formats)
     updatePage(cursorMoving);
 }
 
-void HexVisualization::search(QString str)
+void HexVisualization::searchNext(QString str)
+{
+}
+
+void HexVisualization::searchPrevious(QString str)
 {
 }
 
