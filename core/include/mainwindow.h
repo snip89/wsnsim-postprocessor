@@ -35,6 +35,7 @@
 #include <QDebug>
 #include <QPair>
 #include <QTextStream>
+#include <QToolBar>
 
 #include "project.h"
 #include "log.h"
@@ -62,6 +63,7 @@
 #include "staticvisualizationtools.h"
 #include "columnsselectiondialog.h"
 #include "formatvalidator.h"
+#include "searchwidget.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -96,6 +98,8 @@ public:
 
 private:
     bool realTime;
+
+    SearchWidget *searchWidget;
 
     // actions
     QAction *actionOpen;

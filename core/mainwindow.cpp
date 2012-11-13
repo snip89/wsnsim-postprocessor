@@ -81,6 +81,11 @@ MainWindow::MainWindow(QWidget *parent) :
     previousActiveWidget = EMPTY;
 
     setWindowIcon(QIcon(":/icons/base"));
+
+    searchWidget = new SearchWidget();
+
+    ui->searchToolBar->addWidget(searchWidget);
+    ui->searchToolBar->setVisible(false);
 }
 
 MainWindow::~MainWindow()
@@ -107,6 +112,8 @@ MainWindow::~MainWindow()
 
     /*foreach(Format *format, formats)
         delete format;*/
+
+    delete searchWidget;
 
     delete ui;
 }
@@ -1009,7 +1016,7 @@ void MainWindow::loadFormat()
 
     formatAcceptingDialog->move(settings.value("Hidden/Gui/Columns_selection_dialog_pos").value<QPoint>());
 
-    // TODO: сохранять положение диалога
+    // TODO: ÑÐ¾Ñ…Ñ€Ð°Ð½ÑÑ‚ÑŒ Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ð´Ð¸Ð°Ð»Ð¾Ð³Ð°
     if(formatAcceptingDialog->exec())
     {
         settings.setValue("Hidden/Gui/Columns_selection_dialog_pos", formatAcceptingDialog->pos());
@@ -1567,7 +1574,7 @@ void MainWindow::openLog(QString name)
     else if(settings.value("General/Gui/Default_visualization").value<QString>() == "table")
         actionTableVisualization->toggle();
 
-    // TODO: добавить table visualization
+    // TODO: Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ table visualization
 }
 
 void MainWindow::showSettings()
@@ -1752,7 +1759,7 @@ void MainWindow::toggleFullScreen(bool checked)
     }
 }
 
-// ИЗМЕНЕНИЯ ТУТ
+// Ð˜Ð—ÐœÐ•ÐÐ•ÐÐ˜Ð¯ Ð¢Ð£Ð¢
 void MainWindow::switchCurrentLog()
 {
     QAction *sender = (QAction*)QObject::sender();
@@ -1763,7 +1770,7 @@ void MainWindow::switchCurrentLog()
     {
         if(logs->at(i).fileName == sender->text())
         {
-            // П� ОВЕ� ИТЬ НЕ ВЫБ� АН ЛИ ТОТ ЖЕ ЛОГ
+            // ÐŸÐ ÐžÐ’Ð•Ð Ð˜Ð¢Ð¬ ÐÐ• Ð’Ð«Ð‘Ð ÐÐ Ð›Ð˜ Ð¢ÐžÐ¢ Ð–Ð• Ð›ÐžÐ“
             logs->at(currentLogId).log->toggleActivity(false);
 
             currentLogId = i;
