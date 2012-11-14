@@ -148,10 +148,10 @@ void TextVisualization::searchPrevious(QString str)
         int pos = topLinePos - 1;
         if(pos > 0)
         {
-            currentLog->seek(pos);
-
             while(pos > 0)
             {
+                currentLog->seek(pos);
+
                 qint64 binPageSize = 0;
                 char *binPage = currentLog->read(1, binPageSize);
                 qint64 posInBinPage = 0;

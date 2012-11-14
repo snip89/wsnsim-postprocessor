@@ -82,10 +82,105 @@ void HexVisualization::update(QList<Format *> formats)
 
 void HexVisualization::searchNext(QString str)
 {
+    if(!viewer->find(str))
+    {
+        int pos = topLinePos + linesOnPage(decrement);
+
+        if(pos < currentLog->size())
+        {
+            currentLog->seek(pos);
+
+            while(pos < currentLog->size())
+            {
+                qint64 binPageSize = 0;
+                char *binPage = currentLog->read(1, binPageSize);
+                qint64 posInBinPage = 0;
+
+                qint64 readedSize = 0;
+                Record record;
+                int infoSize = 0;
+                SimpleEventInfo *info = currentProject->info(infoSize);
+
+                StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
+                posInBinPage += readedSize;
+
+                QString resultLine = QString::number(pos) + ": ";
+
+                foreach(char nextHex, record.byteRecord)
+                {
+                    QString hexed = QString::number((quint8)nextHex, 16);
+                    hexed = hexed.toUpper();
+                    if(hexed.size() == 1)
+                        hexed.insert(0, '0');
+
+                    resultLine += hexed + " ";
+                }
+
+                if(resultLine.contains(str))
+                {
+                    topLinePos = pos;
+                    updatePage();
+
+                    viewer->find(str);
+
+                    return;
+                }
+
+                pos ++;
+            }
+        }
+    }
 }
 
 void HexVisualization::searchPrevious(QString str)
 {
+    if(!viewer->find(str, QTextDocument::FindBackward))
+    {
+        int pos = topLinePos - 1;
+        if(pos > 0)
+        {
+            while(pos > 0)
+            {
+                currentLog->seek(pos);
+
+                qint64 binPageSize = 0;
+                char *binPage = currentLog->read(1, binPageSize);
+                qint64 posInBinPage = 0;
+
+                qint64 readedSize = 0;
+                Record record;
+                int infoSize = 0;
+                SimpleEventInfo *info = currentProject->info(infoSize);
+
+                StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
+                posInBinPage += readedSize;
+
+                QString resultLine = QString::number(pos) + ": ";
+
+                foreach(char nextHex, record.byteRecord)
+                {
+                    QString hexed = QString::number((quint8)nextHex, 16);
+                    hexed = hexed.toUpper();
+                    if(hexed.size() == 1)
+                        hexed.insert(0, '0');
+
+                    resultLine += hexed + " ";
+                }
+
+                if(resultLine.contains(str))
+                {
+                    topLinePos = pos;
+                    updatePage();
+
+                    viewer->find(str);
+
+                    return;
+                }
+
+                pos --;
+            }
+        }
+    }
 }
 
 QWidget *HexVisualization::getWidget()
