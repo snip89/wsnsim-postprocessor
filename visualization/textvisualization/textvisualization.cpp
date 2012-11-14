@@ -86,58 +86,115 @@ void TextVisualization::update(QList<Format *> formats)
 
 void TextVisualization::searchNext(QString str)
 {
-    /*currentLog->seek(topLinePos);
-
-    int recordsCount = settings.value("General/Core/Block_size").value<int>();
-
-    while(topLinePos > 0 && recordsCount > currentLog->size() - topLinePos)
+    if(!viewer->find(str))
     {
-        topLinePos --;
-        currentLog->seek(topLinePos);
-    }
+        int pos = topLinePos + linesOnPage(decrement);
 
-    if(topLinePos == 0 && recordsCount > currentLog->size())
-    {
-        recordsCount = currentLog->size();
-    }
-
-    qint64 binPageSize = 0;
-    char *binPage = currentLog->read(recordsCount, binPageSize);
-
-    qint64 posInBinPage = 0;
-    for(int i = 0; i < recordsCount; i ++)
-    {
-        qint64 readedSize = 0;
-        Record record;
-        int infoSize = 0;
-        SimpleEventInfo *info = currentProject->info(infoSize);
-
-        StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
-        posInBinPage += readedSize;
-
-        QString resultLine = QString::number(topLinePos + i) + ": ";
-        resultLine += "time: " + QString::number(record.time) + "; ";
-        resultLine += "event: " + *info[record.eventID].type + "; ";
-
-        for(int j = 0; j < info[record.eventID].argsCount; j ++)
+        if(pos < currentLog->size())
         {
-            resultLine += *info[record.eventID].argsInfo[j].name + ": ";
+            currentLog->seek(pos);
 
-            resultLine += StaticVisualizationTools::updateValue(record.eventID,
-                        j,
-                        record.other[j],
-                        info[record.eventID].argsInfo[j].type,
-                                      formats);
+            while(pos < currentLog->size())
+            {
+                qint64 binPageSize = 0;
+                char *binPage = currentLog->read(1, binPageSize);
+                qint64 posInBinPage = 0;
 
-            resultLine += "; ";
+                qint64 readedSize = 0;
+                Record record;
+                int infoSize = 0;
+                SimpleEventInfo *info = currentProject->info(infoSize);
+
+                StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
+                posInBinPage += readedSize;
+
+                QString resultLine = QString::number(pos) + ": ";
+                resultLine += "time: " + QString::number(record.time) + "; ";
+                resultLine += "event: " + *info[record.eventID].type + "; ";
+
+                for(int j = 0; j < info[record.eventID].argsCount; j ++)
+                {
+                    resultLine += *info[record.eventID].argsInfo[j].name + ": ";
+
+                    resultLine += StaticVisualizationTools::updateValue(record.eventID,
+                                j,
+                                record.other[j],
+                                info[record.eventID].argsInfo[j].type,
+                                              formats);
+
+                    resultLine += "; ";
+                }
+
+                if(resultLine.contains(str))
+                {
+                    topLinePos = pos;
+                    updatePage();
+
+                    viewer->find(str);
+
+                    return;
+                }
+
+                pos ++;
+            }
         }
-
-        viewer->append(resultLine);
-    }*/
+    }
 }
 
 void TextVisualization::searchPrevious(QString str)
 {
+    if(!viewer->find(str, QTextDocument::FindBackward))
+    {
+        int pos = topLinePos - 1;
+        if(pos > 0)
+        {
+            currentLog->seek(pos);
+
+            while(pos > 0)
+            {
+                qint64 binPageSize = 0;
+                char *binPage = currentLog->read(1, binPageSize);
+                qint64 posInBinPage = 0;
+
+                qint64 readedSize = 0;
+                Record record;
+                int infoSize = 0;
+                SimpleEventInfo *info = currentProject->info(infoSize);
+
+                StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
+                posInBinPage += readedSize;
+
+                QString resultLine = QString::number(pos) + ": ";
+                resultLine += "time: " + QString::number(record.time) + "; ";
+                resultLine += "event: " + *info[record.eventID].type + "; ";
+
+                for(int j = 0; j < info[record.eventID].argsCount; j ++)
+                {
+                    resultLine += *info[record.eventID].argsInfo[j].name + ": ";
+
+                    resultLine += StaticVisualizationTools::updateValue(record.eventID,
+                                j,
+                                record.other[j],
+                                info[record.eventID].argsInfo[j].type,
+                                              formats);
+
+                    resultLine += "; ";
+                }
+
+                if(resultLine.contains(str))
+                {
+                    topLinePos = pos;
+                    updatePage();
+
+                    viewer->find(str);
+
+                    return;
+                }
+
+                pos --;
+            }
+        }
+    }
 }
 
 QWidget *TextVisualization::getWidget()
