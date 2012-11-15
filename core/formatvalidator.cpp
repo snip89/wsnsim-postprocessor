@@ -2,7 +2,7 @@
 
 void FormatValidator::validate(Format *format, QString &errorString)
 {
-    /*if(format->formatInfo["name"] == "")
+    if(format->formatInfo["name"] == "")
     {
         errorString = QObject::tr("No format name");
         return;
@@ -14,7 +14,7 @@ void FormatValidator::validate(Format *format, QString &errorString)
         return;
     }
 
-    if(format->fieldsInfo.size() == 0)
+    /*if(format->fieldsInfo.size() == 0)
     {
         errorString = QObject::tr("No format fields");
         return;
