@@ -43,6 +43,8 @@ QString StaticVisualizationTools::applyFormat(QVariant value, Format *format)
 
     StaticLuaLoader::loadFile(format->luaInfo["file"], errorString);
 
+    result += "Format: " + format->formatInfo["name"] + "; ";
+
     QList< QPair<QString, QVariant> > values = StaticLuaLoader::exec(format->luaInfo["file"], value.value<QByteArray>(), errorString);
     if(!errorString.isNull())
     {
