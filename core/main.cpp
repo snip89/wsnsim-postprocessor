@@ -21,6 +21,7 @@
 #include "mainwindow.h"
 #include "ostools.h"
 #include "staticcoreutils.h"
+#include "staticlualoader.h"
 
 void setUpCodec()
 {
@@ -111,6 +112,8 @@ int main(int argc, char **argv) {
         a.installTranslator(&translator_qt);
         a.installTranslator(&translator_postprocessor);
     }
+
+    StaticLuaLoader::init();
 
     MainWindow w;
 

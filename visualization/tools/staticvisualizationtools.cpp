@@ -20,7 +20,7 @@ QString StaticVisualizationTools::updateValue(int eventID,
                     format->argument["argumentID"].toInt() == argumentID &&
                     type == BYTE_ARRAY_TYPE)
             {
-                result = applyFormat(value, type, format);
+                result = applyFormat(value, format);
             }
             else
             {
@@ -32,9 +32,73 @@ QString StaticVisualizationTools::updateValue(int eventID,
     return result;
 }
 
-QString StaticVisualizationTools::applyFormat(QVariant value, LogDataType type, Format *format)
+QString StaticVisualizationTools::applyFormat(QVariant value, Format *format)
 {
     QString result;
+
+    QFileInfo formatFileInfo(format->fileName);
+    QDir::setCurrent(formatFileInfo.absoluteDir().absolutePath());
+
+    QString errorString;
+
+    StaticLuaLoader::loadFile(format->luaInfo["file"], errorString);
+
+    QList< QPair<QString, QVariant> > values = StaticLuaLoader::exec(format->luaInfo["file"], value.value<QByteArray>(), errorString);
+    if(!errorString.isNull())
+    {
+        result += errorString + ": ";
+
+        if(value.type() == QVariant::ByteArray)
+        {
+            QString hexed_string = "";
+            foreach(quint8 nextHex, value.value<QByteArray>())
+            {
+                QString hexed = QString::number(nextHex, 16);
+                hexed = hexed.toUpper();
+                if(hexed.size() == 1)
+                    hexed.insert(0, '0');
+
+                hexed_string += hexed + " ";
+            }
+
+            hexed_string.chop(1);
+
+            result += hexed_string;
+        }
+
+        return result;
+    }
+
+    for(int i = 0; i < values.size(); i++)
+    {
+        result += values[i].first;
+
+        if(values[i].second.type() == QVariant::ByteArray)
+        {
+            QString hexed_string = "";
+            foreach(quint8 nextHex, values[i].second.value<QByteArray>())
+            {
+                QString hexed = QString::number(nextHex, 16);
+                hexed = hexed.toUpper();
+                if(hexed.size() == 1)
+                    hexed.insert(0, '0');
+
+                hexed_string += hexed + " ";
+            }
+
+            hexed_string.chop(1);
+
+            result += hexed_string;
+        }
+        else
+        {
+            result += values[i].second.toString();
+        }
+    }
+
+    return result;
+
+    /*QString result;
 
     qint64 size = value.value<QByteArray>().size();
     int i = 0;
@@ -304,7 +368,7 @@ QString StaticVisualizationTools::applyFormat(QVariant value, LogDataType type, 
         }
     }
 
-    return result;
+    return result;*/
 }
 
 QString StaticVisualizationTools::updateValue(QVariant value, LogDataType type)
@@ -338,7 +402,7 @@ QString StaticVisualizationTools::updateValue(QVariant value, LogDataType type)
 
 int StaticVisualizationTools::formatLength(Format *format)
 {
-    int result = 0;
+    /*int result = 0;
 
     foreach(FieldInfo field, format->fieldsInfo)
     {
@@ -367,7 +431,7 @@ int StaticVisualizationTools::formatLength(Format *format)
             result += sizeof(bool);
     }
 
-    return result;
+    return result;*/
 }
 
 QStringList StaticVisualizationTools::argumentsNames(SimpleEventInfo *info, int infoSize)

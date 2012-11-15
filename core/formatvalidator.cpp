@@ -2,7 +2,7 @@
 
 void FormatValidator::validate(Format *format, QString &errorString)
 {
-    if(format->formatInfo["name"] == "")
+    /*if(format->formatInfo["name"] == "")
     {
         errorString = QObject::tr("No format name");
         return;
@@ -66,5 +66,5 @@ void FormatValidator::validate(Format *format, QString &errorString)
     {
         errorString = QObject::tr("Must be field with type string only or ByteArray only");
         return;
-    }
+    }*/
 }

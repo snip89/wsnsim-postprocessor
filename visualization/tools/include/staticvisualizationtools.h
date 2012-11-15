@@ -5,11 +5,14 @@
 #include <QVariant>
 #include <QList>
 #include <QStringList>
+#include <QDir>
+#include <QFileInfo>
 
 #include "logdatatypes.h"
 #include "formatParams.h"
 #include "simpleeventinfo.h"
 #include "staticrecordsreader.h"
+#include "staticlualoader.h"
 
 class StaticVisualizationTools
 {
@@ -23,7 +26,7 @@ public:
 
     static QString updateValue(QVariant value, LogDataType type);
 
-    static QString applyFormat(QVariant value, LogDataType type, Format *format);
+    static QString applyFormat(QVariant value, Format *format);
 
     static int formatLength(Format *format);
 

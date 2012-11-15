@@ -6,6 +6,10 @@ QT += core gui xml network
 INCLUDEPATH += ../libs/projectData
 INCLUDEPATH += ../libs/formatData
 INCLUDEPATH += ../libs/globalSettings/realtime/interfaces
+
+INCLUDEPATH += . /usr/include/luajit-2.0
+LIBS += -lluajit-5.1
+
 TARGET = logsVisualizer
 TEMPLATE = app
 DEPENDPATH += . \
@@ -105,7 +109,8 @@ HEADERS += interfaces/ilog.h \
     core/include/columnsselectiondialog.h \
     core/include/projectvalidator.h \
     core/include/formatvalidator.h \
-    core/include/searchwidget.h
+    core/include/searchwidget.h \
+    core/include/staticlualoader.h
 FORMS += ui/abstractrealtimetablevisualization.ui \
          ui/abstractrealtimetextvisualization.ui \
          ui/abstracttablevisualization.ui \
@@ -174,7 +179,8 @@ SOURCES += core/clientsettings.cpp \
     core/columnsselectiondialog.cpp \
     core/projectvalidator.cpp \
     core/formatvalidator.cpp \
-    core/searchwidget.cpp
+    core/searchwidget.cpp \
+    core/staticlualoader.cpp
 RESOURCES += resources/postprocessor.qrc
 TRANSLATIONS += resources/localization/postprocessor_en.ts \
                 resources/localization/postprocessor_ru.ts \

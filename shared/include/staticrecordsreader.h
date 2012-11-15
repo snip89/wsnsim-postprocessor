@@ -24,6 +24,7 @@
 class StaticRecordsReader
 {
     friend class StaticVisualizationTools;
+    friend class StaticLuaLoader;
 public:
     static bool skipRecord(char *mem, qint64 memSize, qint64 pos, qint64 &skippedSize, quint64 &time, SimpleEventInfo *info);
     static bool readRecord(char *mem, qint64 memSize, qint64 pos, qint64 &readedSize, Record &record, SimpleEventInfo *info);

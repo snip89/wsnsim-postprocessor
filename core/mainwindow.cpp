@@ -1030,7 +1030,6 @@ void MainWindow::loadFormat()
 
     formatAcceptingDialog->move(settings.value("Hidden/Gui/Columns_selection_dialog_pos").value<QPoint>());
 
-    // TODO: ÑÐ¾Ñ…Ñ€Ð°Ð½ÑÑ‚ÑŒ Ð¿Ð¾Ð»Ð¾Ð¶ÐµÐ½Ð¸Ðµ Ð´Ð¸Ð°Ð»Ð¾Ð³Ð°
     if(formatAcceptingDialog->exec())
     {
         settings.setValue("Hidden/Gui/Columns_selection_dialog_pos", formatAcceptingDialog->pos());
