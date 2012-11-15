@@ -31,6 +31,8 @@ public:
 private:
     QSettings settings;
 
+    int itemSearchedIndex;
+
     void setSettings(QSettings &someSettings);
 
     void updatePage();

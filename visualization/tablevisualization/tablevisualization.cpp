@@ -4,6 +4,8 @@ TableVisualization::TableVisualization(QWidget *parent)
     : AbstractTableVisualization(parent)
 {
     setSettings(settings);
+
+    itemSearchedIndex = 0;
 }
 
 void TableVisualization::activity(bool status)
@@ -76,10 +78,175 @@ void TableVisualization::update(QList<Format *> formats)
 
 void TableVisualization::searchNext(QString str)
 {
+    QList<QTableWidgetItem*> items = viewer->findItems(str, Qt::MatchContains | Qt::MatchCaseSensitive);
+
+    if(!items[itemSearchedIndex]->isSelected())
+    {
+        viewer->setCurrentItem(items[itemSearchedIndex]);
+        //items[itemSearchedIndex]->setSelected(true);
+    }
+    else
+    {
+        if(itemSearchedIndex + 1 < items.size())
+        {
+            itemSearchedIndex ++;
+            searchNext(str);
+        }
+        else
+        {
+            int pos = topLinePos + linesOnPage();
+
+            if(pos < currentLog->size())
+            {
+                currentLog->seek(pos);
+
+                while(pos < currentLog->size())
+                {
+                    qint64 binPageSize = 0;
+                    char *binPage = currentLog->read(1, binPageSize);
+                    qint64 posInBinPage = 0;
+
+                    qint64 readedSize = 0;
+                    Record record;
+                    int infoSize = 0;
+                    SimpleEventInfo *info = currentProject->info(infoSize);
+
+                    StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
+                    posInBinPage += readedSize;
+
+                    QString resultLine = QString::number(record.time);
+
+                    if(resultLine.contains(str))
+                    {
+                        topLinePos = pos;
+                        updatePage();
+
+                        itemSearchedIndex = 0;
+                        searchNext(str);
+                        return;
+                    }
+
+                    resultLine = *info[record.eventID].type;
+                    if(resultLine.contains(str))
+                    {
+                        topLinePos = pos;
+                        updatePage();
+
+                        itemSearchedIndex = 0;
+                        searchNext(str);
+                        return;
+                    }
+
+                    for(int j = 0; j < info[record.eventID].argsCount; j ++)
+                    {
+                        resultLine = StaticVisualizationTools::updateValue(record.eventID,
+                                    j,
+                                    record.other[j],
+                                    info[record.eventID].argsInfo[j].type,
+                                                  formats);
+
+                        if(resultLine.contains(str))
+                        {
+                            topLinePos = pos;
+                            updatePage();
+
+                            itemSearchedIndex = 0;
+                            searchNext(str);
+                            return;
+                        }
+                    }
+
+                    pos ++;
+                }
+            }
+        }
+    }
 }
 
 void TableVisualization::searchPrevious(QString str)
 {
+    QList<QTableWidgetItem*> items = viewer->findItems(str, Qt::MatchContains | Qt::MatchCaseSensitive);
+
+    if(!items[itemSearchedIndex]->isSelected())
+    {
+        viewer->setCurrentItem(items[itemSearchedIndex]);
+        //items[itemSearchedIndex]->setSelected(true);
+    }
+    else
+    {
+        if(itemSearchedIndex - 1 >= 0)
+        {
+            itemSearchedIndex --;
+            searchNext(str);
+        }
+        else
+        {
+            int pos = topLinePos - 1;
+            if(pos >= 0)
+            {
+                while(pos >= 0)
+                {
+                    currentLog->seek(pos);
+
+                    qint64 binPageSize = 0;
+                    char *binPage = currentLog->read(1, binPageSize);
+                    qint64 posInBinPage = 0;
+
+                    qint64 readedSize = 0;
+                    Record record;
+                    int infoSize = 0;
+                    SimpleEventInfo *info = currentProject->info(infoSize);
+
+                    StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
+                    posInBinPage += readedSize;
+
+                    QString resultLine = QString::number(record.time);
+
+                    if(resultLine.contains(str))
+                    {
+                        topLinePos = pos;
+                        updatePage();
+
+                        itemSearchedIndex = 0;
+                        searchNext(str);
+                        return;
+                    }
+
+                    resultLine = *info[record.eventID].type;
+                    if(resultLine.contains(str))
+                    {
+                        topLinePos = pos;
+                        updatePage();
+
+                        itemSearchedIndex = 0;
+                        searchNext(str);
+                        return;
+                    }
+
+                    for(int j = 0; j < info[record.eventID].argsCount; j ++)
+                    {
+                        resultLine = StaticVisualizationTools::updateValue(record.eventID,
+                                    j,
+                                    record.other[j],
+                                    info[record.eventID].argsInfo[j].type,
+                                                  formats);
+
+                        if(resultLine.contains(str))
+                        {
+                            topLinePos = pos;
+                            updatePage();
+
+                            itemSearchedIndex = 0;
+                            searchNext(str);
+                            return;
+                        }
+                    }
+
+                    pos --;
+                }
+            }
+        }
+    }
 }
 
 QWidget *TableVisualization::getWidget()

@@ -146,9 +146,9 @@ void TextVisualization::searchPrevious(QString str)
     if(!viewer->find(str, QTextDocument::FindBackward))
     {
         int pos = topLinePos - 1;
-        if(pos > 0)
+        if(pos >= 0)
         {
-            while(pos > 0)
+            while(pos >= 0)
             {
                 currentLog->seek(pos);
 
