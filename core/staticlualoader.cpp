@@ -35,6 +35,18 @@ QList< QPair<QString, QVariant> > StaticLuaLoader::exec(QString fileName, QByteA
 
             if(lua_istable(m_lua, -1))
             {
+                lua_getfield(m_lua, -1, "error");
+                if(lua_isstring(m_lua, -1))
+                {
+                    QString error = lua_tostring(m_lua, -1);
+
+                    lua_pop(m_lua, 3);
+                    errorString = error;
+                    return result;
+                }
+
+                lua_pop(m_lua, 1);
+
                 lua_getfield(m_lua, -1, "name");
                 if(lua_isstring(m_lua, -1))
                 {
@@ -48,20 +60,6 @@ QList< QPair<QString, QVariant> > StaticLuaLoader::exec(QString fileName, QByteA
                 {
                     QString type = lua_tostring(m_lua, -1);
                     convertedType = LogDataTypes::toLogDataType(type);
-                }
-
-                lua_pop(m_lua, 1);
-
-                lua_getfield(m_lua, -1, "error");
-                if(lua_isboolean(m_lua, -1))
-                {
-                    bool error = lua_toboolean(m_lua, -1);
-                    if(error)
-                    {
-                        lua_pop(m_lua, 3);
-                        errorString = QObject::tr("Unrecognized field");
-                        return result;
-                    }
                 }
 
                 lua_pop(m_lua, 1);

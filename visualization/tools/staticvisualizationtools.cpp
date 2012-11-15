@@ -71,7 +71,7 @@ QString StaticVisualizationTools::applyFormat(QVariant value, Format *format)
 
     for(int i = 0; i < values.size(); i++)
     {
-        result += values[i].first;
+        result += values[i].first + ": ";
 
         if(values[i].second.type() == QVariant::ByteArray)
         {
@@ -89,12 +89,17 @@ QString StaticVisualizationTools::applyFormat(QVariant value, Format *format)
             hexed_string.chop(1);
 
             result += hexed_string;
+
+            result += "; ";
         }
         else
         {
             result += values[i].second.toString();
+            result += "; ";
         }
     }
+
+    result.chop(2);
 
     return result;
 
