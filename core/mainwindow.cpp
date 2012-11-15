@@ -258,7 +258,7 @@ void MainWindow::createActions()
     actionSelectAll->setShortcut(QKeySequence::SelectAll);
     actionSelectAll->setEnabled(false);
 
-    actionFind = new QAction(tr("&Find"), this);
+    actionFind = new QAction(QIcon(":/icons/search_lense"), tr("&Find"), this);
     actionFind->setShortcut(QKeySequence::Find);
     actionFind->setEnabled(false);
     connect(actionFind, SIGNAL(triggered()), this, SLOT(showSearch()));
