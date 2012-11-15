@@ -48,6 +48,16 @@ void RealTimeTextVisualization::update()
     viewer->setText(temp);
 }
 
+void RealTimeTextVisualization::searchNext(QString str)
+{
+    viewer->find(str);
+}
+
+void RealTimeTextVisualization::searchPrevious(QString str)
+{
+    viewer->find(str, QTextDocument::FindBackward);
+}
+
 QWidget *RealTimeTextVisualization::getWidget()
 {
     return this;

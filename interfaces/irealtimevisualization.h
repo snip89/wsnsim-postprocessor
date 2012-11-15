@@ -15,6 +15,8 @@ public:
     virtual void stop() = 0;
     virtual void update(IProject *project, UdpSocketAdapter *socketAdapter, QList<Format*> formats) = 0;
     virtual void update() = 0;
+    virtual void searchNext(QString str) = 0;
+    virtual void searchPrevious(QString str) = 0;
     virtual QWidget *getWidget() = 0;
     virtual ~IRealTimeVisualization() { }
 };

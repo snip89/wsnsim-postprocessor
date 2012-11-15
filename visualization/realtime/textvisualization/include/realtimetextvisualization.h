@@ -18,6 +18,8 @@ public:
     /*virtual*/ void stop();
     /*virtual*/ void update(IProject *project, UdpSocketAdapter *socketAdapter,  QList<Format*> formats);
     /*virtual*/ void update();
+    /*virtual*/ void searchNext(QString str);
+    /*virtual*/ void searchPrevious(QString str);
     /*virtual*/ QWidget *getWidget();
 
     /*virtual*/ void addRecord(QByteArray byteRecord);

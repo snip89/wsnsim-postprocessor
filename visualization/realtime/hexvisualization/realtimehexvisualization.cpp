@@ -45,6 +45,16 @@ void RealTimeHexVisualization::update()
     viewer->setText(temp);
 }
 
+void RealTimeHexVisualization::searchNext(QString str)
+{
+    viewer->find(str);
+}
+
+void RealTimeHexVisualization::searchPrevious(QString str)
+{
+    viewer->find(str, QTextDocument::FindBackward);
+}
+
 QWidget *RealTimeHexVisualization::getWidget()
 {
     return this;

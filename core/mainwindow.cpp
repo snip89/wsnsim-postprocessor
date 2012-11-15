@@ -1878,6 +1878,17 @@ void MainWindow::searchNext(QString str)
             if(activeWidget == TABLEVISUALIZATION)
                 tableVisualization->searchNext(str);
         }
+        else
+        {
+            if(activeWidget == RTHEXVISUALIZATION)
+                realTimeHexVisualization->searchNext(str);
+
+            if(activeWidget == RTTEXTVISUALIZATION)
+                realTimeTextVisualization->searchNext(str);
+
+            if(activeWidget == RTTABLEVISUALIZATION)
+                realTimeTableVisualization->searchNext(str);
+        }
     }
 }
 
@@ -1895,6 +1906,17 @@ void MainWindow::searchPrevious(QString str)
 
             if(activeWidget == TABLEVISUALIZATION)
                 tableVisualization->searchPrevious(str);
+        }
+        else
+        {
+            if(activeWidget == RTHEXVISUALIZATION)
+                realTimeHexVisualization->searchPrevious(str);
+
+            if(activeWidget == RTTEXTVISUALIZATION)
+                realTimeTextVisualization->searchPrevious(str);
+
+            if(activeWidget == RTTABLEVISUALIZATION)
+                realTimeTableVisualization->searchPrevious(str);
         }
     }
 }

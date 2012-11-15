@@ -5,6 +5,8 @@ RealTimeTableVisualization::RealTimeTableVisualization(QWidget *parent) :
 {
     recordsLimit = 1000;
     //recordsLimit = settings.value("RealTime/Text Visualization/Gui/RecordsLimit").value<quint64>();
+
+    itemSearchedIndex = 0;
 }
 
 void RealTimeTableVisualization::stop()
@@ -63,6 +65,44 @@ void RealTimeTableVisualization::update()
             viewer->setColumnHidden(i, false);
         else
             viewer->setColumnHidden(i, true);
+    }
+}
+
+void RealTimeTableVisualization::searchNext(QString str)
+{
+    QList<QTableWidgetItem*> items = viewer->findItems(str, Qt::MatchContains | Qt::MatchCaseSensitive);
+
+    if(!items[itemSearchedIndex]->isSelected())
+    {
+        viewer->setCurrentItem(items[itemSearchedIndex]);
+        //items[itemSearchedIndex]->setSelected(true);
+    }
+    else
+    {
+        if(itemSearchedIndex + 1 < items.size())
+        {
+            itemSearchedIndex ++;
+            searchNext(str);
+        }
+    }
+}
+
+void RealTimeTableVisualization::searchPrevious(QString str)
+{
+    QList<QTableWidgetItem*> items = viewer->findItems(str, Qt::MatchContains | Qt::MatchCaseSensitive);
+
+    if(!items[itemSearchedIndex]->isSelected())
+    {
+        viewer->setCurrentItem(items[itemSearchedIndex]);
+        //items[itemSearchedIndex]->setSelected(true);
+    }
+    else
+    {
+        if(itemSearchedIndex - 1 >= 0)
+        {
+            itemSearchedIndex --;
+            searchNext(str);
+        }
     }
 }
 
