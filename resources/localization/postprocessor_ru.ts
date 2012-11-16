@@ -689,23 +689,23 @@
         <translation>Ошибка при загрузке библиотеки formatData</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1266"/>
+        <location filename="../../core/mainwindow.cpp" line="1265"/>
         <source>Open project file</source>
         <translation>Открыть файл проекта</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1266"/>
+        <location filename="../../core/mainwindow.cpp" line="1265"/>
         <source>XML project files (*xml)</source>
         <translation>XML файлы проекта (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1377"/>
+        <location filename="../../core/mainwindow.cpp" line="1376"/>
         <source>No log file in project</source>
         <translation>Нет журнала в проекте</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1169"/>
-        <location filename="../../core/mainwindow.cpp" line="1301"/>
+        <location filename="../../core/mainwindow.cpp" line="1168"/>
+        <location filename="../../core/mainwindow.cpp" line="1300"/>
         <source>Project file not found</source>
         <translation>Файл проекта не найден</translation>
     </message>
@@ -739,7 +739,7 @@
         <translation type="obsolete">Проект пуст</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1553"/>
+        <location filename="../../core/mainwindow.cpp" line="1552"/>
         <source>No filters</source>
         <translation>Нет фильтров</translation>
     </message>
@@ -790,23 +790,12 @@
         <translation>Ошибка в структуре xml</translation>
     </message>
     <message>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="50"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="73"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="96"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="119"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="142"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="165"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="188"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="211"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="240"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="271"/>
         <source>bad size; </source>
-        <translation>неверный размер; </translation>
+        <translation type="obsolete">неверный размер; </translation>
     </message>
     <message>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="288"/>
         <source>unrecognized</source>
-        <translation>неопределено</translation>
+        <translation type="obsolete">неопределено</translation>
     </message>
     <message>
         <location filename="../../core/formatvalidator.cpp" line="7"/>
@@ -819,39 +808,32 @@
         <translation>Нет имени аргумента формата</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="19"/>
         <source>No format fields</source>
-        <translation>Нет полей формата</translation>
+        <translation type="obsolete">Нет полей формата</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="30"/>
         <source>No field name</source>
-        <translation>Нет имени поля</translation>
+        <translation type="obsolete">Нет имени поля</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="36"/>
         <source>No field type</source>
-        <translation>Нет типа поля</translation>
+        <translation type="obsolete">Нет типа поля</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="48"/>
         <source>Unknown field type</source>
-        <translation>Неизвестный тип поля</translation>
+        <translation type="obsolete">Неизвестный тип поля</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="55"/>
         <source>Field with type string must be only one</source>
-        <translation>Поле с типом string должно быть только одно</translation>
+        <translation type="obsolete">Поле с типом string должно быть только одно</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="61"/>
         <source>Field with type ByteArray must be only one</source>
-        <translation>Поле с типом ByteArray должно быть только одно</translation>
+        <translation type="obsolete">Поле с типом ByteArray должно быть только одно</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="67"/>
         <source>Must be field with type string only or ByteArray only</source>
-        <translation>Должны быть поля только типа string или только типа ByteArray</translation>
+        <translation type="obsolete">Должны быть поля только типа string или только типа ByteArray</translation>
     </message>
     <message>
         <location filename="../../core/projectvalidator.cpp" line="8"/>
@@ -913,6 +895,22 @@
         <location filename="../../core/staticcoreutils.cpp" line="21"/>
         <source>Error while loading globalSettings library</source>
         <translation>Ошибка при заргузке библиотеки globalSettings</translation>
+    </message>
+    <message>
+        <location filename="../../core/staticlualoader.cpp" line="22"/>
+        <source>Can&apos;t execute lua function format</source>
+        <translation>Невозможно выполнить функцию lua format</translation>
+    </message>
+    <message>
+        <location filename="../../core/staticlualoader.cpp" line="98"/>
+        <source>No returned value</source>
+        <translation>Нет возвращенного значения</translation>
+    </message>
+    <message>
+        <location filename="../../core/staticlualoader.cpp" line="135"/>
+        <source>There is no function format in file </source>
+        <translatorcomment>Нет функции format в файле </translatorcomment>
+        <translation></translation>
     </message>
 </context>
 <context>

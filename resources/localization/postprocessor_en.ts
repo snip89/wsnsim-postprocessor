@@ -701,23 +701,23 @@
         <translation>Error while loading formatData library</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1266"/>
+        <location filename="../../core/mainwindow.cpp" line="1265"/>
         <source>Open project file</source>
         <translation>Open project file</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1266"/>
+        <location filename="../../core/mainwindow.cpp" line="1265"/>
         <source>XML project files (*xml)</source>
         <translation>XML project files (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1377"/>
+        <location filename="../../core/mainwindow.cpp" line="1376"/>
         <source>No log file in project</source>
         <translation>No log file in project</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1169"/>
-        <location filename="../../core/mainwindow.cpp" line="1301"/>
+        <location filename="../../core/mainwindow.cpp" line="1168"/>
+        <location filename="../../core/mainwindow.cpp" line="1300"/>
         <source>Project file not found</source>
         <translation>Project file not found</translation>
     </message>
@@ -751,7 +751,7 @@
         <translation type="obsolete">Project is empty</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1553"/>
+        <location filename="../../core/mainwindow.cpp" line="1552"/>
         <source>No filters</source>
         <translation>No filters</translation>
     </message>
@@ -802,23 +802,12 @@
         <translation>Error in xml structure</translation>
     </message>
     <message>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="50"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="73"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="96"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="119"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="142"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="165"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="188"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="211"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="240"/>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="271"/>
         <source>bad size; </source>
-        <translation>bad size; </translation>
+        <translation type="obsolete">bad size; </translation>
     </message>
     <message>
-        <location filename="../../visualization/tools/staticvisualizationtools.cpp" line="288"/>
         <source>unrecognized</source>
-        <translation>unrecognized</translation>
+        <translation type="obsolete">unrecognized</translation>
     </message>
     <message>
         <location filename="../../core/formatvalidator.cpp" line="7"/>
@@ -831,39 +820,32 @@
         <translation>No format argument name</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="19"/>
         <source>No format fields</source>
-        <translation>No format fields</translation>
+        <translation type="obsolete">No format fields</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="30"/>
         <source>No field name</source>
-        <translation>No field name</translation>
+        <translation type="obsolete">No field name</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="36"/>
         <source>No field type</source>
-        <translation>No field type</translation>
+        <translation type="obsolete">No field type</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="48"/>
         <source>Unknown field type</source>
-        <translation>Unknown field type</translation>
+        <translation type="obsolete">Unknown field type</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="55"/>
         <source>Field with type string must be only one</source>
-        <translation>Field with type string must be only one</translation>
+        <translation type="obsolete">Field with type string must be only one</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="61"/>
         <source>Field with type ByteArray must be only one</source>
-        <translation>Field with type ByteArray must be only one</translation>
+        <translation type="obsolete">Field with type ByteArray must be only one</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="67"/>
         <source>Must be field with type string only or ByteArray only</source>
-        <translation>Must be field with type string only or ByteArray only</translation>
+        <translation type="obsolete">Must be field with type string only or ByteArray only</translation>
     </message>
     <message>
         <location filename="../../core/projectvalidator.cpp" line="8"/>
@@ -925,6 +907,21 @@
         <location filename="../../core/staticcoreutils.cpp" line="21"/>
         <source>Error while loading globalSettings library</source>
         <translation>Error while loading globalSettings library</translation>
+    </message>
+    <message>
+        <location filename="../../core/staticlualoader.cpp" line="22"/>
+        <source>Can&apos;t execute lua function format</source>
+        <translation>Can&apos;t execute lua function format</translation>
+    </message>
+    <message>
+        <location filename="../../core/staticlualoader.cpp" line="98"/>
+        <source>No returned value</source>
+        <translation>No returned value</translation>
+    </message>
+    <message>
+        <location filename="../../core/staticlualoader.cpp" line="135"/>
+        <source>There is no function format in file </source>
+        <translation>There is no function format in file </translation>
     </message>
 </context>
 <context>
