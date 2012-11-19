@@ -42,9 +42,15 @@ public:
     QString projectName();
     QStringList paramsNames();
     LogDataType paramType(QString paramName);
+
+    bool isInjectedFormatsSettings(QString &errorString);
+    void injectFormatSettings(QString formats, QString &errorString);
+    void getInjectedFormatSettings(QStringList &formatsNames);
+
     bool isInjectedColumnsSettings(QString &errorString);
     void injectColumnsSettings(QString settings, QString &errorString);
     void getInjectedColumnsSettings(QStringList &columnsNames, QStringList &columnsState, QString &errorString);
+
     virtual ~Project();
 private:
     QString projectFileName;

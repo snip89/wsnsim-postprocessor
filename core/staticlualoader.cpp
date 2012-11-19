@@ -72,7 +72,22 @@ QList< QPair<QString, QVariant> > StaticLuaLoader::exec(QString fileName, QByteA
                     for (quint8 idx = 1; idx <= size; idx++)
                     {
                         lua_rawgeti(m_lua, -1, idx);
-                        data[idx-1] = lua_tonumber(m_lua, -1);
+
+                        if(lua_isnumber(m_lua, -1))
+                            data[idx-1] = lua_tonumber(m_lua, -1);
+
+                        else if(lua_isstring(m_lua, -1))
+                        {
+                            QString str = lua_tostring(m_lua, -1);
+
+                            foreach(QChar ch, str)
+                            {
+                                data[idx - 1] = ch.toAscii();
+                                idx ++;
+                                size ++;
+                            }
+                        }
+
                         lua_pop(m_lua, 1);
                     }
 

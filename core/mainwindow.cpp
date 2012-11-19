@@ -268,11 +268,11 @@ void MainWindow::createActions()
     connect(actionGoToLine, SIGNAL(triggered()), this, SLOT(showGoToLineDialog()));
     actionGoToLine->setEnabled(false);
 
-    actionAcceptFormat = new QAction(QIcon(":/icons/plus"), tr("&Accept format..."), this);
+    actionAcceptFormat = new QAction(tr("&Accept format..."), this);
     actionAcceptFormat->setEnabled(false);
     connect(actionAcceptFormat, SIGNAL(triggered()), this, SLOT(loadFormat()));
 
-    actionClearFormat = new QAction(QIcon(":/icons/minus"), tr("&Clear format"), this);
+    actionClearFormat = new QAction(tr("&Clear format"), this);
     actionClearFormat->setEnabled(false);
     connect(actionClearFormat, SIGNAL(triggered()), this, SLOT(clearFormat()));
 
@@ -325,10 +325,10 @@ void MainWindow::initToolBar()
 
     ui->toolBar->addAction(actionCopy);
 
-    ui->toolBar->addSeparator();
+    //ui->toolBar->addSeparator();
 
-    ui->toolBar->addAction(actionAcceptFormat);
-    ui->toolBar->addAction(actionClearFormat);
+    //ui->toolBar->addAction(actionAcceptFormat);
+    //ui->toolBar->addAction(actionClearFormat);
 
     ui->toolBar->addSeparator();
 
@@ -374,7 +374,7 @@ void MainWindow::createMenus()
     menuEdit->addAction(actionSelectAll);
     menuEdit->addSeparator();
     menuEdit->addAction(actionAcceptFormat);
-    menuEdit->addAction(actionClearFormat);
+    //menuEdit->addAction(actionClearFormat);
     menuEdit->addSeparator();
     menuEdit->addAction(actionFiltration);
     menuEdit->addSeparator();
@@ -1037,6 +1037,10 @@ void MainWindow::loadFormat()
         AttrInfo info = formatAcceptingDialog->getArgument();
 
         format->argument = info;
+
+        // TODO: убивать формат если такой уже есть
+        //project->injectFormatSettings();
+
         formats.append(format);
     }
     else
