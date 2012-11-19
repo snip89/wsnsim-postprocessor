@@ -14,11 +14,19 @@ local function bitStatus(value, bitNumber)
 	return status
 end
 
+local function checkBit(value, bitNumber)
+	value = bit.lshift(value, 8 - bitNumber)
+	value = bit.band(value, 255)
+	value = bit.rshift(value, 7)
+
+	return value
+end
+
 function format(byteArray)
 	local result = { }
-	local status
 	local iterator = 1
-	local intraPanStatus
+	local bool
+	local isIntraPan = 0
 
 	-- длина сообщения
 	local LEN = byteArray[iterator]
@@ -34,45 +42,35 @@ function format(byteArray)
 
 		-- FCF Frame Type
 		local FCF_FrameType = byteArray[iterator]
-
 		FCF_FrameType = bit.lshift(FCF_FrameType, 5)
 		FCF_FrameType = bit.band(FCF_FrameType, 255)
 		FCF_FrameType = bit.rshift(FCF_FrameType, 5)
-
 		table.insert(result, { name = "FCF_FrameType", type = "uint8", value = { FCF_FrameType } } )
 
-		-- local FrameTypeName
-
-		-- if(FCF_FrameType == 0) then
-		--	FrameTypeName = "Beacon"
-		--	table.insert(result, { name = "FCF_FrameType", type = "string", value = { 0, #FrameTypeName, FrameTypeName } } )
-		-- elseif(FCF_FrameType == 1) then
-		--	FrameTypeName = "Data"
-		--	table.insert(result, { name = "FCF_FrameType", type = "string", value = { 0, #FrameTypeName, FrameTypeName } } )
-		-- elseif(FCF_FrameType == 2) then
-		--	FrameTypeName = "Acknowledgment"
-		--	table.insert(result, { name = "FCF_FrameType", type = "string", value = { 0, #FrameTypeName, FrameTypeName } } )
-		-- elseif(FCF_FrameType == 3) then
-		--	FrameTypeName = "MAC command"
-		--	table.insert(result, { name = "FCF_FrameType", type = "string", value = { 0, #FrameTypeName, FrameTypeName } } )
-		-- end
-
 		-- FCF Security Enabled
-		status = bitStatus(byteArray[iterator], 3)
-		table.insert(result, { name = "FCF_SecurityEnabled", type = "string", value = { 0, #status, status } } )
+		bool = checkBit(byteArray[iterator], 3)
+		if(bool == 1) then
+			table.insert(result, { name = "FCF_SecurityEnabled", type = "string", value = { 0, #"true", "true" } } )
+		end
 
 		-- FCF Frame Pending
-		status = bitStatus(byteArray[iterator], 4)
-		table.insert(result, { name = "FCF_FramePending", type = "string", value = { 0, #status, status } } )
+		bool = checkBit(byteArray[iterator], 4)
+		if(bool == 1) then
+			table.insert(result, { name = "FCF_FramePending", type = "string", value = { 0, #"true", "true" } } )
+		end
 
 		-- FCF Ack Request
-		status = bitStatus(byteArray[iterator], 5)
-		table.insert(result, { name = "FCF_AckRequest", type = "string", value = { 0, #status, status } } )
+		bool = checkBit(byteArray[iterator], 5)
+		if(bool == 1) then
+			table.insert(result, { name = "FCF_AckRequest", type = "string", value = { 0, #"true", "true" } } )
+		end
 
 		-- FCF Intra-PAN
-		status = bitStatus(byteArray[iterator], 6)
-		intraPanStatus = status
-		table.insert(result, { name = "FCF_Intra-PAN", type = "string", value = { 0, #status, status } } )
+		bool = checkBit(byteArray[iterator], 6)
+		if(bool == 1) then
+			table.insert(result, { name = "FCF_Intra-PAN", type = "string", value = { 0, #"true", "true" } } )
+			isIntraPan = 1
+		end
 
 		iterator = iterator + 1
 
@@ -147,7 +145,7 @@ function format(byteArray)
 		end
 
 		-- SourcePanID
-		if(FCF_SourceAddrMode ~= 0 and intraPanStatus == "false") then
+		if(FCF_SourceAddrMode ~= 0 and isIntraPan == 0) then
 			table.insert(result, { name = "SourcePanID", type = "ByteArray", value = { 2, byteArray[iterator], byteArray[iterator + 1] } } )
 			iterator = iterator + 2
 		end
@@ -199,8 +197,12 @@ function format(byteArray)
 		table.insert(result, { name = "CORR", type = "uint8", value = { CORR } } )
 
 		-- CHECKSUM
-		status = bitStatus(byteArray[iterator], 8)
-		table.insert(result, { name = "CHECKSUM", type = "string", value = { 0, #status, status } } )
+		bool = checkBit(byteArray[iterator], 8)
+		if(bool == 1) then
+			table.insert(result, { name = "CHECKSUM", type = "string", value = { 0, #"true", "true" } } )
+		else
+			table.insert(result, { name = "CHECKSUM", type = "string", value = { 0, #"false", "falsey" } } )
+		end
 
 	end
 
