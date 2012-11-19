@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<format name="IEEE 802.15.4" argument="message">
+	<lua file="ieee_802_15_4.lua"></lua>
+</format>
