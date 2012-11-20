@@ -82,11 +82,11 @@ MainWindow::MainWindow(QWidget *parent) :
 
     setWindowIcon(QIcon(":/icons/base"));
 
-    searchWidget = new SearchWidget();
-    connect(searchWidget, SIGNAL(findNext(QString)), this, SLOT(searchNext(QString)));
-    connect(searchWidget, SIGNAL(findPrevious(QString)), this, SLOT(searchPrevious(QString)));
+    quickSearchWidget = new QuickSearchWidget();
+    connect(quickSearchWidget, SIGNAL(findNext(QString)), this, SLOT(quickSearchNext(QString)));
+    connect(quickSearchWidget, SIGNAL(findPrevious(QString)), this, SLOT(quickSearchPrevious(QString)));
 
-    ui->searchToolBar->addWidget(searchWidget);
+    ui->searchToolBar->addWidget(quickSearchWidget);
     ui->searchToolBar->addAction(actionCloseSearch);
     ui->searchToolBar->setVisible(false);
 }
@@ -116,7 +116,7 @@ MainWindow::~MainWindow()
     /*foreach(Format *format, formats)
         delete format;*/
 
-    delete searchWidget;
+    delete quickSearchWidget;
 
     delete ui;
 }
@@ -258,10 +258,10 @@ void MainWindow::createActions()
     actionSelectAll->setShortcut(QKeySequence::SelectAll);
     actionSelectAll->setEnabled(false);
 
-    actionFind = new QAction(QIcon(":/icons/search_lense"), tr("&Find"), this);
-    actionFind->setShortcut(QKeySequence::Find);
-    actionFind->setEnabled(false);
-    connect(actionFind, SIGNAL(triggered()), this, SLOT(showSearch()));
+    actionQuickSearch = new QAction(QIcon(":/icons/search_lense"), tr("&Quick search"), this);
+    actionQuickSearch->setShortcut(QKeySequence::Find);
+    actionQuickSearch->setEnabled(false);
+    connect(actionQuickSearch, SIGNAL(triggered()), this, SLOT(showQuickSearch()));
 
     actionGoToLine = new QAction(tr("&Go to line"), this);
     actionGoToLine->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_L));
@@ -308,7 +308,7 @@ void MainWindow::createActions()
     connect(actionCloseSearch, SIGNAL(triggered()), this, SLOT(closeSearch()));
 }
 
-void MainWindow::showSearch()
+void MainWindow::showQuickSearch()
 {
     ui->searchToolBar->setVisible(true);
 }
@@ -384,7 +384,7 @@ void MainWindow::createMenus()
     menuEdit->addAction(actionFiltration);
     menuEdit->addSeparator();
 
-    menuEdit->addAction(actionFind);
+    menuEdit->addAction(actionQuickSearch);
     menuEdit->addAction(actionGoToLine);
 
     menuView = new QMenu(tr("&View"), this);
@@ -444,7 +444,7 @@ void MainWindow::deleteActions()
     delete actionFullScreen;
     delete actionCopy;
     //delete actionPaste;
-    delete actionFind;
+    delete actionQuickSearch;
     delete actionGoToLine;
     delete actionHelp;
     //delete actionContextHelp;
@@ -665,7 +665,7 @@ void MainWindow::switchToWidget(WidgetType type)
     case EMPTY:
         stackedWidget->setCurrentWidget(emptyWidget);
         activeWidget = EMPTY;
-        actionFind->setEnabled(false);
+        actionQuickSearch->setEnabled(false);
         ui->searchToolBar->setVisible(false);
         break;
 
@@ -675,7 +675,7 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case HEXVISUALIZATION:
-        actionFind->setEnabled(true);
+        actionQuickSearch->setEnabled(true);
 
         statusString += tr("Log size: ");
         statusString += QString::number(logs->at(currentLogId).log->size());
@@ -700,7 +700,7 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case TEXTVISUALIZATION:
-        actionFind->setEnabled(true);
+        actionQuickSearch->setEnabled(true);
 
         statusString += tr("Log size: ");
         statusString += QString::number(logs->at(currentLogId).log->size());
@@ -724,7 +724,7 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case TABLEVISUALIZATION:
-        actionFind->setEnabled(true);
+        actionQuickSearch->setEnabled(true);
 
         statusString += tr("Log size: ");
         statusString += QString::number(logs->at(currentLogId).log->size());
@@ -748,7 +748,7 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case RTTEXTVISUALIZATION:
-        actionFind->setEnabled(true);
+        actionQuickSearch->setEnabled(true);
 
         stackedWidget->setCurrentWidget(realTimeTextVisualization->getWidget());
         activeWidget = RTTEXTVISUALIZATION;
@@ -766,7 +766,7 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case RTHEXVISUALIZATION:
-        actionFind->setEnabled(true);
+        actionQuickSearch->setEnabled(true);
 
         stackedWidget->setCurrentWidget(realTimeHexVisualization->getWidget());
         activeWidget = RTHEXVISUALIZATION;
@@ -784,7 +784,7 @@ void MainWindow::switchToWidget(WidgetType type)
         break;
 
     case RTTABLEVISUALIZATION:
-        actionFind->setEnabled(true);
+        actionQuickSearch->setEnabled(true);
 
         stackedWidget->setCurrentWidget(realTimeTableVisualization->getWidget());
         activeWidget = RTTABLEVISUALIZATION;
@@ -1804,7 +1804,7 @@ void MainWindow::showColumnsSelectionDialog()
     delete dialog;
 }
 
-void MainWindow::searchNext(QString str)
+void MainWindow::quickSearchNext(QString str)
 {
     if(str != "")
     {
@@ -1833,7 +1833,7 @@ void MainWindow::searchNext(QString str)
     }
 }
 
-void MainWindow::searchPrevious(QString str)
+void MainWindow::quickSearchPrevious(QString str)
 {
     if(str != "")
     {

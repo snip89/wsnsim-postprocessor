@@ -1,9 +1,9 @@
-#include "searchwidget.h"
-#include "ui_searchwidget.h"
+#include "quicksearchwidget.h"
+#include "ui_quicksearchwidget.h"
 
-SearchWidget::SearchWidget(QWidget *parent) :
+QuickSearchWidget::QuickSearchWidget(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::SearchWidget)
+    ui(new Ui::QuickSearchWidget)
 {
     ui->setupUi(this);
 
@@ -11,17 +11,17 @@ SearchWidget::SearchWidget(QWidget *parent) :
     connect(ui->searchPreviousPushButton, SIGNAL(clicked()), this, SLOT(findPreviousClicked()));
 }
 
-SearchWidget::~SearchWidget()
+QuickSearchWidget::~QuickSearchWidget()
 {
     delete ui;
 }
 
-void SearchWidget::findNextClicked()
+void QuickSearchWidget::findNextClicked()
 {
     emit findNext(ui->searchLineEdit->text());
 }
 
-void SearchWidget::findPreviousClicked()
+void QuickSearchWidget::findPreviousClicked()
 {
     emit findPrevious(ui->searchLineEdit->text());
 }

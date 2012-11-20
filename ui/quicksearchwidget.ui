@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>SearchWidget</class>
- <widget class="QWidget" name="SearchWidget">
+ <class>QuickSearchWidget</class>
+ <widget class="QWidget" name="QuickSearchWidget">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -57,7 +57,7 @@
      <item row="0" column="0">
       <widget class="QLabel" name="label">
        <property name="text">
-        <string>Find:</string>
+        <string>Quick search:</string>
        </property>
       </widget>
      </item>

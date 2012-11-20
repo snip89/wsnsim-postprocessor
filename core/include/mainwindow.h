@@ -63,7 +63,7 @@
 #include "staticvisualizationtools.h"
 #include "columnsselectiondialog.h"
 #include "formatvalidator.h"
-#include "searchwidget.h"
+#include "quicksearchwidget.h"
 #include "formatsdialog.h"
 
 #define DEFAULT_RECENT_NUMBER 4
@@ -100,7 +100,7 @@ public:
 private:
     bool realTime;
 
-    SearchWidget *searchWidget;
+    QuickSearchWidget *quickSearchWidget;
 
     // actions
     QAction *actionOpen;
@@ -116,7 +116,9 @@ private:
     QAction *actionCopy;
     //QAction *actionPaste;
     QAction *actionSelectAll;
-    QAction *actionFind;
+
+    QAction *actionQuickSearch;
+
     QAction *actionGoToLine;
 
     QAction *actionFormats;
@@ -235,13 +237,13 @@ public slots:
     void openConnection();
 
 private slots:
-    void showSearch();
+    void showQuickSearch();
     void closeSearch();
 
     void showFormatsDialog();
 
-    void searchNext(QString str);
-    void searchPrevious(QString str);
+    void quickSearchNext(QString str);
+    void quickSearchPrevious(QString str);
 
     void updateVisualization(WidgetType type);
 
