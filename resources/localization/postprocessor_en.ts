@@ -602,9 +602,8 @@
         <translation>&amp;Select all</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="261"/>
         <source>&amp;Find</source>
-        <translation>&amp;Find</translation>
+        <translation type="obsolete">&amp;Find</translation>
     </message>
     <message>
         <source>&amp;Find next</source>
@@ -766,6 +765,11 @@
         <location filename="../../core/mainwindow.cpp" line="218"/>
         <source>&amp;Close</source>
         <translation>&amp;Close</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="261"/>
+        <source>&amp;Quick search</source>
+        <translation>&amp;Quick search</translation>
     </message>
     <message>
         <location filename="../../core/mainwindow.cpp" line="279"/>
@@ -973,26 +977,41 @@
     </message>
 </context>
 <context>
-    <name>SearchWidget</name>
+    <name>QuickSearchWidget</name>
     <message>
-        <location filename="../../ui/searchwidget.ui" line="32"/>
+        <location filename="../../ui/quicksearchwidget.ui" line="32"/>
         <source>Form</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../ui/searchwidget.ui" line="43"/>
+        <location filename="../../ui/quicksearchwidget.ui" line="43"/>
         <source>Find previous</source>
         <translation>Find previous</translation>
     </message>
     <message>
-        <location filename="../../ui/searchwidget.ui" line="50"/>
+        <location filename="../../ui/quicksearchwidget.ui" line="50"/>
         <source>Find next</source>
         <translation>Find next</translation>
     </message>
     <message>
-        <location filename="../../ui/searchwidget.ui" line="60"/>
+        <location filename="../../ui/quicksearchwidget.ui" line="60"/>
+        <source>Quick search:</source>
+        <translation>Quick search:</translation>
+    </message>
+</context>
+<context>
+    <name>SearchWidget</name>
+    <message>
+        <source>Find previous</source>
+        <translation type="obsolete">Find previous</translation>
+    </message>
+    <message>
+        <source>Find next</source>
+        <translation type="obsolete">Find next</translation>
+    </message>
+    <message>
         <source>Find:</source>
-        <translation>Find:</translation>
+        <translation type="obsolete">Find:</translation>
     </message>
 </context>
 <context>
