@@ -220,26 +220,67 @@
     </message>
 </context>
 <context>
-    <name>FormatDialog</name>
+    <name>FormatsDialog</name>
     <message>
-        <location filename="../../ui/ui_formatdialog.h" line="114"/>
-        <source>Dialog</source>
-        <translation></translation>
+        <location filename="../../ui/formatsdialog.ui" line="32"/>
+        <source>Formats</source>
+        <translation>Форматы</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_formatdialog.h" line="115"/>
-        <source>Argument:</source>
-        <translation></translation>
+        <location filename="../../core/formatsdialog.cpp" line="27"/>
+        <location filename="../../core/formatsdialog.cpp" line="44"/>
+        <source>add format</source>
+        <translation>добавить формат</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_formatdialog.h" line="116"/>
-        <source>Format file:</source>
-        <translation></translation>
+        <location filename="../../core/formatsdialog.cpp" line="32"/>
+        <location filename="../../core/formatsdialog.cpp" line="49"/>
+        <source>delete format</source>
+        <translation>удалить формат</translation>
     </message>
     <message>
-        <location filename="../../ui/ui_formatdialog.h" line="117"/>
-        <source>Open</source>
-        <translation></translation>
+        <location filename="../../core/formatsdialog.cpp" line="38"/>
+        <location filename="../../core/formatsdialog.cpp" line="68"/>
+        <source>remove all</source>
+        <translation>удалить все</translation>
+    </message>
+    <message>
+        <location filename="../../core/formatsdialog.cpp" line="54"/>
+        <location filename="../../core/formatsdialog.cpp" line="186"/>
+        <source>Format name: </source>
+        <translation>Название формата: </translation>
+    </message>
+    <message>
+        <location filename="../../core/formatsdialog.cpp" line="55"/>
+        <location filename="../../core/formatsdialog.cpp" line="187"/>
+        <source>Argument: </source>
+        <translation>Аргумент: </translation>
+    </message>
+    <message>
+        <location filename="../../core/formatsdialog.cpp" line="56"/>
+        <location filename="../../core/formatsdialog.cpp" line="188"/>
+        <source>Event type: </source>
+        <translation>Тип события: </translation>
+    </message>
+    <message>
+        <location filename="../../core/formatsdialog.cpp" line="87"/>
+        <source>Open format file</source>
+        <translation>Открыть файл формата</translation>
+    </message>
+    <message>
+        <location filename="../../core/formatsdialog.cpp" line="87"/>
+        <source>XML format files (*xml)</source>
+        <translation>XML файлы формата (*xml)</translation>
+    </message>
+    <message>
+        <location filename="../../core/formatsdialog.cpp" line="116"/>
+        <source>Error while loading formatData library</source>
+        <translation>Ошибка при загрузке библиотеки formatData</translation>
+    </message>
+    <message>
+        <location filename="../../core/formatsdialog.cpp" line="138"/>
+        <source>Lua file not found</source>
+        <translation>Не найден файл lua</translation>
     </message>
 </context>
 <context>
@@ -567,33 +608,31 @@
         <translation>&amp;Перейти к строке</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="271"/>
         <source>&amp;Accept format...</source>
-        <translation>&amp;Применить формат...</translation>
+        <translation type="obsolete">&amp;Применить формат...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="275"/>
         <source>&amp;Clear format</source>
-        <translation>&amp;Очистить формат</translation>
+        <translation type="obsolete">&amp;Очистить формат</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="279"/>
+        <location filename="../../core/mainwindow.cpp" line="283"/>
         <source>&amp;Select columns...</source>
         <translation>&amp;Выбрать столбцы...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="283"/>
+        <location filename="../../core/mainwindow.cpp" line="287"/>
         <source>&amp;Filter log...</source>
         <translation>&amp;Фильтрация журнала...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="287"/>
+        <location filename="../../core/mainwindow.cpp" line="291"/>
         <source>&amp;Full screen</source>
         <translation>&amp;На весь экран</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="292"/>
-        <location filename="../../core/mainwindow.cpp" line="400"/>
+        <location filename="../../core/mainwindow.cpp" line="296"/>
+        <location filename="../../core/mainwindow.cpp" line="405"/>
         <source>&amp;Help</source>
         <translation>&amp;Справка</translation>
     </message>
@@ -602,12 +641,12 @@
         <translation type="obsolete">&amp;Контекстная справка</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="297"/>
+        <location filename="../../core/mainwindow.cpp" line="301"/>
         <source>&amp;About...</source>
         <translation>&amp;О программе...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="344"/>
+        <location filename="../../core/mainwindow.cpp" line="348"/>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
@@ -620,12 +659,12 @@
         <translation type="obsolete">&amp;Журналы</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="362"/>
+        <location filename="../../core/mainwindow.cpp" line="366"/>
         <source>&amp;Recent projects...</source>
         <translation>&amp;Последние проекты...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="370"/>
+        <location filename="../../core/mainwindow.cpp" line="374"/>
         <source>&amp;Edit</source>
         <translation>&amp;Правка</translation>
     </message>
@@ -634,78 +673,75 @@
         <translation type="obsolete">&amp;Поиск</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="385"/>
+        <location filename="../../core/mainwindow.cpp" line="390"/>
         <source>&amp;View</source>
         <translation>&amp;Вид</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="397"/>
+        <location filename="../../core/mainwindow.cpp" line="402"/>
         <source>&amp;Tools</source>
         <translation>&amp;Сервис</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="674"/>
-        <location filename="../../core/mainwindow.cpp" line="699"/>
-        <location filename="../../core/mainwindow.cpp" line="723"/>
-        <location filename="../../core/mainwindow.cpp" line="815"/>
-        <location filename="../../core/mainwindow.cpp" line="834"/>
-        <location filename="../../core/mainwindow.cpp" line="853"/>
+        <location filename="../../core/mainwindow.cpp" line="680"/>
+        <location filename="../../core/mainwindow.cpp" line="705"/>
+        <location filename="../../core/mainwindow.cpp" line="729"/>
+        <location filename="../../core/mainwindow.cpp" line="821"/>
+        <location filename="../../core/mainwindow.cpp" line="840"/>
+        <location filename="../../core/mainwindow.cpp" line="859"/>
         <source>Log size: </source>
         <translation>Размер журнала: </translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="676"/>
-        <location filename="../../core/mainwindow.cpp" line="701"/>
-        <location filename="../../core/mainwindow.cpp" line="725"/>
-        <location filename="../../core/mainwindow.cpp" line="817"/>
-        <location filename="../../core/mainwindow.cpp" line="836"/>
-        <location filename="../../core/mainwindow.cpp" line="855"/>
+        <location filename="../../core/mainwindow.cpp" line="682"/>
+        <location filename="../../core/mainwindow.cpp" line="707"/>
+        <location filename="../../core/mainwindow.cpp" line="731"/>
+        <location filename="../../core/mainwindow.cpp" line="823"/>
+        <location filename="../../core/mainwindow.cpp" line="842"/>
+        <location filename="../../core/mainwindow.cpp" line="861"/>
         <source> records</source>
         <translation> записей</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="968"/>
+        <location filename="../../core/mainwindow.cpp" line="1012"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="973"/>
+        <location filename="../../core/mainwindow.cpp" line="1017"/>
         <source>About Qt</source>
         <translation>О Qt</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="982"/>
         <source>Open format file</source>
-        <translation>Открыть файл формата</translation>
+        <translation type="obsolete">Открыть файл формата</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="982"/>
         <source>XML format files (*xml)</source>
-        <translation>XML файлы формата (*xml)</translation>
+        <translation type="obsolete">XML файлы формата (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1011"/>
         <source>Error while loading formatData library</source>
-        <translation>Ошибка при загрузке библиотеки formatData</translation>
+        <translation type="obsolete">Ошибка при загрузке библиотеки formatData</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1265"/>
+        <location filename="../../core/mainwindow.cpp" line="1205"/>
         <source>Open project file</source>
         <translation>Открыть файл проекта</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1265"/>
+        <location filename="../../core/mainwindow.cpp" line="1205"/>
         <source>XML project files (*xml)</source>
         <translation>XML файлы проекта (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1376"/>
+        <location filename="../../core/mainwindow.cpp" line="1316"/>
         <source>No log file in project</source>
         <translation>Нет журнала в проекте</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1168"/>
-        <location filename="../../core/mainwindow.cpp" line="1300"/>
+        <location filename="../../core/mainwindow.cpp" line="1107"/>
+        <location filename="../../core/mainwindow.cpp" line="1240"/>
         <source>Project file not found</source>
         <translation>Файл проекта не найден</translation>
     </message>
@@ -720,17 +756,22 @@
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="300"/>
+        <location filename="../../core/mainwindow.cpp" line="279"/>
+        <source>&amp;Formats...</source>
+        <translation>&amp;Форматы...</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="304"/>
         <source>&amp;About Qt...</source>
         <translation>&amp;О Qt...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="303"/>
+        <location filename="../../core/mainwindow.cpp" line="307"/>
         <source>&amp;Close search</source>
         <translation>&amp;Закончить поиск</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="355"/>
+        <location filename="../../core/mainwindow.cpp" line="359"/>
         <source>&amp;Filtration (logs)</source>
         <translation>&amp;Фильтрация (журналы)</translation>
     </message>
@@ -739,7 +780,7 @@
         <translation type="obsolete">Проект пуст</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1552"/>
+        <location filename="../../core/mainwindow.cpp" line="1493"/>
         <source>No filters</source>
         <translation>Нет фильтров</translation>
     </message>
@@ -776,16 +817,18 @@
         <translation>Ошибка при заргузке библиотеки projectData</translation>
     </message>
     <message>
-        <location filename="../../core/project.cpp" line="272"/>
-        <location filename="../../core/project.cpp" line="319"/>
-        <location filename="../../core/project.cpp" line="402"/>
+        <location filename="../../core/project.cpp" line="276"/>
+        <location filename="../../core/project.cpp" line="363"/>
+        <location filename="../../core/project.cpp" line="410"/>
+        <location filename="../../core/project.cpp" line="493"/>
         <source>Can&apos;t open project file</source>
         <translation>Невозможно открыть файл проекта</translation>
     </message>
     <message>
-        <location filename="../../core/project.cpp" line="285"/>
-        <location filename="../../core/project.cpp" line="332"/>
-        <location filename="../../core/project.cpp" line="415"/>
+        <location filename="../../core/project.cpp" line="289"/>
+        <location filename="../../core/project.cpp" line="376"/>
+        <location filename="../../core/project.cpp" line="423"/>
+        <location filename="../../core/project.cpp" line="506"/>
         <source>Error in xml structure</source>
         <translation>Ошибка в структуре xml</translation>
     </message>
@@ -806,6 +849,11 @@
         <location filename="../../core/formatvalidator.cpp" line="13"/>
         <source>No format argument name</source>
         <translation>Нет имени аргумента формата</translation>
+    </message>
+    <message>
+        <location filename="../../core/formatvalidator.cpp" line="19"/>
+        <source>No lua file in format</source>
+        <translation>В формате отсутствует ссылка на файл lua</translation>
     </message>
     <message>
         <source>No format fields</source>
@@ -902,12 +950,12 @@
         <translation>Невозможно выполнить функцию lua format</translation>
     </message>
     <message>
-        <location filename="../../core/staticlualoader.cpp" line="98"/>
+        <location filename="../../core/staticlualoader.cpp" line="113"/>
         <source>No returned value</source>
         <translation>Нет возвращенного значения</translation>
     </message>
     <message>
-        <location filename="../../core/staticlualoader.cpp" line="135"/>
+        <location filename="../../core/staticlualoader.cpp" line="150"/>
         <source>There is no function format in file </source>
         <translatorcomment>Нет функции format в файле </translatorcomment>
         <translation></translation>
