@@ -268,13 +268,17 @@ void MainWindow::createActions()
     connect(actionGoToLine, SIGNAL(triggered()), this, SLOT(showGoToLineDialog()));
     actionGoToLine->setEnabled(false);
 
-    actionAcceptFormat = new QAction(tr("&Accept format..."), this);
-    actionAcceptFormat->setEnabled(false);
-    connect(actionAcceptFormat, SIGNAL(triggered()), this, SLOT(loadFormat()));
+    //actionAcceptFormat = new QAction(tr("&Accept format..."), this);
+    //actionAcceptFormat->setEnabled(false);
+    //connect(actionAcceptFormat, SIGNAL(triggered()), this, SLOT(loadFormat()));
 
-    actionClearFormat = new QAction(tr("&Clear format"), this);
-    actionClearFormat->setEnabled(false);
-    connect(actionClearFormat, SIGNAL(triggered()), this, SLOT(clearFormat()));
+    //actionClearFormat = new QAction(tr("&Clear format"), this);
+    //actionClearFormat->setEnabled(false);
+    //connect(actionClearFormat, SIGNAL(triggered()), this, SLOT(clearFormat()));
+
+    actionFormats = new QAction(tr("&Formats..."), this);
+    actionFormats->setEnabled(false);
+    connect(actionFormats, SIGNAL(triggered()), this, SLOT(showFormatsDialog()));
 
     actionSelectColumns = new QAction(tr("&Select columns..."), this);
     actionSelectColumns->setEnabled(false);
@@ -373,7 +377,8 @@ void MainWindow::createMenus()
     menuEdit->addSeparator();
     menuEdit->addAction(actionSelectAll);
     menuEdit->addSeparator();
-    menuEdit->addAction(actionAcceptFormat);
+    menuEdit->addAction(actionFormats);
+    //menuEdit->addAction(actionAcceptFormat);
     //menuEdit->addAction(actionClearFormat);
     menuEdit->addSeparator();
     menuEdit->addAction(actionFiltration);
@@ -432,8 +437,8 @@ void MainWindow::deleteActions()
     delete actionHexVisualization;
     delete actionTextVisualization;
     delete actionTableVisualization;
-    delete actionAcceptFormat;
-    delete actionClearFormat;
+    //delete actionAcceptFormat;
+    //delete actionClearFormat;
     delete actionSelectColumns;
     delete actionFiltration;
     delete actionFullScreen;
@@ -554,11 +559,12 @@ void MainWindow::closeLog()
         isLogOpened = false;
     }
 
-    actionAcceptFormat->setEnabled(false);
+    actionFormats->setEnabled(false);
+    //actionAcceptFormat->setEnabled(false);
 
     clearFormat();
 
-    actionClearFormat->setEnabled(false);
+    //actionClearFormat->setEnabled(false);
 }
 
 void MainWindow::insertToRecent(QString fileName)
@@ -923,6 +929,44 @@ void MainWindow::updateVisualization(WidgetType type)
     }
 }
 
+void MainWindow::showFormatsDialog()
+{
+    FormatsDialog *dialog = new FormatsDialog(project, formats);
+
+    dialog->exec();
+
+    formats = dialog->getFormats();
+
+    delete dialog;
+
+    if(!realTime)
+    {
+        if(activeWidget == TEXTVISUALIZATION)
+            updateVisualization(TEXTVISUALIZATION);
+
+        if(activeWidget == HEXVISUALIZATION)
+            updateVisualization(HEXVISUALIZATION);
+
+        if(activeWidget == TABLEVISUALIZATION)
+            updateVisualization(TABLEVISUALIZATION);
+    }
+    else
+    {
+        rtHexUpdated = false;
+        rtTextUpdated = false;
+        rtTableUpdated = false;
+
+        if(activeWidget == RTTEXTVISUALIZATION)
+            updateVisualization(RTTEXTVISUALIZATION);
+
+        if(activeWidget == RTHEXVISUALIZATION)
+            updateVisualization(RTHEXVISUALIZATION);
+
+        if(activeWidget == RTTABLEVISUALIZATION)
+            updateVisualization(RTTABLEVISUALIZATION);
+    }
+}
+
 bool MainWindow::isFullScreen()
 {
     return actionFullScreen->isChecked();
@@ -973,115 +1017,6 @@ void MainWindow::showAboutQtDialog()
     QMessageBox::aboutQt(this, tr("About Qt"));
 }
 
-void MainWindow::loadFormat()
-{
-    QString name = "";
-
-    QString dirPath = settings.value("General/Gui/Format_file_dialog_path").toString();
-
-    QFileDialog *fileDialog = new QFileDialog(this, tr("Open format file"), dirPath, tr("XML format files (*xml)"));
-    fileDialog->move(settings.value("Hidden/Gui/File_dialog_pos").value<QPoint>());
-    fileDialog->resize(settings.value("Hidden/Gui/File_dialog_size").value<QSize>());
-    fileDialog->setWindowIcon(QIcon(":/icons/folder"));
-
-    if(fileDialog->exec())
-        name = fileDialog->selectedFiles().at(0);
-
-    settings.setValue("Hidden/Gui/File_dialog_pos", fileDialog->pos());
-    settings.setValue("Hidden/Gui/File_dialog_size", fileDialog->size());
-
-    delete fileDialog;
-
-    if(name == "")
-        return;
-
-    QDir dir;
-    QFileInfo finfo = QFileInfo(name);
-
-    dirPath = dir.filePath(name);
-    dirPath.chop(finfo.fileName().size());
-    settings.setValue("General/Gui/Format_file_dialog_path", dirPath);
-
-    QDir::setCurrent(QApplication::applicationDirPath());
-
-    QString errorString = QString::null;
-    QLibrary formatDataLibrary("./formatData");
-    if(!formatDataLibrary.load())
-    {
-        errorMessager.showMessage(tr("Error while loading formatData library"));
-        return;
-    }
-
-    typedef Format*(*formatDataLoad) (QString& formatFileName, QString* errorMessage);
-    formatDataLoad load = (formatDataLoad) formatDataLibrary.resolve("load");
-
-    Format *format = load(name, &errorString);
-
-    FormatValidator::validate(format, errorString);
-
-    if(!errorString.isNull())
-    {
-        errorMessager.showMessage(errorString);
-        return;
-    }
-
-    FormatAcceptingDialog *formatAcceptingDialog = new FormatAcceptingDialog(project,
-                                                                             format->formatInfo["argument"]);
-
-    formatAcceptingDialog->move(settings.value("Hidden/Gui/Columns_selection_dialog_pos").value<QPoint>());
-
-    if(formatAcceptingDialog->exec())
-    {
-        settings.setValue("Hidden/Gui/Columns_selection_dialog_pos", formatAcceptingDialog->pos());
-
-        AttrInfo info = formatAcceptingDialog->getArgument();
-
-        format->argument = info;
-
-        // TODO: убивать формат если такой уже есть
-        //project->injectFormatSettings();
-
-        formats.append(format);
-    }
-    else
-    {
-        settings.setValue("Hidden/Gui/Columns_selection_dialog_pos", formatAcceptingDialog->pos());
-        delete format;
-        return;
-    }
-
-    delete formatAcceptingDialog;
-
-    if(!realTime)
-    {
-        if(activeWidget == TEXTVISUALIZATION)
-            updateVisualization(TEXTVISUALIZATION);
-
-        if(activeWidget == HEXVISUALIZATION)
-            updateVisualization(HEXVISUALIZATION);
-
-        if(activeWidget == TABLEVISUALIZATION)
-            updateVisualization(TABLEVISUALIZATION);
-    }
-    else
-    {
-        rtHexUpdated = false;
-        rtTextUpdated = false;
-        rtTableUpdated = false;
-
-        if(activeWidget == RTTEXTVISUALIZATION)
-            updateVisualization(RTTEXTVISUALIZATION);
-
-        if(activeWidget == RTHEXVISUALIZATION)
-            updateVisualization(RTHEXVISUALIZATION);
-
-        if(activeWidget == RTTABLEVISUALIZATION)
-            updateVisualization(RTTABLEVISUALIZATION);
-    }
-
-    actionClearFormat->setEnabled(true);
-}
-
 void MainWindow::clearFormat()
 {
     if(realTime)
@@ -1096,7 +1031,7 @@ void MainWindow::clearFormat()
 
     formats.clear();
 
-    actionClearFormat->setEnabled(false);
+    //actionClearFormat->setEnabled(false);
 
     if(!realTime)
     {
@@ -1240,7 +1175,8 @@ void MainWindow::openConnection()
     actionTextVisualization->setEnabled(true);
     actionTableVisualization->setEnabled(true);
 
-    actionAcceptFormat->setEnabled(true);
+    actionFormats->setEnabled(true);
+    //actionAcceptFormat->setEnabled(true);
 
     realTime = true;
 
@@ -1516,11 +1452,12 @@ void MainWindow::closeConnection()
 
         setWindowTitle(prName);
 
-        actionAcceptFormat->setEnabled(false);
+        actionFormats->setEnabled(false);
+        //actionAcceptFormat->setEnabled(false);
 
         clearFormat();
 
-        actionClearFormat->setEnabled(false);
+        //actionClearFormat->setEnabled(false);
     }
 }
 
@@ -1580,7 +1517,8 @@ void MainWindow::openLog(QString name)
     actionTextVisualization->setEnabled(true);
     actionTableVisualization->setEnabled(true);
 
-    actionAcceptFormat->setEnabled(true);
+    actionFormats->setEnabled(true);
+    //actionAcceptFormat->setEnabled(true);
 
     actionFiltration->setEnabled(true);
     

@@ -14,6 +14,12 @@ void FormatValidator::validate(Format *format, QString &errorString)
         return;
     }
 
+    if(format->luaInfo["file"] == "")
+    {
+        errorString = QObject::tr("No lua file in format");
+        return;
+    }
+
     /*if(format->fieldsInfo.size() == 0)
     {
         errorString = QObject::tr("No format fields");

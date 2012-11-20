@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QObject>
+#include <QFile>
 
 #include "formatParams.h"
 #include "logdatatypes.h"

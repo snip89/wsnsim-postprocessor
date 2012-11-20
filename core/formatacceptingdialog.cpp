@@ -21,6 +21,7 @@ AttrInfo FormatAcceptingDialog::getArgument()
     AttrInfo info;
     info["eventID"] = values[0];
     info["argumentID"] = values[1];
+    info["eventType"] = values[2];
 
     return info;
 }
@@ -38,7 +39,7 @@ void FormatAcceptingDialog::initComboBox()
         {
             if(name == argument["name"])
             {
-                QString info = event.eventInfo["ID"] + ";" + argument["ID"];
+                QString info = event.eventInfo["ID"] + ";" + argument["ID"] + ";" + event.eventInfo["name"];
 
                 ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"],
                                                QVariant(info));
@@ -52,7 +53,7 @@ void FormatAcceptingDialog::initComboBox()
         {
             if(name == argument["name"])
             {
-                QString info = event.eventInfo["ID"] + ";" + argument["ID"];
+                QString info = event.eventInfo["ID"] + ";" + argument["ID"] + ";" + event.eventInfo["name"];
 
                 ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"],
                                                QVariant(info));

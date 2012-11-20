@@ -201,7 +201,7 @@ function format(byteArray)
 		if(bool == 1) then
 			table.insert(result, { name = "CHECKSUM", type = "string", value = { 0, #"true", "true" } } )
 		else
-			table.insert(result, { name = "CHECKSUM", type = "string", value = { 0, #"false", "falsey" } } )
+			table.insert(result, { name = "CHECKSUM", type = "string", value = { 0, #"false", "false" } } )
 		end
 
 	end

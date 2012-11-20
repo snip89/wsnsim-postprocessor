@@ -64,6 +64,7 @@
 #include "columnsselectiondialog.h"
 #include "formatvalidator.h"
 #include "searchwidget.h"
+#include "formatsdialog.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -118,8 +119,10 @@ private:
     QAction *actionFind;
     QAction *actionGoToLine;
 
-    QAction *actionAcceptFormat;
-    QAction *actionClearFormat;
+    QAction *actionFormats;
+
+    //QAction *actionAcceptFormat;
+    //QAction *actionClearFormat;
 
     QAction *actionSelectColumns;
 
@@ -235,6 +238,8 @@ private slots:
     void showSearch();
     void closeSearch();
 
+    void showFormatsDialog();
+
     void searchNext(QString str);
     void searchPrevious(QString str);
 
@@ -258,7 +263,6 @@ private slots:
     void showAboutDialog();
     void showAboutQtDialog();
 
-    void loadFormat();
     void clearFormat();
 
     // void selectedSetting(QString topLevelName, QString settingName);
