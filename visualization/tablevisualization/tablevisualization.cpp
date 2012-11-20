@@ -80,6 +80,9 @@ void TableVisualization::searchNext(QString str)
 {
     QList<QTableWidgetItem*> items = viewer->findItems(str, Qt::MatchContains | Qt::MatchCaseSensitive);
 
+    if(items.size() == 0)
+        return;
+
     if(!items[itemSearchedIndex]->isSelected())
     {
         viewer->setCurrentItem(items[itemSearchedIndex]);
@@ -166,6 +169,9 @@ void TableVisualization::searchNext(QString str)
 void TableVisualization::searchPrevious(QString str)
 {
     QList<QTableWidgetItem*> items = viewer->findItems(str, Qt::MatchContains | Qt::MatchCaseSensitive);
+
+    if(items.size() == 0)
+        return;
 
     if(!items[itemSearchedIndex]->isSelected())
     {
