@@ -126,6 +126,14 @@
     </message>
 </context>
 <context>
+    <name>Dialog</name>
+    <message>
+        <location filename="../../ui/printdialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>EmptySettings</name>
     <message>
         <location filename="../../ui/emptysettings.ui" line="14"/>
@@ -156,52 +164,52 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="220"/>
-        <location filename="../../core/filtrationwidget.cpp" line="253"/>
+        <location filename="../../core/filtrationwidget.cpp" line="224"/>
+        <location filename="../../core/filtrationwidget.cpp" line="257"/>
         <source>Filtration error</source>
         <translation>Ошибка фильтрации</translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="312"/>
-        <location filename="../../core/filtrationwidget.cpp" line="328"/>
+        <location filename="../../core/filtrationwidget.cpp" line="316"/>
+        <location filename="../../core/filtrationwidget.cpp" line="332"/>
         <source>==</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="313"/>
-        <location filename="../../core/filtrationwidget.cpp" line="322"/>
+        <location filename="../../core/filtrationwidget.cpp" line="317"/>
+        <location filename="../../core/filtrationwidget.cpp" line="326"/>
         <source>&lt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="314"/>
+        <location filename="../../core/filtrationwidget.cpp" line="318"/>
         <source>&lt;=</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="315"/>
-        <location filename="../../core/filtrationwidget.cpp" line="323"/>
+        <location filename="../../core/filtrationwidget.cpp" line="319"/>
+        <location filename="../../core/filtrationwidget.cpp" line="327"/>
         <source>&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="316"/>
+        <location filename="../../core/filtrationwidget.cpp" line="320"/>
         <source>&gt;=</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="317"/>
-        <location filename="../../core/filtrationwidget.cpp" line="329"/>
+        <location filename="../../core/filtrationwidget.cpp" line="321"/>
+        <location filename="../../core/filtrationwidget.cpp" line="333"/>
         <source>!=</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="335"/>
+        <location filename="../../core/filtrationwidget.cpp" line="339"/>
         <source>Value field is empty</source>
         <translation>Поле значение не заполнено</translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="405"/>
+        <location filename="../../core/filtrationwidget.cpp" line="409"/>
         <source>delete</source>
         <translation>удалить</translation>
     </message>
@@ -279,8 +287,12 @@
     </message>
     <message>
         <location filename="../../core/formatsdialog.cpp" line="138"/>
+        <source>Lua file not found: </source>
+        <translation>Файл lua не найден: </translation>
+    </message>
+    <message>
         <source>Lua file not found</source>
-        <translation>Не найден файл lua</translation>
+        <translation type="obsolete">Не найден файл lua</translation>
     </message>
 </context>
 <context>
@@ -533,7 +545,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="210"/>
+        <location filename="../../core/mainwindow.cpp" line="308"/>
         <source>&amp;Open project...</source>
         <translation>&amp;Открыть проект...</translation>
     </message>
@@ -546,48 +558,46 @@
         <translation type="obsolete">&amp;Закрыть проект</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="223"/>
+        <location filename="../../core/mainwindow.cpp" line="321"/>
         <source>&amp;Print...</source>
         <translation>&amp;Печать...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="227"/>
+        <location filename="../../core/mainwindow.cpp" line="331"/>
         <source>&amp;Exit</source>
         <translation>&amp;Выход</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="231"/>
+        <location filename="../../core/mainwindow.cpp" line="335"/>
         <source>&amp;Settings...</source>
         <translation>&amp;Настройки...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="234"/>
+        <location filename="../../core/mainwindow.cpp" line="338"/>
         <source>&amp;Hex</source>
         <translation>&amp;Шестнадцатиричное</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="239"/>
+        <location filename="../../core/mainwindow.cpp" line="343"/>
         <source>&amp;Text</source>
         <translation>&amp;Текстовое</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="244"/>
+        <location filename="../../core/mainwindow.cpp" line="348"/>
         <source>&amp;Table</source>
         <translation>&amp;Табличное</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="249"/>
         <source>&amp;Copy</source>
-        <translation>&amp;Копировать</translation>
+        <translation type="obsolete">&amp;Копировать</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
         <translation type="obsolete">&amp;Вставить</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="257"/>
         <source>&amp;Select all</source>
-        <translation>&amp;Выделить все</translation>
+        <translation type="obsolete">&amp;Выделить все</translation>
     </message>
     <message>
         <source>&amp;Find</source>
@@ -602,7 +612,7 @@
         <translation type="obsolete">&amp;Найти предыдущее</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="266"/>
+        <location filename="../../core/mainwindow.cpp" line="358"/>
         <source>&amp;Go to line</source>
         <translation>&amp;Перейти к строке</translation>
     </message>
@@ -615,23 +625,23 @@
         <translation type="obsolete">&amp;Очистить формат</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="283"/>
+        <location filename="../../core/mainwindow.cpp" line="375"/>
         <source>&amp;Select columns...</source>
         <translation>&amp;Выбрать столбцы...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="287"/>
+        <location filename="../../core/mainwindow.cpp" line="379"/>
         <source>&amp;Filter log...</source>
         <translation>&amp;Фильтрация журнала...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="291"/>
+        <location filename="../../core/mainwindow.cpp" line="383"/>
         <source>&amp;Full screen</source>
         <translation>&amp;На весь экран</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="296"/>
-        <location filename="../../core/mainwindow.cpp" line="405"/>
+        <location filename="../../core/mainwindow.cpp" line="388"/>
+        <location filename="../../core/mainwindow.cpp" line="490"/>
         <source>&amp;Help</source>
         <translation>&amp;Справка</translation>
     </message>
@@ -640,12 +650,12 @@
         <translation type="obsolete">&amp;Контекстная справка</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="301"/>
+        <location filename="../../core/mainwindow.cpp" line="393"/>
         <source>&amp;About...</source>
         <translation>&amp;О программе...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="348"/>
+        <location filename="../../core/mainwindow.cpp" line="441"/>
         <source>&amp;File</source>
         <translation>&amp;Файл</translation>
     </message>
@@ -658,12 +668,12 @@
         <translation type="obsolete">&amp;Журналы</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="366"/>
+        <location filename="../../core/mainwindow.cpp" line="458"/>
         <source>&amp;Recent projects...</source>
         <translation>&amp;Последние проекты...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="374"/>
+        <location filename="../../core/mainwindow.cpp" line="467"/>
         <source>&amp;Edit</source>
         <translation>&amp;Правка</translation>
     </message>
@@ -672,42 +682,42 @@
         <translation type="obsolete">&amp;Поиск</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="390"/>
+        <location filename="../../core/mainwindow.cpp" line="475"/>
         <source>&amp;View</source>
         <translation>&amp;Вид</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="402"/>
+        <location filename="../../core/mainwindow.cpp" line="487"/>
         <source>&amp;Tools</source>
         <translation>&amp;Сервис</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="680"/>
-        <location filename="../../core/mainwindow.cpp" line="705"/>
-        <location filename="../../core/mainwindow.cpp" line="729"/>
+        <location filename="../../core/mainwindow.cpp" line="766"/>
+        <location filename="../../core/mainwindow.cpp" line="794"/>
         <location filename="../../core/mainwindow.cpp" line="821"/>
-        <location filename="../../core/mainwindow.cpp" line="840"/>
-        <location filename="../../core/mainwindow.cpp" line="859"/>
+        <location filename="../../core/mainwindow.cpp" line="917"/>
+        <location filename="../../core/mainwindow.cpp" line="936"/>
+        <location filename="../../core/mainwindow.cpp" line="955"/>
         <source>Log size: </source>
         <translation>Размер журнала: </translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="682"/>
-        <location filename="../../core/mainwindow.cpp" line="707"/>
-        <location filename="../../core/mainwindow.cpp" line="731"/>
+        <location filename="../../core/mainwindow.cpp" line="768"/>
+        <location filename="../../core/mainwindow.cpp" line="796"/>
         <location filename="../../core/mainwindow.cpp" line="823"/>
-        <location filename="../../core/mainwindow.cpp" line="842"/>
-        <location filename="../../core/mainwindow.cpp" line="861"/>
+        <location filename="../../core/mainwindow.cpp" line="919"/>
+        <location filename="../../core/mainwindow.cpp" line="938"/>
+        <location filename="../../core/mainwindow.cpp" line="957"/>
         <source> records</source>
         <translation> записей</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1012"/>
+        <location filename="../../core/mainwindow.cpp" line="1108"/>
         <source>About</source>
         <translation>О программе</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1017"/>
+        <location filename="../../core/mainwindow.cpp" line="1113"/>
         <source>About Qt</source>
         <translation>О Qt</translation>
     </message>
@@ -720,62 +730,83 @@
         <translation type="obsolete">XML файлы формата (*xml)</translation>
     </message>
     <message>
+        <location filename="../../core/mainwindow.cpp" line="1336"/>
         <source>Error while loading formatData library</source>
-        <translation type="obsolete">Ошибка при загрузке библиотеки formatData</translation>
+        <translation>Ошибка при загрузке библиотеки formatData</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1205"/>
+        <location filename="../../core/mainwindow.cpp" line="1358"/>
+        <source>Lua file not found: </source>
+        <translation>Файл lua не найден: </translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="1380"/>
         <source>Open project file</source>
         <translation>Открыть файл проекта</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1205"/>
+        <location filename="../../core/mainwindow.cpp" line="1380"/>
         <source>XML project files (*xml)</source>
         <translation>XML файлы проекта (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1316"/>
+        <location filename="../../core/mainwindow.cpp" line="1514"/>
         <source>No log file in project</source>
         <translation>Нет журнала в проекте</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1107"/>
-        <location filename="../../core/mainwindow.cpp" line="1240"/>
+        <location filename="../../core/mainwindow.cpp" line="1203"/>
+        <location filename="../../core/mainwindow.cpp" line="1415"/>
         <source>Project file not found</source>
         <translation>Файл проекта не найден</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="214"/>
+        <location filename="../../core/mainwindow.cpp" line="163"/>
+        <source>Export as txt file</source>
+        <translation>Экспорт в txt</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="163"/>
+        <source>txt files (*txt)</source>
+        <translation>txt файлы (*txt)</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="312"/>
         <source>&amp;Open connection...</source>
         <translation>&amp;Присоединиться...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="218"/>
+        <location filename="../../core/mainwindow.cpp" line="316"/>
         <source>&amp;Close</source>
         <translation>&amp;Закрыть</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="261"/>
+        <location filename="../../core/mainwindow.cpp" line="326"/>
+        <source>&amp;Export as txt...</source>
+        <translation>&amp;Экспорт в txt...</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="353"/>
         <source>&amp;Quick search</source>
         <translation>&amp;Быстрый поиск</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="279"/>
+        <location filename="../../core/mainwindow.cpp" line="371"/>
         <source>&amp;Formats...</source>
         <translation>&amp;Форматы...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="304"/>
+        <location filename="../../core/mainwindow.cpp" line="396"/>
         <source>&amp;About Qt...</source>
         <translation>&amp;О Qt...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="307"/>
+        <location filename="../../core/mainwindow.cpp" line="399"/>
         <source>&amp;Close search</source>
         <translation>&amp;Закончить поиск</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="359"/>
+        <location filename="../../core/mainwindow.cpp" line="452"/>
         <source>&amp;Filtration (logs)</source>
         <translation>&amp;Фильтрация (журналы)</translation>
     </message>
@@ -784,7 +815,7 @@
         <translation type="obsolete">Проект пуст</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1493"/>
+        <location filename="../../core/mainwindow.cpp" line="1691"/>
         <source>No filters</source>
         <translation>Нет фильтров</translation>
     </message>
@@ -821,18 +852,22 @@
         <translation>Ошибка при заргузке библиотеки projectData</translation>
     </message>
     <message>
-        <location filename="../../core/project.cpp" line="276"/>
-        <location filename="../../core/project.cpp" line="363"/>
-        <location filename="../../core/project.cpp" line="410"/>
-        <location filename="../../core/project.cpp" line="493"/>
+        <location filename="../../core/project.cpp" line="272"/>
+        <location filename="../../core/project.cpp" line="319"/>
+        <location filename="../../core/project.cpp" line="402"/>
+        <location filename="../../core/project.cpp" line="454"/>
+        <location filename="../../core/project.cpp" line="501"/>
+        <location filename="../../core/project.cpp" line="584"/>
         <source>Can&apos;t open project file</source>
         <translation>Невозможно открыть файл проекта</translation>
     </message>
     <message>
-        <location filename="../../core/project.cpp" line="289"/>
-        <location filename="../../core/project.cpp" line="376"/>
-        <location filename="../../core/project.cpp" line="423"/>
-        <location filename="../../core/project.cpp" line="506"/>
+        <location filename="../../core/project.cpp" line="285"/>
+        <location filename="../../core/project.cpp" line="332"/>
+        <location filename="../../core/project.cpp" line="415"/>
+        <location filename="../../core/project.cpp" line="467"/>
+        <location filename="../../core/project.cpp" line="514"/>
+        <location filename="../../core/project.cpp" line="597"/>
         <source>Error in xml structure</source>
         <translation>Ошибка в структуре xml</translation>
     </message>
@@ -973,19 +1008,37 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../ui/quicksearchwidget.ui" line="43"/>
+        <location filename="../../ui/quicksearchwidget.ui" line="52"/>
         <source>Find previous</source>
         <translation>Найти предыдущее</translation>
     </message>
     <message>
-        <location filename="../../ui/quicksearchwidget.ui" line="50"/>
+        <location filename="../../ui/quicksearchwidget.ui" line="59"/>
         <source>Find next</source>
         <translation>Найти далее</translation>
     </message>
     <message>
-        <location filename="../../ui/quicksearchwidget.ui" line="60"/>
+        <location filename="../../ui/quicksearchwidget.ui" line="69"/>
         <source>Quick search:</source>
         <translation>Быстрый поиск:</translation>
+    </message>
+</context>
+<context>
+    <name>RecordsSelectionDialog</name>
+    <message>
+        <location filename="../../ui/recordsselectiondialog.ui" line="26"/>
+        <source>Records range</source>
+        <translation>Диапазон записей</translation>
+    </message>
+    <message>
+        <location filename="../../ui/recordsselectiondialog.ui" line="34"/>
+        <source>From record:</source>
+        <translation>От записи:</translation>
+    </message>
+    <message>
+        <location filename="../../ui/recordsselectiondialog.ui" line="41"/>
+        <source>To record:</source>
+        <translation>До записи:</translation>
     </message>
 </context>
 <context>

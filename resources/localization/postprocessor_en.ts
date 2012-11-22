@@ -118,6 +118,14 @@
     </message>
 </context>
 <context>
+    <name>Dialog</name>
+    <message>
+        <location filename="../../ui/printdialog.ui" line="14"/>
+        <source>Dialog</source>
+        <translation></translation>
+    </message>
+</context>
+<context>
     <name>EmptySettings</name>
     <message>
         <location filename="../../ui/emptysettings.ui" line="14"/>
@@ -148,52 +156,52 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="220"/>
-        <location filename="../../core/filtrationwidget.cpp" line="253"/>
+        <location filename="../../core/filtrationwidget.cpp" line="224"/>
+        <location filename="../../core/filtrationwidget.cpp" line="257"/>
         <source>Filtration error</source>
         <translation>Filtration error</translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="312"/>
-        <location filename="../../core/filtrationwidget.cpp" line="328"/>
+        <location filename="../../core/filtrationwidget.cpp" line="316"/>
+        <location filename="../../core/filtrationwidget.cpp" line="332"/>
         <source>==</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="313"/>
-        <location filename="../../core/filtrationwidget.cpp" line="322"/>
+        <location filename="../../core/filtrationwidget.cpp" line="317"/>
+        <location filename="../../core/filtrationwidget.cpp" line="326"/>
         <source>&lt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="314"/>
+        <location filename="../../core/filtrationwidget.cpp" line="318"/>
         <source>&lt;=</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="315"/>
-        <location filename="../../core/filtrationwidget.cpp" line="323"/>
+        <location filename="../../core/filtrationwidget.cpp" line="319"/>
+        <location filename="../../core/filtrationwidget.cpp" line="327"/>
         <source>&gt;</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="316"/>
+        <location filename="../../core/filtrationwidget.cpp" line="320"/>
         <source>&gt;=</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="317"/>
-        <location filename="../../core/filtrationwidget.cpp" line="329"/>
+        <location filename="../../core/filtrationwidget.cpp" line="321"/>
+        <location filename="../../core/filtrationwidget.cpp" line="333"/>
         <source>!=</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="335"/>
+        <location filename="../../core/filtrationwidget.cpp" line="339"/>
         <source>Value field is empty</source>
         <translation>Value field is empty</translation>
     </message>
     <message>
-        <location filename="../../core/filtrationwidget.cpp" line="405"/>
+        <location filename="../../core/filtrationwidget.cpp" line="409"/>
         <source>delete</source>
         <translation>delete</translation>
     </message>
@@ -271,8 +279,12 @@
     </message>
     <message>
         <location filename="../../core/formatsdialog.cpp" line="138"/>
+        <source>Lua file not found: </source>
+        <translation>Lua file not found: </translation>
+    </message>
+    <message>
         <source>Lua file not found</source>
-        <translation>Lua file not found</translation>
+        <translation type="obsolete">Lua file not found</translation>
     </message>
 </context>
 <context>
@@ -545,7 +557,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="210"/>
+        <location filename="../../core/mainwindow.cpp" line="308"/>
         <source>&amp;Open project...</source>
         <translation>&amp;Open project...</translation>
     </message>
@@ -558,48 +570,46 @@
         <translation type="obsolete">&amp;Close project</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="223"/>
+        <location filename="../../core/mainwindow.cpp" line="321"/>
         <source>&amp;Print...</source>
         <translation>&amp;Print...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="227"/>
+        <location filename="../../core/mainwindow.cpp" line="331"/>
         <source>&amp;Exit</source>
         <translation>&amp;Exit</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="231"/>
+        <location filename="../../core/mainwindow.cpp" line="335"/>
         <source>&amp;Settings...</source>
         <translation>&amp;Settings...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="234"/>
+        <location filename="../../core/mainwindow.cpp" line="338"/>
         <source>&amp;Hex</source>
         <translation>&amp;Hex</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="239"/>
+        <location filename="../../core/mainwindow.cpp" line="343"/>
         <source>&amp;Text</source>
         <translation>&amp;Text</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="244"/>
+        <location filename="../../core/mainwindow.cpp" line="348"/>
         <source>&amp;Table</source>
         <translation>&amp;Table</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="249"/>
         <source>&amp;Copy</source>
-        <translation>&amp;Copy</translation>
+        <translation type="obsolete">&amp;Copy</translation>
     </message>
     <message>
         <source>&amp;Paste</source>
         <translation type="obsolete">&amp;Paste</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="257"/>
         <source>&amp;Select all</source>
-        <translation>&amp;Select all</translation>
+        <translation type="obsolete">&amp;Select all</translation>
     </message>
     <message>
         <source>&amp;Find</source>
@@ -614,7 +624,7 @@
         <translation type="obsolete">&amp;Find previous</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="266"/>
+        <location filename="../../core/mainwindow.cpp" line="358"/>
         <source>&amp;Go to line</source>
         <translation>&amp;Go to line</translation>
     </message>
@@ -627,23 +637,23 @@
         <translation type="obsolete">&amp;Clear format</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="283"/>
+        <location filename="../../core/mainwindow.cpp" line="375"/>
         <source>&amp;Select columns...</source>
         <translation>&amp;Select columns...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="287"/>
+        <location filename="../../core/mainwindow.cpp" line="379"/>
         <source>&amp;Filter log...</source>
         <translation>&amp;Filter log...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="291"/>
+        <location filename="../../core/mainwindow.cpp" line="383"/>
         <source>&amp;Full screen</source>
         <translation>&amp;Full screen</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="296"/>
-        <location filename="../../core/mainwindow.cpp" line="405"/>
+        <location filename="../../core/mainwindow.cpp" line="388"/>
+        <location filename="../../core/mainwindow.cpp" line="490"/>
         <source>&amp;Help</source>
         <translation>&amp;Help</translation>
     </message>
@@ -652,12 +662,12 @@
         <translation type="obsolete">&amp;Context help</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="301"/>
+        <location filename="../../core/mainwindow.cpp" line="393"/>
         <source>&amp;About...</source>
         <translation>&amp;About...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="348"/>
+        <location filename="../../core/mainwindow.cpp" line="441"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
@@ -670,12 +680,12 @@
         <translation type="obsolete">&amp;Logs</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="366"/>
+        <location filename="../../core/mainwindow.cpp" line="458"/>
         <source>&amp;Recent projects...</source>
         <translation>&amp;Recent projects...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="374"/>
+        <location filename="../../core/mainwindow.cpp" line="467"/>
         <source>&amp;Edit</source>
         <translation>&amp;Edit</translation>
     </message>
@@ -684,42 +694,42 @@
         <translation type="obsolete">&amp;Search</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="390"/>
+        <location filename="../../core/mainwindow.cpp" line="475"/>
         <source>&amp;View</source>
         <translation>&amp;View</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="402"/>
+        <location filename="../../core/mainwindow.cpp" line="487"/>
         <source>&amp;Tools</source>
         <translation>&amp;Tools</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="680"/>
-        <location filename="../../core/mainwindow.cpp" line="705"/>
-        <location filename="../../core/mainwindow.cpp" line="729"/>
+        <location filename="../../core/mainwindow.cpp" line="766"/>
+        <location filename="../../core/mainwindow.cpp" line="794"/>
         <location filename="../../core/mainwindow.cpp" line="821"/>
-        <location filename="../../core/mainwindow.cpp" line="840"/>
-        <location filename="../../core/mainwindow.cpp" line="859"/>
+        <location filename="../../core/mainwindow.cpp" line="917"/>
+        <location filename="../../core/mainwindow.cpp" line="936"/>
+        <location filename="../../core/mainwindow.cpp" line="955"/>
         <source>Log size: </source>
         <translation>Log size: </translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="682"/>
-        <location filename="../../core/mainwindow.cpp" line="707"/>
-        <location filename="../../core/mainwindow.cpp" line="731"/>
+        <location filename="../../core/mainwindow.cpp" line="768"/>
+        <location filename="../../core/mainwindow.cpp" line="796"/>
         <location filename="../../core/mainwindow.cpp" line="823"/>
-        <location filename="../../core/mainwindow.cpp" line="842"/>
-        <location filename="../../core/mainwindow.cpp" line="861"/>
+        <location filename="../../core/mainwindow.cpp" line="919"/>
+        <location filename="../../core/mainwindow.cpp" line="938"/>
+        <location filename="../../core/mainwindow.cpp" line="957"/>
         <source> records</source>
         <translation> records</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1012"/>
+        <location filename="../../core/mainwindow.cpp" line="1108"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1017"/>
+        <location filename="../../core/mainwindow.cpp" line="1113"/>
         <source>About Qt</source>
         <translation>About Qt</translation>
     </message>
@@ -732,62 +742,83 @@
         <translation type="obsolete">XML format files (*xml)</translation>
     </message>
     <message>
+        <location filename="../../core/mainwindow.cpp" line="1336"/>
         <source>Error while loading formatData library</source>
-        <translation type="obsolete">Error while loading formatData library</translation>
+        <translation>Error while loading formatData library</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1205"/>
+        <location filename="../../core/mainwindow.cpp" line="1358"/>
+        <source>Lua file not found: </source>
+        <translation>Lua file not found: </translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="1380"/>
         <source>Open project file</source>
         <translation>Open project file</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1205"/>
+        <location filename="../../core/mainwindow.cpp" line="1380"/>
         <source>XML project files (*xml)</source>
         <translation>XML project files (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1316"/>
+        <location filename="../../core/mainwindow.cpp" line="1514"/>
         <source>No log file in project</source>
         <translation>No log file in project</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1107"/>
-        <location filename="../../core/mainwindow.cpp" line="1240"/>
+        <location filename="../../core/mainwindow.cpp" line="1203"/>
+        <location filename="../../core/mainwindow.cpp" line="1415"/>
         <source>Project file not found</source>
         <translation>Project file not found</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="214"/>
+        <location filename="../../core/mainwindow.cpp" line="163"/>
+        <source>Export as txt file</source>
+        <translation>Export as txt file</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="163"/>
+        <source>txt files (*txt)</source>
+        <translation>txt files (*txt)</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="312"/>
         <source>&amp;Open connection...</source>
         <translation>&amp;Open connection...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="218"/>
+        <location filename="../../core/mainwindow.cpp" line="316"/>
         <source>&amp;Close</source>
         <translation>&amp;Close</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="261"/>
+        <location filename="../../core/mainwindow.cpp" line="326"/>
+        <source>&amp;Export as txt...</source>
+        <translation>&amp;Export as txt...</translation>
+    </message>
+    <message>
+        <location filename="../../core/mainwindow.cpp" line="353"/>
         <source>&amp;Quick search</source>
         <translation>&amp;Quick search</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="279"/>
+        <location filename="../../core/mainwindow.cpp" line="371"/>
         <source>&amp;Formats...</source>
         <translation>&amp;Formats...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="304"/>
+        <location filename="../../core/mainwindow.cpp" line="396"/>
         <source>&amp;About Qt...</source>
         <translation>&amp;About Qt...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="307"/>
+        <location filename="../../core/mainwindow.cpp" line="399"/>
         <source>&amp;Close search</source>
         <translation>&amp;Close search</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="359"/>
+        <location filename="../../core/mainwindow.cpp" line="452"/>
         <source>&amp;Filtration (logs)</source>
         <translation>&amp;Filtration (logs)</translation>
     </message>
@@ -796,7 +827,7 @@
         <translation type="obsolete">Project is empty</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1493"/>
+        <location filename="../../core/mainwindow.cpp" line="1691"/>
         <source>No filters</source>
         <translation>No filters</translation>
     </message>
@@ -833,18 +864,22 @@
         <translation>Error while loading projectData library</translation>
     </message>
     <message>
-        <location filename="../../core/project.cpp" line="276"/>
-        <location filename="../../core/project.cpp" line="363"/>
-        <location filename="../../core/project.cpp" line="410"/>
-        <location filename="../../core/project.cpp" line="493"/>
+        <location filename="../../core/project.cpp" line="272"/>
+        <location filename="../../core/project.cpp" line="319"/>
+        <location filename="../../core/project.cpp" line="402"/>
+        <location filename="../../core/project.cpp" line="454"/>
+        <location filename="../../core/project.cpp" line="501"/>
+        <location filename="../../core/project.cpp" line="584"/>
         <source>Can&apos;t open project file</source>
         <translation>Can&apos;t open project file</translation>
     </message>
     <message>
-        <location filename="../../core/project.cpp" line="289"/>
-        <location filename="../../core/project.cpp" line="376"/>
-        <location filename="../../core/project.cpp" line="423"/>
-        <location filename="../../core/project.cpp" line="506"/>
+        <location filename="../../core/project.cpp" line="285"/>
+        <location filename="../../core/project.cpp" line="332"/>
+        <location filename="../../core/project.cpp" line="415"/>
+        <location filename="../../core/project.cpp" line="467"/>
+        <location filename="../../core/project.cpp" line="514"/>
+        <location filename="../../core/project.cpp" line="597"/>
         <source>Error in xml structure</source>
         <translation>Error in xml structure</translation>
     </message>
@@ -984,19 +1019,37 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../ui/quicksearchwidget.ui" line="43"/>
+        <location filename="../../ui/quicksearchwidget.ui" line="52"/>
         <source>Find previous</source>
         <translation>Find previous</translation>
     </message>
     <message>
-        <location filename="../../ui/quicksearchwidget.ui" line="50"/>
+        <location filename="../../ui/quicksearchwidget.ui" line="59"/>
         <source>Find next</source>
         <translation>Find next</translation>
     </message>
     <message>
-        <location filename="../../ui/quicksearchwidget.ui" line="60"/>
+        <location filename="../../ui/quicksearchwidget.ui" line="69"/>
         <source>Quick search:</source>
         <translation>Quick search:</translation>
+    </message>
+</context>
+<context>
+    <name>RecordsSelectionDialog</name>
+    <message>
+        <location filename="../../ui/recordsselectiondialog.ui" line="26"/>
+        <source>Records range</source>
+        <translation>Records range</translation>
+    </message>
+    <message>
+        <location filename="../../ui/recordsselectiondialog.ui" line="34"/>
+        <source>From record:</source>
+        <translation>From record:</translation>
+    </message>
+    <message>
+        <location filename="../../ui/recordsselectiondialog.ui" line="41"/>
+        <source>To record:</source>
+        <translation>To record:</translation>
     </message>
 </context>
 <context>
