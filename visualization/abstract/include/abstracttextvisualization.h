@@ -38,7 +38,7 @@ public:
         Up,
         Down
     };
-    explicit AbstractTextVisualization(QString group, QWidget *parent = 0);
+    explicit AbstractTextVisualization(QWidget *parent);
 
     /*virtual*/ void resizeEvent(QResizeEvent *e);
     /*virtual*/ bool eventFilter(QObject *target, QEvent *event);

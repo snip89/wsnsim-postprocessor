@@ -171,7 +171,7 @@ void RealTimeTableVisualization::addRecord(QByteArray byteRecord)
 
         QStringList header;
 
-        for(int i = 0; i < recordsCount + 1; i ++)
+        for(quint64 i = 0; i < recordsCount + 1; i ++)
         {
             header.append(QString::number(i));
         }

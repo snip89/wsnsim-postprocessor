@@ -7,7 +7,7 @@
 #include "ui_abstracttextvisualization.h"
 
 HexVisualization::HexVisualization(QWidget *parent) :
-    AbstractTextVisualization("Hex visualization", parent)
+    AbstractTextVisualization(parent)
 {
     setSettings(settings);
 

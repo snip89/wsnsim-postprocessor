@@ -9,7 +9,7 @@
 #include "ui_abstracttextvisualization.h"
 
 TextVisualization::TextVisualization(QWidget *parent) :
-    AbstractTextVisualization("Text visualization", parent)
+    AbstractTextVisualization(parent)
 {
     setSettings(settings);
 

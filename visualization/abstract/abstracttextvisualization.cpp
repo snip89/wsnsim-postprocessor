@@ -1,7 +1,7 @@
 #include "abstracttextvisualization.h"
 #include "ui_abstracttextvisualization.h"
 
-AbstractTextVisualization::AbstractTextVisualization(QString group, QWidget *parent) :
+AbstractTextVisualization::AbstractTextVisualization(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::AbstractTextVisualization)
 {

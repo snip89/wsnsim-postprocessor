@@ -135,7 +135,7 @@ void FormatsDialog::loadFormat()
     QFile luaFile(format->luaInfo["file"]);
     if(!luaFile.exists())
     {
-        errorMessager.showMessage(tr("Lua file not found"));
+        errorMessager.showMessage(tr("Lua file not found: ") + format->luaInfo["file"]);
         return;
     }
 

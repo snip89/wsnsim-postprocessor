@@ -160,6 +160,10 @@ void FiltrationWidget::updateBooleanOperators()
         case STRING_TYPE:
             setEqNeBooleanOperators();
             break;
+
+        case FIVE_BYTES_TYPE:
+            setEqNeBooleanOperators();
+            break;
         }
 
         ui->filtrationOperatorComboBox->setVisible(true);

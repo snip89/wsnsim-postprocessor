@@ -28,8 +28,6 @@ public:
 
     static QString applyFormat(QVariant value, Format *format);
 
-    static int formatLength(Format *format);
-
     static QStringList argumentsNames(SimpleEventInfo *info, int infoSize);
 };
 

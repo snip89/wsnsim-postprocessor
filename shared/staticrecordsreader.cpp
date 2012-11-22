@@ -135,7 +135,7 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
             }
             else if(info[eventID].argsInfo[i].type == UINT8_TYPE)
             {
-                if(pos + sizeof(quint8) > memSize)
+                if(qint64(pos + sizeof(quint8)) > memSize)
                     return false;
 
                 pos += sizeof(quint8);
@@ -143,7 +143,7 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
             }
             else if(info[eventID].argsInfo[i].type == INT8_TYPE)
             {
-                if(pos + sizeof(qint8) > memSize)
+                if(qint64(pos + sizeof(qint8)) > memSize)
                     return false;
 
                 pos += sizeof(qint8);
@@ -151,7 +151,7 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
             }
             else if(info[eventID].argsInfo[i].type == UINT16_TYPE)
             {
-                if(pos + sizeof(quint16) > memSize)
+                if(qint64(pos + sizeof(quint16)) > memSize)
                     return false;
 
                 pos += sizeof(quint16);
@@ -159,7 +159,7 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
             }
             else if(info[eventID].argsInfo[i].type == UINT32_TYPE)
             {
-                if(pos + sizeof(quint32) > memSize)
+                if(qint64(pos + sizeof(quint32)) > memSize)
                     return false;
 
                 pos += sizeof(quint32);
@@ -168,7 +168,7 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
             }
             else if(info[eventID].argsInfo[i].type == UINT64_TYPE)
             {
-                if(pos + sizeof(quint64) > memSize)
+                if(qint64(pos + sizeof(quint64)) > memSize)
                     return false;
 
                 pos += sizeof(quint64);
@@ -176,7 +176,7 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
             }
             else if(info[eventID].argsInfo[i].type == INT32_TYPE)
             {
-                if(pos + sizeof(qint32) > memSize)
+                if(qint64(pos + sizeof(qint32)) > memSize)
                     return false;
 
                 pos += sizeof(qint32);
@@ -184,7 +184,7 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
             }
             else if(info[eventID].argsInfo[i].type == BOOL_TYPE)
             {
-                if(pos + sizeof(bool) > memSize)
+                if(qint64(pos + sizeof(bool)) > memSize)
                     return false;
 
                 pos += sizeof(bool);
@@ -192,7 +192,7 @@ bool StaticRecordsReader::skipArguments(char *mem, qint64 memSize, qint64 pos, q
             }
             else if(info[eventID].argsInfo[i].type == DOUBLE_TYPE)
             {
-                if(pos + sizeof(double) > memSize)
+                if(qint64(pos + sizeof(double)) > memSize)
                     return false;
 
                 pos += sizeof(double);
@@ -454,7 +454,7 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
             }
             else if(info[eventID].argsInfo[i].type == UINT8_TYPE)
             {
-                if(pos + sizeof(quint8) > memSize)
+                if(qint64(pos + sizeof(quint8)) > memSize)
                     return false;
 
                 pos += sizeof(quint8);
@@ -462,7 +462,7 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
             }
             else if(info[eventID].argsInfo[i].type == INT8_TYPE)
             {
-                if(pos + sizeof(qint8) > memSize)
+                if(qint64(pos + sizeof(qint8)) > memSize)
                     return false;
 
                 pos += sizeof(qint8);
@@ -470,7 +470,7 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
             }
             else if(info[eventID].argsInfo[i].type == UINT16_TYPE)
             {
-                if(pos + sizeof(quint16) > memSize)
+                if(qint64(pos + sizeof(quint16)) > memSize)
                     return false;
 
                 pos += sizeof(quint16);
@@ -478,7 +478,7 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
             }
             else if(info[eventID].argsInfo[i].type == UINT32_TYPE)
             {
-                if(pos + sizeof(quint32) > memSize)
+                if(qint64(pos + sizeof(quint32)) > memSize)
                     return false;
 
                 pos += sizeof(quint32);
@@ -487,7 +487,7 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
             }
             else if(info[eventID].argsInfo[i].type == UINT64_TYPE)
             {
-                if(pos + sizeof(quint64) > memSize)
+                if(qint64(pos + sizeof(quint64)) > memSize)
                     return false;
 
                 pos += sizeof(quint64);
@@ -495,7 +495,7 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
             }
             else if(info[eventID].argsInfo[i].type == INT32_TYPE)
             {
-                if(pos + sizeof(qint32) > memSize)
+                if(qint64(pos + sizeof(qint32)) > memSize)
                     return false;
 
                 pos += sizeof(qint32);
@@ -503,7 +503,7 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
             }
             else if(info[eventID].argsInfo[i].type == BOOL_TYPE)
             {
-                if(pos + sizeof(bool) > memSize)
+                if(qint64(pos + sizeof(bool)) > memSize)
                     return false;
 
                 pos += sizeof(bool);
@@ -511,7 +511,7 @@ bool StaticRecordsReader::checkArguments(char *mem, qint64 memSize, qint64 pos, 
             }
             else if(info[eventID].argsInfo[i].type == DOUBLE_TYPE)
             {
-                if(pos + sizeof(double) > memSize)
+                if(qint64(pos + sizeof(double)) > memSize)
                     return false;
 
                 pos += sizeof(double);

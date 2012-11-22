@@ -35,7 +35,7 @@ private:
     template <typename T>
     static bool translateArg(char *mem, qint64 memSize, qint64 sPos, T &value)
     {
-        if(sPos + sizeof(T) > memSize)
+        if(qint64(sPos + sizeof(T)) > memSize)
             return false;
 
         char *bytesValue = new char[sizeof(T)];

@@ -407,40 +407,6 @@ QString StaticVisualizationTools::updateValue(QVariant value, LogDataType type)
     return result;
 }
 
-int StaticVisualizationTools::formatLength(Format *format)
-{
-    /*int result = 0;
-
-    foreach(FieldInfo field, format->fieldsInfo)
-    {
-        if(LogDataTypes::toLogDataType(field["type"]) == UINT8_TYPE)
-            result += sizeof(quint8);
-
-        else if(LogDataTypes::toLogDataType(field["type"]) == UINT16_TYPE)
-            result += sizeof(quint16);
-
-        else if(LogDataTypes::toLogDataType(field["type"]) == UINT32_TYPE)
-            result += sizeof(quint32);
-
-        else if(LogDataTypes::toLogDataType(field["type"]) == UINT64_TYPE)
-            result += sizeof(quint64);
-
-        else if(LogDataTypes::toLogDataType(field["type"]) == INT8_TYPE)
-            result += sizeof(qint8);
-
-        else if(LogDataTypes::toLogDataType(field["type"]) == INT32_TYPE)
-            result += sizeof(qint32);
-
-        else if(LogDataTypes::toLogDataType(field["type"]) == DOUBLE_TYPE)
-            result += sizeof(double);
-
-        else if(LogDataTypes::toLogDataType(field["type"]) == BOOL_TYPE)
-            result += sizeof(bool);
-    }
-
-    return result;*/
-}
-
 QStringList StaticVisualizationTools::argumentsNames(SimpleEventInfo *info, int infoSize)
 {
     QStringList result;
