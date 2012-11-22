@@ -130,6 +130,57 @@ void MainWindow::print()
 
 void MainWindow::exportAsTxt()
 {
+    QTextDocument document;
+
+    QString name;
+
+    RecordsSelectionDialog recordsDialog(this);
+
+    int fromRecord = 0;
+    int toRecord = 0;
+
+    if(!recordsDialog.exec())
+    {
+        return;
+    }
+
+    recordsDialog.getRecordsNumbers(fromRecord, toRecord);
+
+    if(activeWidget == TEXTVISUALIZATION)
+        textVisualization->getTextDocument(fromRecord, toRecord, document);
+
+    else if(activeWidget == HEXVISUALIZATION)
+        hexVisualization->getTextDocument(fromRecord, toRecord, document);
+
+    else if(activeWidget == TABLEVISUALIZATION)
+        tableVisualization->getTextDocument(fromRecord, toRecord, document);
+
+    if(document.isEmpty())
+        return;
+
+    QString dirPath = settings.value("General/Gui/ExportAsTxt_dialog_path").toString();
+
+    QFileDialog *fileDialog = new QFileDialog(this, tr("Export as txt file"), dirPath, tr("txt files (*txt)"));
+    fileDialog->resize(settings.value("Hidden/Gui/ExportAsTxt_dialog_size").value<QSize>());
+    fileDialog->setWindowIcon(QIcon(":/icons/save_as"));
+
+    fileDialog->setAcceptMode(QFileDialog::AcceptSave);
+
+    if(fileDialog->exec())
+        name = fileDialog->selectedFiles().at(0);
+
+    settings.setValue("Hidden/Gui/ExportAsTxt_dialog_pos", fileDialog->pos());
+    settings.setValue("Hidden/Gui/ExportAsTxt_dialog_size", fileDialog->size());
+
+    delete fileDialog;
+
+    QFile file(name);
+    file.open(QFile::ReadWrite);
+
+    QTextStream stream(&file);
+    stream << document.toPlainText();
+
+    file.close();
 }
 
 MainWindow::~MainWindow()
@@ -173,6 +224,9 @@ void MainWindow::setSettings(QSettings &someSettings)
     if(!someSettings.contains("Defaults/General/Gui/Project_file_dialog_path"))
         someSettings.setValue("Defaults/General/Gui/Project_file_dialog_path", QDir::homePath());
 
+    if(!someSettings.contains("Defaults/General/Gui/ExportAsTxt_dialog_path"))
+        someSettings.setValue("Defaults/General/Gui/ExportAsTxt_dialog_path", QDir::homePath());
+
     if(!someSettings.contains("General/Gui/Project_file_dialog_path"))
         someSettings.setValue("General/Gui/Project_file_dialog_path", QDir::homePath());
 
@@ -208,6 +262,9 @@ void MainWindow::setSettings(QSettings &someSettings)
 
     if(!someSettings.contains("Hidden/Gui/File_dialog_size"))
         someSettings.setValue("Hidden/Gui/File_dialog_size", QSize(320, 240));
+
+    if(!someSettings.contains("Hidden/Gui/ExportAsTxt_dialog_size"))
+        someSettings.setValue("Hidden/Gui/ExportAsTxt_dialog_size", QSize(320, 240));
 
     if(!someSettings.contains("Hidden/Gui/Log_dialog_pos"))
         someSettings.setValue("Hidden/Gui/Log_dialog_pos", QPoint(0, 0));
