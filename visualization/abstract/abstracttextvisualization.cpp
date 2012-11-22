@@ -74,6 +74,8 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
 
             ui->verticalScrollBar->setValue(topLinePos - increment);
         }
+
+        return true;
     }
 
     else if(event->type() == QEvent::KeyPress && target == viewer)
@@ -142,9 +144,11 @@ bool AbstractTextVisualization::eventFilter(QObject *target, QEvent *event)
             viewer->moveCursor(QTextCursor::End);
             viewer->moveCursor(QTextCursor::StartOfBlock);
         }
+
+        return true;
     }
 
-    return true;
+    return false;
 }
 
 AbstractTextVisualization::~AbstractTextVisualization()
