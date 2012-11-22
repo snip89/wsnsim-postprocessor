@@ -431,7 +431,8 @@ void Project::getInjectedFormatSettings(QStringList &formats, QString &errorStri
             QDomElement element = dn_node.toElement();
             QString value = element.attribute("value");
 
-            formats = value.split(';');
+            if(value != "")
+                formats = value.split(';');
 
             return;
         }

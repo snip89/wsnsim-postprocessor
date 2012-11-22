@@ -1161,6 +1161,29 @@ void MainWindow::openConnection()
         settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
     }
 
+    if(project->isInjectedFormatsSettings(errorString) && formats.size() == 0)
+    {
+        QStringList formatsInfos;
+
+        project->getInjectedFormatSettings(formatsInfos, errorString);
+
+        if(formatsInfos.size() != 0)
+        {
+
+            if(!errorString.isNull())
+            {
+                errorMessager.showMessage(errorString);
+                return;
+            }
+
+            foreach(QString formatInfo, formatsInfos)
+            {
+                loadFormat(formatInfo);
+            }
+
+        }
+    }
+
     QUdpSocket *socket = new QUdpSocket();
     socket->bind(QHostAddress(rtSettings->ip(type)), rtSettings->port(type), QUdpSocket::ShareAddress);
 
@@ -1365,15 +1388,20 @@ void MainWindow::openProject(QString name)
 
         project->getInjectedFormatSettings(formatsInfos, errorString);
 
-        if(!errorString.isNull())
+        if(formatsInfos.size() != 0)
         {
-            errorMessager.showMessage(errorString);
-            return;
-        }
 
-        foreach(QString formatInfo, formatsInfos)
-        {
-            loadFormat(formatInfo);
+            if(!errorString.isNull())
+            {
+                errorMessager.showMessage(errorString);
+                return;
+            }
+
+            foreach(QString formatInfo, formatsInfos)
+            {
+                loadFormat(formatInfo);
+            }
+
         }
     }
 
