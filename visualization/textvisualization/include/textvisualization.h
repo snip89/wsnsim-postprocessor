@@ -35,6 +35,7 @@ public:
     /*virtual*/ void searchPrevious(QString str);
     /*virtual*/ QWidget *getWidget();
     /*virtual*/ void fromLine(qint64 line);
+    /*virtual*/ void getTextDocument(qint64 fromRecord, qint64 toRecord, QTextDocument &document);
 
     virtual ~TextVisualization();
 

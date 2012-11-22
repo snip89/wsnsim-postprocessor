@@ -111,7 +111,8 @@ HEADERS += interfaces/ilog.h \
     core/include/formatvalidator.h \
     core/include/staticlualoader.h \
     core/include/formatsdialog.h \
-    core/include/quicksearchwidget.h
+    core/include/quicksearchwidget.h \
+    core/include/recordsselectiondialog.h
 FORMS += ui/abstractrealtimetablevisualization.ui \
          ui/abstractrealtimetextvisualization.ui \
          ui/abstracttablevisualization.ui \
@@ -132,7 +133,9 @@ FORMS += ui/abstractrealtimetablevisualization.ui \
          ui/openconnectiondialog.ui \
          ui/tableguisettings.ui \
     ui/formatsdialog.ui \
-    ui/quicksearchwidget.ui
+    ui/quicksearchwidget.ui \
+    ui/printdialog.ui \
+    ui/recordsselectiondialog.ui
 SOURCES += core/clientsettings.cpp \
            core/filter.cpp \
            core/filtrationwidget.cpp \
@@ -183,7 +186,8 @@ SOURCES += core/clientsettings.cpp \
     core/formatvalidator.cpp \
     core/staticlualoader.cpp \
     core/formatsdialog.cpp \
-    core/quicksearchwidget.cpp
+    core/quicksearchwidget.cpp \
+    core/recordsselectiondialog.cpp
 RESOURCES += resources/postprocessor.qrc
 TRANSLATIONS += resources/localization/postprocessor_en.ts \
                 resources/localization/postprocessor_ru.ts \

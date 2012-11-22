@@ -358,6 +358,77 @@ void TableVisualization::updatePage(int cursorMoving)
     updatePage();
 }
 
+void TableVisualization::getTextDocument(qint64 fromRecord, qint64 toRecord, QTextDocument &document)
+{
+    if(toRecord > currentLog->size())
+        return;
+
+    QString result;
+
+    currentLog->seek(fromRecord);
+
+    qint64 recordsCount = toRecord - fromRecord + 1;
+
+    qint64 binPageSize = 0;
+    char *binPage = currentLog->read(recordsCount, binPageSize);
+
+    qint64 posInBinPage = 0;
+    for(int i = fromRecord; i <= toRecord; i ++)
+    {
+        qint64 readedSize = 0;
+        Record record;
+        int infoSize = 0;
+        SimpleEventInfo *info = currentProject->info(infoSize);
+
+        StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
+        posInBinPage += readedSize;
+
+        result += QString::number(i) + ": ";
+
+        QStringList argumentsState = settings.value("Hidden/Gui/Project/Columns_state").value<QStringList>();
+
+        for(int k = 0; k < argumentsNames.size(); k ++)
+        {
+            if(argumentsState[k] == "true")
+            {
+                if(k == 0)
+                {
+                    result += argumentsNames[k] + ": " + QString::number(record.time) + "; ";
+                }
+                else if(k == 1)
+                {
+                    result += argumentsNames[k] + ": " + *info[record.eventID].type + "; ";
+                }
+                else
+                {
+                    bool wasEvent = false;
+                    for(int j = 0; j < info[record.eventID].argsCount; j ++)
+                    {
+                        if(argumentsNames[k] == info[record.eventID].argsInfo[j].name)
+                        {
+                            wasEvent = true;
+
+                            result += argumentsNames[k] + ": " + StaticVisualizationTools::updateValue(record.eventID,
+                                                                                                       j,
+                                                                                                       record.other[j],
+                                                                                                       info[record.eventID].argsInfo[j].type,
+                                                                                                       formats) + "; ";
+                        }
+                    }
+
+                    if(!wasEvent)
+                        result += argumentsNames[k] + ": -//- ; ";
+
+                }
+            }
+        }
+
+        result += "\n";
+    }
+
+    document.setPlainText(result);
+}
+
 TableVisualization::~TableVisualization()
 {
 }

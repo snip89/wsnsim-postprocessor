@@ -25,6 +25,49 @@ void HexVisualization::activity(bool status)
     }
 }
 
+void HexVisualization::getTextDocument(qint64 fromRecord, qint64 toRecord, QTextDocument &document)
+{
+    if(toRecord > currentLog->size())
+        return;
+
+    QString result;
+
+    currentLog->seek(fromRecord);
+
+    qint64 recordsCount = toRecord - fromRecord + 1;
+
+    qint64 binPageSize = 0;
+    char *binPage = currentLog->read(recordsCount, binPageSize);
+
+    qint64 posInBinPage = 0;
+    for(int i = fromRecord; i <= toRecord; i ++)
+    {
+        qint64 readedSize = 0;
+        Record record;
+        int infoSize = 0;
+        SimpleEventInfo *info = currentProject->info(infoSize);
+
+        StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
+        posInBinPage += readedSize;
+
+        QString resultLine = QString::number(i) + ": ";
+
+        foreach(char nextHex, record.byteRecord)
+        {
+            QString hexed = QString::number((quint8)nextHex, 16);
+            hexed = hexed.toUpper();
+            if(hexed.size() == 1)
+                hexed.insert(0, '0');
+
+            resultLine += hexed + " ";
+        }
+
+        result += resultLine + "\n";
+    }
+
+    document.setPlainText(result);
+}
+
 void HexVisualization::update(IProject *project, ILog *log, QList<Format*> formats)
 {
     if(settings.value("Hex visualization/Gui/LineWrapMode").value<bool>())

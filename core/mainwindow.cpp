@@ -91,6 +91,47 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->searchToolBar->setVisible(false);
 }
 
+void MainWindow::print()
+{
+    QPrinter printer;
+
+    QTextDocument document;
+
+    RecordsSelectionDialog recordsDialog(this);
+    QPrintDialog printDialog(&printer, this);
+
+    int fromRecord = 0;
+    int toRecord = 0;
+
+    if(!recordsDialog.exec())
+    {
+        return;
+    }
+
+    recordsDialog.getRecordsNumbers(fromRecord, toRecord);
+
+    if(activeWidget == TEXTVISUALIZATION)
+        textVisualization->getTextDocument(fromRecord, toRecord, document);
+
+    else if(activeWidget == HEXVISUALIZATION)
+        hexVisualization->getTextDocument(fromRecord, toRecord, document);
+
+    else if(activeWidget == TABLEVISUALIZATION)
+        tableVisualization->getTextDocument(fromRecord, toRecord, document);
+
+    if(document.isEmpty())
+        return;
+
+    if (printDialog.exec() == QDialog::Accepted)
+    {
+        document.print(&printer);
+    }
+}
+
+void MainWindow::exportAsTxt()
+{
+}
+
 MainWindow::~MainWindow()
 {
     closeProject();
@@ -223,6 +264,12 @@ void MainWindow::createActions()
     actionPrint = new QAction(QIcon(":/icons/printer"), tr("&Print..."), this);
     actionPrint->setShortcut(QKeySequence::Print);
     actionPrint->setEnabled(false);
+    connect(actionPrint, SIGNAL(triggered()), this, SLOT(print()));
+
+    actionExportAsTxt = new QAction(QIcon(":/icons/save_as"), tr("&Export as txt..."), this);
+    actionExportAsTxt->setShortcut(QKeySequence::Save);
+    actionExportAsTxt->setEnabled(false);
+    connect(actionExportAsTxt, SIGNAL(triggered()), this, SLOT(exportAsTxt()));
 
     actionExit = new QAction(QIcon(":/icons/close_delete_2"), tr("&Exit"), this);
     actionExit->setShortcut(QKeySequence(Qt::CTRL + Qt::Key_Q));
@@ -246,18 +293,6 @@ void MainWindow::createActions()
     actionTableVisualization->setCheckable(true);
     connect(actionTableVisualization, SIGNAL(toggled(bool)), this, SLOT(showTableVisualization(bool)));
 
-    actionCopy = new QAction(QIcon(":/icons/copy"), tr("&Copy"), this);
-    actionCopy->setShortcut(QKeySequence::Copy);
-    actionCopy->setEnabled(false);
-
-    //actionPaste = new QAction(tr("&Paste"), this);
-    //actionPaste->setShortcut(QKeySequence::Paste);
-    //actionPaste->setEnabled(false);
-
-    actionSelectAll = new QAction(tr("&Select all"), this);
-    actionSelectAll->setShortcut(QKeySequence::SelectAll);
-    actionSelectAll->setEnabled(false);
-
     actionQuickSearch = new QAction(QIcon(":/icons/search_lense"), tr("&Quick search"), this);
     actionQuickSearch->setShortcut(QKeySequence::Find);
     actionQuickSearch->setEnabled(false);
@@ -276,7 +311,7 @@ void MainWindow::createActions()
     //actionClearFormat->setEnabled(false);
     //connect(actionClearFormat, SIGNAL(triggered()), this, SLOT(clearFormat()));
 
-    actionFormats = new QAction(tr("&Formats..."), this);
+    actionFormats = new QAction(QIcon(":/icons/tag_blue"), tr("&Formats..."), this);
     actionFormats->setEnabled(false);
     connect(actionFormats, SIGNAL(triggered()), this, SLOT(showFormatsDialog()));
 
@@ -323,11 +358,11 @@ void MainWindow::initToolBar()
     ui->toolBar->addAction(actionOpen);
     ui->toolBar->addAction(actionOpenConnection);
     ui->toolBar->addAction(actionClose);
-    ui->toolBar->addAction(actionPrint);
 
     ui->toolBar->addSeparator();
 
-    ui->toolBar->addAction(actionCopy);
+    ui->toolBar->addAction(actionExportAsTxt);
+    ui->toolBar->addAction(actionPrint);
 
     //ui->toolBar->addSeparator();
 
@@ -336,6 +371,7 @@ void MainWindow::initToolBar()
 
     ui->toolBar->addSeparator();
 
+    ui->toolBar->addAction(actionFormats);
     ui->toolBar->addAction(actionFiltration);
 
     ui->toolBar->addSeparator();
@@ -359,7 +395,6 @@ void MainWindow::createMenus()
     menuFiltrationLogs = new QMenu(tr("&Filtration (logs)"), this);
     menuFiltrationLogs->setEnabled(false);
 
-    menuFile->addSeparator();
     menuFile->addAction(actionClose);
     menuFile->addSeparator();
 
@@ -367,20 +402,13 @@ void MainWindow::createMenus()
 
     menuFile->addMenu(menuRecentProjects);
     menuFile->addSeparator();
+    menuFile->addAction(actionExportAsTxt);
     menuFile->addAction(actionPrint);
     menuFile->addSeparator();
     menuFile->addAction(actionExit);
 
     menuEdit = new QMenu(tr("&Edit"), this);
-    menuEdit->addAction(actionCopy);
-    //menuEdit->addAction(actionPaste);
-    menuEdit->addSeparator();
-    menuEdit->addAction(actionSelectAll);
-    menuEdit->addSeparator();
     menuEdit->addAction(actionFormats);
-    //menuEdit->addAction(actionAcceptFormat);
-    //menuEdit->addAction(actionClearFormat);
-    menuEdit->addSeparator();
     menuEdit->addAction(actionFiltration);
     menuEdit->addSeparator();
 
@@ -431,6 +459,7 @@ void MainWindow::deleteActions()
     removeActionsRecent();
 
     delete actionPrint;
+    delete actionExportAsTxt;
     delete actionClose;
     delete actionExit;
     delete actionSettings;
@@ -442,8 +471,6 @@ void MainWindow::deleteActions()
     delete actionSelectColumns;
     delete actionFiltration;
     delete actionFullScreen;
-    delete actionCopy;
-    //delete actionPaste;
     delete actionQuickSearch;
     delete actionGoToLine;
     delete actionHelp;
@@ -667,6 +694,8 @@ void MainWindow::switchToWidget(WidgetType type)
         activeWidget = EMPTY;
         actionQuickSearch->setEnabled(false);
         ui->searchToolBar->setVisible(false);
+        actionPrint->setEnabled(false);
+        actionExportAsTxt->setEnabled(false);
         break;
 
     case MAINSETTINGS:
@@ -687,6 +716,9 @@ void MainWindow::switchToWidget(WidgetType type)
 
         hexVisualization->activity(true);
         activeWidget = HEXVISUALIZATION;
+
+        actionPrint->setEnabled(true);
+        actionExportAsTxt->setEnabled(true);
 
         if(!hexUpdated)
         {
@@ -711,6 +743,9 @@ void MainWindow::switchToWidget(WidgetType type)
         stackedWidget->setCurrentWidget(textVisualization->getWidget());
         textVisualization->activity(true);
         activeWidget = TEXTVISUALIZATION;
+
+        actionPrint->setEnabled(true);
+        actionExportAsTxt->setEnabled(true);
 
         if(!textUpdated)
         {
@@ -737,6 +772,9 @@ void MainWindow::switchToWidget(WidgetType type)
         activeWidget = TABLEVISUALIZATION;
         actionSelectColumns->setEnabled(true);
 
+        actionPrint->setEnabled(true);
+        actionExportAsTxt->setEnabled(true);
+
         if(!tableUpdated)
         {
             tableVisualization->update(project, logs->at(currentLogId).log, formats);
@@ -745,6 +783,7 @@ void MainWindow::switchToWidget(WidgetType type)
         }
         else
             tableVisualization->update(formats);
+
         break;
 
     case RTTEXTVISUALIZATION:

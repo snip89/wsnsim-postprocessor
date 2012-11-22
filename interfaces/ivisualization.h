@@ -10,6 +10,7 @@
 
 #include <QtGui/QWidget>
 #include <QString>
+#include <QTextDocument>
 
 #include "ilog.h"
 #include "iproject.h"
@@ -27,6 +28,7 @@ public:
     virtual void searchPrevious(QString str) = 0;
     virtual QWidget *getWidget() = 0;
     virtual void fromLine(qint64 line) = 0;
+    virtual void getTextDocument(qint64 fromRecord, qint64 toRecord, QTextDocument &document) = 0;
     virtual ~IVisualization() { }
 };
 

@@ -27,6 +27,54 @@ void TextVisualization::activity(bool status)
     }
 }
 
+void TextVisualization::getTextDocument(qint64 fromRecord, qint64 toRecord, QTextDocument &document)
+{
+    if(toRecord > currentLog->size())
+        return;
+
+    QString result;
+
+    currentLog->seek(fromRecord);
+
+    qint64 recordsCount = toRecord - fromRecord + 1;
+
+    qint64 binPageSize = 0;
+    char *binPage = currentLog->read(recordsCount, binPageSize);
+
+    qint64 posInBinPage = 0;
+    for(int i = fromRecord; i <= toRecord; i ++)
+    {
+        qint64 readedSize = 0;
+        Record record;
+        int infoSize = 0;
+        SimpleEventInfo *info = currentProject->info(infoSize);
+
+        StaticRecordsReader::readRecord(binPage, binPageSize, posInBinPage, readedSize, record, info);
+        posInBinPage += readedSize;
+
+        QString resultLine = QString::number(i) + ": ";
+        resultLine += "time: " + QString::number(record.time) + "; ";
+        resultLine += "event: " + *info[record.eventID].type + "; ";
+
+        for(int j = 0; j < info[record.eventID].argsCount; j ++)
+        {
+            resultLine += *info[record.eventID].argsInfo[j].name + ": ";
+
+            resultLine += StaticVisualizationTools::updateValue(record.eventID,
+                        j,
+                        record.other[j],
+                        info[record.eventID].argsInfo[j].type,
+                                      formats);
+
+            resultLine += "; ";
+        }
+
+        result += resultLine + "\n";
+    }
+
+    document.setPlainText(result);
+}
+
 void TextVisualization::update(IProject *project, ILog *log, QList<Format*> formats)
 {
     this->formats = formats;

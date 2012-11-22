@@ -37,6 +37,10 @@
 #include <QTextStream>
 #include <QToolBar>
 
+#include <QPrintDialog>
+#include <QPrinter>
+#include <QPainter>
+
 #include "project.h"
 #include "log.h"
 #include "simpleeventinfo.h"
@@ -65,6 +69,7 @@
 #include "formatvalidator.h"
 #include "quicksearchwidget.h"
 #include "formatsdialog.h"
+#include "recordsselectiondialog.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -113,9 +118,7 @@ private:
     QAction *actionHexVisualization;
     QAction *actionTextVisualization;
     QAction *actionTableVisualization;
-    QAction *actionCopy;
-    //QAction *actionPaste;
-    QAction *actionSelectAll;
+    QAction *actionExportAsTxt;
 
     QAction *actionQuickSearch;
 
@@ -241,6 +244,9 @@ public slots:
 private slots:
     void showQuickSearch();
     void closeSearch();
+
+    void print();
+    void exportAsTxt();
 
     void showFormatsDialog();
 
