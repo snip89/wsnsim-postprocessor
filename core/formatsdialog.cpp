@@ -16,7 +16,7 @@ FormatsDialog::FormatsDialog(Project *project, QList<Format*> formats, QWidget *
     connect(ui->listWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
         this, SLOT(showContextMenu(const QPoint&)));
 
-    errorMessager = new QErrorMessage(this);
+    errorMessager.setModal(true);
 }
 
 void FormatsDialog::showContextMenu(const QPoint& pos)
@@ -113,7 +113,7 @@ void FormatsDialog::loadFormat()
     QLibrary formatDataLibrary("./formatData");
     if(!formatDataLibrary.load())
     {
-        errorMessager->showMessage(tr("Error while loading formatData library"));
+        errorMessager.showMessage(tr("Error while loading formatData library"));
         return;
     }
 
@@ -126,7 +126,7 @@ void FormatsDialog::loadFormat()
 
     if(!errorString.isNull())
     {
-        errorMessager->showMessage(errorString);
+        errorMessager.showMessage(errorString);
         return;
     }
 
@@ -135,7 +135,7 @@ void FormatsDialog::loadFormat()
     QFile luaFile(format->luaInfo["file"]);
     if(!luaFile.exists())
     {
-        errorMessager->showMessage(tr("Lua file not found"));
+        errorMessager.showMessage(tr("Lua file not found"));
         return;
     }
 
@@ -193,6 +193,26 @@ void FormatsDialog::updateList()
 
 FormatsDialog::~FormatsDialog()
 {
+    QString formatsInfos;
+
+    foreach(Format *format, formats)
+    {
+        formatsInfos += format->argument["eventID"] + ",";
+        formatsInfos += format->argument["argumentID"] + ",";
+        formatsInfos += format->argument["eventType"] + ",";
+        formatsInfos += format->fileName + ";";
+    }
+
+    formatsInfos.chop(1);
+
+    QString errorString = QString::null;
+    project->injectFormatSettings(formatsInfos, errorString);
+
+    if(!errorString.isNull())
+    {
+        errorMessager.showMessage(errorString);
+        return;
+    }
+
     delete ui;
-    delete errorMessager;
 }

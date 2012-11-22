@@ -1196,6 +1196,62 @@ void MainWindow::openConnection()
     delete rtSettings;
 }
 
+void MainWindow::loadFormat(QString formatInfo)
+{
+    QString errorString = QString::null;
+
+    QStringList formatInfos = formatInfo.split(',');
+    QString name = formatInfos[3];
+
+    QDir dir;
+    QFileInfo finfo = QFileInfo(name);
+
+    QString dirPath = dir.filePath(name);
+    dirPath.chop(finfo.fileName().size());
+
+    QDir::setCurrent(QApplication::applicationDirPath());
+
+    QLibrary formatDataLibrary("./formatData");
+    if(!formatDataLibrary.load())
+    {
+        errorMessager.showMessage(tr("Error while loading formatData library"));
+        return;
+    }
+
+    typedef Format*(*formatDataLoad) (QString& formatFileName, QString* errorMessage);
+    formatDataLoad load = (formatDataLoad) formatDataLibrary.resolve("load");
+
+    Format *format = load(name, &errorString);
+
+    FormatValidator::validate(format, errorString);
+
+    if(!errorString.isNull())
+    {
+        errorMessager.showMessage(errorString);
+        return;
+    }
+
+    QDir::setCurrent(dirPath);
+
+    QFile luaFile(format->luaInfo["file"]);
+    if(!luaFile.exists())
+    {
+        errorMessager.showMessage(tr("Lua file not found"));
+        return;
+    }
+
+    QDir::setCurrent(QApplication::applicationDirPath());
+
+    AttrInfo info;
+    info["eventID"] = formatInfos[0];
+    info["argumentID"] = formatInfos[1];
+    info["eventType"] = formatInfos[2];
+
+    format->argument = info;
+
+    formats.append(format);
+}
+
 void MainWindow::openProject(QString name)
 {
     if(name == QString::null)
@@ -1301,6 +1357,24 @@ void MainWindow::openProject(QString name)
 
         settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
         settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
+    }
+
+    if(project->isInjectedFormatsSettings(errorString) && formats.size() == 0)
+    {
+        QStringList formatsInfos;
+
+        project->getInjectedFormatSettings(formatsInfos, errorString);
+
+        if(!errorString.isNull())
+        {
+            errorMessager.showMessage(errorString);
+            return;
+        }
+
+        foreach(QString formatInfo, formatsInfos)
+        {
+            loadFormat(formatInfo);
+        }
     }
 
     setTitle(project->projectName(), QString::null);

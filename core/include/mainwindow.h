@@ -213,6 +213,8 @@ private:
     void initToolBar();
     void createStatusWidgets();
 
+    void loadFormat(QString formatInfo);
+
     void deleteActions();
     void deleteMenus();
     void deleteStatusWidgets();

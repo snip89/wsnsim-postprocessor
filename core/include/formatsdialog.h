@@ -34,7 +34,7 @@ private:
 
     Project *project;
 
-    QErrorMessage *errorMessager;
+    QErrorMessage errorMessager;
 
     Ui::FormatsDialog *ui;
 

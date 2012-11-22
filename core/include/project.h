@@ -45,7 +45,7 @@ public:
 
     bool isInjectedFormatsSettings(QString &errorString);
     void injectFormatSettings(QString formats, QString &errorString);
-    void getInjectedFormatSettings(QStringList &formatsNames);
+    void getInjectedFormatSettings(QStringList &formats, QString &errorString);
 
     bool isInjectedColumnsSettings(QString &errorString);
     void injectColumnsSettings(QString settings, QString &errorString);
