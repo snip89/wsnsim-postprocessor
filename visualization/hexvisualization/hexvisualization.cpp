@@ -89,7 +89,8 @@ void HexVisualization::update(IProject *project, ILog *log, QList<Format*> forma
     currentProject = project;
     currentLog = log;
 
-    topLinePos = 0;
+    topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+    //topLinePos = 0;
 
     viewer->clear();
 
@@ -98,6 +99,8 @@ void HexVisualization::update(IProject *project, ILog *log, QList<Format*> forma
 
 void HexVisualization::update(QList<Format *> formats)
 {
+    topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+
     this->formats = formats;
 
     if(settings.value("Hex visualization/Gui/LineWrapMode").value<bool>())
@@ -357,6 +360,8 @@ void HexVisualization::updatePage()
     {
         decrement = 0;
     }*/
+
+    settings.setValue("Hidden/Core/Current_pos", topLinePos);
 }
 
 void HexVisualization::updatePage(int cursorMoving)

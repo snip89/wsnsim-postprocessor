@@ -20,7 +20,7 @@ void TableVisualization::update(IProject *project, ILog *log, QList<Format*> for
     currentProject = project;
     currentLog = log;
 
-    topLinePos = 0;
+    topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
     currentRow = 0;
     currentColumn = 0;
 
@@ -50,6 +50,8 @@ void TableVisualization::update(IProject *project, ILog *log, QList<Format*> for
 
 void TableVisualization::update(QList<Format *> formats)
 {
+    topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+
     this->formats = formats;
 
     viewer->clear();
@@ -353,6 +355,8 @@ void TableVisualization::updatePage()
     ui->horizontalScrollBar->setMaximum(viewer->horizontalScrollBar()->maximum());
 
     viewer->verticalHeader()->setResizeMode(QHeaderView::Fixed);
+
+    settings.setValue("Hidden/Core/Current_pos", topLinePos);
 }
 
 void TableVisualization::updatePage(int cursorMoving)

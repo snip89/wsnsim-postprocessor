@@ -1346,6 +1346,8 @@ void MainWindow::loadFormat(QString formatInfo)
 
 void MainWindow::openProject(QString name)
 {
+    settings.setValue("Hidden/Core/Current_pos", 0);
+
     if(name == QString::null)
     {
         QString dirPath = settings.value("General/Gui/Project_file_dialog_path").toString();
@@ -1830,6 +1832,8 @@ void MainWindow::filteredLog(int id)
     hexUpdated = false;
     textUpdated = false;
     tableUpdated = false;
+
+    settings.setValue("Hidden/Core/Current_pos", 0);
 
     if(activeWidget == TEXTVISUALIZATION)
         updateVisualization(TEXTVISUALIZATION);

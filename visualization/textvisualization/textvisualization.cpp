@@ -98,7 +98,7 @@ void TextVisualization::update(IProject *project, ILog *log, QList<Format*> form
     currentProject = project;
     currentLog = log;
 
-    topLinePos = 0;
+    topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
 
     viewer->clear();
 
@@ -107,6 +107,8 @@ void TextVisualization::update(IProject *project, ILog *log, QList<Format*> form
 
 void TextVisualization::update(QList<Format *> formats)
 {
+    topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+
     this->formats = formats;
 
     if(settings.value("Text visualization/Gui/LineWrapMode").value<bool>())
@@ -381,6 +383,8 @@ void TextVisualization::updatePage()
     {
         decrement = 0;
     }*/
+
+    settings.setValue("Hidden/Core/Current_pos", topLinePos);
 }
 
 void TextVisualization::updatePage(int cursorMoving)
