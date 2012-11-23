@@ -180,6 +180,8 @@ void RealTimeTableVisualization::addRecord(QByteArray byteRecord)
         //viewer->setCurrentCell(currentRow, currentColumn);
 
         recordsCount ++;
+
+        viewer->verticalHeader()->setResizeMode(QHeaderView::Fixed);
     //}
 }
 

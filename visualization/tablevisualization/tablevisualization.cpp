@@ -351,6 +351,8 @@ void TableVisualization::updatePage()
 
     ui->horizontalScrollBar->setMinimum(viewer->horizontalScrollBar()->minimum());
     ui->horizontalScrollBar->setMaximum(viewer->horizontalScrollBar()->maximum());
+
+    viewer->verticalHeader()->setResizeMode(QHeaderView::Fixed);
 }
 
 void TableVisualization::updatePage(int cursorMoving)
