@@ -34,6 +34,9 @@ public:
 
     Project(QString fileName);
     void load(QString &errorString);
+    void save(QString &errorString);
+
+    ProjectParams projectParams;
 
     /*virtual*/ SimpleEventInfo *info(int &size);
 
@@ -43,18 +46,9 @@ public:
     QStringList paramsNames();
     LogDataType paramType(QString paramName);
 
-    bool isInjectedFormatsSettings(QString &errorString);
-    void injectFormatSettings(QString formats, QString &errorString);
-    void getInjectedFormatSettings(QStringList &formats, QString &errorString);
-
-    bool isInjectedColumnsSettings(QString &errorString);
-    void injectColumnsSettings(QString settings, QString &errorString);
-    void getInjectedColumnsSettings(QStringList &columnsNames, QStringList &columnsState, QString &errorString);
-
     virtual ~Project();
 private:
     QString projectFileName;
-    ProjectParams projectParams;
     int eventsInfoSize;
     SimpleEventInfo *eventsInfo;
     bool isLoaded;

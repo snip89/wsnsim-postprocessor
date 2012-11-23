@@ -206,7 +206,9 @@ FormatsDialog::~FormatsDialog()
     formatsInfos.chop(1);
 
     QString errorString = QString::null;
-    project->injectFormatSettings(formatsInfos, errorString);
+
+    project->projectParams.visualizationInfo.formatsSettings = formatsInfos;
+    project->save(errorString);
 
     if(!errorString.isNull())
     {

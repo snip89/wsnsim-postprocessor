@@ -1217,16 +1217,7 @@ void MainWindow::openConnection()
     int eventsInfoSize = 0;
     info = project->info(eventsInfoSize);
 
-    bool injected = project->isInjectedColumnsSettings(errorString);
-
-    if(!errorString.isNull())
-    {
-        errorMessager.showMessage(errorString);
-        delete project;
-        return;
-    }
-
-    if(!injected)
+    if(project->projectParams.visualizationInfo.columnsSettings == "")
     {
         QStringList columnsNames = StaticVisualizationTools::argumentsNames(info, eventsInfoSize);
         QStringList columnsState;
@@ -1241,42 +1232,24 @@ void MainWindow::openConnection()
     }
     else
     {
-        QStringList columnsNames;
-        QStringList columnsState;
-
-        project->getInjectedColumnsSettings(columnsNames, columnsState, errorString);
-
-        if(!errorString.isNull())
-        {
-            errorMessager.showMessage(errorString);
-            delete project;
-            return;
-        }
+        QStringList columnsSettings = project->projectParams.visualizationInfo.columnsSettings.split(';');
+        QStringList columnsNames = columnsSettings[0].split(',');
+        QStringList columnsState = columnsSettings[1].split(',');
 
         settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
         settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
     }
 
-    if(project->isInjectedFormatsSettings(errorString) && formats.size() == 0)
+    if(project->projectParams.visualizationInfo.formatsSettings != "")
     {
-        QStringList formatsInfos;
+        QStringList formatsSettings = project->projectParams.visualizationInfo.formatsSettings.split(';');
 
-        project->getInjectedFormatSettings(formatsInfos, errorString);
-
-        if(formatsInfos.size() != 0)
+        if(formatsSettings.size() != 0)
         {
-
-            if(!errorString.isNull())
-            {
-                errorMessager.showMessage(errorString);
-                return;
-            }
-
-            foreach(QString formatInfo, formatsInfos)
+            foreach(QString formatInfo, formatsSettings)
             {
                 loadFormat(formatInfo);
             }
-
         }
     }
 
@@ -1438,16 +1411,7 @@ void MainWindow::openProject(QString name)
     int eventsInfoSize = 0;
     info = project->info(eventsInfoSize);
 
-    bool injected = project->isInjectedColumnsSettings(errorString);
-
-    if(!errorString.isNull())
-    {
-        errorMessager.showMessage(errorString);
-        delete project;
-        return;
-    }
-
-    if(!injected)
+    if(project->projectParams.visualizationInfo.columnsSettings == "")
     {
         QStringList columnsNames = StaticVisualizationTools::argumentsNames(info, eventsInfoSize);
         QStringList columnsState;
@@ -1462,42 +1426,24 @@ void MainWindow::openProject(QString name)
     }
     else
     {
-        QStringList columnsNames;
-        QStringList columnsState;
-
-        project->getInjectedColumnsSettings(columnsNames, columnsState, errorString);
-
-        if(!errorString.isNull())
-        {
-            errorMessager.showMessage(errorString);
-            delete project;
-            return;
-        }
+        QStringList columnsSettings = project->projectParams.visualizationInfo.columnsSettings.split(';');
+        QStringList columnsNames = columnsSettings[0].split(',');
+        QStringList columnsState = columnsSettings[1].split(',');
 
         settings.setValue("Hidden/Gui/Project/Columns_names", columnsNames);
         settings.setValue("Hidden/Gui/Project/Columns_state", columnsState);
     }
 
-    if(project->isInjectedFormatsSettings(errorString) && formats.size() == 0)
+    if(project->projectParams.visualizationInfo.formatsSettings != "")
     {
-        QStringList formatsInfos;
+        QStringList formatsSettings = project->projectParams.visualizationInfo.formatsSettings.split(';');
 
-        project->getInjectedFormatSettings(formatsInfos, errorString);
-
-        if(formatsInfos.size() != 0)
+        if(formatsSettings.size() != 0)
         {
-
-            if(!errorString.isNull())
-            {
-                errorMessager.showMessage(errorString);
-                return;
-            }
-
-            foreach(QString formatInfo, formatsInfos)
+            foreach(QString formatInfo, formatsSettings)
             {
                 loadFormat(formatInfo);
             }
-
         }
     }
 
@@ -1546,25 +1492,26 @@ void MainWindow::closeProject()
 
         QString errorString;
 
-        QString columnsValue = "";
+        QString columnsSettings = "";
 
         foreach(QString str, settings.value("Hidden/Gui/Project/Columns_names").value<QStringList>())
         {
-            columnsValue += str + ",";
+            columnsSettings += str + ",";
         }
 
-        columnsValue.chop(1);
+        columnsSettings.chop(1);
 
-        columnsValue += ";";
+        columnsSettings += ";";
 
         foreach(QString str, settings.value("Hidden/Gui/Project/Columns_state").value<QStringList>())
         {
-            columnsValue += str + ",";
+            columnsSettings += str + ",";
         }
 
-        columnsValue.chop(1);
+        columnsSettings.chop(1);
 
-        project->injectColumnsSettings(columnsValue, errorString);
+        project->projectParams.visualizationInfo.columnsSettings = columnsSettings;
+        project->save(errorString);
 
         if(!errorString.isNull())
         {
@@ -1610,25 +1557,26 @@ void MainWindow::closeConnection()
 
         QString errorString;
 
-        QString columnsValue = "";
+        QString columnsSettings = "";
 
         foreach(QString str, settings.value("Hidden/Gui/Project/Columns_names").value<QStringList>())
         {
-            columnsValue += str + ",";
+            columnsSettings += str + ",";
         }
 
-        columnsValue.chop(1);
+        columnsSettings.chop(1);
 
-        columnsValue += ";";
+        columnsSettings += ";";
 
         foreach(QString str, settings.value("Hidden/Gui/Project/Columns_state").value<QStringList>())
         {
-            columnsValue += str + ",";
+            columnsSettings += str + ",";
         }
 
-        columnsValue.chop(1);
+        columnsSettings.chop(1);
 
-        project->injectColumnsSettings(columnsValue, errorString);
+        project->projectParams.visualizationInfo.columnsSettings = columnsSettings;
+        project->save(errorString);
 
         if(!errorString.isNull())
         {
