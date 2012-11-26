@@ -27,8 +27,19 @@ bool StaticLogFilter::useFilter(Log *currentLog, Log *newLog, AbstractFilter *fi
 
     bool breakFirst = false;
 
+    QProgressDialog dlg(QObject::tr("Filtration..."), QObject::tr("Cancel"), 0, 100);
+    dlg.setWindowModality(Qt::WindowModal);
+
     while(currentLog->pos() < currentLog->size())
     {
+        qDebug() << (currentLog->pos() * 100) / currentLog->size();
+
+        if(dlg.wasCanceled())
+            return false;
+
+        dlg.setValue((currentLog->pos() * 100) / currentLog->size());
+        QCoreApplication::processEvents();
+
         if(breakFirst)
             break;
 

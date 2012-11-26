@@ -12,6 +12,8 @@
 #include <malloc.h>
 #include <QDebug>
 #include <QErrorMessage>
+#include <QProgressDialog>
+#include <QCoreApplication>
 
 #include "simpleeventinfo.h"
 #include "staticlogreader.h"
@@ -33,7 +35,7 @@ public:
     friend class StaticFromLogSelector;
 
     LogIndex(QFile *logFile, qint64 bSize, qint64 mSize, SimpleEventInfo *info);
-    void generate();
+    bool generate();
     Index at(qint64 i);
     qint64 size();
     virtual ~LogIndex();

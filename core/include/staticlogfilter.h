@@ -12,6 +12,8 @@
 #include <QString>
 #include <QStringList>
 #include <QErrorMessage>
+#include <QProgressDialog>
+#include <QCoreApplication>
 
 #include "log.h"
 #include "staticrecordsreader.h"

@@ -21,8 +21,20 @@ LogIndex::LogIndex(QFile *logFile, qint64 bSize, qint64 mSize, SimpleEventInfo *
     indexSize = 1;
 }
 
-void LogIndex::generate()
+bool LogIndex::generate()
 {
+    int n;
+
+    if(file->size() <= memorySize)
+        n = 1;
+    else
+        n = file->size() / memorySize;
+
+    QProgressDialog dlg(QObject::tr("Generating index..."), QObject::tr("Cancel"), 0, n);
+    dlg.setWindowModality(Qt::WindowModal);
+
+    int i = 0;
+
     logSize = 0;
     blockElementsCount = 0;
 //    currentBlockSize = 0;
@@ -30,6 +42,12 @@ void LogIndex::generate()
 
     if(file->size() <= memorySize)
     {
+        if(dlg.wasCanceled())
+            return false;
+
+        dlg.setValue(i + 1);
+        QCoreApplication::processEvents();
+
         char *memory = new char[memorySize];
 
         qint64 reallyReadedSize = StaticLogReader::readLogFile(*file, memory, memorySize);
@@ -44,6 +62,9 @@ void LogIndex::generate()
     {
         while(!file->atEnd())
         {
+            if(dlg.wasCanceled())
+                return false;
+
             char *memory = new char[memorySize];
 
             qint64 reallyReadedSize = StaticLogReader::readLogFile(*file, memory, memorySize);
@@ -55,8 +76,15 @@ void LogIndex::generate()
             file->seek(filePos);
 
             delete[] memory;
+
+            i++;
+
+            dlg.setValue(i);
+            QCoreApplication::processEvents();
         }
     }
+
+    return true;
 }
 
 Index LogIndex::at(qint64 i)

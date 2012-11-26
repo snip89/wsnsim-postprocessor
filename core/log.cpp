@@ -32,14 +32,14 @@ bool Log::load(bool generateIndex, bool createNew)
     {
         if(!file->exists())
         {
-            errorMessager.showMessage("Log file not found");
+            errorMessager.showMessage(QObject::tr("Log file not found"));
             return false;
         }
     }
 
     if(!file->open(QFile::ReadWrite))
     {
-        errorMessager.showMessage("Can't open log file");
+        errorMessager.showMessage(QObject::tr("Can't open log file"));
         return false;
     }
 
@@ -47,7 +47,12 @@ bool Log::load(bool generateIndex, bool createNew)
 
     if(generateIndex)
     {
-        index->generate();
+        if(!index->generate())
+        {
+            errorMessager.showMessage(QObject::tr("Can't generate index"));
+            return false;
+        }
+
         qDebug() << "logSize in records = " << index->logSize;
     }
 
