@@ -26,6 +26,28 @@ Log::Log(QString fileName, qint64 bSize, qint64 mSize, SimpleEventInfo *info, bo
     updateFileSize();
 }
 
+QString Log::saveIndex()
+{
+    QDateTime time;
+    QString indexFileName = time.currentDateTime().toString(Qt::TextDate) + ".index";
+
+    QFile indexFile(indexFileName);
+    indexFile.open(QFile::ReadWrite);
+
+    QDataStream stream(&indexFile);
+
+    for(int i = 0; i < index->size(); i ++)
+    {
+        stream << index->at(i).time << index->at(i).filePos;
+    }
+
+    stream << index->indexSize;
+
+    indexFile.close();
+
+    return indexFileName;
+}
+
 bool Log::load(bool generateIndex, bool createNew)
 {
     if(!createNew)

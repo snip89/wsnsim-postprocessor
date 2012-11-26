@@ -1488,6 +1488,8 @@ void MainWindow::closeProject()
 
         switchToWidget(EMPTY);
 
+        logs->at(currentLogId).log->saveIndex();
+
         closeLog();
 
         filtrationWidget->deactivate();

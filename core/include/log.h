@@ -12,6 +12,7 @@
 #include <QFile>
 #include <QErrorMessage>
 #include <QStringList>
+#include <QDateTime>
 #include <QDebug>
 
 #include "ilog.h"
@@ -31,6 +32,7 @@ public:
     Log(QString fileName, qint64 bSize, qint64 mSize, SimpleEventInfo *info, bool temp);
     bool load(bool generateIndex, bool createNew);
     void toggleActivity(bool activityStatus);
+    QString saveIndex();
 
     /*virtual*/ qint64 size();
     /*virtual*/ void seek(qint64 pos);
