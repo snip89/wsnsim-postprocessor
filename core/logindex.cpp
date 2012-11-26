@@ -23,17 +23,8 @@ LogIndex::LogIndex(QFile *logFile, qint64 bSize, qint64 mSize, SimpleEventInfo *
 
 bool LogIndex::generate()
 {
-    int n;
-
-    if(file->size() <= memorySize)
-        n = 1;
-    else
-        n = file->size() / memorySize;
-
-    QProgressDialog dlg(QObject::tr("Generating index..."), QObject::tr("Cancel"), 0, n);
+    QProgressDialog dlg(QObject::tr("Generating index..."), QObject::tr("Cancel"), 0, 100);
     dlg.setWindowModality(Qt::WindowModal);
-
-    int i = 0;
 
     logSize = 0;
     blockElementsCount = 0;
@@ -42,17 +33,14 @@ bool LogIndex::generate()
 
     if(file->size() <= memorySize)
     {
-        if(dlg.wasCanceled())
-            return false;
-
-        dlg.setValue(i + 1);
         QCoreApplication::processEvents();
 
         char *memory = new char[memorySize];
 
         qint64 reallyReadedSize = StaticLogReader::readLogFile(*file, memory, memorySize);
 
-        generateFromMemory(memory, reallyReadedSize, logSize);
+        if(!generateFromMemory(memory, reallyReadedSize, logSize, dlg))
+            return false;
 
         qDebug() << logSize;
 
@@ -62,14 +50,12 @@ bool LogIndex::generate()
     {
         while(!file->atEnd())
         {
-            if(dlg.wasCanceled())
-                return false;
-
             char *memory = new char[memorySize];
 
             qint64 reallyReadedSize = StaticLogReader::readLogFile(*file, memory, memorySize);
 
-            generateFromMemory(memory, reallyReadedSize, logSize);
+            if(!generateFromMemory(memory, reallyReadedSize, logSize, dlg))
+                return false;
 
             qDebug() << logSize;
 
@@ -77,9 +63,6 @@ bool LogIndex::generate()
 
             delete[] memory;
 
-            i++;
-
-            dlg.setValue(i);
             QCoreApplication::processEvents();
         }
     }
@@ -116,7 +99,7 @@ qint64 LogIndex::size()
     return indexSize;
 }
 
-void LogIndex::generateFromMemory(char *memory, qint64 memorySize, qint64 &logSize)
+bool LogIndex::generateFromMemory(char *memory, qint64 memorySize, qint64 &logSize, QProgressDialog &dlg)
 {
     // текущая позиция в буфере
     qint64 pos = 0;
@@ -150,12 +133,20 @@ void LogIndex::generateFromMemory(char *memory, qint64 memorySize, qint64 &logSi
     // пока не закончился буфер
     while(pos < memorySize)
     {
+        if(dlg.wasCanceled())
+            return false;
+
+        //qDebug() << ((indexSize * memorySize + pos) * 100) / file->size();
+        //qDebug() << memorySize;
+
+        dlg.setValue((filePos * 100) / file->size());
+
         qint64 skippedSize = 0;
         quint64 time = 0;
 
         // попытка пропустить запись
         if(!StaticRecordsReader::skipRecord(memory, memorySize, pos, skippedSize, time, eventsInfo))
-            return;
+            return true;
 
         // увеличить размер формируемого блока
 //        currentBlockSize += skippedSize;
@@ -180,4 +171,6 @@ void LogIndex::generateFromMemory(char *memory, qint64 memorySize, qint64 &logSi
             blockElementsCount = 0;
         }
     }
+
+    return true;
 }

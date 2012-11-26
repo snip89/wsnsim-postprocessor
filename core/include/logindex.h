@@ -59,7 +59,7 @@ private:
     QErrorMessage errorMessager;
 
     void append(qint64 pos, quint64 time);
-    void generateFromMemory(char *memory, qint64 memorySize, qint64 &logSize);
+    bool generateFromMemory(char *memory, qint64 memorySize, qint64 &logSize, QProgressDialog &dlg);
 };
 
 #endif /* LOGINDEX_H_ */

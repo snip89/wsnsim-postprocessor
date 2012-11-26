@@ -730,33 +730,33 @@
         <translation type="obsolete">XML файлы формата (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1336"/>
+        <location filename="../../core/mainwindow.cpp" line="1309"/>
         <source>Error while loading formatData library</source>
         <translation>Ошибка при загрузке библиотеки formatData</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1358"/>
+        <location filename="../../core/mainwindow.cpp" line="1331"/>
         <source>Lua file not found: </source>
         <translation>Файл lua не найден: </translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1380"/>
+        <location filename="../../core/mainwindow.cpp" line="1355"/>
         <source>Open project file</source>
         <translation>Открыть файл проекта</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1380"/>
+        <location filename="../../core/mainwindow.cpp" line="1355"/>
         <source>XML project files (*xml)</source>
         <translation>XML файлы проекта (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1514"/>
+        <location filename="../../core/mainwindow.cpp" line="1462"/>
         <source>No log file in project</source>
         <translation>Нет журнала в проекте</translation>
     </message>
     <message>
         <location filename="../../core/mainwindow.cpp" line="1203"/>
-        <location filename="../../core/mainwindow.cpp" line="1415"/>
+        <location filename="../../core/mainwindow.cpp" line="1390"/>
         <source>Project file not found</source>
         <translation>Файл проекта не найден</translation>
     </message>
@@ -815,7 +815,7 @@
         <translation type="obsolete">Проект пуст</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1691"/>
+        <location filename="../../core/mainwindow.cpp" line="1641"/>
         <source>No filters</source>
         <translation>Нет фильтров</translation>
     </message>
@@ -836,8 +836,23 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../core/log.cpp" line="170"/>
-        <location filename="../../core/staticlogfilter.cpp" line="54"/>
+        <location filename="../../core/log.cpp" line="35"/>
+        <source>Log file not found</source>
+        <translation>Файл журнала не найден</translation>
+    </message>
+    <message>
+        <location filename="../../core/log.cpp" line="42"/>
+        <source>Can&apos;t open log file</source>
+        <translation>Невозможно открыть файл журнала</translation>
+    </message>
+    <message>
+        <location filename="../../core/log.cpp" line="52"/>
+        <source>Can&apos;t generate index</source>
+        <translation>Невозможно сгенерировать индекс</translation>
+    </message>
+    <message>
+        <location filename="../../core/log.cpp" line="175"/>
+        <location filename="../../core/staticlogfilter.cpp" line="65"/>
         <location filename="../../shared/staticfromlogselector.cpp" line="52"/>
         <source>Unexpected end of record</source>
         <translation>Внезапный конец записи</translation>
@@ -848,28 +863,17 @@
     </message>
     <message>
         <location filename="../../core/project.cpp" line="42"/>
+        <location filename="../../core/project.cpp" line="66"/>
         <source>Error while loading projectData library</source>
         <translation>Ошибка при заргузке библиотеки projectData</translation>
     </message>
     <message>
-        <location filename="../../core/project.cpp" line="272"/>
-        <location filename="../../core/project.cpp" line="319"/>
-        <location filename="../../core/project.cpp" line="402"/>
-        <location filename="../../core/project.cpp" line="454"/>
-        <location filename="../../core/project.cpp" line="501"/>
-        <location filename="../../core/project.cpp" line="584"/>
         <source>Can&apos;t open project file</source>
-        <translation>Невозможно открыть файл проекта</translation>
+        <translation type="obsolete">Невозможно открыть файл проекта</translation>
     </message>
     <message>
-        <location filename="../../core/project.cpp" line="285"/>
-        <location filename="../../core/project.cpp" line="332"/>
-        <location filename="../../core/project.cpp" line="415"/>
-        <location filename="../../core/project.cpp" line="467"/>
-        <location filename="../../core/project.cpp" line="514"/>
-        <location filename="../../core/project.cpp" line="597"/>
         <source>Error in xml structure</source>
-        <translation>Ошибка в структуре xml</translation>
+        <translation type="obsolete">Ошибка в структуре xml</translation>
     </message>
     <message>
         <source>bad size; </source>
@@ -998,6 +1002,22 @@
         <source>There is no function format in file </source>
         <translatorcomment>Нет функции format в файле </translatorcomment>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="../../core/logindex.cpp" line="33"/>
+        <source>Generating index...</source>
+        <translation>Генерация индекса...</translation>
+    </message>
+    <message>
+        <location filename="../../core/logindex.cpp" line="33"/>
+        <location filename="../../core/staticlogfilter.cpp" line="30"/>
+        <source>Cancel</source>
+        <translation>Отмена</translation>
+    </message>
+    <message>
+        <location filename="../../core/staticlogfilter.cpp" line="30"/>
+        <source>Filtration...</source>
+        <translation>Фильтрация...</translation>
     </message>
 </context>
 <context>
