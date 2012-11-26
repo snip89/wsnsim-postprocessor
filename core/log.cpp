@@ -36,16 +36,56 @@ QString Log::saveIndex()
 
     QDataStream stream(&indexFile);
 
-    for(int i = 0; i < index->size(); i ++)
+    stream << index->indexSize;
+    stream << index->logSize;
+
+    for(int i = 0; i < index->size() - 1; i ++)
     {
         stream << index->at(i).time << index->at(i).filePos;
     }
 
-    stream << index->indexSize;
-
     indexFile.close();
 
     return indexFileName;
+}
+
+qint64 Log::indexSize()
+{
+    return index->indexSize;
+}
+
+bool Log::loadIndex(QString fileName)
+{
+    QFile indexFile(fileName);
+
+    if(!indexFile.exists())
+        return false;
+
+    indexFile.open(QFile::ReadWrite);
+
+    QDataStream stream(&indexFile);
+
+    qint64 indexSize;
+    qint64 logSize;
+    stream >> indexSize;
+    stream >> logSize;
+
+    index->logSize = logSize;
+
+    while(!stream.atEnd())
+    {
+        quint64 time;
+        qint64 pos;
+
+        stream >> time;
+        stream >> pos;
+
+        index->append(pos, time);
+    }
+
+    indexFile.close();
+
+    return true;
 }
 
 bool Log::load(bool generateIndex, bool createNew)

@@ -1488,7 +1488,56 @@ void MainWindow::closeProject()
 
         switchToWidget(EMPTY);
 
-        logs->at(currentLogId).log->saveIndex();
+        QString existingIndexInfo = project->projectParams.indexFileInfo["name"];
+
+        if(existingIndexInfo != "")
+        {
+            QFile indexFile(existingIndexInfo);
+            if(!indexFile.exists())
+            {
+                QString indexFileName = logs->at(currentLogId).log->saveIndex();
+
+                IndexFileInfo indexFileInfo;
+                indexFileInfo["name"] = indexFileName;
+
+                project->projectParams.indexFileInfo = indexFileInfo;
+            }
+            else
+            {
+                indexFile.open(QFile::ReadWrite);
+
+                QDataStream stream(&indexFile);
+
+                qint64 indexSize;
+                stream >> indexSize;
+
+                if(indexSize != logs->at(currentLogId).log->indexSize())
+                {
+                    indexFile.close();
+
+                    indexFile.remove();
+
+                    QString indexFileName = logs->at(currentLogId).log->saveIndex();
+
+                    IndexFileInfo indexFileInfo;
+                    indexFileInfo["name"] = indexFileName;
+
+                    project->projectParams.indexFileInfo = indexFileInfo;
+                }
+
+                indexFile.close();
+            }
+        }
+        else
+        {
+            QString indexFileName = logs->at(currentLogId).log->saveIndex();
+
+            IndexFileInfo indexFileInfo;
+            indexFileInfo["ID"] = "0";
+            indexFileInfo["name"] = indexFileName;
+
+            project->projectParams.indexFileInfo = indexFileInfo;
+        }
 
         closeLog();
 
@@ -1644,10 +1693,25 @@ void MainWindow::openLog(QString name)
 
     logs->append(logInfo);
 
-    if(!logs->at(currentLogId).log->load(true, false))
+    QFile logIndexFile(project->projectParams.indexFileInfo["name"]);
+
+    if(settings.value("General/Core/Save_index").value<bool>() && logIndexFile.exists())
     {
-        closeLog();
-        return;
+        if(!logs->at(currentLogId).log->load(false, false))
+        {
+            closeLog();
+            return;
+        }
+
+        logs->at(currentLogId).log->loadIndex(project->projectParams.indexFileInfo["name"]);
+    }
+    else
+    {
+        if(!logs->at(currentLogId).log->load(true, false))
+        {
+            closeLog();
+            return;
+        }
     }
 
     filtrationWidget->setMainLog(currentLogId);

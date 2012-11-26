@@ -37,6 +37,12 @@ void setSettings(QSettings &settings)
     if(!settings.contains("General/Core/Block_size"))
         settings.setValue("General/Core/Block_size", 100);
 
+    if(!settings.contains("Defaults/General/Core/Save_index"))
+        settings.setValue("Defaults/General/Core/Save_index", true);
+
+    if(!settings.contains("General/Core/Save_index"))
+        settings.setValue("General/Core/Save_index", true);
+
     if(!settings.contains("Hidden/Gui/Main_window_pos"))
         settings.setValue("Hidden/Gui/Main_window_pos", QPoint(0, 0));
 

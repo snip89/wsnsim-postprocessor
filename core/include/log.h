@@ -33,6 +33,8 @@ public:
     bool load(bool generateIndex, bool createNew);
     void toggleActivity(bool activityStatus);
     QString saveIndex();
+    qint64 indexSize();
+    bool loadIndex(QString fileName);
 
     /*virtual*/ qint64 size();
     /*virtual*/ void seek(qint64 pos);

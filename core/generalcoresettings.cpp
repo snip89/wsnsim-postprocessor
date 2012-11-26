@@ -19,12 +19,23 @@ void GeneralCoreSettings::showCurrentSettings()
 {
     ui->memoryUsageSpinBox->setValue(settings.value("General/Core/Memory_usage").toInt());
     ui->blockSizeSpinBox->setValue(settings.value("General/Core/Block_size").toInt());
+
+    if(settings.value("General/Core/Save_index").value<bool>())
+        ui->saveIndexCheckBox->setCheckState(Qt::Checked);
+    else
+        ui->saveIndexCheckBox->setCheckState(Qt::Unchecked);
 }
 
 void GeneralCoreSettings::applySettings()
 {
     settings.setValue("General/Core/Memory_usage", ui->memoryUsageSpinBox->text());
     settings.setValue("General/Core/Block_size", ui->blockSizeSpinBox->text());
+
+    if(ui->saveIndexCheckBox->checkState())
+        settings.setValue("General/Core/Save_index", true);
+
+    else
+        settings.setValue("General/Core/Save_index", false);
 }
 
 GeneralCoreSettings::~GeneralCoreSettings()
@@ -36,6 +47,11 @@ void GeneralCoreSettings::showDefaultSettings()
 {
     ui->memoryUsageSpinBox->setValue(settings.value("Defaults/General/Core/Memory_usage").toInt());
     ui->blockSizeSpinBox->setValue(settings.value("Defaults/General/Core/Block_size").toInt());
+
+    if(settings.value("Defaults/General/Core/Save_index").value<bool>())
+        ui->saveIndexCheckBox->setCheckState(Qt::Checked);
+    else
+        ui->saveIndexCheckBox->setCheckState(Qt::Checked);
 }
 
 void GeneralCoreSettings::buttonClicked(QAbstractButton *button)
