@@ -28,8 +28,7 @@ Log::Log(QString fileName, qint64 bSize, qint64 mSize, SimpleEventInfo *info, bo
 
 QString Log::saveIndex()
 {
-    QDateTime time;
-    QString indexFileName = time.currentDateTime().toString(Qt::TextDate) + ".index";
+    QString indexFileName = "index.index";
 
     QFile indexFile(indexFileName);
     indexFile.open(QFile::ReadWrite);
