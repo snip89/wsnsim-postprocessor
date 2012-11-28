@@ -1495,7 +1495,7 @@ void MainWindow::closeProject()
             QFile indexFile(existingIndexInfo);
             if(!indexFile.exists())
             {
-                QString indexFileName = logs->at(currentLogId).log->saveIndex();
+                QString indexFileName = logs->at(0).log->saveIndex();
 
                 IndexFileInfo indexFileInfo;
                 indexFileInfo["name"] = indexFileName;
@@ -1511,13 +1511,13 @@ void MainWindow::closeProject()
                 qint64 indexSize;
                 stream >> indexSize;
 
-                if(indexSize != logs->at(currentLogId).log->indexSize())
+                if(indexSize != logs->at(0).log->indexSize())
                 {
                     indexFile.close();
 
                     indexFile.remove();
 
-                    QString indexFileName = logs->at(currentLogId).log->saveIndex();
+                    QString indexFileName = logs->at(0).log->saveIndex();
 
                     IndexFileInfo indexFileInfo;
                     indexFileInfo["name"] = indexFileName;
@@ -1530,7 +1530,7 @@ void MainWindow::closeProject()
         }
         else
         {
-            QString indexFileName = logs->at(currentLogId).log->saveIndex();
+            QString indexFileName = logs->at(0).log->saveIndex();
 
             IndexFileInfo indexFileInfo;
             indexFileInfo["ID"] = "0";
@@ -1697,30 +1697,30 @@ void MainWindow::openLog(QString name)
 
     if(settings.value("General/Core/Save_index").value<bool>() && logIndexFile.exists())
     {
-        if(!logs->at(currentLogId).log->load(false, false))
+        if(!logs->at(0).log->load(false, false))
         {
             closeLog();
             return;
         }
 
-        logs->at(currentLogId).log->loadIndex(project->projectParams.indexFileInfo["name"]);
+        logs->at(0).log->loadIndex(project->projectParams.indexFileInfo["name"]);
     }
     else
     {
-        if(!logs->at(currentLogId).log->load(true, false))
+        if(!logs->at(0).log->load(true, false))
         {
             closeLog();
             return;
         }
     }
 
-    filtrationWidget->setMainLog(currentLogId);
+    filtrationWidget->setMainLog(0);
 
     updateActionsCurrentLogMenu();
 
-    logs->at(currentLogId).log->toggleActivity(true);
+    logs->at(0).log->toggleActivity(true);
 
-    setTitle(project->projectName(), logs->at(currentLogId).fileName);
+    setTitle(project->projectName(), logs->at(0).fileName);
 
     isLogOpened = true;
 
@@ -1742,8 +1742,6 @@ void MainWindow::openLog(QString name)
         actionTextVisualization->toggle();
     else if(settings.value("General/Gui/Default_visualization").value<QString>() == "table")
         actionTableVisualization->toggle();
-
-    // TODO: Ð´Ð¾Ð±Ð°Ð²Ð¸Ñ‚ÑŒ table visualization
 }
 
 void MainWindow::showSettings()
