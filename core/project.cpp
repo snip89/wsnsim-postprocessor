@@ -229,6 +229,12 @@ int Project::sizeOf(LogDataType type)
     if(type == UINT8_TYPE)
         return sizeof(quint8);
 
+    else if(type == FIVE_BYTES_TYPE)
+        return 5;
+
+    else if(type == UINT8_TYPE)
+        return sizeof(quint8);
+
     else if(type == UINT16_TYPE)
         return sizeof(quint16);
 
@@ -240,6 +246,9 @@ int Project::sizeOf(LogDataType type)
 
     else if(type == INT32_TYPE)
         return sizeof(qint32);
+
+    else if(type == BOOL_TYPE)
+        return sizeof(bool);
 
     else if(type == DOUBLE_TYPE)
         return sizeof(double);
