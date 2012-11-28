@@ -7,8 +7,15 @@ INCLUDEPATH += ../libs/projectData
 INCLUDEPATH += ../libs/formatData
 INCLUDEPATH += ../libs/globalSettings/realtime/interfaces
 
-INCLUDEPATH += ../libs/luajit/src
-LIBS += ../../bin/lua51.dll
+win32 {
+    INCLUDEPATH += ../libs/luajit/src
+    LIBS += ../../bin/lua51.dll
+}
+
+unix {
+    INCLUDEPATH += . /usr/include/luajit-2.0
+    LIBS += -lluajit-5.1
+}
 
 TARGET = logsVisualizer
 TEMPLATE = app
