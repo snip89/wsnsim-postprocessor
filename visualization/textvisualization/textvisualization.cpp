@@ -99,6 +99,7 @@ void TextVisualization::update(IProject *project, ILog *log, QList<Format*> form
     currentLog = log;
 
     topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+    currentLine = topLinePos;
 
     viewer->clear();
 
@@ -108,6 +109,7 @@ void TextVisualization::update(IProject *project, ILog *log, QList<Format*> form
 void TextVisualization::update(QList<Format *> formats)
 {
     topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+    currentLine = topLinePos;
 
     this->formats = formats;
 

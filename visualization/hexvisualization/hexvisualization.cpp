@@ -90,6 +90,7 @@ void HexVisualization::update(IProject *project, ILog *log, QList<Format*> forma
     currentLog = log;
 
     topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+    currentLine = topLinePos;
     //topLinePos = 0;
 
     viewer->clear();
@@ -100,6 +101,7 @@ void HexVisualization::update(IProject *project, ILog *log, QList<Format*> forma
 void HexVisualization::update(QList<Format *> formats)
 {
     topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+    currentLine = topLinePos;
 
     this->formats = formats;
 
