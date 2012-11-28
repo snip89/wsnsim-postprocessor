@@ -308,12 +308,17 @@
         <translation>Расход памяти (проценты):</translation>
     </message>
     <message>
-        <location filename="../../ui/generalcoresettings.ui" line="203"/>
+        <location filename="../../ui/generalcoresettings.ui" line="268"/>
         <source>Block size (records):</source>
         <translation>Размер блока (записи):</translation>
     </message>
     <message>
-        <location filename="../../ui/generalcoresettings.ui" line="319"/>
+        <location filename="../../ui/generalcoresettings.ui" line="339"/>
+        <source>Save index on hard disk</source>
+        <translation>Сохранять индекс на жесткий диск</translation>
+    </message>
+    <message>
+        <location filename="../../ui/generalcoresettings.ui" line="236"/>
         <source>This settings will be applied after log reloading!</source>
         <translation>Настройки вступят в силу только после перезагрузки журнала!</translation>
     </message>
@@ -815,7 +820,7 @@
         <translation type="obsolete">Проект пуст</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1641"/>
+        <location filename="../../core/mainwindow.cpp" line="1692"/>
         <source>No filters</source>
         <translation>Нет фильтров</translation>
     </message>
@@ -836,22 +841,22 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../core/log.cpp" line="35"/>
+        <location filename="../../core/log.cpp" line="97"/>
         <source>Log file not found</source>
         <translation>Файл журнала не найден</translation>
     </message>
     <message>
-        <location filename="../../core/log.cpp" line="42"/>
+        <location filename="../../core/log.cpp" line="104"/>
         <source>Can&apos;t open log file</source>
         <translation>Невозможно открыть файл журнала</translation>
     </message>
     <message>
-        <location filename="../../core/log.cpp" line="52"/>
+        <location filename="../../core/log.cpp" line="114"/>
         <source>Can&apos;t generate index</source>
         <translation>Невозможно сгенерировать индекс</translation>
     </message>
     <message>
-        <location filename="../../core/log.cpp" line="175"/>
+        <location filename="../../core/log.cpp" line="237"/>
         <location filename="../../core/staticlogfilter.cpp" line="65"/>
         <location filename="../../shared/staticfromlogselector.cpp" line="52"/>
         <source>Unexpected end of record</source>
@@ -1004,12 +1009,12 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/logindex.cpp" line="33"/>
+        <location filename="../../core/logindex.cpp" line="26"/>
         <source>Generating index...</source>
         <translation>Генерация индекса...</translation>
     </message>
     <message>
-        <location filename="../../core/logindex.cpp" line="33"/>
+        <location filename="../../core/logindex.cpp" line="26"/>
         <location filename="../../core/staticlogfilter.cpp" line="30"/>
         <source>Cancel</source>
         <translation>Отмена</translation>

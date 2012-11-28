@@ -300,12 +300,17 @@
         <translation>Memory usage (percents):</translation>
     </message>
     <message>
-        <location filename="../../ui/generalcoresettings.ui" line="203"/>
+        <location filename="../../ui/generalcoresettings.ui" line="268"/>
         <source>Block size (records):</source>
         <translation>Block size (records):</translation>
     </message>
     <message>
-        <location filename="../../ui/generalcoresettings.ui" line="319"/>
+        <location filename="../../ui/generalcoresettings.ui" line="339"/>
+        <source>Save index on hard disk</source>
+        <translation>Save index on hard disk</translation>
+    </message>
+    <message>
+        <location filename="../../ui/generalcoresettings.ui" line="236"/>
         <source>This settings will be applied after log reloading!</source>
         <translation>This settings will be applied after log reloading!</translation>
     </message>
@@ -827,7 +832,7 @@
         <translation type="obsolete">Project is empty</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1641"/>
+        <location filename="../../core/mainwindow.cpp" line="1692"/>
         <source>No filters</source>
         <translation>No filters</translation>
     </message>
@@ -848,22 +853,22 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../core/log.cpp" line="35"/>
+        <location filename="../../core/log.cpp" line="97"/>
         <source>Log file not found</source>
         <translation>Log file not found</translation>
     </message>
     <message>
-        <location filename="../../core/log.cpp" line="42"/>
+        <location filename="../../core/log.cpp" line="104"/>
         <source>Can&apos;t open log file</source>
         <translation>Can&apos;t open log file</translation>
     </message>
     <message>
-        <location filename="../../core/log.cpp" line="52"/>
+        <location filename="../../core/log.cpp" line="114"/>
         <source>Can&apos;t generate index</source>
         <translation>Can&apos;t generate index</translation>
     </message>
     <message>
-        <location filename="../../core/log.cpp" line="175"/>
+        <location filename="../../core/log.cpp" line="237"/>
         <location filename="../../core/staticlogfilter.cpp" line="65"/>
         <location filename="../../shared/staticfromlogselector.cpp" line="52"/>
         <source>Unexpected end of record</source>
@@ -1015,12 +1020,12 @@
         <translation>There is no function format in file </translation>
     </message>
     <message>
-        <location filename="../../core/logindex.cpp" line="33"/>
+        <location filename="../../core/logindex.cpp" line="26"/>
         <source>Generating index...</source>
         <translation>Generating index...</translation>
     </message>
     <message>
-        <location filename="../../core/logindex.cpp" line="33"/>
+        <location filename="../../core/logindex.cpp" line="26"/>
         <location filename="../../core/staticlogfilter.cpp" line="30"/>
         <source>Cancel</source>
         <translation>Cancel</translation>
