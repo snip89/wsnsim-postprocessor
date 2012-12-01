@@ -1,19 +1,3 @@
-local function bitStatus(value, bitNumber)
-	local status
-
-	value = bit.lshift(value, 8 - bitNumber)
-	value = bit.band(value, 255)
-	value = bit.rshift(value, 7)
-
-	if(value == 1) then
-		status = "true"
-	else
-		status = "false"
-	end
-
-	return status
-end
-
 local function checkBit(value, bitNumber)
 	value = bit.lshift(value, 8 - bitNumber)
 	value = bit.band(value, 255)
@@ -40,35 +24,46 @@ function format(byteArray)
 
 		-- FCF
 
+		local FCF = ""
+
 		-- FCF Frame Type
 		local FCF_FrameType = byteArray[iterator]
 		FCF_FrameType = bit.lshift(FCF_FrameType, 5)
 		FCF_FrameType = bit.band(FCF_FrameType, 255)
 		FCF_FrameType = bit.rshift(FCF_FrameType, 5)
-		table.insert(result, { name = "FCF_FrameType", type = "uint8", value = { FCF_FrameType } } )
+
+		if(FCF_FrameType == 0) then
+			FCF = FCF .. "Beacon"
+		elseif(FCF_FrameType == 1) then
+			FCF = FCF .. "Data"
+		elseif(FCF_FrameType == 2) then
+			FCF = FCF .. "Acknowledgment"
+		elseif(FCF_FrameType == 3) then
+			FCf = FCF .. "MacCommand"
+		end
 
 		-- FCF Security Enabled
 		bool = checkBit(byteArray[iterator], 3)
 		if(bool == 1) then
-			table.insert(result, { name = "FCF_SecurityEnabled", type = "string", value = { 0, #"true", "true" } } )
+			FCF = FCF .. ", SecurityEnabled"
 		end
 
 		-- FCF Frame Pending
 		bool = checkBit(byteArray[iterator], 4)
 		if(bool == 1) then
-			table.insert(result, { name = "FCF_FramePending", type = "string", value = { 0, #"true", "true" } } )
+			FCF = FCF .. ", FramePending"
 		end
 
 		-- FCF Ack Request
 		bool = checkBit(byteArray[iterator], 5)
 		if(bool == 1) then
-			table.insert(result, { name = "FCF_AckRequest", type = "string", value = { 0, #"true", "true" } } )
+			FCF = FCF .. ", AckRequest"
 		end
 
 		-- FCF Intra-PAN
 		bool = checkBit(byteArray[iterator], 6)
 		if(bool == 1) then
-			table.insert(result, { name = "FCF_Intra-PAN", type = "string", value = { 0, #"true", "true" } } )
+			FCF = FCF .. ", Intra-PAN"
 			isIntraPan = 1
 		end
 
@@ -81,17 +76,12 @@ function format(byteArray)
 		FCF_DestAddrMode = bit.band(FCF_DestAddrMode, 255)
 		FCF_DestAddrMode = bit.rshift(FCF_DestAddrMode, 6)
 
-		local DestAddrMode
-
 		if(FCF_DestAddrMode == 0) then
-			DestAddrMode = "no address"
-			table.insert(result, { name = "FCF_DestAddrMode", type = "string", value = { 0, #DestAddrMode, DestAddrMode } } )
+			FCF = FCF .. ", no address"
 		elseif(FCF_DestAddrMode == 2) then
-			DestAddrMode = "16 bit short short address"
-			table.insert(result, { name = "FCF_DestAddrMode", type = "string", value = { 0, #DestAddrMode, DestAddrMode } } )
+			FCF = FCF .. ", 16 bit short address"
 		elseif(FCF_DestAddrMode == 3) then
-			DestAddrMode = "64 bit long long address"
-			table.insert(result, { name = "FCF_DestAddrMode", type = "string", value = { 0, #DestAddrMode, DestAddrMode } } )
+			FCF = FCF .. ", 64 bit extended address"
 		end
 
 		-- FCF Source Addr Mode
@@ -100,18 +90,15 @@ function format(byteArray)
 		FCF_SourceAddrMode = bit.band(FCF_SourceAddrMode, 255)
 		FCF_SourceAddrMode = bit.rshift(FCF_SourceAddrMode, 6)
 
-		local SourceAddrMode
-
 		if(FCF_SourceAddrMode == 0) then
-			SourceAddrMode = "no address"
-			table.insert(result, { name = "FCF_SourceAddrMode", type = "string", value = { 0, #SourceAddrMode, SourceAddrMode } } )
+			FCF = FCF .. ", no address"
 		elseif(FCF_SourceAddrMode == 2) then
-			SourceAddrMode = "16 bit address"
-			table.insert(result, { name = "FCF_SourceAddrMode", type = "string", value = { 0, #SourceAddrMode, SourceAddrMode } } )
+			FCF = FCF .. ", 16 bit short address"
 		elseif(FCF_SourceAddrMode == 3) then
-			SourceAddrMode = "64 bit address"
-			table.insert(result, { name = "FCF_SourceAddrMode", type = "string", value = { 0, #SourceAddrMode, SourceAddrMode } } )
+			FCF = FCF .. ", 64 bit extended address"
 		end
+
+		table.insert(result, { name = "FCF", type = "string", value = { 0, #FCF, FCF } } )
 
 		iterator = iterator + 1
 
