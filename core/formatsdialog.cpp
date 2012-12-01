@@ -12,70 +12,11 @@ FormatsDialog::FormatsDialog(Project *project, QList<Format*> formats, QWidget *
 
     updateList();
 
-    ui->listWidget->setContextMenuPolicy(Qt::CustomContextMenu);
-    connect(ui->listWidget, SIGNAL(customContextMenuRequested(const QPoint&)),
-        this, SLOT(showContextMenu(const QPoint&)));
+    connect(ui->addPushButton, SIGNAL(clicked()), this, SLOT(addButtonClicked()));
+    connect(ui->removePushButton, SIGNAL(clicked()), this, SLOT(removeButtonClicked()));
+    connect(ui->removeAllPushButton, SIGNAL(clicked()), this, SLOT(removeAllButtonClicked()));
 
     errorMessager.setModal(true);
-}
-
-void FormatsDialog::showContextMenu(const QPoint& pos)
-{
-    QPoint globalPos = ui->listWidget->mapToGlobal(pos);
-
-    QMenu menu;
-    menu.addAction(tr("add format"));
-
-    QListWidgetItem* temp = ui->listWidget->itemAt(pos);
-    if(temp)
-    {
-        menu.addAction(tr("delete format"));
-    }
-
-    if(formats.size() != 0)
-    {
-        menu.addSeparator();
-        menu.addAction(tr("remove all"));
-    }
-
-    QAction* selectedItem = menu.exec(globalPos);
-    if (selectedItem)
-    {
-        if(selectedItem->text() == tr("add format"))
-        {
-            loadFormat();
-        }
-
-        else if(selectedItem->text() == tr("delete format"))
-        {
-            for(int i = 0; i < formats.size(); i++)
-            {
-                QString info;
-                info += tr("Format name: ") + formats[i]->formatInfo["name"] + " / ";
-                info += tr("Argument: ") + formats[i]->formatInfo["argument"] + " / ";
-                info += tr("Event type: ") + formats[i]->argument["eventType"];
-
-                if(temp->text().contains(info))
-                {
-                    delete formats[i];
-                    formats.removeAt(i);
-                }
-            }
-
-            delete temp;
-        }
-
-        else if(selectedItem->text() == tr("remove all"))
-        {
-            foreach(Format *format, formats)
-            {
-                delete format;
-            }
-
-            formats.clear();
-            updateList();
-        }
-    }
 }
 
 void FormatsDialog::loadFormat()
@@ -217,4 +158,42 @@ FormatsDialog::~FormatsDialog()
     }
 
     delete ui;
+}
+
+void FormatsDialog::addButtonClicked()
+{
+    loadFormat();
+}
+
+void FormatsDialog::removeButtonClicked()
+{
+    for(int i = 0; i < formats.size(); i++)
+    {
+        QString info;
+        info += tr("Format name: ") + formats[i]->formatInfo["name"] + " / ";
+        info += tr("Argument: ") + formats[i]->formatInfo["argument"] + " / ";
+        info += tr("Event type: ") + formats[i]->argument["eventType"];
+
+        if(ui->listWidget->currentItem())
+        {
+            if(ui->listWidget->currentItem()->text().contains(info))
+            {
+                delete formats[i];
+                formats.removeAt(i);
+            }
+
+            delete ui->listWidget->currentItem();
+        }
+    }
+}
+
+void FormatsDialog::removeAllButtonClicked()
+{
+    foreach(Format *format, formats)
+    {
+        delete format;
+    }
+
+    formats.clear();
+    updateList();
 }

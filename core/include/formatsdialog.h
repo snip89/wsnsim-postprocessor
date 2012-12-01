@@ -42,7 +42,9 @@ private:
 
     void updateList();
 private slots:
-    void showContextMenu(const QPoint& pos);
+    void addButtonClicked();
+    void removeButtonClicked();
+    void removeAllButtonClicked();
 };
 
 #endif // FORMATSDIALOG_H
