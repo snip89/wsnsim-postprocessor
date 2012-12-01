@@ -8,6 +8,9 @@ FormatAcceptingDialog::FormatAcceptingDialog(Project *project, QString name, QWi
     this->name = name;
 
     ui->setupUi(this);
+
+    connect(ui->acceptionComboBox, SIGNAL(currentIndexChanged(int)), this, SLOT(updateArgComboBox(int)));
+
     initComboBox();
 }
 
@@ -20,8 +23,13 @@ AttrInfo FormatAcceptingDialog::getArgument()
 
     AttrInfo info;
     info["eventID"] = values[0];
-    info["argumentID"] = values[1];
-    info["eventType"] = values[2];
+    //info["argumentID"] = values[1];
+    info["eventType"] = values[1];
+
+    QString argValue = ui->acceptionArgComboBox->itemData(
+                ui->acceptionArgComboBox->currentIndex()).value<QString>();
+
+    info["argumentID"] = argValue;
 
     return info;
 }
@@ -35,29 +43,61 @@ void FormatAcceptingDialog::initComboBox()
 {
     foreach(EventParams event, project->projectParams.events.systemEvents)
     {
-        foreach(EventArgument argument, event.arguments)
-        {
-            if(name == argument["name"])
-            {
-                QString info = event.eventInfo["ID"] + ";" + argument["ID"] + ";" + event.eventInfo["name"];
+        //foreach(EventArgument argument, event.arguments)
+        //{
+            //if(name == argument["name"])
+            //{
+                QString info = event.eventInfo["ID"] + ";" + event.eventInfo["name"];
 
                 ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"],
                                                QVariant(info));
-            }
+            //}
+        //}
+    }
+
+    foreach(EventParams event, project->projectParams.events.userEvents)
+    {
+        //foreach(EventArgument argument, event.arguments)
+        //{
+            //if(name == argument["name"])
+            //{
+                QString info = event.eventInfo["ID"] + ";" + event.eventInfo["name"];
+
+                ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"],
+                                               QVariant(info));
+            //}
+        //}
+    }
+}
+
+void FormatAcceptingDialog::updateArgComboBox(int index)
+{
+    ui->acceptionArgComboBox->clear();
+
+    EventParams currentEvent;
+
+    foreach(EventParams event, project->projectParams.events.systemEvents)
+    {
+        if(event.eventInfo["ID"] == QString::number(index))
+        {
+            currentEvent = event;
         }
     }
 
     foreach(EventParams event, project->projectParams.events.userEvents)
     {
-        foreach(EventArgument argument, event.arguments)
+        if(event.eventInfo["ID"] == QString::number(index))
         {
-            if(name == argument["name"])
-            {
-                QString info = event.eventInfo["ID"] + ";" + argument["ID"] + ";" + event.eventInfo["name"];
+            currentEvent = event;
+        }
+    }
 
-                ui->acceptionComboBox->addItem("event: " + event.eventInfo["name"],
-                                               QVariant(info));
-            }
+    foreach(EventArgument argument, currentEvent.arguments)
+    {
+        if(argument["type"] == "ByteArray")
+        {
+            QString info = argument["ID"];
+            ui->acceptionArgComboBox->addItem("argument: " + argument["name"], QVariant(info));
         }
     }
 }

@@ -28,6 +28,8 @@ private:
     void initComboBox();
 
     Ui::FormatAcceptingDialog *ui;
+private slots:
+    void updateArgComboBox(int index);
 };
 
 #endif // FORMATACCEPTINGDIALOG_H
