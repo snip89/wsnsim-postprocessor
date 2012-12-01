@@ -8,12 +8,6 @@ void FormatValidator::validate(Format *format, QString &errorString)
         return;
     }
 
-    if(format->formatInfo["argument"] == "")
-    {
-        errorString = QObject::tr("No format argument name");
-        return;
-    }
-
     if(format->luaInfo["file"] == "")
     {
         errorString = QObject::tr("No lua file in format");
