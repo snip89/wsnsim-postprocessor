@@ -87,10 +87,10 @@ function format(byteArray)
 			DestAddrMode = "no address"
 			table.insert(result, { name = "FCF_DestAddrMode", type = "string", value = { 0, #DestAddrMode, DestAddrMode } } )
 		elseif(FCF_DestAddrMode == 2) then
-			DestAddrMode = "16 bit address"
+			DestAddrMode = "16 bit short short address"
 			table.insert(result, { name = "FCF_DestAddrMode", type = "string", value = { 0, #DestAddrMode, DestAddrMode } } )
 		elseif(FCF_DestAddrMode == 3) then
-			DestAddrMode = "64 bit address"
+			DestAddrMode = "64 bit long long address"
 			table.insert(result, { name = "FCF_DestAddrMode", type = "string", value = { 0, #DestAddrMode, DestAddrMode } } )
 		end
 

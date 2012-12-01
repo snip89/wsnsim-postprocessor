@@ -78,10 +78,21 @@ QList< QPair<QString, QVariant> > StaticLuaLoader::exec(QString fileName, QByteA
 
                         else if(lua_isstring(m_lua, -1))
                         {
+                            size--;
+
                             QString str = lua_tostring(m_lua, -1);
 
                             foreach(QChar ch, str)
                             {
+                                size_t newSize = size + 1;
+                                char* newData = new char[newSize];
+
+                                memcpy(newData, data, size);
+
+                                size = newSize;
+                                delete [] data;
+                                data = newData;
+
                                 data[idx - 1] = ch.toAscii();
                                 idx ++;
                                 size ++;
