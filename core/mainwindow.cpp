@@ -1490,7 +1490,11 @@ void MainWindow::closeProject()
         QString existingIndexInfo = project->projectParams.indexFileInfo["name"];
 
         QDir dir;
-        QDir::setCurrent(dir.absoluteFilePath(logs->at(0).fileName));
+        QFileInfo finfo = QFileInfo(project->projectName());
+
+        QString dirPath = dir.filePath(project->projectName());
+        dirPath.chop(finfo.fileName().size());
+        QDir::setCurrent(dirPath);
 
         if(settings.value("General/Core/Save_index").value<bool>())
         {
@@ -1699,7 +1703,11 @@ void MainWindow::openLog(QString name)
     logs->append(logInfo);
 
     QDir dir;
-    QDir::setCurrent(dir.absoluteFilePath(logs->at(0).fileName));
+    QFileInfo finfo = QFileInfo(project->projectName());
+
+    QString dirPath = dir.filePath(project->projectName());
+    dirPath.chop(finfo.fileName().size());
+    QDir::setCurrent(dirPath);
 
     QFile logIndexFile(project->projectParams.indexFileInfo["name"]);
 
