@@ -185,8 +185,7 @@ void MainWindow::exportAsTxt()
 
 MainWindow::~MainWindow()
 {
-    closeProject();
-    closeConnection();
+    closeAnything();
 
     deleteActions();
     deleteMenus();
@@ -1490,53 +1489,59 @@ void MainWindow::closeProject()
 
         QString existingIndexInfo = project->projectParams.indexFileInfo["name"];
 
-        if(existingIndexInfo != "")
+        QDir dir;
+        QDir::setCurrent(dir.absoluteFilePath(logs->at(0).fileName));
+
+        if(settings.value("General/Core/Save_index").value<bool>())
         {
-            QFile indexFile(existingIndexInfo);
-            if(!indexFile.exists())
+            if(existingIndexInfo != "")
             {
-                QString indexFileName = logs->at(0).log->saveIndex();
-
-                IndexFileInfo indexFileInfo;
-                indexFileInfo["name"] = indexFileName;
-
-                project->projectParams.indexFileInfo = indexFileInfo;
-            }
-            else
-            {
-                indexFile.open(QFile::ReadWrite);
-
-                QDataStream stream(&indexFile);
-
-                qint64 indexSize;
-                stream >> indexSize;
-
-                if(indexSize != logs->at(0).log->indexSize())
+                QFile indexFile(existingIndexInfo);
+                if(!indexFile.exists())
                 {
-                    indexFile.close();
-
-                    indexFile.remove();
-
-                    QString indexFileName = logs->at(0).log->saveIndex();
+                    QString indexFileName = logs->at(0).log->saveIndex(project->projectName());
 
                     IndexFileInfo indexFileInfo;
                     indexFileInfo["name"] = indexFileName;
 
                     project->projectParams.indexFileInfo = indexFileInfo;
                 }
+                else
+                {
+                    indexFile.open(QFile::ReadOnly);
 
-                indexFile.close();
+                    QDataStream stream(&indexFile);
+
+                    QString realFileName;
+                    stream >> realFileName;
+
+                    if(project->projectName() != realFileName)
+                    {
+                        indexFile.close();
+
+                        indexFile.remove();
+
+                        QString indexFileName = logs->at(0).log->saveIndex(project->projectName());
+
+                        IndexFileInfo indexFileInfo;
+                        indexFileInfo["name"] = indexFileName;
+
+                        project->projectParams.indexFileInfo = indexFileInfo;
+                    }
+
+                    indexFile.close();
+                }
             }
-        }
-        else
-        {
-            QString indexFileName = logs->at(0).log->saveIndex();
+            else
+            {
+                QString indexFileName = logs->at(0).log->saveIndex(project->projectName());
 
-            IndexFileInfo indexFileInfo;
-            indexFileInfo["ID"] = "0";
-            indexFileInfo["name"] = indexFileName;
+                IndexFileInfo indexFileInfo;
+                indexFileInfo["ID"] = "0";
+                indexFileInfo["name"] = indexFileName;
 
-            project->projectParams.indexFileInfo = indexFileInfo;
+                project->projectParams.indexFileInfo = indexFileInfo;
+            }
         }
 
         closeLog();
@@ -1693,6 +1698,9 @@ void MainWindow::openLog(QString name)
 
     logs->append(logInfo);
 
+    QDir dir;
+    QDir::setCurrent(dir.absoluteFilePath(logs->at(0).fileName));
+
     QFile logIndexFile(project->projectParams.indexFileInfo["name"]);
 
     if(settings.value("General/Core/Save_index").value<bool>() && logIndexFile.exists())
@@ -1703,7 +1711,14 @@ void MainWindow::openLog(QString name)
             return;
         }
 
-        logs->at(0).log->loadIndex(project->projectParams.indexFileInfo["name"]);
+        if(!logs->at(0).log->loadIndex(project->projectParams.indexFileInfo["name"], project->projectName()))
+        {
+            if(!logs->at(0).log->load(true, false))
+            {
+                closeLog();
+                return;
+            }
+        }
     }
     else
     {

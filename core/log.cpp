@@ -26,16 +26,17 @@ Log::Log(QString fileName, qint64 bSize, qint64 mSize, SimpleEventInfo *info, bo
     updateFileSize();
 }
 
-QString Log::saveIndex()
+QString Log::saveIndex(QString projectName)
 {
-    QString indexFileName = "index.index";
+    QDateTime date;
+    QString indexFileName = QString::number(date.currentDateTime().toUTC().currentMSecsSinceEpoch()) + ".index";
 
     QFile indexFile(indexFileName);
     indexFile.open(QFile::ReadWrite);
 
     QDataStream stream(&indexFile);
 
-    stream << index->indexSize;
+    stream << projectName;
     stream << index->logSize;
 
     for(int i = 0; i < index->size() - 1; i ++)
@@ -53,7 +54,7 @@ qint64 Log::indexSize()
     return index->indexSize;
 }
 
-bool Log::loadIndex(QString fileName)
+bool Log::loadIndex(QString fileName, QString projectName)
 {
     QFile indexFile(fileName);
 
@@ -64,9 +65,14 @@ bool Log::loadIndex(QString fileName)
 
     QDataStream stream(&indexFile);
 
-    qint64 indexSize;
+    QString realProjectName;
     qint64 logSize;
-    stream >> indexSize;
+
+    stream >> realProjectName;
+
+    if(realProjectName != projectName)
+        return false;
+
     stream >> logSize;
 
     index->logSize = logSize;
