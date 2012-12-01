@@ -95,6 +95,16 @@ void FormatsDialog::loadFormat()
 
         format->argument = info;
 
+        foreach(Format *f, formats)
+        {
+            if(f->argument["eventID"] == format->argument["eventID"] &&
+                    f->argument["argumentID"] == format->argument["argumentID"])
+            {
+                errorMessager.showMessage(tr("This argument already has format"));
+                return;
+            }
+        }
+
         // TODO: убивать формат если такой уже есть
         //project->injectFormatSettings();
 
