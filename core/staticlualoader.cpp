@@ -93,6 +93,8 @@ QList< QPair<QString, QVariant> > StaticLuaLoader::exec(QString fileName, QByteA
 
                     QVariant value = convertBytes(data, size, convertedType);
 
+                    delete[] data;
+
                     QPair<QString, QVariant> pair;
                     pair.first = name;
                     pair.second = value;
