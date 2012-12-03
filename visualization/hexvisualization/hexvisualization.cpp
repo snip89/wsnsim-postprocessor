@@ -366,6 +366,8 @@ void HexVisualization::updatePage()
     }*/
 
     settings.setValue("Hidden/Core/Current_pos", topLinePos);
+
+    ui->horizontalScrollBar->setValue(0);
 }
 
 void HexVisualization::updatePage(int cursorMoving)

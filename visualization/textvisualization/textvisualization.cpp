@@ -390,6 +390,8 @@ void TextVisualization::updatePage()
     }*/
 
     settings.setValue("Hidden/Core/Current_pos", topLinePos);
+
+    ui->horizontalScrollBar->setValue(0);
 }
 
 void TextVisualization::updatePage(int cursorMoving)

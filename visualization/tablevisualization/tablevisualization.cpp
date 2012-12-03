@@ -360,6 +360,10 @@ void TableVisualization::updatePage()
     viewer->verticalHeader()->setResizeMode(QHeaderView::Fixed);
 
     settings.setValue("Hidden/Core/Current_pos", topLinePos);
+
+    int hscrollPosition = ui->horizontalScrollBar->value();
+    ui->horizontalScrollBar->setValue(0);
+    ui->horizontalScrollBar->setValue(hscrollPosition);
 }
 
 void TableVisualization::updatePage(int cursorMoving)
