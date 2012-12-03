@@ -46,11 +46,14 @@ void TableVisualization::update(IProject *project, ILog *log, QList<Format*> for
     }
 
     updatePage();
+
+    ui->verticalScrollBar->setValue(topLinePos);
 }
 
 void TableVisualization::update(QList<Format *> formats)
 {
     topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+    ui->verticalScrollBar->setValue(topLinePos);
 
     this->formats = formats;
 

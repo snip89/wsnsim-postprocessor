@@ -104,11 +104,14 @@ void TextVisualization::update(IProject *project, ILog *log, QList<Format*> form
     viewer->clear();
 
     updatePage();
+
+    ui->verticalScrollBar->setValue(topLinePos);
 }
 
 void TextVisualization::update(QList<Format *> formats)
 {
     topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+    ui->verticalScrollBar->setValue(topLinePos);
     currentLine = topLinePos;
 
     this->formats = formats;

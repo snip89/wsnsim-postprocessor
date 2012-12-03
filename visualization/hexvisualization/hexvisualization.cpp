@@ -96,11 +96,13 @@ void HexVisualization::update(IProject *project, ILog *log, QList<Format*> forma
     viewer->clear();
 
     updatePage();
+    ui->verticalScrollBar->setValue(topLinePos);
 }
 
 void HexVisualization::update(QList<Format *> formats)
 {
     topLinePos = settings.value("Hidden/Core/Current_pos").value<int>();
+    ui->verticalScrollBar->setValue(topLinePos);
     currentLine = topLinePos;
 
     this->formats = formats;
