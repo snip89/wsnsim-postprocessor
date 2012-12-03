@@ -135,7 +135,38 @@ void FormatsDialog::updateList()
     {
         QString info;
         info += tr("Format name: ") + format->formatInfo["name"] + " / ";
-        info += tr("Argument: ") + format->formatInfo["argument"] + " / ";
+
+        bool system = false;
+        bool user = false;
+
+        foreach(EventParams event, project->projectParams.events.systemEvents)
+        {
+            if(event.eventInfo["ID"] == format->argument["eventID"])
+                system = true;
+        }
+
+        foreach(EventParams event, project->projectParams.events.userEvents)
+        {
+            if(event.eventInfo["ID"] == format->argument["eventID"])
+                user = true;
+        }
+
+        if(system)
+        {
+            info += tr("Argument: ");
+            info += project->projectParams.events.systemEvents[
+                    format->argument["eventID"].toInt()].arguments[
+                    format->argument["argumentID"].toInt()]["name"] + " / ";
+        }
+
+        if(user)
+        {
+            info += tr("Argument: ");
+            info += project->projectParams.events.userEvents[
+                    format->argument["eventID"].toInt()].arguments[
+                    format->argument["argumentID"].toInt()]["name"] + " / ";
+        }
+
         info += tr("Event type: ") + format->argument["eventType"];
 
         ui->listWidget->addItem(info);
