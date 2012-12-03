@@ -37,6 +37,7 @@ QString Log::saveIndex(QString projectName)
     QDataStream stream(&indexFile);
 
     stream << projectName;
+    stream << blockSize;
     stream << index->logSize;
 
     for(int i = 0; i < index->size() - 1; i ++)
@@ -66,12 +67,23 @@ bool Log::loadIndex(QString fileName, QString projectName)
     QDataStream stream(&indexFile);
 
     QString realProjectName;
+    qint64 realBlockSize;
     qint64 logSize;
 
     stream >> realProjectName;
+    stream >> realBlockSize;
+
+    if(realBlockSize != blockSize)
+    {
+        indexFile.close();
+        return false;
+    }
 
     if(realProjectName != projectName)
+    {
+        indexFile.close();
         return false;
+    }
 
     stream >> logSize;
 
@@ -103,6 +115,9 @@ bool Log::load(bool generateIndex, bool createNew)
             return false;
         }
     }
+
+    if(file->isOpen())
+        file->close();
 
     if(!file->open(QFile::ReadWrite))
     {

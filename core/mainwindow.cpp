@@ -1510,30 +1510,16 @@ void MainWindow::closeProject()
 
                     project->projectParams.indexFileInfo = indexFileInfo;
                 }
-                else
+                else if(needRefreshIndex)
                 {
-                    indexFile.open(QFile::ReadOnly);
+                    indexFile.remove();
 
-                    QDataStream stream(&indexFile);
+                    QString indexFileName = logs->at(0).log->saveIndex(project->projectName());
 
-                    QString realFileName;
-                    stream >> realFileName;
+                    IndexFileInfo indexFileInfo;
+                    indexFileInfo["name"] = indexFileName;
 
-                    if(project->projectName() != realFileName)
-                    {
-                        indexFile.close();
-
-                        indexFile.remove();
-
-                        QString indexFileName = logs->at(0).log->saveIndex(project->projectName());
-
-                        IndexFileInfo indexFileInfo;
-                        indexFileInfo["name"] = indexFileName;
-
-                        project->projectParams.indexFileInfo = indexFileInfo;
-                    }
-
-                    indexFile.close();
+                    project->projectParams.indexFileInfo = indexFileInfo;
                 }
             }
             else
@@ -1679,6 +1665,8 @@ void MainWindow::closeAnything()
 
 void MainWindow::openLog(QString name)
 {
+    needRefreshIndex = false;
+
     QFileInfo projectFileInfo(project->projectName());
     QDir::setCurrent(projectFileInfo.absoluteDir().absolutePath());
 
@@ -1721,6 +1709,8 @@ void MainWindow::openLog(QString name)
 
         if(!logs->at(0).log->loadIndex(project->projectParams.indexFileInfo["name"], project->projectName()))
         {
+            needRefreshIndex = true;
+
             if(!logs->at(0).log->load(true, false))
             {
                 closeLog();

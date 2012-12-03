@@ -104,6 +104,7 @@ public:
 
 private:
     bool realTime;
+    bool needRefreshIndex;
 
     QuickSearchWidget *quickSearchWidget;
 
