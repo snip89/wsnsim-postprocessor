@@ -21,6 +21,7 @@ QString StaticVisualizationTools::updateValue(int eventID,
                     type == BYTE_ARRAY_TYPE)
             {
                 result = applyFormat(value, format);
+                break;
             }
             else
             {
