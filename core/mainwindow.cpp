@@ -748,8 +748,14 @@ void MainWindow::switchToWidget(WidgetType type)
     case EMPTY:
         stackedWidget->setCurrentWidget(emptyWidget);
         activeWidget = EMPTY;
-        actionQuickSearch->setEnabled(false);
-        ui->searchToolBar->setVisible(false);
+
+        if(!actionTextVisualization->isChecked()
+                && !actionHexVisualization->isChecked()
+                && !actionTableVisualization->isChecked())
+        {
+            actionQuickSearch->setEnabled(false);
+            ui->searchToolBar->setVisible(false);
+        }
         actionPrint->setEnabled(false);
         actionExportAsTxt->setEnabled(false);
         break;
