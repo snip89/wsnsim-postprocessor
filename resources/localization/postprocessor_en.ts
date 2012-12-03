@@ -227,60 +227,66 @@
         <translation>Formats</translation>
     </message>
     <message>
-        <location filename="../../core/formatsdialog.cpp" line="27"/>
-        <location filename="../../core/formatsdialog.cpp" line="44"/>
+        <location filename="../../ui/formatsdialog.ui" line="56"/>
+        <source>remove format</source>
+        <translation>remove format</translation>
+    </message>
+    <message>
+        <location filename="../../ui/formatsdialog.ui" line="63"/>
         <source>add format</source>
         <translation>add format</translation>
     </message>
     <message>
-        <location filename="../../core/formatsdialog.cpp" line="32"/>
-        <location filename="../../core/formatsdialog.cpp" line="49"/>
         <source>delete format</source>
-        <translation>delete format</translation>
+        <translation type="obsolete">delete format</translation>
     </message>
     <message>
-        <location filename="../../core/formatsdialog.cpp" line="38"/>
-        <location filename="../../core/formatsdialog.cpp" line="68"/>
+        <location filename="../../ui/formatsdialog.ui" line="49"/>
         <source>remove all</source>
         <translation>remove all</translation>
     </message>
     <message>
-        <location filename="../../core/formatsdialog.cpp" line="54"/>
-        <location filename="../../core/formatsdialog.cpp" line="186"/>
+        <location filename="../../core/formatsdialog.cpp" line="137"/>
+        <location filename="../../core/formatsdialog.cpp" line="183"/>
         <source>Format name: </source>
         <translation>Format name: </translation>
     </message>
     <message>
-        <location filename="../../core/formatsdialog.cpp" line="55"/>
-        <location filename="../../core/formatsdialog.cpp" line="187"/>
+        <location filename="../../core/formatsdialog.cpp" line="138"/>
+        <location filename="../../core/formatsdialog.cpp" line="184"/>
         <source>Argument: </source>
         <translation>Argument: </translation>
     </message>
     <message>
-        <location filename="../../core/formatsdialog.cpp" line="56"/>
-        <location filename="../../core/formatsdialog.cpp" line="188"/>
+        <location filename="../../core/formatsdialog.cpp" line="139"/>
+        <location filename="../../core/formatsdialog.cpp" line="185"/>
         <source>Event type: </source>
         <translation>Event type: </translation>
     </message>
     <message>
-        <location filename="../../core/formatsdialog.cpp" line="87"/>
+        <location filename="../../core/formatsdialog.cpp" line="28"/>
         <source>Open format file</source>
         <translation>Open format file</translation>
     </message>
     <message>
-        <location filename="../../core/formatsdialog.cpp" line="87"/>
+        <location filename="../../core/formatsdialog.cpp" line="28"/>
         <source>XML format files (*xml)</source>
         <translation>XML format files (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/formatsdialog.cpp" line="116"/>
+        <location filename="../../core/formatsdialog.cpp" line="57"/>
         <source>Error while loading formatData library</source>
         <translation>Error while loading formatData library</translation>
     </message>
     <message>
-        <location filename="../../core/formatsdialog.cpp" line="138"/>
+        <location filename="../../core/formatsdialog.cpp" line="79"/>
         <source>Lua file not found: </source>
         <translation>Lua file not found: </translation>
+    </message>
+    <message>
+        <location filename="../../core/formatsdialog.cpp" line="103"/>
+        <source>This argument already has format</source>
+        <translation>This argument already has format</translation>
     </message>
     <message>
         <source>Lua file not found</source>
@@ -562,7 +568,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="308"/>
+        <location filename="../../core/mainwindow.cpp" line="307"/>
         <source>&amp;Open project...</source>
         <translation>&amp;Open project...</translation>
     </message>
@@ -575,32 +581,32 @@
         <translation type="obsolete">&amp;Close project</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="321"/>
+        <location filename="../../core/mainwindow.cpp" line="320"/>
         <source>&amp;Print...</source>
         <translation>&amp;Print...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="331"/>
+        <location filename="../../core/mainwindow.cpp" line="330"/>
         <source>&amp;Exit</source>
         <translation>&amp;Exit</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="335"/>
+        <location filename="../../core/mainwindow.cpp" line="334"/>
         <source>&amp;Settings...</source>
         <translation>&amp;Settings...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="338"/>
+        <location filename="../../core/mainwindow.cpp" line="337"/>
         <source>&amp;Hex</source>
         <translation>&amp;Hex</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="343"/>
+        <location filename="../../core/mainwindow.cpp" line="342"/>
         <source>&amp;Text</source>
         <translation>&amp;Text</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="348"/>
+        <location filename="../../core/mainwindow.cpp" line="347"/>
         <source>&amp;Table</source>
         <translation>&amp;Table</translation>
     </message>
@@ -629,7 +635,7 @@
         <translation type="obsolete">&amp;Find previous</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="358"/>
+        <location filename="../../core/mainwindow.cpp" line="357"/>
         <source>&amp;Go to line</source>
         <translation>&amp;Go to line</translation>
     </message>
@@ -642,23 +648,23 @@
         <translation type="obsolete">&amp;Clear format</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="375"/>
+        <location filename="../../core/mainwindow.cpp" line="374"/>
         <source>&amp;Select columns...</source>
         <translation>&amp;Select columns...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="379"/>
+        <location filename="../../core/mainwindow.cpp" line="378"/>
         <source>&amp;Filter log...</source>
         <translation>&amp;Filter log...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="383"/>
+        <location filename="../../core/mainwindow.cpp" line="382"/>
         <source>&amp;Full screen</source>
         <translation>&amp;Full screen</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="388"/>
-        <location filename="../../core/mainwindow.cpp" line="490"/>
+        <location filename="../../core/mainwindow.cpp" line="387"/>
+        <location filename="../../core/mainwindow.cpp" line="489"/>
         <source>&amp;Help</source>
         <translation>&amp;Help</translation>
     </message>
@@ -667,12 +673,12 @@
         <translation type="obsolete">&amp;Context help</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="393"/>
+        <location filename="../../core/mainwindow.cpp" line="392"/>
         <source>&amp;About...</source>
         <translation>&amp;About...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="441"/>
+        <location filename="../../core/mainwindow.cpp" line="440"/>
         <source>&amp;File</source>
         <translation>&amp;File</translation>
     </message>
@@ -685,12 +691,12 @@
         <translation type="obsolete">&amp;Logs</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="458"/>
+        <location filename="../../core/mainwindow.cpp" line="457"/>
         <source>&amp;Recent projects...</source>
         <translation>&amp;Recent projects...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="467"/>
+        <location filename="../../core/mainwindow.cpp" line="466"/>
         <source>&amp;Edit</source>
         <translation>&amp;Edit</translation>
     </message>
@@ -699,42 +705,42 @@
         <translation type="obsolete">&amp;Search</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="475"/>
+        <location filename="../../core/mainwindow.cpp" line="474"/>
         <source>&amp;View</source>
         <translation>&amp;View</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="487"/>
+        <location filename="../../core/mainwindow.cpp" line="486"/>
         <source>&amp;Tools</source>
         <translation>&amp;Tools</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="766"/>
-        <location filename="../../core/mainwindow.cpp" line="794"/>
-        <location filename="../../core/mainwindow.cpp" line="821"/>
-        <location filename="../../core/mainwindow.cpp" line="917"/>
-        <location filename="../../core/mainwindow.cpp" line="936"/>
-        <location filename="../../core/mainwindow.cpp" line="955"/>
+        <location filename="../../core/mainwindow.cpp" line="765"/>
+        <location filename="../../core/mainwindow.cpp" line="793"/>
+        <location filename="../../core/mainwindow.cpp" line="820"/>
+        <location filename="../../core/mainwindow.cpp" line="916"/>
+        <location filename="../../core/mainwindow.cpp" line="935"/>
+        <location filename="../../core/mainwindow.cpp" line="954"/>
         <source>Log size: </source>
         <translation>Log size: </translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="768"/>
-        <location filename="../../core/mainwindow.cpp" line="796"/>
-        <location filename="../../core/mainwindow.cpp" line="823"/>
-        <location filename="../../core/mainwindow.cpp" line="919"/>
-        <location filename="../../core/mainwindow.cpp" line="938"/>
-        <location filename="../../core/mainwindow.cpp" line="957"/>
+        <location filename="../../core/mainwindow.cpp" line="767"/>
+        <location filename="../../core/mainwindow.cpp" line="795"/>
+        <location filename="../../core/mainwindow.cpp" line="822"/>
+        <location filename="../../core/mainwindow.cpp" line="918"/>
+        <location filename="../../core/mainwindow.cpp" line="937"/>
+        <location filename="../../core/mainwindow.cpp" line="956"/>
         <source> records</source>
         <translation> records</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1108"/>
+        <location filename="../../core/mainwindow.cpp" line="1107"/>
         <source>About</source>
         <translation>About</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1113"/>
+        <location filename="../../core/mainwindow.cpp" line="1112"/>
         <source>About Qt</source>
         <translation>About Qt</translation>
     </message>
@@ -747,33 +753,33 @@
         <translation type="obsolete">XML format files (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1309"/>
+        <location filename="../../core/mainwindow.cpp" line="1308"/>
         <source>Error while loading formatData library</source>
         <translation>Error while loading formatData library</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1331"/>
+        <location filename="../../core/mainwindow.cpp" line="1330"/>
         <source>Lua file not found: </source>
         <translation>Lua file not found: </translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1355"/>
+        <location filename="../../core/mainwindow.cpp" line="1354"/>
         <source>Open project file</source>
         <translation>Open project file</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1355"/>
+        <location filename="../../core/mainwindow.cpp" line="1354"/>
         <source>XML project files (*xml)</source>
         <translation>XML project files (*xml)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1462"/>
+        <location filename="../../core/mainwindow.cpp" line="1461"/>
         <source>No log file in project</source>
         <translation>No log file in project</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1203"/>
-        <location filename="../../core/mainwindow.cpp" line="1390"/>
+        <location filename="../../core/mainwindow.cpp" line="1202"/>
+        <location filename="../../core/mainwindow.cpp" line="1389"/>
         <source>Project file not found</source>
         <translation>Project file not found</translation>
     </message>
@@ -788,42 +794,42 @@
         <translation>txt files (*txt)</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="312"/>
+        <location filename="../../core/mainwindow.cpp" line="311"/>
         <source>&amp;Open connection...</source>
         <translation>&amp;Open connection...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="316"/>
+        <location filename="../../core/mainwindow.cpp" line="315"/>
         <source>&amp;Close</source>
         <translation>&amp;Close</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="326"/>
+        <location filename="../../core/mainwindow.cpp" line="325"/>
         <source>&amp;Export as txt...</source>
         <translation>&amp;Export as txt...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="353"/>
+        <location filename="../../core/mainwindow.cpp" line="352"/>
         <source>&amp;Quick search</source>
         <translation>&amp;Quick search</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="371"/>
+        <location filename="../../core/mainwindow.cpp" line="370"/>
         <source>&amp;Formats...</source>
         <translation>&amp;Formats...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="396"/>
+        <location filename="../../core/mainwindow.cpp" line="395"/>
         <source>&amp;About Qt...</source>
         <translation>&amp;About Qt...</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="399"/>
+        <location filename="../../core/mainwindow.cpp" line="398"/>
         <source>&amp;Close search</source>
         <translation>&amp;Close search</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="452"/>
+        <location filename="../../core/mainwindow.cpp" line="451"/>
         <source>&amp;Filtration (logs)</source>
         <translation>&amp;Filtration (logs)</translation>
     </message>
@@ -832,7 +838,7 @@
         <translation type="obsolete">Project is empty</translation>
     </message>
     <message>
-        <location filename="../../core/mainwindow.cpp" line="1692"/>
+        <location filename="../../core/mainwindow.cpp" line="1701"/>
         <source>No filters</source>
         <translation>No filters</translation>
     </message>
@@ -853,22 +859,22 @@
 <context>
     <name>QObject</name>
     <message>
-        <location filename="../../core/log.cpp" line="97"/>
+        <location filename="../../core/log.cpp" line="102"/>
         <source>Log file not found</source>
         <translation>Log file not found</translation>
     </message>
     <message>
-        <location filename="../../core/log.cpp" line="104"/>
+        <location filename="../../core/log.cpp" line="109"/>
         <source>Can&apos;t open log file</source>
         <translation>Can&apos;t open log file</translation>
     </message>
     <message>
-        <location filename="../../core/log.cpp" line="114"/>
+        <location filename="../../core/log.cpp" line="119"/>
         <source>Can&apos;t generate index</source>
         <translation>Can&apos;t generate index</translation>
     </message>
     <message>
-        <location filename="../../core/log.cpp" line="237"/>
+        <location filename="../../core/log.cpp" line="242"/>
         <location filename="../../core/staticlogfilter.cpp" line="65"/>
         <location filename="../../shared/staticfromlogselector.cpp" line="52"/>
         <source>Unexpected end of record</source>
@@ -906,12 +912,11 @@
         <translation>No format name</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="13"/>
         <source>No format argument name</source>
-        <translation>No format argument name</translation>
+        <translation type="obsolete">No format argument name</translation>
     </message>
     <message>
-        <location filename="../../core/formatvalidator.cpp" line="19"/>
+        <location filename="../../core/formatvalidator.cpp" line="13"/>
         <source>No lua file in format</source>
         <translation>No lua file in format</translation>
     </message>
@@ -1010,12 +1015,12 @@
         <translation>Can&apos;t execute lua function format</translation>
     </message>
     <message>
-        <location filename="../../core/staticlualoader.cpp" line="113"/>
+        <location filename="../../core/staticlualoader.cpp" line="126"/>
         <source>No returned value</source>
         <translation>No returned value</translation>
     </message>
     <message>
-        <location filename="../../core/staticlualoader.cpp" line="150"/>
+        <location filename="../../core/staticlualoader.cpp" line="163"/>
         <source>There is no function format in file </source>
         <translation>There is no function format in file </translation>
     </message>
