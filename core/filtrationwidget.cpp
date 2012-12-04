@@ -180,6 +180,14 @@ void FiltrationWidget::updateBooleanOperators()
 
 void FiltrationWidget::execute()
 {
+    QDir dir;
+    QFileInfo finfo = QFileInfo(currentProject->projectName());
+
+    QString dirPath = dir.filePath(currentProject->projectName());
+    dirPath.chop(finfo.fileName().size());
+
+    QDir::setCurrent(dirPath);
+
     if(!ui->filtrationListWidget->item(0))
     {
 //        emit filtrationCanceled();
