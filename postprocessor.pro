@@ -119,7 +119,9 @@ HEADERS += interfaces/ilog.h \
     core/include/staticlualoader.h \
     core/include/formatsdialog.h \
     core/include/quicksearchwidget.h \
-    core/include/recordsselectiondialog.h
+    core/include/recordsselectiondialog.h \
+    core/include/bookmarkswidget.h \
+    core/include/bookmarknamedialog.h
 FORMS += ui/abstractrealtimetablevisualization.ui \
          ui/abstractrealtimetextvisualization.ui \
          ui/abstracttablevisualization.ui \
@@ -142,7 +144,9 @@ FORMS += ui/abstractrealtimetablevisualization.ui \
     ui/formatsdialog.ui \
     ui/quicksearchwidget.ui \
     ui/printdialog.ui \
-    ui/recordsselectiondialog.ui
+    ui/recordsselectiondialog.ui \
+    ui/bookmarkswidget.ui \
+    ui/bookmarknamedialog.ui
 SOURCES += core/clientsettings.cpp \
            core/filter.cpp \
            core/filtrationwidget.cpp \
@@ -194,7 +198,9 @@ SOURCES += core/clientsettings.cpp \
     core/staticlualoader.cpp \
     core/formatsdialog.cpp \
     core/quicksearchwidget.cpp \
-    core/recordsselectiondialog.cpp
+    core/recordsselectiondialog.cpp \
+    core/bookmarkswidget.cpp \
+    core/bookmarknamedialog.cpp
 RESOURCES += resources/postprocessor.qrc
 TRANSLATIONS += resources/localization/postprocessor_en.ts \
                 resources/localization/postprocessor_ru.ts \

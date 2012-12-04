@@ -70,6 +70,8 @@
 #include "quicksearchwidget.h"
 #include "formatsdialog.h"
 #include "recordsselectiondialog.h"
+#include "bookmarkswidget.h"
+#include "bookmarknamedialog.h"
 
 #define DEFAULT_RECENT_NUMBER 4
 
@@ -107,6 +109,7 @@ private:
     bool needRefreshIndex;
 
     QuickSearchWidget *quickSearchWidget;
+    BookmarksWidget *bookmarksWidget;
 
     // actions
     QAction *actionOpen;
@@ -243,6 +246,9 @@ public slots:
     void openConnection();
 
 private slots:
+    void addBookmark();
+    void removeBookmark(QString bookmark);
+    void applyBookmark(QString bookmark);
     void showQuickSearch();
     void closeSearch();
 

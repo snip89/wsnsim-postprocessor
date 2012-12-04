@@ -89,6 +89,14 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->searchToolBar->addWidget(quickSearchWidget);
     ui->searchToolBar->addAction(actionCloseSearch);
     ui->searchToolBar->setVisible(false);
+
+    bookmarksWidget = new BookmarksWidget();
+    bookmarksWidget->setEnabled(false);
+    ui->toolBar->addWidget(bookmarksWidget);
+
+    connect(bookmarksWidget, SIGNAL(addBookmarkClicked()), this, SLOT(addBookmark()));
+    connect(bookmarksWidget, SIGNAL(removeBookmarkClicked(QString)), this, SLOT(removeBookmark(QString)));
+    connect(bookmarksWidget, SIGNAL(applyBookmarkClicked(QString)), this, SLOT(applyBookmark(QString)));
 }
 
 void MainWindow::print()
@@ -208,6 +216,7 @@ MainWindow::~MainWindow()
         delete format;*/
 
     delete quickSearchWidget;
+    delete bookmarksWidget;
 
     delete ui;
 }
@@ -399,6 +408,140 @@ void MainWindow::createActions()
     connect(actionCloseSearch, SIGNAL(triggered()), this, SLOT(closeSearch()));
 }
 
+void MainWindow::addBookmark()
+{
+    BookmarkNameDialog *dlg = new BookmarkNameDialog();
+    if(dlg->exec())
+    {
+        QString bookmarkName = dlg->getName();
+
+        if(bookmarkName == "")
+        {
+            errorMessager.showMessage(tr("Bookmark name can't be empty"));
+            delete dlg;
+            return;
+        }
+
+        QString bookmarkInfo;
+
+        if(project->projectParams.visualizationInfo.bookmarksSettings != "")
+        {
+            bookmarkInfo += project->projectParams.visualizationInfo.bookmarksSettings;
+            bookmarkInfo += ";" + bookmarkName + ",";
+        }
+        else
+            bookmarkInfo += bookmarkName + ",";
+
+        if(activeWidget == TEXTVISUALIZATION)
+            bookmarkInfo += "text,";
+
+        else if(activeWidget == HEXVISUALIZATION)
+            bookmarkInfo += "hex,";
+
+        else if(activeWidget == TABLEVISUALIZATION)
+            bookmarkInfo += "table,";
+
+        bookmarkInfo += settings.value("Hidden/Core/Current_pos").toString();
+
+        if(!project->projectParams.visualizationInfo.bookmarksSettings.contains(bookmarkName))
+        {
+            project->projectParams.visualizationInfo.bookmarksSettings = bookmarkInfo;
+
+            QString errorString = QString::null;
+
+            project->save(errorString);
+
+            if(!errorString.isNull())
+            {
+                errorMessager.showMessage(errorString);
+                delete dlg;
+                return;
+            }
+
+            bookmarksWidget->update(project->projectParams.visualizationInfo);
+        }
+        else
+        {
+            errorMessager.showMessage(tr("Bookmark with this name already exists"));
+            delete dlg;
+            return;
+        }
+    }
+
+    delete dlg;
+}
+
+void MainWindow::removeBookmark(QString bookmark)
+{
+    project->projectParams.visualizationInfo.bookmarksSettings.remove(bookmark);
+
+    if(project->projectParams.visualizationInfo.bookmarksSettings != "")
+    {
+        if(project->projectParams.visualizationInfo.bookmarksSettings[0] == ';')
+            project->projectParams.visualizationInfo.bookmarksSettings.remove(0, 1);
+
+        if(project->projectParams.visualizationInfo.bookmarksSettings[
+                project->projectParams.visualizationInfo.bookmarksSettings.size() - 1] == ';')
+            project->projectParams.visualizationInfo.bookmarksSettings.remove(
+                        project->projectParams.visualizationInfo.bookmarksSettings.size() - 2, 1);
+    }
+
+    QString errorString = QString::null;
+
+    project->save(errorString);
+
+    if(!errorString.isNull())
+    {
+        errorMessager.showMessage(errorString);
+        return;
+    }
+
+    bookmarksWidget->update(project->projectParams.visualizationInfo);
+}
+
+void MainWindow::applyBookmark(QString bookmark)
+{
+    QStringList bookmarkArgs = bookmark.split(',');
+
+    settings.setValue("Hidden/Core/Current_pos", bookmarkArgs[2].toInt());
+
+    if(bookmarkArgs[1] == "text")
+    {
+        if(!actionTextVisualization->isChecked())
+        {
+            actionTextVisualization->setChecked(true);
+        }
+        else
+        {
+            updateVisualization(TEXTVISUALIZATION);
+        }
+    }
+
+    else if(bookmarkArgs[1] == "hex")
+    {
+        if(!actionHexVisualization->isChecked())
+        {
+            actionHexVisualization->setChecked(true);
+        }
+        else
+        {
+            updateVisualization(HEXVISUALIZATION);
+        }
+    }
+
+    else if(bookmarkArgs[1] == "table")
+    {
+        if(!actionTableVisualization->isChecked())
+        {
+            actionTableVisualization->setChecked(true);
+        }
+        else
+        {
+            updateVisualization(TABLEVISUALIZATION);
+        }
+    }
+}
+
 void MainWindow::showQuickSearch()
 {
     ui->searchToolBar->setVisible(true);
@@ -433,6 +576,7 @@ void MainWindow::initToolBar()
     ui->toolBar->addSeparator();
 
     ui->toolBar->addAction(actionSettings);
+    ui->toolBar->addSeparator();
 }
 
 void MainWindow::createMenus()
@@ -1476,6 +1620,9 @@ void MainWindow::openProject(QString name)
     actionClose->setEnabled(true);
 
     isProjectOpened = true;
+
+    bookmarksWidget->update(project->projectParams.visualizationInfo);
+    bookmarksWidget->setEnabled(true);
 }
 
 void MainWindow::closeProject()
@@ -1580,6 +1727,9 @@ void MainWindow::closeProject()
         menuFiltrationLogs->setEnabled(false);
 
         setWindowTitle(prName);
+
+        bookmarksWidget->setEnabled(false);
+        bookmarksWidget->clearComboBox();
     }
 }
 
