@@ -23,6 +23,11 @@ void BookmarksWidget::update(VisualizationInfo info)
         QStringList bookmarkArgs = bookmark.split(',');
         ui->comboBox->addItem(bookmarkArgs[0], QVariant(bookmark));
     }
+
+    if(ui->comboBox->currentText() == "")
+        ui->applyPushButton->setEnabled(false);
+    else
+        ui->applyPushButton->setEnabled(true);
 }
 
 void BookmarksWidget::clearComboBox()
