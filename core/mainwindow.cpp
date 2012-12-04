@@ -1450,19 +1450,9 @@ void MainWindow::loadFormat(QString formatInfo)
     QString dirPath = dir.filePath(name);
     dirPath.chop(finfo.fileName().size());
 
-    QDir::setCurrent(QApplication::applicationDirPath());
+    FormatData data;
 
-    QLibrary formatDataLibrary("./formatData");
-    if(!formatDataLibrary.load())
-    {
-        errorMessager.showMessage(tr("Error while loading formatData library"));
-        return;
-    }
-
-    typedef Format*(*formatDataLoad) (QString& formatFileName, QString* errorMessage);
-    formatDataLoad load = (formatDataLoad) formatDataLibrary.resolve("load");
-
-    Format *format = load(name, &errorString);
+    Format *format = data.load(name, &errorString);
 
     FormatValidator::validate(format, errorString);
 

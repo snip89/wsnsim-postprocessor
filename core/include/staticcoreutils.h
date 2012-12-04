@@ -11,6 +11,7 @@
 
 #include "ihostrealtimesettings.h"
 #include "simpleeventinfo.h"
+#include "hostrealtimesettings.h"
 
 class StaticCoreUtils
 {

@@ -33,20 +33,9 @@ Project::~Project()
 
 void Project::load(QString &errorString)
 {
-    errorString = QString::null;
-    QDir::setCurrent(QApplication::applicationDirPath());
+    ProjectData data;
 
-    QLibrary projectDataLibrary("./projectData");
-    if(!projectDataLibrary.load())
-    {
-        errorString = QObject::tr("Error while loading projectData library");
-        return;
-    }
-
-    typedef ProjectParams(*projectDataLoad) (QString& projectFileName, QString* errorMessage);
-    projectDataLoad load = (projectDataLoad) projectDataLibrary.resolve("load");
-
-    projectParams = load(projectFileName, &errorString);
+    projectParams = data.load(projectFileName, &errorString);
 
     ProjectValidator::validate(projectParams, errorString);
 
@@ -57,22 +46,11 @@ void Project::load(QString &errorString)
 
 void Project::save(QString &errorString)
 {
-    errorString = QString::null;
-    QDir::setCurrent(QApplication::applicationDirPath());
-
-    QLibrary projectDataLibrary("./projectData");
-    if(!projectDataLibrary.load())
-    {
-        errorString = QObject::tr("Error while loading projectData library");
-        return;
-    }
-
-    typedef void(*projectDataSave) (QString& projectFileName, QString* errorMessage, ProjectParams params);
-    projectDataSave save = (projectDataSave) projectDataLibrary.resolve("save");
+    ProjectData data;
 
     QFile::remove(projectFileName);
 
-    save(projectFileName, &errorString, projectParams);
+    data.save(projectFileName, &errorString, projectParams);
 }
 
 SimpleEventInfo *Project::info(int &size)

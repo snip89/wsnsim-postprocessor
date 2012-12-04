@@ -15,6 +15,7 @@
 #include "formatvalidator.h"
 #include "project.h"
 #include "formatacceptingdialog.h"
+#include "formatData.h"
 
 namespace Ui {
     class FormatsDialog;

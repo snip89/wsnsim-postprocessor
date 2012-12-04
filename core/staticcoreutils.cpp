@@ -11,23 +11,7 @@ void StaticCoreUtils::setApplicationInfo()
 
 IHostRealTimeSettings *StaticCoreUtils::getHostRealTimeSettings()
 {
-    QDir::setCurrent(QApplication::applicationDirPath());
-
-    QLibrary globalSettings("./globalSettings");
-    if(!globalSettings.load())
-    {
-        QErrorMessage errorMessager;
-
-        errorMessager.showMessage(QObject::tr("Error while loading globalSettings library"));
-        errorMessager.exec();
-
-        exit(EXIT_SUCCESS);
-    }
-
-    typedef IHostRealTimeSettings*(*getHostRealTimeSettings) ();
-    getHostRealTimeSettings func = (getHostRealTimeSettings) globalSettings.resolve("getHostRealTimeSettings");
-
-    return func();
+    return new HostRealTimeSettings();
 }
 
 #endif // STATICCOREUTILS_CPP

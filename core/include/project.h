@@ -22,6 +22,7 @@
 #include "simpleeventinfo.h"
 #include "logdatatypes.h"
 #include "projectParams.h"
+#include "projectData.h"
 #include "projectvalidator.h"
 // TODO include projectParams herex
 

@@ -6,15 +6,23 @@ QT += core gui xml network
 INCLUDEPATH += ../libs/projectData
 INCLUDEPATH += ../libs/formatData
 INCLUDEPATH += ../libs/globalSettings/realtime/interfaces
+INCLUDEPATH += ../libs/globalSettings/realtime/include
+INCLUDEPATH += ../libs/globalSettings/realtime/tools/include
 
 win32 {
     INCLUDEPATH += ../libs/luajit/src
-    LIBS += ../../bin/lua51.dll
+    LIBS += ../../bin/libluajit.a
+    LIBS += ../../bin/libprojectData.a
+    LIBS += ../../bin/libformatData.a
+    LIBS += ../../bin/libglobalSettings.a
 }
 
 unix {
     INCLUDEPATH += . /usr/include/luajit-2.0
     LIBS += -lluajit-5.1
+    LIBS += -L../../bin -lprojectData
+    LIBS += -L../../bin -lglobalSettings
+    LIBS += -L../../bin -lformatData
 }
 
 TARGET = logsVisualizer
