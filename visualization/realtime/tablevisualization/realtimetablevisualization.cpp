@@ -182,6 +182,7 @@ void RealTimeTableVisualization::addRecord(QByteArray byteRecord)
         recordsCount ++;
 
         viewer->verticalHeader()->setResizeMode(QHeaderView::Fixed);
+        viewer->scrollToBottom();
     //}
 }
 

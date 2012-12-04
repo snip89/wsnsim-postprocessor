@@ -86,6 +86,8 @@ void RealTimeHexVisualization::addRecord(QByteArray byteRecord)
         viewer->append(resultLine);
 
         recordsCount ++;
+
+        viewer->moveCursor(QTextCursor::End);
     //}
     //else
     //{
