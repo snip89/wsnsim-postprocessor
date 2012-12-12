@@ -16,12 +16,15 @@ void RealTimeTableVisualization::stop()
 
 void RealTimeTableVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter, QList<Format*> formats)
 {
-    this->formats = formats;
+    if(this->formats != formats)
+    {
+        this->formats = formats;
 
-    viewer->clear();
-    viewer->setRowCount(0);
+        viewer->clear();
+        viewer->setRowCount(0);
 
-    recordsCount = 0;
+        recordsCount = 0;
+    }
 
     currentProject = project;
     currentSocketAdapter = socketAdapter;

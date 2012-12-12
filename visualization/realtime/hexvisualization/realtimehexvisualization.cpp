@@ -13,8 +13,13 @@ void RealTimeHexVisualization::stop()
 
 void RealTimeHexVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter, QList<Format*> formats)
 {
-    viewer->clear();
-    recordsCount = 0;
+    if(this->formats != formats)
+    {
+        this->formats = formats;
+
+        viewer->clear();
+        recordsCount = 0;
+    }
 
     currentProject = project;
     currentSocketAdapter = socketAdapter;

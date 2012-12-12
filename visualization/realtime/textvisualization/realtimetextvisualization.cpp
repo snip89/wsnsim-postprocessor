@@ -14,10 +14,13 @@ void RealTimeTextVisualization::stop()
 
 void RealTimeTextVisualization::update(IProject *project, UdpSocketAdapter *socketAdapter, QList<Format*> formats)
 {
-    this->formats = formats;
+    if(this->formats != formats)
+    {
+        this->formats = formats;
 
-    viewer->clear();
-    recordsCount = 0;
+        viewer->clear();
+        recordsCount = 0;
+    }
 
     currentProject = project;
     currentSocketAdapter = socketAdapter;
