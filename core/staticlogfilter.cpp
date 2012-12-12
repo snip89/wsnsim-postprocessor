@@ -137,6 +137,65 @@ bool StaticLogFilter::useFilter(Log *currentLog, Log *newLog, AbstractFilter *fi
     return true;
 }
 
+bool StaticLogFilter::findRecord(Log* currentLog, QList<AbstractFilter*> filters, quint64 &pos)
+{
+    currentLog->seek(pos);
+
+    while(currentLog->pos() < currentLog->size())
+    {
+        qint64 blockSize = 0;
+        char *blockBuffer;
+
+        if((currentLog->size() - currentLog->pos()) < currentLog->blockSize)
+            blockBuffer = currentLog->read(currentLog->size() - currentLog->pos(), blockSize);
+
+        else
+            blockBuffer = currentLog->read(currentLog->blockSize, blockSize);
+
+        qint64 pos = 0;
+        while(pos < blockSize)
+        {
+            qint64 allreadedSize = 0;
+            int comparsions = 0;
+
+            foreach(AbstractFilter *filter, filters)
+            {
+                qint64 tmpPos = pos;
+
+                qint64 readedSize = 0;
+                bool success = false;
+                QVariant argValue;
+                quint64 time = 0;
+                if(!StaticRecordsReader::checkRecord(blockBuffer, blockSize, tmpPos, readedSize, success, filter->argName(), argValue, time, currentLog->eventsInfo))
+                {
+                    QErrorMessage errorMessager;
+                    errorMessager.showMessage(QObject::tr("Unexpected end of record"));
+                    return false;
+                }
+
+                if(success)
+                {
+                    if(filter->check(argValue))
+                    {
+                        comparsions ++;
+                    }
+                }
+
+                allreadedSize += readedSize;
+                tmpPos += readedSize;
+            }
+
+            if(comparsions == filters.size())
+            {
+                pos += allreadedSize;
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
 void StaticLogFilter::appendToBuffer(char *fromBuffer, quint64 fromBufferPos, char *toBuffer, quint64 &toBufferPos, quint64 size)
 {
     for(quint64 i = fromBufferPos; i < fromBufferPos + size; i ++)

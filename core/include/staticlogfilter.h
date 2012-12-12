@@ -27,6 +27,7 @@ public:
 
     // TODO: must take some argument like filter expression
     static bool useFilter(Log *currentLog, Log *newLog, AbstractFilter *filter);
+    static bool findRecord(Log* currentLog, QList<AbstractFilter*> filters, quint64 &pos);
 private:
     static void appendToBuffer(char *fromBuffer, quint64 fromBufferPos, char *toBuffer, quint64 &toBufferPos, quint64 size);
 };
