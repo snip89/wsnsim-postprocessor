@@ -95,6 +95,7 @@ void RealTimeTextVisualization::addRecord(QByteArray byteRecord)
 
         recordsCount ++;
         viewer->moveCursor(QTextCursor::End);
+        viewer->moveCursor(QTextCursor::StartOfLine);
     //}
     //else
     //{
