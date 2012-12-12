@@ -49,7 +49,10 @@ MainWindow::MainWindow(QWidget *parent) :
 
     filtrationWidget = new FiltrationWidget();
 
+    smartSearchWidget = new SmartSearchWidget();
+
     connect(filtrationWidget, SIGNAL(logFiltered(int)), this, SLOT(filteredLog(int)));
+    connect(smartSearchWidget, SIGNAL(recordFinded()), this, SLOT(findedRecord()));
 
     hexVisualization = new HexVisualization();
     textVisualization = new TextVisualization();
@@ -97,6 +100,18 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(bookmarksWidget, SIGNAL(addBookmarkClicked()), this, SLOT(addBookmark()));
     connect(bookmarksWidget, SIGNAL(removeBookmarkClicked(QString)), this, SLOT(removeBookmark(QString)));
     connect(bookmarksWidget, SIGNAL(applyBookmarkClicked(QString)), this, SLOT(applyBookmark(QString)));
+}
+
+void MainWindow::findedRecord()
+{
+    if(activeWidget == TEXTVISUALIZATION)
+        updateVisualization(TEXTVISUALIZATION);
+
+    else if(activeWidget == HEXVISUALIZATION)
+        updateVisualization(HEXVISUALIZATION);
+
+    else if(activeWidget == TABLEVISUALIZATION)
+        updateVisualization(TABLEVISUALIZATION);
 }
 
 void MainWindow::print()
@@ -388,6 +403,10 @@ void MainWindow::createActions()
     actionFiltration->setEnabled(false);
     connect(actionFiltration, SIGNAL(triggered()), this, SLOT(showFiltration()));
 
+    actionSmartSearch = new QAction(QIcon(":/icons/search_lense"), tr("&Smart search"), this);
+    actionSmartSearch->setEnabled(false);
+    connect(actionSmartSearch, SIGNAL(triggered()), this, SLOT(showSmartSearch()));
+
     actionFullScreen = new QAction(tr("&Full screen"), this);
     actionFullScreen->setShortcut(QKeySequence(Qt::CTRL + Qt::SHIFT + Qt::Key_F11));
     actionFullScreen->setCheckable(true);
@@ -570,6 +589,8 @@ void MainWindow::initToolBar()
 
     ui->toolBar->addSeparator();
 
+    ui->toolBar->addAction(actionQuickSearch);
+    ui->toolBar->addAction(actionSmartSearch);
     ui->toolBar->addAction(actionFormats);
     ui->toolBar->addAction(actionFiltration);
 
@@ -613,6 +634,7 @@ void MainWindow::createMenus()
     menuEdit->addSeparator();
 
     menuEdit->addAction(actionQuickSearch);
+    menuEdit->addAction(actionSmartSearch);
     menuEdit->addAction(actionGoToLine);
 
     menuView = new QMenu(tr("&View"), this);
@@ -1613,6 +1635,8 @@ void MainWindow::openProject(QString name)
 
     bookmarksWidget->update(project->projectParams.visualizationInfo);
     bookmarksWidget->setEnabled(true);
+
+    actionSmartSearch->setEnabled(true);
 }
 
 void MainWindow::closeProject()
@@ -1807,6 +1831,7 @@ void MainWindow::closeAnything()
         closeConnection();
     else
         closeProject();
+    actionSmartSearch->setEnabled(false);
 }
 
 void MainWindow::openLog(QString name)
@@ -1826,6 +1851,7 @@ void MainWindow::openLog(QString name)
     logs = new QList<LogInfo>();
 
     filtrationWidget->setLogsInfos(logs);
+    smartSearchWidget->setLogsInfos(logs);
 
     LogInfo logInfo;
 
@@ -2003,6 +2029,20 @@ void MainWindow::showFiltration()
     filtrationWidget->setWindowModality(Qt::ApplicationModal);
     filtrationWidget->move(settings.value("Hidden/Gui/Filtration_dialog_pos").value<QPoint>());
     filtrationWidget->show();
+}
+
+void MainWindow::showSmartSearch(){
+    smartSearchWidget->setCurrentProject(project);
+//    filtrationWidget->setCurrentLog(logs->at(logs->size() - 1));
+    smartSearchWidget->setCurrentLog(currentLogId);
+    smartSearchWidget->activate();
+//    switchToWidget(FILTRATION);
+//    filtrationWidget->show();
+    smartSearchWidget->setWindowFlags(Qt::Dialog);
+    smartSearchWidget->setWindowModality(Qt::ApplicationModal);
+    smartSearchWidget->move(settings.value("Hidden/Gui/Filtration_dialog_pos").value<QPoint>());
+    smartSearchWidget->show();
+
 }
 
 void MainWindow::showGoToLineDialog()

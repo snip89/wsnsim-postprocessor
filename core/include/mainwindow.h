@@ -73,6 +73,8 @@
 #include "bookmarkswidget.h"
 #include "bookmarknamedialog.h"
 
+#include "smartsearchwidget.h"
+
 #define DEFAULT_RECENT_NUMBER 4
 
 namespace Ui {
@@ -138,6 +140,8 @@ private:
     // FIXME: rename this later
     QAction *actionFiltration;
 
+    QAction *actionSmartSearch;
+
     QAction *actionFullScreen;
     QAction *actionHelp;
     //QAction *actionContextHelp;
@@ -178,6 +182,9 @@ private:
     WidgetType previousActiveWidget;
     QWidget *emptyWidget;
     FiltrationWidget *filtrationWidget;
+
+    SmartSearchWidget *smartSearchWidget;
+
     QStackedWidget *stackedWidget;
     MainSettings *mainSettings;
     IVisualization *hexVisualization;
@@ -246,6 +253,7 @@ public slots:
     void openConnection();
 
 private slots:
+    void findedRecord();
     void addBookmark();
     void removeBookmark(QString bookmark);
     void applyBookmark(QString bookmark);
@@ -276,6 +284,7 @@ private slots:
     void showHexVisualization(bool checked);
     void showTableVisualization(bool checked);
     void showFiltration();
+    void showSmartSearch();
     void showGoToLineDialog();
     void showAboutDialog();
     void showAboutQtDialog();

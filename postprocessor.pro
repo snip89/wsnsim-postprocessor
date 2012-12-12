@@ -129,7 +129,8 @@ HEADERS += interfaces/ilog.h \
     core/include/quicksearchwidget.h \
     core/include/recordsselectiondialog.h \
     core/include/bookmarkswidget.h \
-    core/include/bookmarknamedialog.h
+    core/include/bookmarknamedialog.h \
+    core/include/smartsearchwidget.h
 FORMS += ui/abstractrealtimetablevisualization.ui \
          ui/abstractrealtimetextvisualization.ui \
          ui/abstracttablevisualization.ui \
@@ -208,7 +209,8 @@ SOURCES += core/clientsettings.cpp \
     core/quicksearchwidget.cpp \
     core/recordsselectiondialog.cpp \
     core/bookmarkswidget.cpp \
-    core/bookmarknamedialog.cpp
+    core/bookmarknamedialog.cpp \
+    core/smartsearchwidget.cpp
 RESOURCES += resources/postprocessor.qrc
 TRANSLATIONS += resources/localization/postprocessor_en.ts \
                 resources/localization/postprocessor_ru.ts \

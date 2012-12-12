@@ -48,24 +48,23 @@ public:
     void deactivate();
     void clearLogs();
 
-    ~FiltrationWidget();
-
-private:
+    virtual ~FiltrationWidget();
+protected:
     QSettings settings;
+
+    QList<AbstractFilter*> filters;
+    QList<LogInfo> *logs;
 
     Ui::FiltrationWidget *ui;
 
     Project *currentProject;
     int currentLogId;
-    QList<LogInfo> *logs;
 
     int mainLogId;
 
     int logNameCounter;
 
     QErrorMessage errorMessager;
-
-    QList<AbstractFilter*> filters;
 
     void updateBooleanOperators();
     void execute();

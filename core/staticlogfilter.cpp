@@ -139,6 +139,8 @@ bool StaticLogFilter::useFilter(Log *currentLog, Log *newLog, AbstractFilter *fi
 
 bool StaticLogFilter::findRecord(Log* currentLog, QList<AbstractFilter*> filters, quint64 &pos)
 {
+    quint64 oldPos = pos;
+
     currentLog->seek(pos);
 
     while(currentLog->pos() < currentLog->size())
@@ -152,21 +154,21 @@ bool StaticLogFilter::findRecord(Log* currentLog, QList<AbstractFilter*> filters
         else
             blockBuffer = currentLog->read(currentLog->blockSize, blockSize);
 
-        qint64 pos = 0;
-        while(pos < blockSize)
+        quint64 realPos = 0;
+
+        quint64 findedRecordPos = pos;
+        while(realPos < blockSize)
         {
-            qint64 allreadedSize = 0;
             int comparsions = 0;
 
+            qint64 allSize = 0;
             foreach(AbstractFilter *filter, filters)
             {
-                qint64 tmpPos = pos;
-
                 qint64 readedSize = 0;
                 bool success = false;
                 QVariant argValue;
                 quint64 time = 0;
-                if(!StaticRecordsReader::checkRecord(blockBuffer, blockSize, tmpPos, readedSize, success, filter->argName(), argValue, time, currentLog->eventsInfo))
+                if(!StaticRecordsReader::checkRecord(blockBuffer, blockSize, realPos, readedSize, success, filter->argName(), argValue, time, currentLog->eventsInfo))
                 {
                     QErrorMessage errorMessager;
                     errorMessager.showMessage(QObject::tr("Unexpected end of record"));
@@ -181,14 +183,22 @@ bool StaticLogFilter::findRecord(Log* currentLog, QList<AbstractFilter*> filters
                     }
                 }
 
-                allreadedSize += readedSize;
-                tmpPos += readedSize;
+                allSize = readedSize;
             }
+
+            realPos += allSize;
+
+            findedRecordPos ++;
 
             if(comparsions == filters.size())
             {
-                pos += allreadedSize;
-                return true;
+                quint64 ppos = findedRecordPos - 1;
+
+                if(ppos != oldPos)
+                {
+                    pos = ppos;
+                    return true;
+                }
             }
         }
     }
