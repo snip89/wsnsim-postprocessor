@@ -6,9 +6,8 @@
 
 SmartSearchWidget::SmartSearchWidget(QWidget *parent):FiltrationWidget(parent)
 {
-    ui->buttonBox->clear();
+    ui->buttonBox->removeButton(ui->buttonBox->button(QDialogButtonBox::Ok));
     find_next_ = ui->buttonBox->addButton(tr("&Find"), QDialogButtonBox::ActionRole);
-    ui->buttonBox->addButton(tr("&Cancel"), QDialogButtonBox::RejectRole);
 
     setWindowTitle(tr("Smart search"));
     ui->filtrationGroupBox->setTitle(tr("Smart search"));
@@ -21,7 +20,8 @@ void SmartSearchWidget::on_find_next()
     quint64 pos = settings.value("Hidden/Core/Current_pos").value<int>();
 
     if(StaticLogFilter::findRecord(logs->at(currentLogId).log, filters, pos))
+    {
         settings.setValue("Hidden/Core/Current_pos", pos);
-
-    emit recordFinded();
+        emit recordFinded();
+    }
 }

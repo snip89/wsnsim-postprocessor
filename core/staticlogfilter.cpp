@@ -139,6 +139,9 @@ bool StaticLogFilter::useFilter(Log *currentLog, Log *newLog, AbstractFilter *fi
 
 bool StaticLogFilter::findRecord(Log* currentLog, QList<AbstractFilter*> filters, quint64 &pos)
 {
+    if(filters.size() != 0)
+    {
+
     quint64 oldPos = pos;
 
     currentLog->seek(pos);
@@ -201,6 +204,7 @@ bool StaticLogFilter::findRecord(Log* currentLog, QList<AbstractFilter*> filters
                 }
             }
         }
+    }
     }
 
     return false;
